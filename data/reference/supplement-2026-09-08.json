@@ -1,0 +1,127 @@
+{
+  "retrievedAt": "2026-09-08",
+  "attachments": [
+    {
+      "id": "SRC-SUPPLEMENT-01",
+      "file": "ac0ff9d7-f23a-4bad-afc1-52bbc37181ef.png",
+      "title": "重卡換電需求與SST",
+      "sha256": "140b974fde272300d8ad7b1cb3669ff2d035cdd19cd884e9a9650969ecc26dd3"
+    },
+    {
+      "id": "SRC-SUPPLEMENT-02",
+      "file": "22e9c01e-d48d-4913-814e-7bc92129c638.png",
+      "title": "箱變與PCS容量",
+      "sha256": "a0fa059031548e8cf68d784e1798763a6eeaa93cd1f543cd2d277d3c73fdefaf"
+    },
+    {
+      "id": "SRC-SUPPLEMENT-03",
+      "file": "3b607d2f-ccc1-4875-a719-3bc6fcd26f76.png",
+      "title": "PCS剩餘功率與換電倉分配",
+      "sha256": "4e738ba5cbc4886066053b3ab428c5b959264ef2bb31a081b3721a0cb1e79fb5"
+    },
+    {
+      "id": "SRC-SUPPLEMENT-04",
+      "file": "9711cc2e-1466-4100-a633-74144730f56f.png",
+      "title": "重卡電池與超充方案",
+      "sha256": "1d6597b160230956b8d1aaa13d92942c6c4c6ad4a236b6ab614ccb5e7774c76d"
+    },
+    {
+      "id": "SRC-SUPPLEMENT-05",
+      "file": "076ca5e9-dbfa-48b6-ac65-624ef0d2a6da.png",
+      "title": "双母線互濟與同動率",
+      "sha256": "4559b603eea7d4cde43c05d3dc23b4cf8a55b11d2a6c869ba82c686f1fe22b76"
+    },
+    {
+      "id": "SRC-SUPPLEMENT-06",
+      "file": "772afd80-8ccf-401c-83db-fbbec79cd711.png",
+      "title": "電力容量與分期櫃體",
+      "sha256": "19e5d40e95c4f0ea91a5137248788d6864f040748cb2fdfe5f031aec7d280268"
+    }
+  ],
+  "official": [
+    {
+      "id": "CATL-CHOCO-OFFICIAL",
+      "url": "https://www.catl.com/brand/servicebrand/",
+      "slots": [
+        14,
+        30
+      ],
+      "swapSeconds": 99,
+      "wheelbaseMetres": [
+        2.55,
+        3.1
+      ],
+      "stationPowerKW": null
+    },
+    {
+      "id": "CATL-CHOCO-2024",
+      "url": "https://www.catl.com/news/8209.html",
+      "publishedAt": "2024-12-19",
+      "swapSeconds": 100
+    }
+  ],
+  "sourceCase": {
+    "batteryKWh": 513,
+    "startSOC": 0.2,
+    "endSOC": 1,
+    "energyPerSwapKWh": 410.4,
+    "slotsPerSite": 8,
+    "ddKW": 560,
+    "ddEfficiency": 0.974,
+    "sourceHourlyDDInputKW": 3370.76,
+    "derivedHourlyDDInputKW": 3370.841889117043,
+    "transformerKVA": 2500,
+    "pf": 0.99,
+    "transformerEfficiency": 0.98,
+    "transformerOutputKW": 2425.5,
+    "acLoadsKW": 770,
+    "pcsRatedKW": 2000,
+    "pcsInputKW": 1655.5,
+    "pcsOutputKW": 1622.39,
+    "sstUnitsPerSiteInACCase": 2,
+    "sourceDualSiteSlotRows": [
+      [
+        16,
+        0,
+        8,
+        0,
+        8
+      ],
+      [
+        14,
+        2,
+        8,
+        2,
+        10
+      ],
+      [
+        12,
+        4,
+        8,
+        4,
+        12
+      ],
+      [
+        10,
+        6,
+        8,
+        6,
+        14
+      ]
+    ],
+    "stackTotalKW": 2880,
+    "terminalsTotal": 4,
+    "gunsTotal": 8,
+    "sourceCombinedPCSRangeKW": [
+      1559.36,
+      3244.78
+    ],
+    "simultaneityFactors": [
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1
+    ]
+  }
+}

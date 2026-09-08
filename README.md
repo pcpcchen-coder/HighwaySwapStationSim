@@ -2,7 +2,7 @@
 
 **HighwaySwapSim** — 高速公路雙服務區供電、換電／充電營運與收益測算工作台。
 
-由 Codex / Astra 接手實作。第一個工程工作版本 **0.1.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
+由 Codex / Astra 接手實作。工程工作版本 **0.2.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
 
 ## 已提供的操作
 
@@ -60,9 +60,20 @@ tests/                    核心及正式產物測試
 ## 文件
 
 - [執行決策](docs/EXECUTION_CONTEXT.md) — 使用指定repo、由Codex接手，覆蓋原Kimi執行限定。
-- [完整 Master Prompt](docs/MASTER_PROMPT.md) — 原0–100章與新增101–114章。
+- [完整 Master Prompt](docs/MASTER_PROMPT.md) — 原0–100章、101–114章及設備容量追加115–122章。
 - [架構](docs/ARCHITECTURE.md)、[電力模型](docs/ELECTRICAL_MODEL.md)、[經濟模型](docs/ECONOMIC_MODEL.md)。
 - [假設](docs/ASSUMPTIONS.md)、[資料來源](data/reference/source-manifest.json)、[驗證](docs/VERIFICATION.md)。
 - [交接與下一步](docs/HANDOFF.md)、[產品路線](docs/ROADMAP.md)。
 
 本版是有向供電路徑與能量級模型。完整双800V母線的並聯控制、PV/ESS、保護暫態、3D車流、進階EMS、資產替換及通用Excel編輯後重播仍在後續範圍，不能宣稱已完成整份Master Prompt。
+
+## 本輪設備補充
+
+完整案例已展開 92 個設備與 96 條連線：逐台 SST、雙 DC 母線、16 倉 / DD、2 超充堆、4 終端 / 8 槍，以及 CATL 巧克力站。
+
+- [設備與容量需求](docs/SUPPLEMENT_2026-09-08.md)
+- [原始重播的完整設備快照](examples/supplement-source-replay.json)
+- [二期 410.4 kWh 物理案例](examples/supplement-phase2-physical.json)
+- [來源與數值轉錄](data/reference/supplement-2026-09-08.json)
+
+原始八月 410 kWh 表與新電池 410.4 kWh 投影分開；CATL 官方 14–30 倉 / 99 秒與附件 500+50 kW 配置分開。案例容量的 3370.76 kW 原值會顯示精確重算 3370.841889 kW，並保留 0.6 同動率不足時的供電缺口。乘用車目前只計交流共用負載，沒有假設換電收入。

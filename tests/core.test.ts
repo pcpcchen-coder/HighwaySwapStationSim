@@ -27,3 +27,50 @@ test('constrained simulation conserves energy, bounds inventory and is reproduci
     assert.ok(h.gridKWh >= 0);
 } near(a.totals.gridKWh, a.totals.lossKWh + a.hours.reduce((s, h) => s + h.auxiliaryKWh, 0) + a.totals.deliveredKWh + a.totals.finalStoredKWh - a.totals.initialStoredKWh, .01); });
 test('no supply does not create charged batteries; shortage remains unserved', () => { const p = defaultProject(); p.mode = 'CONSTRAINED'; p.topology.edges.forEach(e => e.enabled = false); p.station.A.auxiliaryKW = 0; p.station.B.auxiliaryKW = 0; const r = simulate(p); assert.equal(r.totals.gridKWh, 0); assert.ok(r.totals.unservedKWh > 0); assert.ok(r.totals.deliveredKWh <= 48 * 410 + 1e-6); assert.ok(r.totals.maxBalanceResidual < .01); });
+
+// Supplement numeric checks use independent expected values, never screenshot rounding as physics.
+import {engineeringProject, engineeringTopology, physicalProjection, capacityCase} from '../packages/engineering/index.ts';
+test('supplement reconciles exact energy, AC allocation, concurrency and gun current limits',()=>{
+ const p=engineeringProject();p.phase=2;p.topology=engineeringTopology(p);const v=capacityCase(p);
+ near(v.energy,410.4);near(v.hourlyBattery,3283.2);near(v.hourlyDD,3370.841889117);near(v.sstDeficit,10.841889117);
+ near(v.transformerOutput,2425.5);near(v.ac,770);near(v.pcsInput,1655.5);near(v.pcsOutput,1622.39);
+ near(v.residuals[2].residual,779.679527721);near(v.residuals[2].configured,1299.465879535);
+ near(v.gunLimit,382.536);near(v.concurrency[0].request,1728);assert.ok(v.concurrency[0].deficit>0);
+ const original=defaultProject();assert.equal(replay(original).totals.requestedKWh,77750);
+ near(physicalProjection(p).services[0].swapKWh,3283.2);near(replay(physicalProjection(p)).totals.requestedKWh,77801.2);
+});
+test('detailed topology retains individual SSTs, racks, guns, AC source ownership and schema migration',()=>{
+ const p=engineeringProject(),n=p.topology.nodes;assert.deepEqual(validateTopology(p.topology),[]);
+ assert.equal(n.filter(n=>n.type==='rack').length,16);assert.equal(n.filter(n=>n.type==='gun').length,8);
+ assert.equal(n.filter(n=>n.type==='terminal').length,4);assert.equal(n.filter(n=>n.type==='sst'&&n.enabled).length,2);
+ p.phase=2;p.topology=engineeringTopology(p);assert.equal(p.topology.nodes.filter(n=>n.type==='sst'&&n.enabled).length,4);
+ const allocation=allocatePower(p,[{sink:'B-rack-0',kw:100}])[0];near(allocation.sourceImport['A-grid'],allocation.grid);assert.equal(allocation.sourceImport['B-grid'],undefined);
+ assert.deepEqual(importWorkbook(exportWorkbook(p,replay(p))),p);
+ const old=defaultProject();assert.deepEqual(migrateProject({...old,schemaVersion:'1.1'}),old);
+});
+test('box transformer and shared stack boundaries constrain concurrent branch demand',()=>{
+ const p=engineeringProject();p.phase=2;p.topology=engineeringTopology(p);p.engineering!.intertie=false;p.topology=engineeringTopology(p);
+ const a=allocatePower(p,[{sink:'A-passenger',kw:550},{sink:'A-swap-bay',kw:200},{sink:'A-sst-aux',kw:20},{sink:'A-bus-pcs',kw:3000}]);
+ near(a[3].delivered,1622.39);near(a.reduce((s,x)=>s+x.grid,0),2475);
+ // Test gun V*I and total stack cap at 800 V with ample PCS supply.
+ p.topology.nodes.filter(n=>n.type==='gun').forEach(n=>n.params.vehicleVoltage=800);
+ const guns=allocatePower(p,[0,1,2,3].map(i=>({sink:`A-gun-${i}`,kw:480})));
+ near(guns.reduce((s,x)=>s+x.delivered,0),1440);assert.ok(guns.every(x=>x.delivered<=480));
+ p.topology.nodes.find(n=>n.id==='A-gun-0')!.enabled=false;
+ near(allocatePower(p,[{sink:'A-gun-0',kw:480}])[0].delivered,0);
+ p.topology.nodes.find(n=>n.id==='A-rack-0')!.enabled=false;
+ near(allocatePower(p,[{sink:'A-rack-0',kw:560}])[0].delivered,0);
+});
+test('DC intertie shares capacity without adding power or shorting AC sources',()=>{
+ const p=engineeringProject();p.topology.nodes.find(n=>n.id==='A-pcs')!.enabled=false;
+ const shared=allocatePower(p,[{sink:'A-gun-0',kw:300}])[0];assert.ok(shared.delivered>0);assert.ok(shared.sourceImport['B-grid']>0);
+ p.topology.edges.filter(e=>e.source.includes('tie-')||e.target.includes('tie-')).forEach(e=>e.enabled=false);
+ near(allocatePower(p,[{sink:'A-gun-0',kw:300}])[0].delivered,0);
+});
+test('detailed physical case conserves energy and disabled guns cannot serve jobs',()=>{
+ const p=physicalProjection(engineeringProject());p.topology.nodes.filter(n=>n.type==='gun').forEach(n=>n.enabled=false);
+ const r=simulate(p);assert.ok(r.totals.maxBalanceResidual<.01);assert.ok(r.transactions.filter(t=>t.kind==='charge').every(t=>t.start===null&&t.deliveredKWh===0));
+ const full=simulate(physicalProjection(engineeringProject()));assert.ok(full.totals.maxBalanceResidual<.01);assert.ok(full.totals.gridKWh>0);
+ assert.ok(full.transactions.filter(t=>t.kind==='charge'&&t.start!==null).every(t=>t.equipmentId?.includes('-gun-')));
+ assert.deepEqual(full,simulate(physicalProjection(engineeringProject())));
+});

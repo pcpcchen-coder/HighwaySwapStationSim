@@ -46,7 +46,7 @@ export function allocatePower(p: Project, requests: {
                 suffix *= efficiencies[i];
             }
             let delivered = remaining;
-            path.forEach((n, i) => { const capacity = equipmentRegistry.get(n.type).capacity(n); delivered = Math.min(delivered, Math.max(0, capacity - (used.get(n.id) ?? 0)) / factors[i]); });
+            path.forEach((n, i) => { const capacity = n.type === 'transformer' && p.engineering ? n.params.kva*n.params.pf*p.efficiency.transformer : equipmentRegistry.get(n.type).capacity(n); delivered = Math.min(delivered, Math.max(0, capacity - (used.get(n.id) ?? 0)) / factors[i]); });
             if (delivered <= 0)
                 continue;
             path.forEach((n, i) => used.set(n.id, (used.get(n.id) ?? 0) + delivered * factors[i]));

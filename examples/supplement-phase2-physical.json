@@ -1,0 +1,2529 @@
+{
+  "schemaVersion": "1.2",
+  "name": "513 kWh · SOC 補電投影",
+  "seed": 12345,
+  "phase": 2,
+  "mode": "CONSTRAINED",
+  "strategy": "IMMEDIATE",
+  "arrival": "SCHEDULED",
+  "topology": {
+    "nodes": [
+      {
+        "id": "A-grid",
+        "type": "grid",
+        "name": "10 kV 電力接入",
+        "station": "A",
+        "x": 20,
+        "y": 60,
+        "enabled": true,
+        "params": {
+          "kva": 9500,
+          "pf": 0.99
+        }
+      },
+      {
+        "id": "A-incoming",
+        "type": "mv-switch",
+        "name": "進線櫃",
+        "station": "A",
+        "x": 230,
+        "y": 60,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "A-meter",
+        "type": "meter",
+        "name": "計量櫃",
+        "station": "A",
+        "x": 440,
+        "y": 60,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "A-out-sst",
+        "type": "mv-switch",
+        "name": "SST 出線櫃",
+        "station": "A",
+        "x": 20,
+        "y": 165,
+        "enabled": true,
+        "params": {
+          "kw": 3465
+        }
+      },
+      {
+        "id": "A-out-transformer",
+        "type": "mv-switch",
+        "name": "箱變出線櫃",
+        "station": "A",
+        "x": 650,
+        "y": 165,
+        "enabled": true,
+        "params": {
+          "kw": 2475
+        }
+      },
+      {
+        "id": "A-sst-cable",
+        "type": "mv-cable",
+        "name": "站內 SST 饋線",
+        "station": "A",
+        "x": 20,
+        "y": 260,
+        "enabled": true,
+        "params": {
+          "kva": 3500,
+          "pf": 0.99,
+          "length": 0
+        }
+      },
+      {
+        "id": "A-transformer",
+        "type": "transformer",
+        "name": "箱變 10 / 0.4 kV",
+        "station": "A",
+        "x": 650,
+        "y": 260,
+        "enabled": true,
+        "params": {
+          "kva": 2500,
+          "pf": 0.99,
+          "outputEfficiency": 0.98
+        }
+      },
+      {
+        "id": "A-load-switch-0",
+        "type": "mv-switch",
+        "name": "SST 負荷開關 1",
+        "station": "A",
+        "x": 20,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "A-sst-0",
+        "type": "sst",
+        "name": "SST 1",
+        "station": "A",
+        "x": 20,
+        "y": 455,
+        "enabled": true,
+        "params": {
+          "kw": 1680
+        }
+      },
+      {
+        "id": "A-load-switch-1",
+        "type": "mv-switch",
+        "name": "SST 負荷開關 2",
+        "station": "A",
+        "x": 230,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "A-sst-1",
+        "type": "sst",
+        "name": "SST 2",
+        "station": "A",
+        "x": 230,
+        "y": 455,
+        "enabled": true,
+        "params": {
+          "kw": 1680
+        }
+      },
+      {
+        "id": "A-lv",
+        "type": "lv-bus",
+        "name": "低壓饋線 AC 400 V",
+        "station": "A",
+        "x": 650,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kw": 2500
+        }
+      },
+      {
+        "id": "A-compensation",
+        "type": "compensation",
+        "name": "功率補償櫃",
+        "station": "A",
+        "x": 860,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kvar": 0
+        }
+      },
+      {
+        "id": "A-passenger",
+        "type": "passenger",
+        "name": "CATL 巧克力換電站",
+        "station": "A",
+        "x": 860,
+        "y": 465,
+        "enabled": true,
+        "params": {
+          "kw": 550,
+          "slots": 14,
+          "swapSeconds": 99
+        }
+      },
+      {
+        "id": "A-swap-bay",
+        "type": "swap-bay",
+        "name": "重卡換電工位",
+        "station": "A",
+        "x": 860,
+        "y": 565,
+        "enabled": true,
+        "params": {
+          "kw": 200
+        }
+      },
+      {
+        "id": "A-sst-aux",
+        "type": "ac-load",
+        "name": "SST / UPS 運行負載",
+        "station": "A",
+        "x": 860,
+        "y": 655,
+        "enabled": true,
+        "params": {
+          "kw": 20
+        }
+      },
+      {
+        "id": "A-pcs",
+        "type": "pcs",
+        "name": "PCS AC 400 / DC 800",
+        "station": "A",
+        "x": 650,
+        "y": 465,
+        "enabled": true,
+        "params": {
+          "kw": 2000
+        }
+      },
+      {
+        "id": "A-bus-sst",
+        "type": "bus",
+        "name": "DC 800 V 母線 1",
+        "station": "A",
+        "x": 20,
+        "y": 565,
+        "enabled": true,
+        "params": {
+          "voltage": 800,
+          "amps": 6000
+        }
+      },
+      {
+        "id": "A-bus-pcs",
+        "type": "bus",
+        "name": "DC 800 V 母線 2",
+        "station": "A",
+        "x": 440,
+        "y": 565,
+        "enabled": true,
+        "params": {
+          "voltage": 800,
+          "amps": 6000
+        }
+      },
+      {
+        "id": "A-feed-sst",
+        "type": "dc-switch",
+        "name": "母線 1 · 分段饋線",
+        "station": "A",
+        "x": 20,
+        "y": 680,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "A-feed-pcs",
+        "type": "dc-switch",
+        "name": "母線 2 · 分段饋線",
+        "station": "A",
+        "x": 440,
+        "y": 680,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "A-dd-0",
+        "type": "charger",
+        "name": "DD 1 · SST",
+        "station": "A",
+        "x": 20,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-0",
+        "type": "rack",
+        "name": "電池倉 1",
+        "station": "A",
+        "x": 20,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-1",
+        "type": "charger",
+        "name": "DD 2 · SST",
+        "station": "A",
+        "x": 230,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-1",
+        "type": "rack",
+        "name": "電池倉 2",
+        "station": "A",
+        "x": 230,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-2",
+        "type": "charger",
+        "name": "DD 3 · SST",
+        "station": "A",
+        "x": 440,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-2",
+        "type": "rack",
+        "name": "電池倉 3",
+        "station": "A",
+        "x": 440,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-3",
+        "type": "charger",
+        "name": "DD 4 · SST",
+        "station": "A",
+        "x": 650,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-3",
+        "type": "rack",
+        "name": "電池倉 4",
+        "station": "A",
+        "x": 650,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-4",
+        "type": "charger",
+        "name": "DD 5 · SST",
+        "station": "A",
+        "x": 20,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-4",
+        "type": "rack",
+        "name": "電池倉 5",
+        "station": "A",
+        "x": 20,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-5",
+        "type": "charger",
+        "name": "DD 6 · SST",
+        "station": "A",
+        "x": 230,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-5",
+        "type": "rack",
+        "name": "電池倉 6",
+        "station": "A",
+        "x": 230,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-6",
+        "type": "charger",
+        "name": "DD 7 · PCS",
+        "station": "A",
+        "x": 440,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-6",
+        "type": "rack",
+        "name": "電池倉 7",
+        "station": "A",
+        "x": 440,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-dd-7",
+        "type": "charger",
+        "name": "DD 8 · PCS",
+        "station": "A",
+        "x": 650,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "A-rack-7",
+        "type": "rack",
+        "name": "電池倉 8",
+        "station": "A",
+        "x": 650,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "A-stack",
+        "type": "charger",
+        "name": "DD 超充堆",
+        "station": "A",
+        "x": 230,
+        "y": 1220,
+        "enabled": true,
+        "params": {
+          "kw": 1440
+        }
+      },
+      {
+        "id": "A-terminal-0",
+        "type": "terminal",
+        "name": "液冷雙槍終端 1",
+        "station": "A",
+        "x": 20,
+        "y": 1325,
+        "enabled": true,
+        "params": {
+          "kw": 960
+        }
+      },
+      {
+        "id": "A-terminal-1",
+        "type": "terminal",
+        "name": "液冷雙槍終端 2",
+        "station": "A",
+        "x": 440,
+        "y": 1325,
+        "enabled": true,
+        "params": {
+          "kw": 960
+        }
+      },
+      {
+        "id": "A-gun-0",
+        "type": "gun",
+        "name": "充電槍 1",
+        "station": "A",
+        "x": 20,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "A-gun-1",
+        "type": "gun",
+        "name": "充電槍 2",
+        "station": "A",
+        "x": 230,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "A-gun-2",
+        "type": "gun",
+        "name": "充電槍 3",
+        "station": "A",
+        "x": 440,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "A-gun-3",
+        "type": "gun",
+        "name": "充電槍 4",
+        "station": "A",
+        "x": 650,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "B-grid",
+        "type": "grid",
+        "name": "10 kV 電力接入",
+        "station": "B",
+        "x": 1240,
+        "y": 60,
+        "enabled": true,
+        "params": {
+          "kva": 2500,
+          "pf": 0.99
+        }
+      },
+      {
+        "id": "B-incoming",
+        "type": "mv-switch",
+        "name": "進線櫃",
+        "station": "B",
+        "x": 1450,
+        "y": 60,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "B-meter",
+        "type": "meter",
+        "name": "計量櫃",
+        "station": "B",
+        "x": 1660,
+        "y": 60,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "B-out-sst",
+        "type": "mv-switch",
+        "name": "SST 出線櫃",
+        "station": "B",
+        "x": 1240,
+        "y": 165,
+        "enabled": true,
+        "params": {
+          "kw": 3465
+        }
+      },
+      {
+        "id": "B-out-transformer",
+        "type": "mv-switch",
+        "name": "箱變出線櫃",
+        "station": "B",
+        "x": 1870,
+        "y": 165,
+        "enabled": true,
+        "params": {
+          "kw": 2475
+        }
+      },
+      {
+        "id": "B-sst-cable",
+        "type": "mv-cable",
+        "name": "跨區 AC 10 kV · 150 m",
+        "station": "B",
+        "x": 1240,
+        "y": 260,
+        "enabled": true,
+        "params": {
+          "kva": 3500,
+          "pf": 0.99,
+          "length": 150
+        }
+      },
+      {
+        "id": "B-transformer",
+        "type": "transformer",
+        "name": "箱變 10 / 0.4 kV",
+        "station": "B",
+        "x": 1870,
+        "y": 260,
+        "enabled": true,
+        "params": {
+          "kva": 2500,
+          "pf": 0.99,
+          "outputEfficiency": 0.98
+        }
+      },
+      {
+        "id": "B-load-switch-0",
+        "type": "mv-switch",
+        "name": "SST 負荷開關 1",
+        "station": "B",
+        "x": 1240,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "B-sst-0",
+        "type": "sst",
+        "name": "SST 1",
+        "station": "B",
+        "x": 1240,
+        "y": 455,
+        "enabled": true,
+        "params": {
+          "kw": 1680
+        }
+      },
+      {
+        "id": "B-load-switch-1",
+        "type": "mv-switch",
+        "name": "SST 負荷開關 2",
+        "station": "B",
+        "x": 1450,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "B-sst-1",
+        "type": "sst",
+        "name": "SST 2",
+        "station": "B",
+        "x": 1450,
+        "y": 455,
+        "enabled": true,
+        "params": {
+          "kw": 1680
+        }
+      },
+      {
+        "id": "B-lv",
+        "type": "lv-bus",
+        "name": "低壓饋線 AC 400 V",
+        "station": "B",
+        "x": 1870,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kw": 2500
+        }
+      },
+      {
+        "id": "B-compensation",
+        "type": "compensation",
+        "name": "功率補償櫃",
+        "station": "B",
+        "x": 2080,
+        "y": 365,
+        "enabled": true,
+        "params": {
+          "kvar": 0
+        }
+      },
+      {
+        "id": "B-passenger",
+        "type": "passenger",
+        "name": "CATL 巧克力換電站",
+        "station": "B",
+        "x": 2080,
+        "y": 465,
+        "enabled": true,
+        "params": {
+          "kw": 550,
+          "slots": 14,
+          "swapSeconds": 99
+        }
+      },
+      {
+        "id": "B-swap-bay",
+        "type": "swap-bay",
+        "name": "重卡換電工位",
+        "station": "B",
+        "x": 2080,
+        "y": 565,
+        "enabled": true,
+        "params": {
+          "kw": 200
+        }
+      },
+      {
+        "id": "B-sst-aux",
+        "type": "ac-load",
+        "name": "SST / UPS 運行負載",
+        "station": "B",
+        "x": 2080,
+        "y": 655,
+        "enabled": true,
+        "params": {
+          "kw": 20
+        }
+      },
+      {
+        "id": "B-pcs",
+        "type": "pcs",
+        "name": "PCS AC 400 / DC 800",
+        "station": "B",
+        "x": 1870,
+        "y": 465,
+        "enabled": true,
+        "params": {
+          "kw": 2000
+        }
+      },
+      {
+        "id": "B-bus-sst",
+        "type": "bus",
+        "name": "DC 800 V 母線 1",
+        "station": "B",
+        "x": 1240,
+        "y": 565,
+        "enabled": true,
+        "params": {
+          "voltage": 800,
+          "amps": 6000
+        }
+      },
+      {
+        "id": "B-bus-pcs",
+        "type": "bus",
+        "name": "DC 800 V 母線 2",
+        "station": "B",
+        "x": 1660,
+        "y": 565,
+        "enabled": true,
+        "params": {
+          "voltage": 800,
+          "amps": 6000
+        }
+      },
+      {
+        "id": "B-feed-sst",
+        "type": "dc-switch",
+        "name": "母線 1 · 分段饋線",
+        "station": "B",
+        "x": 1240,
+        "y": 680,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "B-feed-pcs",
+        "type": "dc-switch",
+        "name": "母線 2 · 分段饋線",
+        "station": "B",
+        "x": 1660,
+        "y": 680,
+        "enabled": true,
+        "params": {
+          "kw": 10000
+        }
+      },
+      {
+        "id": "B-dd-0",
+        "type": "charger",
+        "name": "DD 1 · SST",
+        "station": "B",
+        "x": 1240,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-0",
+        "type": "rack",
+        "name": "電池倉 1",
+        "station": "B",
+        "x": 1240,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-1",
+        "type": "charger",
+        "name": "DD 2 · SST",
+        "station": "B",
+        "x": 1450,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-1",
+        "type": "rack",
+        "name": "電池倉 2",
+        "station": "B",
+        "x": 1450,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-2",
+        "type": "charger",
+        "name": "DD 3 · SST",
+        "station": "B",
+        "x": 1660,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-2",
+        "type": "rack",
+        "name": "電池倉 3",
+        "station": "B",
+        "x": 1660,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-3",
+        "type": "charger",
+        "name": "DD 4 · SST",
+        "station": "B",
+        "x": 1870,
+        "y": 800,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-3",
+        "type": "rack",
+        "name": "電池倉 4",
+        "station": "B",
+        "x": 1870,
+        "y": 885,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-4",
+        "type": "charger",
+        "name": "DD 5 · SST",
+        "station": "B",
+        "x": 1240,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-4",
+        "type": "rack",
+        "name": "電池倉 5",
+        "station": "B",
+        "x": 1240,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-5",
+        "type": "charger",
+        "name": "DD 6 · SST",
+        "station": "B",
+        "x": 1450,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-5",
+        "type": "rack",
+        "name": "電池倉 6",
+        "station": "B",
+        "x": 1450,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-6",
+        "type": "charger",
+        "name": "DD 7 · PCS",
+        "station": "B",
+        "x": 1660,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-6",
+        "type": "rack",
+        "name": "電池倉 7",
+        "station": "B",
+        "x": 1660,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-dd-7",
+        "type": "charger",
+        "name": "DD 8 · PCS",
+        "station": "B",
+        "x": 1870,
+        "y": 985,
+        "enabled": true,
+        "params": {
+          "kw": 560
+        }
+      },
+      {
+        "id": "B-rack-7",
+        "type": "rack",
+        "name": "電池倉 8",
+        "station": "B",
+        "x": 1870,
+        "y": 1070,
+        "enabled": true,
+        "params": {
+          "kw": 560,
+          "kWh": 513
+        }
+      },
+      {
+        "id": "B-stack",
+        "type": "charger",
+        "name": "DD 超充堆",
+        "station": "B",
+        "x": 1450,
+        "y": 1220,
+        "enabled": true,
+        "params": {
+          "kw": 1440
+        }
+      },
+      {
+        "id": "B-terminal-0",
+        "type": "terminal",
+        "name": "液冷雙槍終端 1",
+        "station": "B",
+        "x": 1240,
+        "y": 1325,
+        "enabled": true,
+        "params": {
+          "kw": 960
+        }
+      },
+      {
+        "id": "B-terminal-1",
+        "type": "terminal",
+        "name": "液冷雙槍終端 2",
+        "station": "B",
+        "x": 1660,
+        "y": 1325,
+        "enabled": true,
+        "params": {
+          "kw": 960
+        }
+      },
+      {
+        "id": "B-gun-0",
+        "type": "gun",
+        "name": "充電槍 1",
+        "station": "B",
+        "x": 1240,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "B-gun-1",
+        "type": "gun",
+        "name": "充電槍 2",
+        "station": "B",
+        "x": 1450,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "B-gun-2",
+        "type": "gun",
+        "name": "充電槍 3",
+        "station": "B",
+        "x": 1660,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "B-gun-3",
+        "type": "gun",
+        "name": "充電槍 4",
+        "station": "B",
+        "x": 1870,
+        "y": 1430,
+        "enabled": true,
+        "params": {
+          "kw": 480,
+          "amps": 600,
+          "voltage": 1000,
+          "vehicleVoltage": 637.56
+        }
+      },
+      {
+        "id": "A-tie-sst",
+        "type": "dc-cable",
+        "name": "跨站母聯 1",
+        "station": "A",
+        "x": 1050,
+        "y": 710,
+        "enabled": true,
+        "params": {
+          "kw": 4000,
+          "length": 150
+        }
+      },
+      {
+        "id": "A-tie-pcs",
+        "type": "dc-cable",
+        "name": "跨站母聯 2",
+        "station": "A",
+        "x": 1050,
+        "y": 810,
+        "enabled": true,
+        "params": {
+          "kw": 4000,
+          "length": 150
+        }
+      },
+      {
+        "id": "B-tie-sst",
+        "type": "dc-cable",
+        "name": "跨站母聯 1",
+        "station": "B",
+        "x": 2270,
+        "y": 710,
+        "enabled": true,
+        "params": {
+          "kw": 4000,
+          "length": 150
+        }
+      },
+      {
+        "id": "B-tie-pcs",
+        "type": "dc-cable",
+        "name": "跨站母聯 2",
+        "station": "B",
+        "x": 2270,
+        "y": 810,
+        "enabled": true,
+        "params": {
+          "kw": 4000,
+          "length": 150
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "A-grid>A-incoming",
+        "source": "A-grid",
+        "target": "A-incoming",
+        "enabled": true
+      },
+      {
+        "id": "A-incoming>A-meter",
+        "source": "A-incoming",
+        "target": "A-meter",
+        "enabled": true
+      },
+      {
+        "id": "A-meter>A-out-transformer",
+        "source": "A-meter",
+        "target": "A-out-transformer",
+        "enabled": true
+      },
+      {
+        "id": "A-meter>A-out-sst",
+        "source": "A-meter",
+        "target": "A-out-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-out-sst>A-sst-cable",
+        "source": "A-out-sst",
+        "target": "A-sst-cable",
+        "enabled": true
+      },
+      {
+        "id": "A-out-transformer>A-transformer",
+        "source": "A-out-transformer",
+        "target": "A-transformer",
+        "enabled": true
+      },
+      {
+        "id": "A-sst-cable>A-load-switch-0",
+        "source": "A-sst-cable",
+        "target": "A-load-switch-0",
+        "enabled": true
+      },
+      {
+        "id": "A-load-switch-0>A-sst-0",
+        "source": "A-load-switch-0",
+        "target": "A-sst-0",
+        "enabled": true
+      },
+      {
+        "id": "A-sst-cable>A-load-switch-1",
+        "source": "A-sst-cable",
+        "target": "A-load-switch-1",
+        "enabled": true
+      },
+      {
+        "id": "A-load-switch-1>A-sst-1",
+        "source": "A-load-switch-1",
+        "target": "A-sst-1",
+        "enabled": true
+      },
+      {
+        "id": "A-transformer>A-lv",
+        "source": "A-transformer",
+        "target": "A-lv",
+        "enabled": true
+      },
+      {
+        "id": "A-lv>A-compensation",
+        "source": "A-lv",
+        "target": "A-compensation",
+        "enabled": true
+      },
+      {
+        "id": "A-lv>A-passenger",
+        "source": "A-lv",
+        "target": "A-passenger",
+        "enabled": true
+      },
+      {
+        "id": "A-lv>A-swap-bay",
+        "source": "A-lv",
+        "target": "A-swap-bay",
+        "enabled": true
+      },
+      {
+        "id": "A-lv>A-sst-aux",
+        "source": "A-lv",
+        "target": "A-sst-aux",
+        "enabled": true
+      },
+      {
+        "id": "A-lv>A-pcs",
+        "source": "A-lv",
+        "target": "A-pcs",
+        "enabled": true
+      },
+      {
+        "id": "A-pcs>A-bus-pcs",
+        "source": "A-pcs",
+        "target": "A-bus-pcs",
+        "enabled": true
+      },
+      {
+        "id": "A-sst-0>A-bus-sst",
+        "source": "A-sst-0",
+        "target": "A-bus-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-sst-1>A-bus-sst",
+        "source": "A-sst-1",
+        "target": "A-bus-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-bus-sst>A-feed-sst",
+        "source": "A-bus-sst",
+        "target": "A-feed-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-bus-pcs>A-feed-pcs",
+        "source": "A-bus-pcs",
+        "target": "A-feed-pcs",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-sst>A-dd-0",
+        "source": "A-feed-sst",
+        "target": "A-dd-0",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-0>A-rack-0",
+        "source": "A-dd-0",
+        "target": "A-rack-0",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-sst>A-dd-1",
+        "source": "A-feed-sst",
+        "target": "A-dd-1",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-1>A-rack-1",
+        "source": "A-dd-1",
+        "target": "A-rack-1",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-sst>A-dd-2",
+        "source": "A-feed-sst",
+        "target": "A-dd-2",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-2>A-rack-2",
+        "source": "A-dd-2",
+        "target": "A-rack-2",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-sst>A-dd-3",
+        "source": "A-feed-sst",
+        "target": "A-dd-3",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-3>A-rack-3",
+        "source": "A-dd-3",
+        "target": "A-rack-3",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-sst>A-dd-4",
+        "source": "A-feed-sst",
+        "target": "A-dd-4",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-4>A-rack-4",
+        "source": "A-dd-4",
+        "target": "A-rack-4",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-sst>A-dd-5",
+        "source": "A-feed-sst",
+        "target": "A-dd-5",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-5>A-rack-5",
+        "source": "A-dd-5",
+        "target": "A-rack-5",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-pcs>A-dd-6",
+        "source": "A-feed-pcs",
+        "target": "A-dd-6",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-6>A-rack-6",
+        "source": "A-dd-6",
+        "target": "A-rack-6",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-pcs>A-dd-7",
+        "source": "A-feed-pcs",
+        "target": "A-dd-7",
+        "enabled": true
+      },
+      {
+        "id": "A-dd-7>A-rack-7",
+        "source": "A-dd-7",
+        "target": "A-rack-7",
+        "enabled": true
+      },
+      {
+        "id": "A-feed-pcs>A-stack",
+        "source": "A-feed-pcs",
+        "target": "A-stack",
+        "enabled": true
+      },
+      {
+        "id": "A-stack>A-terminal-0",
+        "source": "A-stack",
+        "target": "A-terminal-0",
+        "enabled": true
+      },
+      {
+        "id": "A-stack>A-terminal-1",
+        "source": "A-stack",
+        "target": "A-terminal-1",
+        "enabled": true
+      },
+      {
+        "id": "A-terminal-0>A-gun-0",
+        "source": "A-terminal-0",
+        "target": "A-gun-0",
+        "enabled": true
+      },
+      {
+        "id": "A-terminal-0>A-gun-1",
+        "source": "A-terminal-0",
+        "target": "A-gun-1",
+        "enabled": true
+      },
+      {
+        "id": "A-terminal-1>A-gun-2",
+        "source": "A-terminal-1",
+        "target": "A-gun-2",
+        "enabled": true
+      },
+      {
+        "id": "A-terminal-1>A-gun-3",
+        "source": "A-terminal-1",
+        "target": "A-gun-3",
+        "enabled": true
+      },
+      {
+        "id": "B-grid>B-incoming",
+        "source": "B-grid",
+        "target": "B-incoming",
+        "enabled": true
+      },
+      {
+        "id": "B-incoming>B-meter",
+        "source": "B-incoming",
+        "target": "B-meter",
+        "enabled": true
+      },
+      {
+        "id": "B-meter>B-out-transformer",
+        "source": "B-meter",
+        "target": "B-out-transformer",
+        "enabled": true
+      },
+      {
+        "id": "B-out-sst>B-sst-cable",
+        "source": "B-out-sst",
+        "target": "B-sst-cable",
+        "enabled": true
+      },
+      {
+        "id": "B-out-transformer>B-transformer",
+        "source": "B-out-transformer",
+        "target": "B-transformer",
+        "enabled": true
+      },
+      {
+        "id": "B-sst-cable>B-load-switch-0",
+        "source": "B-sst-cable",
+        "target": "B-load-switch-0",
+        "enabled": true
+      },
+      {
+        "id": "B-load-switch-0>B-sst-0",
+        "source": "B-load-switch-0",
+        "target": "B-sst-0",
+        "enabled": true
+      },
+      {
+        "id": "B-sst-cable>B-load-switch-1",
+        "source": "B-sst-cable",
+        "target": "B-load-switch-1",
+        "enabled": true
+      },
+      {
+        "id": "B-load-switch-1>B-sst-1",
+        "source": "B-load-switch-1",
+        "target": "B-sst-1",
+        "enabled": true
+      },
+      {
+        "id": "B-transformer>B-lv",
+        "source": "B-transformer",
+        "target": "B-lv",
+        "enabled": true
+      },
+      {
+        "id": "B-lv>B-compensation",
+        "source": "B-lv",
+        "target": "B-compensation",
+        "enabled": true
+      },
+      {
+        "id": "B-lv>B-passenger",
+        "source": "B-lv",
+        "target": "B-passenger",
+        "enabled": true
+      },
+      {
+        "id": "B-lv>B-swap-bay",
+        "source": "B-lv",
+        "target": "B-swap-bay",
+        "enabled": true
+      },
+      {
+        "id": "B-lv>B-sst-aux",
+        "source": "B-lv",
+        "target": "B-sst-aux",
+        "enabled": true
+      },
+      {
+        "id": "B-lv>B-pcs",
+        "source": "B-lv",
+        "target": "B-pcs",
+        "enabled": true
+      },
+      {
+        "id": "B-pcs>B-bus-pcs",
+        "source": "B-pcs",
+        "target": "B-bus-pcs",
+        "enabled": true
+      },
+      {
+        "id": "B-sst-0>B-bus-sst",
+        "source": "B-sst-0",
+        "target": "B-bus-sst",
+        "enabled": true
+      },
+      {
+        "id": "B-sst-1>B-bus-sst",
+        "source": "B-sst-1",
+        "target": "B-bus-sst",
+        "enabled": true
+      },
+      {
+        "id": "B-bus-sst>B-feed-sst",
+        "source": "B-bus-sst",
+        "target": "B-feed-sst",
+        "enabled": true
+      },
+      {
+        "id": "B-bus-pcs>B-feed-pcs",
+        "source": "B-bus-pcs",
+        "target": "B-feed-pcs",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-sst>B-dd-0",
+        "source": "B-feed-sst",
+        "target": "B-dd-0",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-0>B-rack-0",
+        "source": "B-dd-0",
+        "target": "B-rack-0",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-sst>B-dd-1",
+        "source": "B-feed-sst",
+        "target": "B-dd-1",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-1>B-rack-1",
+        "source": "B-dd-1",
+        "target": "B-rack-1",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-sst>B-dd-2",
+        "source": "B-feed-sst",
+        "target": "B-dd-2",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-2>B-rack-2",
+        "source": "B-dd-2",
+        "target": "B-rack-2",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-sst>B-dd-3",
+        "source": "B-feed-sst",
+        "target": "B-dd-3",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-3>B-rack-3",
+        "source": "B-dd-3",
+        "target": "B-rack-3",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-sst>B-dd-4",
+        "source": "B-feed-sst",
+        "target": "B-dd-4",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-4>B-rack-4",
+        "source": "B-dd-4",
+        "target": "B-rack-4",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-sst>B-dd-5",
+        "source": "B-feed-sst",
+        "target": "B-dd-5",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-5>B-rack-5",
+        "source": "B-dd-5",
+        "target": "B-rack-5",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-pcs>B-dd-6",
+        "source": "B-feed-pcs",
+        "target": "B-dd-6",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-6>B-rack-6",
+        "source": "B-dd-6",
+        "target": "B-rack-6",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-pcs>B-dd-7",
+        "source": "B-feed-pcs",
+        "target": "B-dd-7",
+        "enabled": true
+      },
+      {
+        "id": "B-dd-7>B-rack-7",
+        "source": "B-dd-7",
+        "target": "B-rack-7",
+        "enabled": true
+      },
+      {
+        "id": "B-feed-pcs>B-stack",
+        "source": "B-feed-pcs",
+        "target": "B-stack",
+        "enabled": true
+      },
+      {
+        "id": "B-stack>B-terminal-0",
+        "source": "B-stack",
+        "target": "B-terminal-0",
+        "enabled": true
+      },
+      {
+        "id": "B-stack>B-terminal-1",
+        "source": "B-stack",
+        "target": "B-terminal-1",
+        "enabled": true
+      },
+      {
+        "id": "B-terminal-0>B-gun-0",
+        "source": "B-terminal-0",
+        "target": "B-gun-0",
+        "enabled": true
+      },
+      {
+        "id": "B-terminal-0>B-gun-1",
+        "source": "B-terminal-0",
+        "target": "B-gun-1",
+        "enabled": true
+      },
+      {
+        "id": "B-terminal-1>B-gun-2",
+        "source": "B-terminal-1",
+        "target": "B-gun-2",
+        "enabled": true
+      },
+      {
+        "id": "B-terminal-1>B-gun-3",
+        "source": "B-terminal-1",
+        "target": "B-gun-3",
+        "enabled": true
+      },
+      {
+        "id": "A-meter>B-out-sst",
+        "source": "A-meter",
+        "target": "B-out-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-bus-sst>A-tie-sst",
+        "source": "A-bus-sst",
+        "target": "A-tie-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-tie-sst>B-feed-sst",
+        "source": "A-tie-sst",
+        "target": "B-feed-sst",
+        "enabled": true
+      },
+      {
+        "id": "A-bus-pcs>A-tie-pcs",
+        "source": "A-bus-pcs",
+        "target": "A-tie-pcs",
+        "enabled": true
+      },
+      {
+        "id": "A-tie-pcs>B-feed-pcs",
+        "source": "A-tie-pcs",
+        "target": "B-feed-pcs",
+        "enabled": true
+      },
+      {
+        "id": "B-bus-sst>B-tie-sst",
+        "source": "B-bus-sst",
+        "target": "B-tie-sst",
+        "enabled": true
+      },
+      {
+        "id": "B-tie-sst>A-feed-sst",
+        "source": "B-tie-sst",
+        "target": "A-feed-sst",
+        "enabled": true
+      },
+      {
+        "id": "B-bus-pcs>B-tie-pcs",
+        "source": "B-bus-pcs",
+        "target": "B-tie-pcs",
+        "enabled": true
+      },
+      {
+        "id": "B-tie-pcs>A-feed-pcs",
+        "source": "B-tie-pcs",
+        "target": "A-feed-pcs",
+        "enabled": true
+      }
+    ]
+  },
+  "services": [
+    {
+      "hour": 0,
+      "station": "A",
+      "swapCount": 8,
+      "swapKWh": 3283.2000000000003,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": null,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 1,
+      "station": "A",
+      "swapCount": 8,
+      "swapKWh": 3283.2000000000003,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 0,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 2,
+      "station": "A",
+      "swapCount": 6,
+      "swapKWh": 2462.4,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 1,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 3,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 4,
+      "station": "A",
+      "swapCount": 4,
+      "swapKWh": 1641.6000000000001,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 2,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 5,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 4,
+      "gridPrice": 0.422744,
+      "swapFee": 0.5,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.92,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 6,
+      "station": "A",
+      "swapCount": 8,
+      "swapKWh": 3283.2000000000003,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 0,
+      "gridPrice": 0.628011,
+      "swapFee": 0.15,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.78,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 7,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 8,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 9,
+      "station": "A",
+      "swapCount": 3,
+      "swapKWh": 1231.2,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 3,
+      "gridPrice": 0.628011,
+      "swapFee": 0.3,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.93,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 10,
+      "station": "A",
+      "swapCount": 3,
+      "swapKWh": 1231.2,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 1,
+      "gridPrice": 0.628011,
+      "swapFee": 0.3,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.93,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 11,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 12,
+      "station": "A",
+      "swapCount": 7,
+      "swapKWh": 2872.8,
+      "chargeCount": 1,
+      "chargeKWh": 2050,
+      "idleRaw": 1,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 13,
+      "station": "A",
+      "swapCount": 0,
+      "swapKWh": 0,
+      "chargeCount": 4,
+      "chargeKWh": 1640,
+      "idleRaw": 0,
+      "gridPrice": 0.422744,
+      "swapFee": 0.5,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.92,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 14,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 15,
+      "station": "A",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 16,
+      "station": "A",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 5,
+      "gridPrice": 0.818449,
+      "swapFee": 0.3,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.12,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 17,
+      "station": "A",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 5,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 18,
+      "station": "A",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 5,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 19,
+      "station": "A",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 5,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 20,
+      "station": "A",
+      "swapCount": 0,
+      "swapKWh": 0,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 8,
+      "gridPrice": 1.008497,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.36,
+      "chargeTotalRaw": 1.31
+    },
+    {
+      "hour": 21,
+      "station": "A",
+      "swapCount": 0,
+      "swapKWh": 0,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 8,
+      "gridPrice": 1.008497,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.36,
+      "chargeTotalRaw": 1.31
+    },
+    {
+      "hour": 22,
+      "station": "A",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 5,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 23,
+      "station": "A",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 5,
+      "gridPrice": 0.818449,
+      "swapFee": 0.3,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.12,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 0,
+      "station": "B",
+      "swapCount": 8,
+      "swapKWh": 3283.2000000000003,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": null,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 1,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 4,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 2,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 4,
+      "gridPrice": 0.422744,
+      "swapFee": 0.5,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.92,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 3,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 4,
+      "station": "B",
+      "swapCount": 6,
+      "swapKWh": 2462.4,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 2,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 5,
+      "station": "B",
+      "swapCount": 8,
+      "swapKWh": 3283.2000000000003,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 0,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 6,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 4,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 7,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 8,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 9,
+      "station": "B",
+      "swapCount": 3,
+      "swapKWh": 1231.2,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 1,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 10,
+      "station": "B",
+      "swapCount": 3,
+      "swapKWh": 1231.2,
+      "chargeCount": 1,
+      "chargeKWh": 410,
+      "idleRaw": 3,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 11,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 12,
+      "station": "B",
+      "swapCount": 5,
+      "swapKWh": 2052,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 3,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.72
+    },
+    {
+      "hour": 13,
+      "station": "B",
+      "swapCount": 4,
+      "swapKWh": 1641.6000000000001,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 4,
+      "gridPrice": 0.422744,
+      "swapFee": 0.35,
+      "chargeFee": 0.5,
+      "swapTotalRaw": 0.77,
+      "chargeTotalRaw": 0.92
+    },
+    {
+      "hour": 14,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 15,
+      "station": "B",
+      "swapCount": 2,
+      "swapKWh": 820.8000000000001,
+      "chargeCount": 2,
+      "chargeKWh": 820,
+      "idleRaw": 2,
+      "gridPrice": 0.628011,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 0.98,
+      "chargeTotalRaw": 0.93
+    },
+    {
+      "hour": 16,
+      "station": "B",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 3,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 17,
+      "station": "B",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 3,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 18,
+      "station": "B",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 3,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 19,
+      "station": "B",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 3,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 20,
+      "station": "B",
+      "swapCount": 0,
+      "swapKWh": 0,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 8,
+      "gridPrice": 1.008497,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.36,
+      "chargeTotalRaw": 1.31
+    },
+    {
+      "hour": 21,
+      "station": "B",
+      "swapCount": 0,
+      "swapKWh": 0,
+      "chargeCount": 0,
+      "chargeKWh": 0,
+      "idleRaw": 8,
+      "gridPrice": 1.008497,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.36,
+      "chargeTotalRaw": 1.31
+    },
+    {
+      "hour": 22,
+      "station": "B",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 3,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    },
+    {
+      "hour": 23,
+      "station": "B",
+      "swapCount": 1,
+      "swapKWh": 410.40000000000003,
+      "chargeCount": 2,
+      "chargeKWh": 500,
+      "idleRaw": 3,
+      "gridPrice": 0.818449,
+      "swapFee": 0.35,
+      "chargeFee": 0.3,
+      "swapTotalRaw": 1.17,
+      "chargeTotalRaw": 1.12
+    }
+  ],
+  "station": {
+    "A": {
+      "batteries": 8,
+      "capacityKWh": 513,
+      "readySOC": 1,
+      "returnSOC": 0.2,
+      "bays": 1,
+      "swapMinutes": 7.5,
+      "guns": 4,
+      "gunKW": 480,
+      "chargePoolKW": 1440,
+      "batteryChargeKW": 560,
+      "auxiliaryKW": 200
+    },
+    "B": {
+      "batteries": 8,
+      "capacityKWh": 513,
+      "readySOC": 1,
+      "returnSOC": 0.2,
+      "bays": 1,
+      "swapMinutes": 7.5,
+      "guns": 4,
+      "gunKW": 480,
+      "chargePoolKW": 1440,
+      "batteryChargeKW": 560,
+      "auxiliaryKW": 200
+    }
+  },
+  "efficiency": {
+    "mode": "ASSEMBLY",
+    "sst": 0.98,
+    "transformer": 0.98,
+    "pcs": 0.98,
+    "charger": 0.974,
+    "sstSource": 0.9557,
+    "pcsSource": 0.9307
+  },
+  "billing": "EXACT_COMPONENTS",
+  "finance": {
+    "capex": null,
+    "fixedDaily": null,
+    "variablePerKWh": 0,
+    "discountRate": 0.08,
+    "years": 10,
+    "rampMonths": 24,
+    "startLoad": 0.2,
+    "operatingDaysPerYear": 365
+  },
+  "sources": [
+    {
+      "id": "SRC-POWER-01",
+      "status": "SOURCE_TRANSCRIBED",
+      "note": "一期/二期供電圖；工作版拓撲為明示簡化"
+    },
+    {
+      "id": "SRC-EFF-01",
+      "status": "SOURCE_TRANSCRIBED",
+      "note": "加權效率，無負載曲線"
+    },
+    {
+      "id": "SRC-SCENE-01",
+      "status": "CONFLICT",
+      "note": "A充電合計差1次/2050kWh"
+    },
+    {
+      "id": "SRC-FIN-01",
+      "status": "ASSUMPTION",
+      "note": "15000kWh/日、0.30服務費僅為訪談參考"
+    },
+    {
+      "id": "SRC-SUPPLEMENT-01..06",
+      "status": "SOURCE_TRANSCRIBED",
+      "note": "513 kWh、8倉、560 kW/DD、2×1440 kW；0.6為裝機同動率，不增加供電"
+    },
+    {
+      "id": "CATL-CHOCO-OFFICIAL",
+      "status": "OFFICIAL",
+      "note": "https://www.catl.com/brand/servicebrand/；14–30倉、99秒；500+50 kW為附件配置，非CATL官方額定"
+    },
+    {
+      "id": "DERIVED-SOC-PROJECTION",
+      "status": "DERIVED",
+      "note": "保留原始車次/充電kWh；僅按目前SOC窗口重新計算換電需求"
+    }
+  ],
+  "engineering": {
+    "profile": "SUPPLEMENT_513",
+    "pcsSlotsPerSite": 2,
+    "intertie": true,
+    "simultaneity": 0.6,
+    "packVoltage": 637.56,
+    "passengerSlots": 14,
+    "passengerSwapSeconds": 99,
+    "passengerChargerKW": 500,
+    "passengerAuxKW": 50,
+    "passengerLoadFactor": 0.5,
+    "truckAuxLoadFactor": 0.5
+  }
+}

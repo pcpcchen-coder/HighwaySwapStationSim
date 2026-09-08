@@ -30,6 +30,10 @@ test("production Worker serves the HighwaySwapSim workbench", async () => {
   assert.match(html, /HighwaySwapSim/);
   assert.match(html, /執行測算/);
   assert.match(html, /77\.75/);
+  for (const label of ['CATL 巧克力換電站','DD 超充堆','液冷','母線 1','母線 2','重卡換電工位','電池倉']) {
+    // React may insert comment boundaries around adjacent dynamic text.
+    assert.ok(html.replace(/<!--.*?-->/g,'').includes(label),label);
+  }
   assert.doesNotMatch(html, /Starter Project/);
   assert.doesNotMatch(html, /codex-preview/);
 });

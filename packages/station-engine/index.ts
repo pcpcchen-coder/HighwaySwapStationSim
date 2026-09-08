@@ -5,7 +5,7 @@ import { bill } from '../economics-engine/index.ts';
 import { validateTopology, sourceDiagnostics } from '../topology-engine/index.ts';
 import { parseProject } from '../schemas/index.ts';
 const ids: StationId[] = ['A', 'B'];
-export const ENGINE_VERSION = '0.1.0';
+export const ENGINE_VERSION = '0.2.0';
 const blank = (row: ServiceRow): HourResult => ({ hour: row.hour, station: row.station, requestedKWh: row.swapKWh + row.chargeKWh, deliveredKWh: 0, swapCount: 0, chargeCount: 0, gridKWh: 0, lossKWh: 0, auxiliaryKWh: 0, revenue: 0, gridCost: 0, ready: 0, queue: 0, storedKWh: 0, balanceResidual: 0, peakKW: 0 });
 function finish(p: Project, hours: HourResult[], transactions: Transaction[], initialStoredKWh: number, finalStoredKWh: number, diagnostics: RunResult['diagnostics']): RunResult {
     const sum = (key: keyof HourResult) => hours.reduce((a, h) => a + Number(h[key]), 0);
@@ -40,8 +40,10 @@ export function simulate(input: Project): RunResult {
     if (diagnostics.some(d => d.severity === 'error'))
         throw Error(diagnostics.filter(d => d.severity === 'error').map(d => d.message).join('\n'));
     for (const s of ids)
-        if (!p.topology.nodes.some(n => n.id === `${s}-charger` && n.type === 'charger'))
+        if (!p.engineering && !p.topology.nodes.some(n => n.id === `${s}-charger` && n.type === 'charger'))
             throw Error(`Missing station sink: ${s}-charger`);
+    if(p.engineering && p.efficiency.mode !== 'ASSEMBLY') throw Error('詳細多分支供電需使用設備組裝效率模式');
+    if(p.engineering) diagnostics.push({code:'PASSENGER_LOAD_ONLY',severity:'warning',message:'CATL站以共用交流負載模擬；負載係數為可調假設，未計乘用車換電收入。'});
     const rows = new Map(p.services.map(r => [`${r.station}:${r.hour}`, r]));
     const hours = p.services.map(blank);
     const hourly = new Map(hours.map(h => [`${h.station}:${h.hour}`, h]));
@@ -91,7 +93,7 @@ export function simulate(input: Project): RunResult {
         process(t);
         for (const s of ids) {
             const st = states[s], c = p.station[s];
-            while (st.busy < c.bays && st.swapQueue.length) {
+            while (st.busy < c.bays && st.swapQueue.length && (!p.engineering || p.topology.nodes.some(n=>n.id===`${s}-swap-bay`&&n.enabled))) {
                 const job = st.swapQueue[0];
                 if (Math.abs(job.requestedKWh - c.capacityKWh * (c.readySOC - c.returnSOC)) > 1e-6)
                     break;
@@ -105,7 +107,10 @@ export function simulate(input: Project): RunResult {
                 queue.schedule(t + c.swapMinutes, { kind: 'swap-complete', job, battery: b });
             }
             while (st.charging.length < c.guns && st.chargeQueue.length) {
+                const freeGun = p.engineering ? Array.from({length:c.guns},(_,i)=>`${s}-gun-${i}`).find(id=>p.topology.nodes.some(n=>n.id===id&&n.enabled)&&!st.charging.some(j=>j.equipmentId===id)) : undefined;
+                if(p.engineering && !freeGun) break;
                 const job = st.chargeQueue.shift()!;
+                if(freeGun) job.equipmentId=freeGun;
                 job.start = t;
                 st.charging.push(job);
             }
@@ -115,25 +120,35 @@ export function simulate(input: Project): RunResult {
         if (dt <= 0)
             throw Error('Scheduler failed to advance');
         const demands = ids.map(s => { const st = states[s], c = p.station[s]; const canCharge = p.strategy === 'IMMEDIATE' || getRate(s, t).gridPrice < .7 || ready(s) < Math.max(2, c.bays * 2); const batteries = st.batteries.map(b => !b.reserved && canCharge ? Math.min(c.batteryChargeKW, Math.max(0, c.capacityKWh * c.readySOC - b.energy) / dt) : 0); const ev = st.charging.map(j => Math.min(c.gunKW, Math.max(0, j.requestedKWh - j.deliveredKWh) / dt)); const evTotal = ev.reduce((a, b) => a + b, 0); const factor = evTotal > 0 ? Math.min(1, c.chargePoolKW / evTotal) : 0; return { s, batteries, ev: ev.map(v => v * factor), kw: batteries.reduce((a, b) => a + b, 0) + evTotal * factor }; });
-        const allocations = allocatePower(p, [...ids.map(s => ({ sink: `${s}-grid`, kw: p.station[s].auxiliaryKW })), ...demands.map(d => ({ sink: `${d.s}-charger`, kw: d.kw }))]);
-        for (const [i, d] of demands.entries()) {
-            const s = d.s, st = states[s], h = getHour(s, t), a = allocations[i + 2], aux = allocations[i];
-            h.gridKWh += (a.grid + aux.grid) * dt;
-            h.lossKWh += (a.loss + aux.loss) * dt;
-            h.auxiliaryKWh += aux.delivered * dt;
-            h.peakKW = Math.max(h.peakKW, a.grid + aux.grid);
-            for (const item of [a, aux])
-                for (const [source, kw] of Object.entries(item.sourceImport)) {
-                    const sourceStation = p.topology.nodes.find(n => n.id === source)!.station;
-                    h.gridCost += kw * dt * getRate(sourceStation, t).gridPrice;
-                }
-            const fraction = d.kw > 0 ? a.delivered / d.kw : 0;
-            st.batteries.forEach((b, index) => b.energy += d.batteries[index] * fraction * dt);
-            st.charging.forEach((job, index) => { const energy = d.ev[index] * fraction * dt; job.deliveredKWh += energy; h.deliveredKWh += energy; h.revenue += bill(getRate(s, t), 'charge', energy, p.billing); if (job.deliveredKWh >= job.requestedKWh - 1e-8) {
-                job.completion = next;
-                h.chargeCount++;
-            } });
-            st.charging = st.charging.filter(j => j.completion === null);
+        // Each rack and each gun is a real sink. All requests consume shared upstream limits.
+        const requests: {sink:string;kw:number;station:StationId;kind:'aux'|'battery'|'gun'|'legacy';index:number}[]=[];
+        for(const s of ids){const c=p.engineering;
+            if(c){requests.push(
+                {sink:`${s}-passenger`,kw:(c.passengerChargerKW+c.passengerAuxKW)*c.passengerLoadFactor,station:s,kind:'aux',index:0},
+                {sink:`${s}-swap-bay`,kw:p.station[s].auxiliaryKW*c.truckAuxLoadFactor,station:s,kind:'aux',index:0},
+                {sink:`${s}-sst-aux`,kw:p.topology.nodes.filter(n=>n.station===s&&n.type==='sst'&&n.enabled).length*10,station:s,kind:'aux',index:0});
+            }else requests.push({sink:`${s}-grid`,kw:p.station[s].auxiliaryKW,station:s,kind:'aux',index:0});
+        }
+        for(const d of demands){if(p.engineering){
+            d.batteries.forEach((kw,index)=>requests.push({sink:`${d.s}-rack-${index}`,kw,station:d.s,kind:'battery',index}));
+            d.ev.forEach((kw,index)=>requests.push({sink:states[d.s].charging[index].equipmentId!,kw,station:d.s,kind:'gun',index}));
+        }else requests.push({sink:`${d.s}-charger`,kw:d.kw,station:d.s,kind:'legacy',index:0});}
+        const allocations=allocatePower(p,requests);
+        const batteryPowers:Record<StationId,number[]>={A:[],B:[]},gunPowers:Record<StationId,number[]>={A:[],B:[]};
+        const gridPower={A:0,B:0};
+        requests.forEach((request,i)=>{const a=allocations[i],s=request.station,h=getHour(s,t);
+            h.gridKWh+=a.grid*dt;h.lossKWh+=a.loss*dt;gridPower[s]+=a.grid;
+            if(request.kind==='aux')h.auxiliaryKWh+=a.delivered*dt;
+            if(request.kind==='battery')batteryPowers[s][request.index]=a.delivered;
+            if(request.kind==='gun')gunPowers[s][request.index]=a.delivered;
+            if(request.kind==='legacy'){const d=demands.find(d=>d.s===s)!;const f=d.kw>0?a.delivered/d.kw:0;batteryPowers[s]=d.batteries.map(v=>v*f);gunPowers[s]=d.ev.map(v=>v*f);}
+            for(const [source,kw] of Object.entries(a.sourceImport)){const sourceStation=p.topology.nodes.find(n=>n.id===source)!.station;h.gridCost+=kw*dt*getRate(sourceStation,t).gridPrice;}
+        });
+        for(const d of demands){const s=d.s,st=states[s],h=getHour(s,t);
+            h.peakKW=Math.max(h.peakKW,gridPower[s]);
+            st.batteries.forEach((b,index)=>b.energy+=(batteryPowers[s][index]??0)*dt);
+            st.charging.forEach((job,index)=>{const energy=(gunPowers[s][index]??0)*dt;job.deliveredKWh+=energy;h.deliveredKWh+=energy;h.revenue+=bill(getRate(s,t),'charge',energy,p.billing);if(job.deliveredKWh>=job.requestedKWh-1e-8){job.completion=next;h.chargeCount++;}});
+            st.charging=st.charging.filter(j=>j.completion===null);
             h.ready = ready(s);
             h.queue = st.swapQueue.length + st.chargeQueue.length;
             h.storedKWh = stored(s);

@@ -55,7 +55,8 @@ export interface StationConfig {
     auxiliaryKW: number;
 }
 export interface Project {
-    schemaVersion: '1.1';
+    schemaVersion: '1.2';
+    engineering?: EngineeringConfig;
     name: string;
     seed: number;
     phase: 1 | 2;
@@ -116,6 +117,7 @@ export interface HourResult {
     peakKW: number;
 }
 export interface Transaction {
+    equipmentId?: string;
     id: string;
     station: StationId;
     kind: 'swap' | 'charge';
@@ -145,4 +147,18 @@ export interface RunResult {
         finalStoredKWh: number;
         maxBalanceResidual: number;
     };
+}
+
+export interface EngineeringConfig {
+    profile: 'SUPPLEMENT_513';
+    pcsSlotsPerSite: number;
+    intertie: boolean;
+    simultaneity: number;
+    packVoltage: number;
+    passengerSlots: number;
+    passengerSwapSeconds: number;
+    passengerChargerKW: number;
+    passengerAuxKW: number;
+    passengerLoadFactor: number;
+    truckAuxLoadFactor: number;
 }
