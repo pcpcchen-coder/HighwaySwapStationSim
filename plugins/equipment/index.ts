@@ -33,7 +33,7 @@ for (const [type, label, voltage, domain] of [
     ['passenger','CATL 巧克力站',400,'AC'], ['terminal','雙槍終端',800,'DC'],
     ['rack','電池倉',800,'DC'], ['dc-switch','直流開關',800,'DC'],
 ] as const) equipmentRegistry.register({type,label,parameters:[param('kw','功率上限','kW',10000)],
-    ports:()=>[port('in',domain,voltage,'input'),port('out',domain,voltage,'output')],capacity:n=>n.params.kw});
+    ports:()=>['ac-load','passenger','rack'].includes(type)?[port('in',domain,voltage,'input')]:[port('in',domain,voltage,'input'),port('out',domain,voltage,'output')],capacity:n=>n.params.kw});
 equipmentRegistry.register({type:'gun',label:'液冷充電槍',parameters:[param('kw','額定功率','kW',480),param('amps','最大電流','A',600),param('voltage','額定電壓上限','V',1000),param('vehicleVoltage','車端電壓','V',637.56)],ports:()=>[port('in','DC',800,'input')],capacity:n=>n.params.vehicleVoltage>n.params.voltage?0:Math.min(n.params.kw,n.params.amps*n.params.vehicleVoltage/1000)});
 equipmentRegistry.register({type:'swap-bay',label:'重卡換電工位',parameters:[param('kw','站用上限','kW',200)],ports:()=>[port('in','AC',400,'input')],capacity:n=>n.params.kw});
 equipmentRegistry.register({type:'compensation',label:'功率補償櫃',parameters:[param('kvar','補償額定（待確認）','kvar',0)],ports:()=>[port('in','AC',400,'input')],capacity:()=>0});

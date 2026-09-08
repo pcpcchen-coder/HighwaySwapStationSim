@@ -42,3 +42,7 @@ next-env.d.ts
 /work/
 
 *.tsbuildinfo
+
+# Regenerated numeric evidence; frozen copies live in docs/evidence
+/artifacts/
+__pycache__/

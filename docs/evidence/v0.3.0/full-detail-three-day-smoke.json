@@ -1,0 +1,182 @@
+{
+  "engineVersion": "0.3.0",
+  "schemaVersion": "1.3",
+  "horizonDays": 3,
+  "nodes": 92,
+  "edges": 96,
+  "serviceRows": 144,
+  "transactions": 585,
+  "hourRows": 144,
+  "componentRows": 4213,
+  "edgeRows": 4141,
+  "sourceRows": 144,
+  "timing": {
+    "simulationMs": 3208.235999,
+    "exportMs": 174.3025650000004,
+    "importMs": 145.95960600000035
+  },
+  "checks": {
+    "globalResidual": 3.5652192309498787e-10,
+    "sourceResidual": -3.4924596548080444e-10,
+    "sourceCostResidual": 8.731149137020111e-11,
+    "componentLossResidual": 2.546585164964199e-11,
+    "maxNodeResidual": 3.907985046680551e-12,
+    "maxEdgeInResidual": 1.8189894035458565e-12,
+    "maxEdgeOutResidual": 3.637978807091713e-12,
+    "maxCapacityExcess": 0,
+    "maxReportedResidual": 2.000888343900442e-11
+  },
+  "totals": {
+    "deliveredKWh": 233286.13599999982,
+    "requestedKWh": 233403.59999999974,
+    "gridKWh": 302933.5022111768,
+    "lossKWh": 14207.366211176593,
+    "revenue": 206837.3,
+    "gridCost": 176022.46,
+    "auxiliaryGridCost": 36143.94,
+    "completed": 583,
+    "unservedKWh": 117.4639999999199,
+    "initialStoredKWh": 8208,
+    "finalStoredKWh": 8207.999999999993,
+    "maxBalanceResidual": 2.000888343900442e-11
+  },
+  "byDay": [
+    {
+      "day": 0,
+      "deliveredKWh": 77683.73600000002,
+      "gridKWh": 100894.11923676572,
+      "completed": 193,
+      "finalStoredKWh": 8207.999999999996
+    },
+    {
+      "day": 1,
+      "deliveredKWh": 77801.20000000003,
+      "gridKWh": 101019.69148720548,
+      "completed": 195,
+      "finalStoredKWh": 8207.99999999999
+    },
+    {
+      "day": 2,
+      "deliveredKWh": 77801.20000000001,
+      "gridKWh": 101019.69148720552,
+      "completed": 195,
+      "finalStoredKWh": 8207.999999999993
+    }
+  ],
+  "xlsx": {
+    "bytes": 3890391,
+    "MiB": 3.7101659774780273,
+    "sha256": "727cd06eacc5ccfdee8f210da48354d524a75292ab71de563a96d8e4d88417de",
+    "imported": true,
+    "importError": null,
+    "projectJsonBytes": 52840,
+    "zipEntries": [
+      {
+        "name": "[Content_Types].xml",
+        "bytes": 2707
+      },
+      {
+        "name": "_rels/.rels",
+        "bytes": 261
+      },
+      {
+        "name": "xl/workbook.xml",
+        "bytes": 1132
+      },
+      {
+        "name": "xl/_rels/workbook.xml.rels",
+        "bytes": 2534
+      },
+      {
+        "name": "xl/worksheets/sheet1.xml",
+        "bytes": 94497
+      },
+      {
+        "name": "xl/worksheets/sheet2.xml",
+        "bytes": 2204
+      },
+      {
+        "name": "xl/worksheets/sheet3.xml",
+        "bytes": 58531
+      },
+      {
+        "name": "xl/worksheets/sheet4.xml",
+        "bytes": 50140
+      },
+      {
+        "name": "xl/worksheets/sheet5.xml",
+        "bytes": 31805
+      },
+      {
+        "name": "xl/worksheets/sheet6.xml",
+        "bytes": 92093
+      },
+      {
+        "name": "xl/worksheets/sheet7.xml",
+        "bytes": 290957
+      },
+      {
+        "name": "xl/worksheets/sheet8.xml",
+        "bytes": 2698
+      },
+      {
+        "name": "xl/worksheets/sheet9.xml",
+        "bytes": 1847
+      },
+      {
+        "name": "xl/worksheets/sheet10.xml",
+        "bytes": 1275
+      },
+      {
+        "name": "xl/worksheets/sheet11.xml",
+        "bytes": 2259
+      },
+      {
+        "name": "xl/worksheets/sheet12.xml",
+        "bytes": 1797
+      },
+      {
+        "name": "xl/worksheets/sheet13.xml",
+        "bytes": 4487
+      },
+      {
+        "name": "xl/worksheets/sheet14.xml",
+        "bytes": 1591757
+      },
+      {
+        "name": "xl/worksheets/sheet15.xml",
+        "bytes": 1613791
+      },
+      {
+        "name": "xl/worksheets/sheet16.xml",
+        "bytes": 40567
+      },
+      {
+        "name": "xl/worksheets/sheet17.xml",
+        "bytes": 460
+      }
+    ]
+  },
+  "diagnostics": [
+    {
+      "code": "SOURCE_TOTAL_MISMATCH",
+      "severity": "warning",
+      "message": "A 區原圖充電總計 35 次 / 12,430 kWh；逐列 36 次 / 14,480 kWh，差額等於 12 時一列。"
+    },
+    {
+      "code": "SOURCE_AMBIGUITY",
+      "severity": "warning",
+      "message": "A 12 時 1 次 / 2,050 kWh 與「閒」欄語意未确认；原值保留。"
+    },
+    {
+      "code": "MISSING_COST",
+      "severity": "warning",
+      "message": "CAPEX / 固定成本尚未填妥；不能判定真實獲利。"
+    },
+    {
+      "code": "PASSENGER_LOAD_ONLY",
+      "severity": "warning",
+      "message": "CATL站作共用交流負載；沒有乘用車換電收入。"
+    }
+  ]
+}

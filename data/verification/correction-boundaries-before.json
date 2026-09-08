@@ -1,0 +1,4038 @@
+{
+  "correction": "C01_CLOSE_BOUNDARY_STATE",
+  "oldExpectedSHA256": "c8440cecbbafe3d6bd09fa9769bcedec96b64162e53f4ed86572f9ef4b47345e",
+  "oldHourlyBoundaryFields": [
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 0,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 0,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 1,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 1,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 2,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 2,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 3,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 3,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 4,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 4,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 5,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 5,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 6,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 6,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 7,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 7,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 8,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 8,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 9,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 9,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 10,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 10,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 11,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 11,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 12,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 12,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 13,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 13,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 14,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 14,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 15,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 15,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 16,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 16,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 17,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 17,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 18,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 18,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 19,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 19,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 20,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 20,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 21,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 21,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 22,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 22,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 23,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 23,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 24,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 24,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 25,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 25,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 26,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 26,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 27,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 27,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 28,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 28,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 29,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 29,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 30,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 30,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 31,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 31,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 32,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 32,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 33,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 33,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 34,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 34,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 35,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 35,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 36,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 36,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 37,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 37,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 38,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 38,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 39,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 39,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 40,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 40,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 41,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 41,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 42,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 42,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 43,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 43,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 44,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 44,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 45,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 45,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 46,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 46,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 47,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 47,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 48,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 48,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 49,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 49,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 50,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 50,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 51,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 51,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 52,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 52,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 53,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 53,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 54,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 54,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 55,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 55,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 56,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 56,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 57,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 57,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 58,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 58,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 59,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 59,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 60,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 60,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 61,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 61,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 62,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 62,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 63,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 63,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 64,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 64,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 65,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 65,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 66,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 66,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 67,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 67,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 68,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 68,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 69,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 69,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 70,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 70,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 71,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 71,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 0,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 0,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 1,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 1,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 2,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 2,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 3,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 3,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 4,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 4,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 5,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 5,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 6,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 6,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 7,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 7,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 8,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 8,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 9,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 9,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 10,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 10,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 11,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 11,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 12,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 12,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 13,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 13,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 14,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 14,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 15,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 15,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 16,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 16,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 17,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 17,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 18,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 18,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 19,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 19,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 20,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 20,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 21,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 21,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 22,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 22,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 23,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 23,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 24,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 24,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 25,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 25,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 26,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 26,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 27,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 27,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 28,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 28,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 29,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 29,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 30,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 30,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 31,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 31,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 32,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 32,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 33,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 33,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 34,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 34,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 35,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 35,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 36,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 36,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 37,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 37,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 38,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 38,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 39,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 39,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 40,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 40,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 41,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 41,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 42,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 42,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 43,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 43,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 44,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 44,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 45,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 45,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 46,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 46,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 47,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 47,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 48,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 48,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 49,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 49,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 50,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 50,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 51,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 51,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 52,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 52,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 53,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 53,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 54,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 54,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 55,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 55,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 56,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 56,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 57,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 57,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 58,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 58,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 59,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 59,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 60,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 60,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 61,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 61,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 62,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 62,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 63,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 63,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 64,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 64,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 65,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 65,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 66,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 66,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 67,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 67,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 68,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 68,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 69,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 69,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 70,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 70,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 71,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 71,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 72,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 72,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 73,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 73,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 74,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 74,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 75,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 75,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 76,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 76,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 77,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 77,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 78,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 78,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 79,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 79,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 80,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 80,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 81,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 81,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 82,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 82,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 83,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 83,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 84,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 84,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 85,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 85,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 86,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 86,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 87,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 87,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 88,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 88,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 89,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 89,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 90,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 90,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 91,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 91,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 92,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 92,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 93,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 93,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 94,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 94,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 95,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V02_PCS_AC_EV_4D",
+      "absoluteHour": 95,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 0,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 0,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 1,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 1,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 2,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 2,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 3,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 3,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 4,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 4,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 5,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 5,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 6,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 6,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 7,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 7,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 8,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 8,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 9,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 9,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 10,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 10,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 11,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 11,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 12,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 12,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 13,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 13,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 14,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 14,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 15,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 15,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 16,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 16,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 17,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 17,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 18,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 18,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 19,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 19,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 20,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 20,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 21,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 21,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 22,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 22,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 23,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 23,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 24,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 24,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 25,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 25,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 26,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 26,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 27,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 27,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 28,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 28,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 29,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 29,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 30,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 30,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 31,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 31,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 32,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 32,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 33,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 33,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 34,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 34,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 35,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 35,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 36,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 36,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 37,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 37,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 38,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 38,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 39,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 39,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 40,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 40,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 41,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 41,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 42,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 42,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 43,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 43,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 44,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 44,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 45,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 45,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 46,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 46,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 47,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 47,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 48,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 48,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 49,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 49,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 50,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 50,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 51,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 51,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 52,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 52,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 53,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 53,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 54,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 54,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 55,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 55,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 56,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 56,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 57,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 57,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 58,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 58,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 59,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 59,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 60,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 60,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 61,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 61,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 62,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 62,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 63,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 63,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 64,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 64,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 65,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 65,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 66,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 66,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 67,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 67,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 68,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 68,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 69,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 69,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 70,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 2
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 70,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 2
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 71,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 2
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 71,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 2
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 72,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 2
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 72,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 2
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 73,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 73,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 74,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 74,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 75,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 75,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 76,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 76,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 77,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 77,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 78,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 78,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 79,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 79,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 80,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 80,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 81,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 81,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 82,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 82,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 83,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 83,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 84,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 84,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 85,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 85,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 86,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 86,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 87,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 87,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 88,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 88,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 89,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 89,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 90,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 90,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 91,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 91,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 92,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 92,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 93,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 93,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 94,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 94,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 95,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 95,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 96,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 96,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 97,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 97,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 98,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 98,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 99,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 99,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 100,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 100,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 101,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 101,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 102,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 102,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 103,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 103,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 104,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 104,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 105,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 105,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 106,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 106,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 107,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 107,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 108,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 108,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 109,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 109,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 110,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 110,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 111,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 111,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 112,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 112,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 113,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 113,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 114,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 114,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 115,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 115,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 116,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 116,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 117,
+      "station": "A",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 117,
+      "station": "B",
+      "readyPacks": 1,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 118,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 118,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 119,
+      "station": "A",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 119,
+      "station": "B",
+      "readyPacks": 0,
+      "queuedSessions": 0
+    }
+  ]
+}

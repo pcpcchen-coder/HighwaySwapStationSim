@@ -1,0 +1,40 @@
+HighwaySwapSim Verification PPTX — final QA
+Date: 2026-09-08
+Status: PASS
+
+Content and evidence
+- 16 Traditional Chinese slides for George's engineering/management audience.
+- Frozen report: 47,489/47,489 analytic comparisons PASS; three synthetic scenarios only (3,4,5 days).
+- Case assertion counts: 8,957 / 25,431 / 13,101.
+- Energy max absolute difference 2.9558577807620168e-12 kWh; declared tolerance 1e-6.
+- Integer-cent settlement differences: 0. Transaction-time differences: 0.
+- 43 regressions reported: core15 + finance13 + physical15; new IO/build checks not prematurely claimed.
+- Supplementary 92-equipment/96-edge three-day smoke explicitly labeled as integration conservation, not a fourth independent scenario.
+- Case V03 inventory drawdown 112.5 kWh and forecast block explicitly shown.
+- Model/implementation verification separated from field validation, optimal dispatch and real-world profitability.
+- Independent-oracle corrections and mutation self-checks retained in notes.
+- Every slide has a [Sources] block. Method sources: ASME, NIST, NASA; no certification claim.
+
+Visual and structural QA
+- Read required Presentations style/API/default Codex Grid resources; selected compositions 01,05,14,21.
+- Built only with bundled @oai/artifact-tool JavaScript ES modules.
+- Runtime bundle 26.826.12353; mandatory runtime paths verified.
+- Every final slide rendered at 1280x720 and individually inspected at full size.
+- Slides 1–16: PASS for clipping, wrapping, footer consistency, chart/data mapping and unintended overlaps.
+- Table minimum cell margins were adjusted to prevent automatic height growth.
+- CJK missing-glyph issue in initial scaffold fixed with official Noto Sans CJK TC asset.
+- Final text-width/canvas/overlap/table-extension check: 0 warnings.
+- Slides 4,6,13 copy refinements re-rendered and individually inspected.
+- Notes-only source-path finalization preserved identical PNG hashes for all 16 slides.
+- OOXML verified: 16 slides, 16 source-note blocks, 10 native tables, 1 native chart.
+- Minimum explicit font size 16.5 pt; titles 36 pt, cover 57 pt.
+- No unresolved placeholders or draft/scaffold text in slide XML.
+
+Reproduction
+- Single source module includes frozen displayed evidence and provenance metadata.
+- Source archive includes the required CJK font and its OFL license.
+- Output PPTX: HighwaySwapSim_Verification.pptx
+
+Frozen report SHA256: 9eaaac66465b9b0f72710b8393e7148c9fc54fe29564f894c8039de15b8f32e0
+Model source manifest SHA256: 141d3ff769965122547d1d835a7b715111a8b257073e6583332d7016b2691b27
+PPTX SHA256: 2e9ba61506d18af11e45bf59ee4f2757b396b52028cc981f9f324c37b570f189

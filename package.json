@@ -1,6 +1,6 @@
 {
   "name": "highway-swap-station-sim",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "engines": {
     "node": ">=24.0.0"
@@ -10,12 +10,13 @@
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vite",
     "build": "bash scripts/build-verified.sh",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run test:core && npm run build && node --test tests/*.test.mjs",
+    "test": "npm run test:core && npm run verify:scenarios && npm run build && node --test tests/*.test.mjs",
     "lint": "bash scripts/sites-env.sh -- eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "bash scripts/sites-env.sh -- drizzle-kit generate",
-    "test:core": "node --test tests/core.test.ts",
+    "test:core": "node --test tests/*.test.ts",
     "typecheck": "tsc --noEmit",
-    "types:runtime": "wrangler types worker-configuration.d.ts --config config/runtime-types.wrangler.json"
+    "types:runtime": "wrangler types worker-configuration.d.ts --config config/runtime-types.wrangler.json",
+    "verify:scenarios": "python3 data/verification/calculate.py && node scripts/verification/run.ts --history docs/evidence/v0.3.0/first-run-mismatch.json"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -1,0 +1,146 @@
+{
+  "status": "PASS",
+  "passed": 47489,
+  "failed": 0,
+  "assertions": 47489,
+  "expectedSHA256": "ea9c02a3d6b9b9a47f955fb707accbef97de7d184820e1d7ab687f1c65be208f",
+  "fixtureSHA256": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209",
+  "reportSHA256": "9eaaac66465b9b0f72710b8393e7148c9fc54fe29564f894c8039de15b8f32e0",
+  "cases": [
+    {
+      "id": "V01_SST_3D",
+      "status": "PASS",
+      "assertions": 8957,
+      "passed": 8957,
+      "failed": 0,
+      "maxErrors": {
+        "count": {
+          "absolute": 0,
+          "path": null
+        },
+        "identity": {
+          "absolute": 0,
+          "path": null
+        },
+        "boolean": {
+          "absolute": 0,
+          "path": null
+        },
+        "kWh": {
+          "absolute": 9.094947017729282e-13,
+          "path": "V01_SST_3D.totals.batteryChargeKWh"
+        },
+        "CNY_cent": {
+          "absolute": 0,
+          "path": null
+        },
+        "CNY_unrounded": {
+          "absolute": 3.7769093408357435e-13,
+          "path": "V01_SST_3D.totals.settlementRoundingDifference"
+        },
+        "kW": {
+          "absolute": 7.105427357601002e-15,
+          "path": "V01_SST_3D.hour[0].node[A-sst].peakOutputKW"
+        },
+        "fraction": {
+          "absolute": 0,
+          "path": null
+        },
+        "min": {
+          "absolute": 0,
+          "path": null
+        }
+      }
+    },
+    {
+      "id": "V02_PCS_AC_EV_4D",
+      "status": "PASS",
+      "assertions": 25431,
+      "passed": 25431,
+      "failed": 0,
+      "maxErrors": {
+        "count": {
+          "absolute": 0,
+          "path": null
+        },
+        "identity": {
+          "absolute": 0,
+          "path": null
+        },
+        "boolean": {
+          "absolute": 0,
+          "path": null
+        },
+        "kWh": {
+          "absolute": 2.9558577807620168e-12,
+          "path": "V02_PCS_AC_EV_4D.totals.balanceResidualKWh"
+        },
+        "CNY_cent": {
+          "absolute": 0,
+          "path": null
+        },
+        "CNY_unrounded": {
+          "absolute": 2.7284841053187847e-12,
+          "path": "V02_PCS_AC_EV_4D.totals.gridCostExact"
+        },
+        "kW": {
+          "absolute": 1.4210854715202004e-14,
+          "path": "V02_PCS_AC_EV_4D.hour[12].node[A-transformer].peakOutputKW"
+        },
+        "fraction": {
+          "absolute": 1.1102230246251565e-16,
+          "path": "V02_PCS_AC_EV_4D.transaction[A:charge:3600].unitPrice"
+        },
+        "min": {
+          "absolute": 0,
+          "path": null
+        }
+      }
+    },
+    {
+      "id": "V03_OUTAGE_CROSSSITE_5D",
+      "status": "PASS",
+      "assertions": 13101,
+      "passed": 13101,
+      "failed": 0,
+      "maxErrors": {
+        "count": {
+          "absolute": 0,
+          "path": null
+        },
+        "identity": {
+          "absolute": 0,
+          "path": null
+        },
+        "boolean": {
+          "absolute": 0,
+          "path": null
+        },
+        "kWh": {
+          "absolute": 1.2505552149377763e-12,
+          "path": "V03_OUTAGE_CROSSSITE_5D.nodeTotal[A-sst].outputKWh"
+        },
+        "CNY_cent": {
+          "absolute": 0,
+          "path": null
+        },
+        "CNY_unrounded": {
+          "absolute": 1.1368683772161603e-13,
+          "path": "V03_OUTAGE_CROSSSITE_5D.sourceTotal[A-grid].costExact"
+        },
+        "kW": {
+          "absolute": 1.4210854715202004e-14,
+          "path": "V03_OUTAGE_CROSSSITE_5D.hour[23].node[A-sst].peakOutputKW"
+        },
+        "fraction": {
+          "absolute": 1.1102230246251565e-16,
+          "path": "V03_OUTAGE_CROSSSITE_5D.transaction[A:swap:4260].unitPrice"
+        },
+        "min": {
+          "absolute": 0,
+          "path": null
+        }
+      }
+    }
+  ]
+}

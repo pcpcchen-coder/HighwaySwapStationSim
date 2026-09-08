@@ -1,3 +1,18 @@
+# 交接 — 0.3.0 / schema 1.3
+
+更新2026-09-08。指定repo與公開網站不變，既有發布授權保留於EXECUTION_CONTEXT.md。
+
+- Master Prompt 原0–122章保留，追加123–129章，正式明定連續多日、元件帳、計價、獨立案例與驗收範圍。
+- 本輪修正與證據以 VERIFICATION.md 為準。三例47,489項通過，金融／事件／電力缺口有回歸，首次不符與oracle更正均留存。
+- Node24、Python3；執行 npm ci、npm run typecheck、npm test。npm run verify:scenarios 僅重跑數值；新結果寫入artifacts/verification，不覆蓋封存資料。
+- 網站新增三例驗證頁、1–31日連續時序、來源電表及元件帳；原513kWh完整設備案例仍保留。
+- 財務輸出使用result.parameterSnapshot，期末存貨不足不外推；收入減電費不稱會計淨利。IRR和金額有數值範圍與不可用狀態。
+- 原始schema1.0/1.1/1.2匯入遷移到1.3，舊案例日數1；JSON是資料真相。XLSX依全期輸出、嚴格校驗ZIP與Unicode、上限64MiB；内嵌JSON上限8MiB。
+- 本版仍不含實際AC潮流/保護配合、最優EMS、PV/ESS調度、電池效率曲線與老化、乘用車服務收入、完整稅／替換資產／應收款。工序與關鍵假設須用現場資料校準，有限測試不可推廣為真實獲利100%保證。
+- docs/evidence/v0.3.0 是發布時封存；後續修改核心公式需新版本重驗，不能沿用舊PPT宣稱新版本已通過。
+
+以下為0.2.0歷史交接（不是現行計算契約）：
+
 # HighwaySwapSim 開發交接
 
 更新：2026-09-08。產品 / engine 0.2.0，schema 1.2。指定 repo：pcpcchen-coder/HighwaySwapStationSim。

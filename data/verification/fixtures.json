@@ -1,0 +1,145 @@
+{
+  "fixture_schema": "highwayswapsim-independent-fixtures/1",
+  "authored": "2026-09-08",
+  "case_count": 3,
+  "provenance": "Analytic synthetic verification inputs, not manufacturer specifications or measured site observations.",
+  "invariants": {
+    "days_start_at_zero_in_engine": true,
+    "minutes_from_horizon_start": true,
+    "rate_unit": "CNY/kWh",
+    "energy_unit": "kWh",
+    "zero_auxiliary_is_explicit_ideal_mechanics_assumption": true,
+    "arrival_retail_price_is_locked_until_delivery": true,
+    "grid_price_uses_physical_source_station_at_energy_import_time": true,
+    "efficiency_mode": "ASSEMBLY",
+    "battery_charge_power_is_battery_side_output": true,
+    "wire_bus_losses_are_zero": true,
+    "initial_inventory_is_created_once_per_horizon": true,
+    "station_count": 2,
+    "ready_soc": "1",
+    "return_soc": "0",
+    "pack_kWh": "100",
+    "packs_per_station": 1,
+    "swap_minutes": "7.5",
+    "battery_charge_kW": "50",
+    "service_fee": "0.3",
+    "fixed_cost_per_day": "0",
+    "variable_cost_per_customer_kWh": "0",
+    "capex": null,
+    "monetary_policy": {
+      "rounding": "ROUND_HALF_UP",
+      "energy_invoice_decimals": 6,
+      "tariff_invoice_decimals": 6,
+      "currency_decimals": 2,
+      "grid_invoice_unit": "physical grid source and absolute hour",
+      "customer_invoice_unit": "cumulative delivered session energy; incremental cents recognized in each delivery interval",
+      "completion_count_interval": "half-open [hour start, hour end); completion exactly at hour end counts in next hour",
+      "unfinished_session_revenue": "recognized for energy delivered by horizon end"
+    },
+    "equipment_capacity_is_output_side_unless_grid_or_transformer_input": true,
+    "transformer_kVA_times_PF_is_input_rating": true
+  },
+  "cases": [
+    {
+      "id": "V01_SST_3D",
+      "name": "Three-day SST swap inventory cycle",
+      "horizon_days": 3,
+      "sst_efficiency": "0.98",
+      "dd_efficiency": "0.95",
+      "sst_output_kW_per_site": "100",
+      "auxiliary_kW_per_site": "0",
+      "grid_prices_A": [
+        "0.5",
+        "0.5",
+        "0.5"
+      ],
+      "grid_prices_B": [
+        "0.5",
+        "0.5",
+        "0.5"
+      ],
+      "swap_arrival_hour_each_day": 0,
+      "swaps_per_site_each_day": 1,
+      "ev_kWh_per_site_each_day": "0",
+      "topology_roles": [
+        "grid->sst->dc_bus->dd->battery_inventory"
+      ],
+      "calculation": "Each daily 100 kWh swap per site is fully restored in 2 h after its 7.5 min service. No inventory reset occurs. Each 200 kWh daily restoration needs 200/(0.98*0.95) grid kWh."
+    },
+    {
+      "id": "V02_PCS_AC_EV_4D",
+      "name": "Four-day transformer and PCS EV charging with continuous AC load",
+      "horizon_days": 4,
+      "transformer_efficiency": "0.98",
+      "pcs_efficiency": "0.96",
+      "dd_efficiency": "0.95",
+      "transformer_kVA_per_site": "1000",
+      "transformer_pf": "1",
+      "pcs_output_kW_per_site": "100",
+      "auxiliary_kW_per_site": "10",
+      "grid_prices_A": [
+        "0.4",
+        "0.5",
+        "0.6",
+        "0.7"
+      ],
+      "grid_prices_B": [
+        "0.4",
+        "0.5",
+        "0.6",
+        "0.7"
+      ],
+      "ev_arrival_hour_each_day": 12,
+      "ev_sessions_per_site_each_day": 1,
+      "ev_kWh_per_site_each_day": "100",
+      "gun_output_kW": "50",
+      "charge_pool_kW_per_site": "100",
+      "swaps_per_site_each_day": 0,
+      "topology_roles": [
+        "grid->transformer->lv_bus->ac_load",
+        "lv_bus->pcs->dc_bus->dd->ev_gun"
+      ],
+      "calculation": "Daily customer EV energy is 200 kWh, AC auxiliary energy is 2*10*24=480 kWh. Transformer input is (200/(0.96*0.95)+480)/0.98; the AC branch bypasses PCS and DD. Initial batteries remain full and unchanged."
+    },
+    {
+      "id": "V03_OUTAGE_CROSSSITE_5D",
+      "name": "Five-day cross-site supply with overnight charging, outage, queue recovery and inventory deficit",
+      "horizon_days": 5,
+      "sst_efficiency": "0.98",
+      "dd_efficiency": "0.95",
+      "sst_output_kW_at_A": "200",
+      "cross_site_cable_output_kW": "200",
+      "auxiliary_kW_per_site": "0",
+      "grid_prices_A": [
+        "0.4",
+        "0.5",
+        "0.6",
+        "0.7",
+        "0.8"
+      ],
+      "grid_prices_B": [
+        "0.9",
+        "0.9",
+        "0.9",
+        "0.9",
+        "0.9"
+      ],
+      "grid_source": "A",
+      "grid_outages_absolute_minute_intervals": [
+        [
+          "1440",
+          "4320"
+        ]
+      ],
+      "swap_arrival_hour_each_day": 23,
+      "swaps_per_site_each_day": 1,
+      "ev_kWh_per_site_each_day": "0",
+      "topology_roles": [
+        "A.grid->A.sst->A.dc_bus->A.dd->A.battery_inventory",
+        "A.dc_bus->cross_site_dc_cable->B.dc_bus->B.dd->B.battery_inventory"
+      ],
+      "calculation": "After each 23:07.5 swap completion, 52.5 min of 50 kW restoration reaches 43.75 kWh at midnight. Days 2 and 3 have no grid import; their requests wait. Day 4 grid return replenishes 56.25 kWh/site in 67.5 min, then queued swaps start at 01:07.5 and 03:15. Day 4 day-total restoration 300 kWh/site; day 5 restoration 100 kWh/site. All 10 swaps finish; ending inventory 87.5 kWh is 112.5 below initial."
+    }
+  ],
+  "contract_revision": "C02_INTERVAL_ACCRUAL"
+}

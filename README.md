@@ -2,18 +2,19 @@
 
 **HighwaySwapSim** — 高速公路雙服務區供電、換電／充電營運與收益測算工作台。
 
-由 Codex / Astra 接手實作。工程工作版本 **0.2.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
+由 Codex / Astra 接手實作。工程工作版本 **0.3.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
 
 ## 已提供的操作
 
 |工作頁|功能|
 |---|---|
-|總覽|24小時需求／交付與電價、A/B服務區與來源差異|
+|總覽|1–31日需求／交付與電價、連續庫存與A/B服務區|
 |供電設計|SST／PCS、一期／二期預設；拖曳、新增／刪除設備、連線及開關；schema參數檢查|
 |站務配置|電池數量、容量、SOC、工位、作業時間、充電槍與共享功率|
-|逐時案例|48筆A/B時序、換充電量、購電價、服務費、來源idle保留|
+|逐時案例|每站每日24筆時序，逐日編輯需求與到站鎖定單價|
 |效率比較|來源摘要／組裝效率、相同交付能量比較、避免重複乘效率|
-|模擬結果|Web Worker受限模擬、排隊／庫存／功率／損耗／能量守恆|
+|模擬結果|Web Worker受限模擬、排隊／庫存、逐元件與連線能量帳、實際來源電表|
+|三例獨立驗證|3／4／5日受控案例、即時總計比較、47,489項封存比對與PPT|
 |獲利能力|成本輸入、代表日外推、月度爬坡、NPV／IRR／回收期及資金缺口|
 |情境比較|最多4個結果快照；JSON匯出／匯入；本系統XLSX匯出／還原|
 |模型與驗證|插件與模型範圍、來源疑點、診斷資訊|
@@ -22,7 +23,7 @@
 
 ## 開發與驗證
 
-需要 **Node.js 24+**、npm、Git。
+需要 **Node.js 24+**、Python 3、npm、Git。
 
 ```bash
 git clone https://github.com/pcpcchen-coder/HighwaySwapStationSim.git
@@ -34,7 +35,7 @@ npm test
 npm run dev
 ```
 
-`npm test` 包含核心測試、正式建置、Worker／HTML／元件驗證。`config/runtime-types.wrangler.json` 僅供產生型別，沒有實際建立資料庫；部署使用 `.openai/hosting.json` 與 Vite Sites 適配。型別需要重建時執行 `npm run types:runtime`。
+`npm test` 包含核心／財務回歸、Python獨立解析資料再現與47,489項比對、正式建置、Worker／HTML／物理／匯出驗證。`config/runtime-types.wrangler.json` 僅供產生型別，沒有實際建立資料庫；部署使用 `.openai/hosting.json` 與 Vite Sites 適配。型別需要重建時執行 `npm run types:runtime`。
 
 ## 檔案結構
 
@@ -60,7 +61,7 @@ tests/                    核心及正式產物測試
 ## 文件
 
 - [執行決策](docs/EXECUTION_CONTEXT.md) — 使用指定repo、由Codex接手，覆蓋原Kimi執行限定。
-- [完整 Master Prompt](docs/MASTER_PROMPT.md) — 原0–100章、101–114章及設備容量追加115–122章。
+- [完整 Master Prompt](docs/MASTER_PROMPT.md) — 原0–100章、101–114章、設備容量115–122章與連續多日／獨立驗證123–129章。
 - [架構](docs/ARCHITECTURE.md)、[電力模型](docs/ELECTRICAL_MODEL.md)、[經濟模型](docs/ECONOMIC_MODEL.md)。
 - [假設](docs/ASSUMPTIONS.md)、[資料來源](data/reference/source-manifest.json)、[驗證](docs/VERIFICATION.md)。
 - [交接與下一步](docs/HANDOFF.md)、[產品路線](docs/ROADMAP.md)。
@@ -77,3 +78,10 @@ tests/                    核心及正式產物測試
 - [來源與數值轉錄](data/reference/supplement-2026-09-08.json)
 
 原始八月 410 kWh 表與新電池 410.4 kWh 投影分開；CATL 官方 14–30 倉 / 99 秒與附件 500+50 kW 配置分開。案例容量的 3370.76 kW 原值會顯示精確重算 3370.841889 kW，並保留 0.6 同動率不足時的供電缺口。乘用車目前只計交流共用負載，沒有假設換電收入。
+
+
+## 0.3.0 驗證交付
+
+[公開工作網站](https://highway-swap-george.george-chen-1104.chatgpt.site) · [完整驗證紀錄](docs/VERIFICATION.md) · [驗證PPT](public/reports/HighwaySwapSim_Verification.pptx) · [獨立解析計算器與預期](data/verification/README.md)
+
+三個案例共288小時，47,489項獨立數值比對全通過，最大能量誤差2.96e-12 kWh，結算金額差0分；另有比較器故意破壞自驗與完整92設備三日守恆測試。這是指定輸入／模型契約的驗證，不能當作未經實測校準的獲利保證。期末庫存缺口會阻擋投資回報外推；成本與真實結算條款仍須確認。

@@ -28,6 +28,7 @@ export interface Topology {
     edges: Edge[];
 }
 export interface ServiceRow {
+    day: number;
     hour: number;
     station: StationId;
     swapCount: number;
@@ -55,7 +56,10 @@ export interface StationConfig {
     auxiliaryKW: number;
 }
 export interface Project {
-    schemaVersion: '1.2';
+    schemaVersion: '1.3';
+    horizonDays: number;
+    moneyPolicy: 'CNY_CENT_HALF_UP';
+    equipmentSchedule: {atMinute:number; equipmentId:string; enabled:boolean}[];
     engineering?: EngineeringConfig;
     name: string;
     seed: number;
@@ -99,6 +103,8 @@ export interface Diagnostic {
     target?: string;
 }
 export interface HourResult {
+    day: number;
+    auxiliaryGridCost: number;
     hour: number;
     station: StationId;
     requestedKWh: number;
@@ -117,6 +123,8 @@ export interface HourResult {
     peakKW: number;
 }
 export interface Transaction {
+    unitPrice?: number;
+    revenue?: number;
     equipmentId?: string;
     id: string;
     station: StationId;
@@ -134,6 +142,9 @@ export interface RunResult {
     hours: HourResult[];
     transactions: Transaction[];
     diagnostics: Diagnostic[];
+    componentEnergy: ComponentEnergy[];
+    edgeEnergy: EdgeEnergy[];
+    sourceMeters: SourceMeter[];
     totals: {
         deliveredKWh: number;
         requestedKWh: number;
@@ -141,6 +152,7 @@ export interface RunResult {
         lossKWh: number;
         revenue: number;
         gridCost: number;
+        auxiliaryGridCost: number;
         completed: number;
         unservedKWh: number;
         initialStoredKWh: number;
@@ -162,3 +174,7 @@ export interface EngineeringConfig {
     passengerLoadFactor: number;
     truckAuxLoadFactor: number;
 }
+
+export interface ComponentEnergy {day:number;hour:number;nodeId:string;inputKWh:number;outputKWh:number;lossKWh:number;terminalKWh:number;peakOutputKW:number;capacityKW:number;maxBalanceResidual:number;}
+export interface EdgeEnergy {day:number;hour:number;edgeId:string;source:string;target:string;kWh:number;peakKW:number;}
+export interface SourceMeter {day:number;hour:number;sourceId:string;importKWh:number;peakKW:number;unitPrice:number;cost:number;}

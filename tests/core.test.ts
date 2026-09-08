@@ -9,7 +9,7 @@ import { EventQueue, Registry, SeededRandom } from '../packages/sim-kernel/index
 import { validateTopology } from '../packages/topology-engine/index.ts';
 import { exportWorkbook, importWorkbook, unzipStored } from '../packages/io/index.ts';
 const near = (a: number, b: number, tolerance = 1e-6) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
-test('XLSX is a real ZIP workbook and preserves exact canonical project', () => { const p = defaultProject(); p.name = '中文 & <test> "quoted"'; const bytes = exportWorkbook(p, replay(p)); assert.equal(bytes[0], 0x50); assert.equal(bytes[1], 0x4b); assert.deepEqual(importWorkbook(bytes), p); const files = unzipStored(bytes); assert.ok(files['xl/workbook.xml'].includes('Hourly_Results')); assert.ok(files['xl/worksheets/sheet11.xml'].includes('SUM(Hourly_Results!D2:D49)')); const corrupt = bytes.slice(); corrupt[100] ^= 1; assert.throws(() => importWorkbook(corrupt)); });
+test('XLSX is a real ZIP workbook and preserves exact canonical project', () => { const p = defaultProject(); p.name = '中文 & <test> "quoted"'; const bytes = exportWorkbook(p, replay(p)); assert.equal(bytes[0], 0x50); assert.equal(bytes[1], 0x4b); assert.deepEqual(importWorkbook(bytes), p); const files = unzipStored(bytes); assert.ok(files['xl/workbook.xml'].includes('Hourly_Results')); assert.ok(files['xl/worksheets/sheet11.xml'].includes('SUM(Hourly_Results!E2:E49)')); const corrupt = bytes.slice(); corrupt[100] ^= 1; assert.throws(() => importWorkbook(corrupt)); });
 test('source rows retain discrepancy and exact billing', () => { const p = defaultProject(); const r = replay(p); assert.equal(r.totals.deliveredKWh, 77750); assert.equal(r.totals.completed, 195); const a = r.hours.filter(h => h.station === 'A'); assert.equal(a.reduce((s, h) => s + h.chargeCount, 0), 36); p.billing = 'SOURCE_DISPLAY_PRICE'; near(replay(p).totals.revenue, 68912.9); assert.equal(p.services[0].idleRaw, null); });
 test('schema round trip and migration are deterministic; reject duplicate hours and unsupported version', () => { const p = defaultProject(); assert.deepEqual(parseProject(JSON.parse(JSON.stringify(p))), p); assert.deepEqual(migrateProject({ ...p, schemaVersion: '1.0' }), p); assert.throws(() => parseProject({ ...p, schemaVersion: '2.0' })); p.services[0] = p.services[1]; assert.throws(() => parseProject(p)); });
 test('kernel deterministic RNG, stable event order and registry isolation', () => { const a = new SeededRandom(7), b = new SeededRandom(7); for (let i = 0; i < 30; i++)
@@ -45,7 +45,7 @@ test('detailed topology retains individual SSTs, racks, guns, AC source ownershi
  assert.equal(n.filter(n=>n.type==='terminal').length,4);assert.equal(n.filter(n=>n.type==='sst'&&n.enabled).length,2);
  p.phase=2;p.topology=engineeringTopology(p);assert.equal(p.topology.nodes.filter(n=>n.type==='sst'&&n.enabled).length,4);
  const allocation=allocatePower(p,[{sink:'B-rack-0',kw:100}])[0];near(allocation.sourceImport['A-grid'],allocation.grid);assert.equal(allocation.sourceImport['B-grid'],undefined);
- assert.deepEqual(importWorkbook(exportWorkbook(p,replay(p))),p);
+ assert.deepEqual(importWorkbook(exportWorkbook(replay(p).parameterSnapshot,replay(p))),replay(p).parameterSnapshot);
  const old=defaultProject();assert.deepEqual(migrateProject({...old,schemaVersion:'1.1'}),old);
 });
 test('box transformer and shared stack boundaries constrain concurrent branch demand',()=>{

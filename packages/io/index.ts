@@ -30,21 +30,35 @@ export function zipStored(files: Record<string, string>) { const parts: Uint8Arr
     central.push(header(46, [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [8, 0x800, 2], [16, crc, 4], [20, data.length, 4], [24, data.length, 4], [28, filename.length, 2], [42, offset, 4]]), filename);
     offset += local.length + filename.length + data.length;
 } const directory = join(central); return join([...parts, directory, header(22, [[0, 0x06054b50, 4], [8, Object.keys(files).length, 2], [10, Object.keys(files).length, 2], [12, directory.length, 4], [16, offset, 4]])]); }
-export function unzipStored(bytes: Uint8Array) { if (bytes.length > 8 * 1024 * 1024)
-    throw Error('File exceeds 8 MB'); const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength), decoder = new TextDecoder(), files: Record<string, string> = {}; let offset = 0; while (offset + 30 <= bytes.length && view.getUint32(offset, true) === 0x04034b50) {
-    if (view.getUint16(offset + 8, true) !== 0)
-        throw Error('目前只支援本系統直接匯出的 XLSX；Excel 另存後請改用 JSON');
-    const length = view.getUint32(offset + 18, true), nameLength = view.getUint16(offset + 26, true), extra = view.getUint16(offset + 28, true);
-    const name = decoder.decode(bytes.subarray(offset + 30, offset + 30 + nameLength));
-    const start = offset + 30 + nameLength + extra;
-    if (start + length > bytes.length)
-        throw Error('Truncated workbook');
-    const data = bytes.subarray(start, start + length);
-    if (crc32(data) !== view.getUint32(offset + 14, true))
-        throw Error('Workbook checksum mismatch');
-    files[name] = decoder.decode(data);
-    offset = start + length;
-} return files; }
+export function unzipStored(bytes:Uint8Array){
+ if(bytes.length>64*1024*1024)throw Error('Workbook exceeds 64 MB');
+ if(bytes.length<22)throw Error('Truncated workbook');
+ const view=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength),decoder=new TextDecoder('utf-8',{fatal:true}),files:Record<string,string>={};
+ const end=bytes.length-22;if(view.getUint32(end,true)!==0x06054b50||view.getUint16(end+20,true)!==0)throw Error('Missing complete workbook directory');
+ const count=view.getUint16(end+10,true),directorySize=view.getUint32(end+12,true),directoryStart=view.getUint32(end+16,true);
+ if(view.getUint16(end+4,true)!==0||view.getUint16(end+6,true)!==0||view.getUint16(end+8,true)!==count||directoryStart+directorySize!==end)throw Error('Invalid workbook directory');
+ const locals=new Map<number,{name:string;length:number;crc:number}>();let offset=0;
+ while(offset<directoryStart){
+  if(offset+30>directoryStart||view.getUint32(offset,true)!==0x04034b50)throw Error('Invalid workbook entry');
+  if(view.getUint16(offset+8,true)!==0||view.getUint16(offset+6,true)!==0x800)throw Error('只支援本系統直接匯出的 XLSX；Excel 另存後請改用 JSON');
+  const length=view.getUint32(offset+18,true),nameLength=view.getUint16(offset+26,true),extra=view.getUint16(offset+28,true),start=offset+30+nameLength+extra;
+  if(start+length>directoryStart||length!==view.getUint32(offset+22,true))throw Error('Truncated workbook entry');
+  const name=decoder.decode(bytes.subarray(offset+30,offset+30+nameLength));if(name in files)throw Error('Duplicate workbook entry');
+  const data=bytes.subarray(start,start+length),crc=view.getUint32(offset+14,true);if(crc32(data)!==crc)throw Error('Workbook checksum mismatch');
+  files[name]=decoder.decode(data);locals.set(offset,{name,length,crc});offset=start+length;
+ }
+ if(locals.size!==count)throw Error('Workbook entry count mismatch');
+ const referenced=new Set<number>();
+ for(let i=0;i<count;i++){
+  if(offset+46>end||view.getUint32(offset,true)!==0x02014b50)throw Error('Invalid central directory');
+  const nameLength=view.getUint16(offset+28,true),extra=view.getUint16(offset+30,true),comment=view.getUint16(offset+32,true),next=offset+46+nameLength+extra+comment;
+  if(next>end)throw Error('Truncated central directory');
+  const localOffset=view.getUint32(offset+42,true),local=locals.get(localOffset),name=decoder.decode(bytes.subarray(offset+46,offset+46+nameLength));
+  if(!local||referenced.has(localOffset)||local.name!==name||local.length!==view.getUint32(offset+20,true)||local.crc!==view.getUint32(offset+16,true))throw Error('Workbook central entry mismatch');
+  referenced.add(localOffset);offset=next;
+ }
+ if(offset!==end)throw Error('Unexpected central directory data');return files;
+}
 function column(index: number) { let value = index + 1, result = ''; while (value) {
     value--;
     result = String.fromCharCode(65 + value % 26) + result;
@@ -57,17 +71,22 @@ function sheet(rows: Cell[][]) { return `<?xml version="1.0" encoding="UTF-8" st
 function objectRows(rows: Record<string, unknown>[]): Cell[][] { if (!rows.length)
     return [['No rows']]; const keys = [...new Set(rows.flatMap(r => Object.keys(r)))]; return [keys, ...rows.map(r => keys.map(k => { const v = r[k]; return v === null || v === undefined ? null : typeof v === 'number' ? v : typeof v === 'object' ? JSON.stringify(v) : String(v); }))]; }
 export function exportWorkbook(project: Project, result: RunResult) {
+    if(JSON.stringify(project)!==JSON.stringify(result.parameterSnapshot))throw Error('EXPORT_SNAPSHOT_MISMATCH');
     const json = JSON.stringify(project);
-    const chunks = json.match(/[\s\S]{1,16000}/g) ?? [''];
+    const hourlyRows=objectRows(result.hours as unknown as Record<string,unknown>[]);
+    const deliveredColumn=column((hourlyRows[0] as string[]).indexOf('deliveredKWh'));
+    const deliveredFormula=`SUM(Hourly_Results!${deliveredColumn}2:${deliveredColumn}${result.hours.length+1})`;
+    const chunks = json.match(/[\s\S]{1,16000}/gu) ?? [''];
     const sheets: {
         name: string;
         rows: Cell[][];
-    }[] = [{ name: 'Project_JSON', rows: chunks.map(v => [v]) }, { name: 'README', rows: [['HighwaySwapSim', '0.2.0'], ['schemaVersion', project.schemaVersion], ['Engine', result.engineVersion], ['Mode', result.mode], ['Currency', 'CNY — assumption'], ['Units', 'kW / kWh / minutes'], ['Replay', 'SOURCE_REPLAY does not calculate physical grid purchases'], ['Import', 'Import an unchanged application-exported workbook or use JSON']] }, { name: 'Service_Profile', rows: objectRows(project.services as unknown as Record<string, unknown>[]) }, { name: 'Equipment', rows: objectRows(project.topology.nodes as unknown as Record<string, unknown>[]) }, { name: 'Topology', rows: objectRows(project.topology.edges as unknown as Record<string, unknown>[]) }, { name: 'Hourly_Results', rows: objectRows(result.hours as unknown as Record<string, unknown>[]) }, { name: 'Transactions', rows: objectRows(result.transactions as unknown as Record<string, unknown>[]) }, { name: 'Sources', rows: objectRows(project.sources) }, { name: 'Validation', rows: objectRows(result.diagnostics as unknown as Record<string, unknown>[]) }, { name: 'Financial_Settings', rows: Object.entries(project.finance).map(([k, v]) => [k, v]) }, { name: 'KPI', rows: [['Metric', 'Value'], ...Object.entries(result.totals).map(([k, v]) => [k, v] as Cell[]), ['Hourly delivered cross-check', { formula: `SUM(Hourly_Results!D2:D49)`, value: result.totals.deliveredKWh }]] }];
+    }[] = [{ name: 'Project_JSON', rows: chunks.map(v => [v]) }, { name: 'README', rows: [['HighwaySwapSim', '0.3.0'], ['schemaVersion', project.schemaVersion], ['Engine', result.engineVersion], ['Mode', result.mode], ['Currency', 'CNY — assumption'], ['Units', 'kW / kWh / absolute minutes; day is zero-based'], ['Horizon days',project.horizonDays],['Settlement','Quantity and rate: 6 decimal HALF_UP; invoice: CNY 2 decimals; source-hour grouping; arrival-locked customer rates'], ['Replay', 'SOURCE_REPLAY does not calculate physical grid purchases'], ['Import', 'Import an unchanged application-exported workbook or use JSON']] }, { name: 'Service_Profile', rows: objectRows(project.services as unknown as Record<string, unknown>[]) }, { name: 'Equipment', rows: objectRows(project.topology.nodes as unknown as Record<string, unknown>[]) }, { name: 'Topology', rows: objectRows(project.topology.edges as unknown as Record<string, unknown>[]) }, { name: 'Hourly_Results', rows: hourlyRows }, { name: 'Transactions', rows: objectRows(result.transactions as unknown as Record<string, unknown>[]) }, { name: 'Sources', rows: objectRows(project.sources) }, { name: 'Validation', rows: objectRows(result.diagnostics as unknown as Record<string, unknown>[]) }, { name: 'Financial_Settings', rows: Object.entries(project.finance).map(([k, v]) => [k, v]) }, { name: 'KPI', rows: [['Metric', 'Value'], ...Object.entries(result.totals).map(([k, v]) => [k, v] as Cell[]), ['Hourly delivered cross-check', { formula: deliveredFormula, value: result.totals.deliveredKWh }]] }];
     if(project.engineering){sheets.push({name:'Engineering_Settings',rows:Object.entries(project.engineering).map(([k,v])=>[k,typeof v==='number'?v:String(v)])});sheets.push({name:'Capacity_Case',rows:Object.entries(capacityCase(project)).map(([k,v])=>[k,typeof v==='number'?v:JSON.stringify(v)])});}
+    sheets.push({name:'Component_Energy',rows:objectRows(result.componentEnergy as unknown as Record<string,unknown>[])},{name:'Edge_Energy',rows:objectRows(result.edgeEnergy as unknown as Record<string,unknown>[])},{name:'Source_Meters',rows:objectRows(result.sourceMeters as unknown as Record<string,unknown>[])},{name:'Equipment_Schedule',rows:objectRows(project.equipmentSchedule as unknown as Record<string,unknown>[])});
     // Explicit worksheet indices remain stable and are included in regression validation.
     const files: Record<string, string> = { '[Content_Types].xml': `<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`, '_rels/.rels': '<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>', 'xl/workbook.xml': `<?xml version="1.0"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s, i) => `<sheet name="${s.name}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join('')}</sheets><calcPr fullCalcOnLoad="1"/></workbook>`, 'xl/_rels/workbook.xml.rels': `<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((_, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('')}</Relationships>` };
     sheets.forEach((s, i) => files[`xl/worksheets/sheet${i + 1}.xml`] = sheet(s.rows));
     return zipStored(files);
 }
 export function importWorkbook(bytes: Uint8Array): Project { const files = unzipStored(bytes); const content = files['xl/worksheets/sheet1.xml']; if (!content)
-    throw Error('Missing project sheet'); const chunks = [...content.matchAll(/<t xml:space="preserve">([\s\S]*?)<\/t>/g)].map(m => unesc(m[1])); return migrateProject(JSON.parse(chunks.join(''))); }
+    throw Error('Missing project sheet'); const chunks = [...content.matchAll(/<t xml:space="preserve">([\s\S]*?)<\/t>/g)].map(m => unesc(m[1])); const json=chunks.join('');if(encoder.encode(json).length>8*1024*1024)throw Error('Project JSON exceeds 8 MB');return migrateProject(JSON.parse(json)); }

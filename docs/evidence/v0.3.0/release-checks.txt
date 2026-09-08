@@ -1,0 +1,84 @@
+# Release checks — 2026-09-08
+
+Runtime: Node 24.19.0; Python 3.12.13.
+TypeScript check: PASS (exit 0).
+Sites/Vinext production build: PASS (exit 0).
+Independent Decimal expectations: byte-for-byte PASS; 47,489/47,489 comparisons PASS; 2 comparator mutations detected.
+Model source manifest: every entry verified unchanged after report freeze.
+
+45 core/financial/electrical/export tests:
+
+✔ XLSX is a real ZIP workbook and preserves exact canonical project (33.297544ms)
+✔ source rows retain discrepancy and exact billing (6.53012ms)
+✔ schema round trip and migration are deterministic; reject duplicate hours and unsupported version (6.426904ms)
+✔ kernel deterministic RNG, stable event order and registry isolation (0.505973ms)
+✔ efficiency assembly matches independent fixture and rejects double counting (5.58144ms)
+✔ valid preset; AC/DC errors and directed loops rejected (0.924874ms)
+✔ shared upstream grid cap and open edge constrain delivered power (1.050243ms)
+✔ financial analytic fixtures and no-root states (1.052746ms)
+✔ constrained simulation conserves energy, bounds inventory and is reproducible (305.284984ms)
+✔ no supply does not create charged batteries; shortage remains unserved (40.205973ms)
+✔ supplement reconciles exact energy, AC allocation, concurrency and gun current limits (7.894585ms)
+✔ detailed topology retains individual SSTs, racks, guns, AC source ownership and schema migration (34.682621ms)
+✔ box transformer and shared stack boundaries constrain concurrent branch demand (1.797904ms)
+✔ DC intertie shares capacity without adding power or shorting AC sources (0.594215ms)
+✔ detailed physical case conserves energy and disabled guns cannot serve jobs (3064.23709ms)
+✔ finance: independent reference NPV, IRR and simple payback (1.87181ms)
+✔ finance: long negative startup gives a negative IRR instead of a false 409500 percent return (4.542835ms)
+✔ finance: trailing and leading zero periods do not change a 20 percent IRR (1.886182ms)
+✔ finance: ambiguous roots, representability and invalid values have explicit unavailable states (1.802516ms)
+✔ finance: 1, 3 and 5 day identical operation normalizes to the same investment projection (3.151118ms)
+✔ finance: fixed auxiliary energy runs every operating day regardless of traffic ramp (0.651792ms)
+✔ finance: monthly cash bridge separates traffic energy, fixed energy and other costs (0.324289ms)
+✔ finance: a changed draft cannot mix financial or operational inputs with an earlier result (1.30687ms)
+✔ finance: inventory depletion blocks investment extrapolation without inventing a replacement cost (1.004464ms)
+✔ finance: missing costs, source replay and zero-grid losses cannot masquerade as profit (3.720106ms)
+✔ money: ten distinct 1.005 CNY invoices settle to 10.10 CNY, not a combined 10.05 CNY (54.368755ms)
+✔ money: individual and aggregate ledgers reject amounts outside the declared 1e12-cent range (0.334364ms)
+✔ finance: extreme finite monthly inputs return an unavailable projection (0.218148ms)
+✔ XLSX preserves a Unicode surrogate pair spanning the former JSON chunk boundary (37.941602ms)
+✔ XLSX import rejects truncation even when a valid Project_JSON sheet survives (19.322877ms)
+✔ charging completion is an exact event, including a queued 1 kWh backlog (187.418938ms)
+✔ battery readiness triggers a swap at its exact threshold (44.214894ms)
+✔ hour boundary uses half-open event counts and arrival-locked prices (27.961704ms)
+✔ an incompatible swap cannot permanently block a compatible request (31.603381ms)
+✔ a swap pauses while its auxiliary source is unavailable (84.249009ms)
+✔ complete supply outage cannot power mechanical service or consume its stored inventory (347.828835ms)
+✔ a failed B transformer stops B swaps and B SSTs that need its auxiliary supply (1152.379789ms)
+✔ actual source meters and independent edge sums reconcile component ledgers (830.359109ms)
+✔ guns share stack capacity while respecting vehicle voltage times current (1.404717ms)
+✔ AC paralleling and direct bus-to-rack paths are rejected by preflight (1.78468ms)
+✔ scheduled activation cannot bypass AC-parallel validation (2.680981ms)
+✔ scheduled activation cannot create an unchecked DD bypass (12.658171ms)
+✔ a 65-route topology does not silently ignore its only live capacity (0.721287ms)
+✔ SOURCE_CHAIN retains an SST rated-output boundary (0.20519ms)
+✔ one transformer shares its input kVA limit across AC auxiliary and DC conversion paths (0.472683ms)
+ℹ tests 45
+ℹ suites 0
+ℹ pass 45
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3729.776132
+
+6 production and component checks:
+
+✔ production worker matches the canonical model and all three multi-day verification outputs (2396.72308ms)
+✔ production Worker serves the HighwaySwapSim workbench (218.683272ms)
+✔ emits the catalog's animation and scrolling utilities (47.30758ms)
+✔ forwards progress semantics to the primitive (493.568115ms)
+✔ emits chart themes for the starter's media dark mode (434.221473ms)
+✔ renders sidebar skeletons deterministically (449.805632ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2577.456101
+
+Total test runner tests: 51 passed, 0 failed. The 47,489 numeric assertions are a separate comparison count.
+No browser interaction or field measurement validation is claimed.
+

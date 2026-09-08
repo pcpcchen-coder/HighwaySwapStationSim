@@ -1,0 +1,675 @@
+{
+  "id": "C02_INTERVAL_ACCRUAL",
+  "date": "2026-09-08",
+  "origin": "Root clarified formal model contract after first complete comparator run. This is an oracle contract mismatch resolution, not a numerical modification to match observed output.",
+  "formalContract": {
+    "timeInterval": "half-open [hour start,hour end); completion14:00 counts in hour14",
+    "retailPrice": "locked at customer arrival",
+    "revenue": "cumulative invoice on delivered session energy, quantized energy6 x tariff6, HALF_UP to cents; interval receives change in cumulative invoice",
+    "unfinishedSessions": "recognized revenue for energy actually delivered within horizon",
+    "transformerCapacity": "kVA x PF is input rated power; ASSEMBLY output capacity equals input x transformer efficiency; fixture1000 x1 x.98=980kW"
+  },
+  "independentDerivation": "V02 per-site sessions draw50kW for exactly2h from12:00 through14:00. Each hour delivers50kWh. Arrival retail prices .7,.8,.9,1.0 yield35,40,45,50CNY during each of hours12 and13. Completion14:00 belongs to hour14. These were derived from fixture intervals and tariffs without copying actual values.",
+  "firstRun": {
+    "status": "FAIL",
+    "assertions": 47033,
+    "failed": 224,
+    "breakdown": {
+      "transformerCapacityMetadataContract": 192,
+      "hourlyRevenueContract": 16,
+      "hourlyCompletionCountContract": 16
+    },
+    "preservedDirectory": "../verification-history/first-run-contract-mismatch"
+  },
+  "resolvedRun": {
+    "status": "PASS",
+    "assertions": 47489,
+    "failed": 0,
+    "additionalAssertions": "456 source-hour invoice energy quantization checks were added; original main comparisons were retained."
+  },
+  "oldExpectedSHA256": "303cb4f81e9cdaa77b72d4319d1f55899b19017ac8a78d697ab30005722514c3",
+  "correctedExpectedSHA256": "ea9c02a3d6b9b9a47f955fb707accbef97de7d184820e1d7ab687f1c65be208f",
+  "oldFixtureSHA256": "9abc2c7e4ea4e42ad4593dd870ae7300ec3cc89838f8bb7f0f408f536efc496c",
+  "correctedFixtureSHA256": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209",
+  "changes": [
+    {
+      "path": [
+        "fixtureSHA256"
+      ],
+      "old": "9abc2c7e4ea4e42ad4593dd870ae7300ec3cc89838f8bb7f0f408f536efc496c",
+      "corrected": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        12,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        12,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        12,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        12,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        13,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        13,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "70.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        13,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "70.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        13,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        13,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "70.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        13,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "70.000000000000000000000000000000",
+      "corrected": "35.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        14,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        14,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        36,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        36,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        36,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        36,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        37,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        37,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "80.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        37,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "80.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        37,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        37,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "80.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        37,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "80.000000000000000000000000000000",
+      "corrected": "40.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        38,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        38,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        60,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        60,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        60,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        60,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        61,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        61,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "90.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        61,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "90.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        61,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        61,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "90.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        61,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "90.000000000000000000000000000000",
+      "corrected": "45.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        62,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        62,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        84,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        84,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        84,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        84,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "0.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        85,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        85,
+        "stations",
+        "A",
+        "revenueExact"
+      ],
+      "old": "100.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        85,
+        "stations",
+        "A",
+        "revenueSettled"
+      ],
+      "old": "100.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        85,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        85,
+        "stations",
+        "B",
+        "revenueExact"
+      ],
+      "old": "100.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        85,
+        "stations",
+        "B",
+        "revenueSettled"
+      ],
+      "old": "100.000000000000000000000000000000",
+      "corrected": "50.000000000000000000000000000000"
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        86,
+        "stations",
+        "A",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "path": [
+        "cases",
+        1,
+        "hourlyPhysicalLedgers",
+        86,
+        "stations",
+        "B",
+        "completedSessions"
+      ],
+      "old": 0,
+      "corrected": 1
+    }
+  ],
+  "changeCounts": {
+    "V02RevenueExact": 16,
+    "V02RevenueSettled": 16,
+    "V02CompletedSessions": 16,
+    "fixtureSHA256": 1
+  },
+  "unchangedDataProof": "Reversing only the48 hourly fields plus fixtureSHA256 reproduces original expected.json byte-for-byte. Every physical energy, peak interval, source invoice, transaction time/value, inventory, daily and horizon total is unchanged. Expected-summary.json changes only fixtureSHA256.",
+  "independentReview": "A second agent independently predicted all48 numerical changes from interval and tariff equations before reviewing regenerated data, then verified recursive diff and exact original-byte reconstruction."
+}

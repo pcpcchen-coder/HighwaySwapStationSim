@@ -1,0 +1,182 @@
+{
+  "id": "C01_CLOSE_BOUNDARY_STATE",
+  "date": "2026-09-08",
+  "origin": "Root identified an inconsistency between V01 final daily inventory and reported daily ready packs; corrected analytically without observing an implementation run.",
+  "defect": "Oracle readiness treated a next-period swap starting exactly at an hour/day close as already reserving the pack; its queue predicate also counted arrivals exactly at close in the prior interval.",
+  "snapshotPolicy": "After completions at the closing boundary and before arrivals or service starts exactly at that boundary.",
+  "oldReservationPredicate": "start <= boundary < completion",
+  "correctedReservationPredicate": "start < boundary < completion",
+  "oldQueuePredicate": "arrival <= boundary < start",
+  "correctedQueuePredicate": "arrival < boundary <= start",
+  "unchanged": "All physical energies, conversion losses, imports, source-hour invoices, session prices/times, inventories, horizon totals and money are unchanged. Only boundary readiness/queue fields and V01 day1/day2 ready aggregates changed.",
+  "oldExpectedSHA256": "c8440cecbbafe3d6bd09fa9769bcedec96b64162e53f4ed86572f9ef4b47345e",
+  "correctedExpectedSHA256": "303cb4f81e9cdaa77b72d4319d1f55899b19017ac8a78d697ab30005722514c3",
+  "changes": [
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 23,
+      "dayLabel": 1,
+      "hour": 23,
+      "station": "A",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 23,
+      "dayLabel": 1,
+      "hour": 23,
+      "station": "B",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 47,
+      "dayLabel": 2,
+      "hour": 23,
+      "station": "A",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V01_SST_3D",
+      "absoluteHour": 47,
+      "dayLabel": 2,
+      "hour": 23,
+      "station": "B",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 22,
+      "dayLabel": 1,
+      "hour": 22,
+      "station": "A",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 22,
+      "dayLabel": 1,
+      "hour": 22,
+      "station": "B",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 46,
+      "dayLabel": 2,
+      "hour": 22,
+      "station": "A",
+      "field": "queuedSessions",
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 46,
+      "dayLabel": 2,
+      "hour": 22,
+      "station": "B",
+      "field": "queuedSessions",
+      "old": 1,
+      "corrected": 0
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 70,
+      "dayLabel": 3,
+      "hour": 22,
+      "station": "A",
+      "field": "queuedSessions",
+      "old": 2,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 70,
+      "dayLabel": 3,
+      "hour": 22,
+      "station": "B",
+      "field": "queuedSessions",
+      "old": 2,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 94,
+      "dayLabel": 4,
+      "hour": 22,
+      "station": "A",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 94,
+      "dayLabel": 4,
+      "hour": 22,
+      "station": "B",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 118,
+      "dayLabel": 5,
+      "hour": 22,
+      "station": "A",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    },
+    {
+      "case": "V03_OUTAGE_CROSSSITE_5D",
+      "absoluteHour": 118,
+      "dayLabel": 5,
+      "hour": 22,
+      "station": "B",
+      "field": "readyPacks",
+      "old": 0,
+      "corrected": 1
+    }
+  ],
+  "correctedDailyReadyTotals": {
+    "V01_SST_3D": [
+      "2.000000000000000000000000000000",
+      "2.000000000000000000000000000000",
+      "2.000000000000000000000000000000"
+    ],
+    "V02_PCS_AC_EV_4D": [
+      "2.000000000000000000000000000000",
+      "2.000000000000000000000000000000",
+      "2.000000000000000000000000000000",
+      "2.000000000000000000000000000000"
+    ],
+    "V03_OUTAGE_CROSSSITE_5D": [
+      "0.000000000000000000000000000000",
+      "0.000000000000000000000000000000",
+      "0.000000000000000000000000000000",
+      "0.000000000000000000000000000000",
+      "0.000000000000000000000000000000"
+    ]
+  },
+  "independentReview": {
+    "result": "Confirmed the explicit snapshot event ordering and all 14 hourly plus 6 daily scalar field changes.",
+    "unchangedDataProof": "Reverting only corrected boundary fields in current expected.json reproduces the complete original expected.json SHA256 exactly. This proves all other content is unchanged.",
+    "reconstructedOriginalSHA256": "c8440cecbbafe3d6bd09fa9769bcedec96b64162e53f4ed86572f9ef4b47345e",
+    "priorReviewCorrection": "The first independent readiness/queue review repeated the predicates without challenging boundary semantics; its blanket correctness claim was too broad. Energy and monetary findings remain valid."
+  }
+}
