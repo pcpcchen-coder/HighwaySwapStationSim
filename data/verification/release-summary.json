@@ -5,8 +5,8 @@
   "assertions": 47489,
   "expectedSHA256": "ea9c02a3d6b9b9a47f955fb707accbef97de7d184820e1d7ab687f1c65be208f",
   "fixtureSHA256": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209",
-  "engineVersion": "0.4.1",
-  "reportSHA256": "a3b88ed8298d5eece7d1a68bc78d7ba344c9059f47bf4e63b98ff70c51ff788d",
+  "engineVersion": "0.4.2",
+  "reportSHA256": "9d7a0bfd47b862618e338008425c1c54616739a9ec426332faedf4dd4162a38b",
   "cases": [
     {
       "id": "V01_SST_3D",

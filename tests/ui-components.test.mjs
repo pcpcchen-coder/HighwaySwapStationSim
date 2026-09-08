@@ -119,3 +119,12 @@ test("cumulative summary renders physical boundary totals in kWh and explains in
   assert.match(html,/累計總輸入（電網）/);assert.match(html,/累計總輸出（末端）/);assert.match(html,/累計總損耗/);
   assert.match(html,/3\.40/);assert.match(html,/3\.33/);assert.match(html,/0\.07/);assert.match(html,/kWh/);assert.match(html,/避免中間設備逐級加總而重複計量/);
 });
+
+test("demand editor renders current draft values, import/export, arrival controls and source billing fields",async()=>{
+ const { ServicePanel }=await vite.ssrLoadModule('/components/simulator/service-panel.tsx');
+ const { engineeringProject }=await import('../packages/engineering/index.ts');
+ const p=engineeringProject();p.billing='SOURCE_DISPLAY_PRICE';p.arrival='SEEDED';p.services[0].chargeCount=7;
+ const html=renderToStaticMarkup(React.createElement(ServicePanel,{project:p,setProject:()=>{}}));
+ for(const text of ['匯入需求 CSV / JSON','匯出需求 CSV','匯出需求 JSON','每小時到站方式','隨機種子','本日換電量依 SOC 重算','來源換電總價','來源充電總價','不必先測算','SOC'])assert.ok(html.includes(text),text);
+ assert.match(html,/aria-label="第 1 天 A 區 0 時 充電車次"[^>]*value="7"/);assert.match(html,/accept=".csv,.json"/);
+});

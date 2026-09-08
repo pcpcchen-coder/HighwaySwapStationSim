@@ -279,7 +279,7 @@ async function main() {
   const expected = JSON.parse(expectedText), fixtures = JSON.parse(fixtureText);
   if (expected.cases.length !== 3 || fixtures.cases.length !== 3) throw Error('Exactly three cases required');
   if (sha(fixtureText) !== expected.fixtureSHA256) throw Error('Fixture hash differs from immutable oracle');
-  const codeFiles=['packages/contracts/index.ts','packages/power-trace/index.ts','packages/station-engine/index.ts','packages/electrical-engine/index.ts','packages/money/index.ts','packages/verification/cases.ts','plugins/equipment/index.ts','data/verification/fixtures.json'];
+  const codeFiles=['packages/service-profile/index.ts','packages/schemas/index.ts','packages/contracts/index.ts','packages/power-trace/index.ts','packages/station-engine/index.ts','packages/electrical-engine/index.ts','packages/money/index.ts','packages/verification/cases.ts','plugins/equipment/index.ts','data/verification/fixtures.json'];
   const codeSHA256=Object.fromEntries(await Promise.all(codeFiles.map(async file=>[file,sha(await readFile(join(REPO,file),'utf8'))])));
   const runnerSHA256=sha(await readFile(resolve(process.argv[1]),'utf8'));
   const { simulate } = await import(pathToFileURL(join(REPO, 'packages/station-engine/index.ts')).href);
