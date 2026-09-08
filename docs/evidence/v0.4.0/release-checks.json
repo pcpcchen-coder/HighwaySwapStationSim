@@ -1,0 +1,22 @@
+{
+  "engineVersion": "0.4.0",
+  "schemaVersion": "1.3",
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "coreTests": {
+    "passed": 35,
+    "failed": 0
+  },
+  "productionTests": {
+    "passed": 25,
+    "failed": 0
+  },
+  "totalTests": 60,
+  "independentAnalyticComparisons": {
+    "passed": 47489,
+    "failed": 0
+  },
+  "traceReconciliationComparisons": 48168,
+  "browserInteractionTested": false,
+  "scope": "Fixed-input implementation verification; no universal correctness or measured profit guarantee."
+}

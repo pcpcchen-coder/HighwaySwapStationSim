@@ -1,0 +1,52 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> highway-swap-station-sim@0.4.0 test:core
+> node --test tests/*.test.ts
+
+✔ XLSX is a real ZIP workbook and preserves exact canonical project (26.292521ms)
+✔ source rows retain discrepancy and exact billing (2.365952ms)
+✔ schema round trip and migration are deterministic; reject duplicate hours and unsupported version (3.860942ms)
+✔ kernel deterministic RNG, stable event order and registry isolation (0.347987ms)
+✔ efficiency assembly matches independent fixture and rejects double counting (0.440353ms)
+✔ valid preset; AC/DC errors and directed loops rejected (0.891093ms)
+✔ shared upstream grid cap and open edge constrain delivered power (0.843542ms)
+✔ financial analytic fixtures and no-root states (0.76085ms)
+✔ constrained simulation conserves energy, bounds inventory and is reproducible (290.175666ms)
+✔ no supply does not create charged batteries; shortage remains unserved (48.961583ms)
+✔ supplement reconciles exact energy, AC allocation, concurrency and gun current limits (5.053562ms)
+✔ detailed topology retains individual SSTs, racks, guns, AC source ownership and schema migration (29.483247ms)
+✔ box transformer and shared stack boundaries constrain concurrent branch demand (1.186671ms)
+✔ DC intertie shares capacity without adding power or shorting AC sources (0.48487ms)
+✔ detailed physical case conserves energy and disabled guns cannot serve jobs (3288.055494ms)
+✔ finance: independent reference NPV, IRR and simple payback (2.193697ms)
+✔ finance: long negative startup gives a negative IRR instead of a false 409500 percent return (1.762256ms)
+✔ finance: trailing and leading zero periods do not change a 20 percent IRR (0.50483ms)
+✔ finance: ambiguous roots, representability and invalid values have explicit unavailable states (1.569831ms)
+✔ finance: 1, 3 and 5 day identical operation normalizes to the same investment projection (2.697614ms)
+✔ finance: fixed auxiliary energy runs every operating day regardless of traffic ramp (0.376899ms)
+✔ finance: monthly cash bridge separates traffic energy, fixed energy and other costs (0.362148ms)
+✔ finance: a changed draft cannot mix financial or operational inputs with an earlier result (1.768565ms)
+✔ finance: inventory depletion blocks investment extrapolation without inventing a replacement cost (0.548514ms)
+✔ finance: missing costs, source replay and zero-grid losses cannot masquerade as profit (1.404635ms)
+✔ money: ten distinct 1.005 CNY invoices settle to 10.10 CNY, not a combined 10.05 CNY (65.266408ms)
+✔ money: individual and aggregate ledgers reject amounts outside the declared 1e12-cent range (0.410489ms)
+✔ finance: extreme finite monthly inputs return an unavailable projection (0.233547ms)
+✔ 480 kW for 0.125 minutes delivers exactly 1 kWh, then the timeline shows zero (78.410856ms)
+✔ sub-microsecond closing event and zero-load off/on changes remain selectable (44.139705ms)
+✔ unserved terminal demand is distinct from zero demand and from auxiliary interlocks (36.884886ms)
+✔ transformer outages close SST auxiliary interlocks at exact event boundaries (1317.087809ms)
+✔ unrecorded legacy and replay results cannot be mistaken for simulated zero (31.870132ms)
+✔ all three independent multi-day cases reconcile every node, edge and physical source hour to raw power traces (542.894567ms)
+ℹ V01_SST_3D: {"checks":2887,"maxDelta":8.526512829121202e-14,"events":7,"bytes":3672}
+ℹ V02_PCS_AC_EV_4D: {"checks":6729,"maxDelta":8.526512829121202e-14,"events":9,"bytes":7231}
+ℹ V03_OUTAGE_CROSSSITE_5D: {"checks":4212,"maxDelta":1.5631940186722204e-13,"events":12,"bytes":5108}
+✔ complete 92-node/96-edge three-day case retains every signal and reconciles all hourly ledgers (2977.813045ms)
+ℹ COMPLETE_3D: {"checks":34340,"maxDelta":3.637978807091713e-12,"events":788,"bytes":1054122}
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5223.877678

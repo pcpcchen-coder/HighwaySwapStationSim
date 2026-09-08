@@ -136,6 +136,8 @@ export interface Transaction {
     deliveredKWh: number;
 }
 export interface RunResult {
+    /** Present only for constrained runs recorded by engine 0.4+. */
+    powerTrace?: PowerTrace;
     engineVersion: string;
     parameterSnapshot: Project;
     mode: Project['mode'];
@@ -178,3 +180,17 @@ export interface EngineeringConfig {
 export interface ComponentEnergy {day:number;hour:number;nodeId:string;inputKWh:number;outputKWh:number;lossKWh:number;terminalKWh:number;peakOutputKW:number;capacityKW:number;maxBalanceResidual:number;}
 export interface EdgeEnergy {day:number;hour:number;edgeId:string;source:string;target:string;kWh:number;peakKW:number;}
 export interface SourceMeter {day:number;hour:number;sourceId:string;importKWh:number;peakKW:number;unitPrice:number;cost:number;}
+
+/** Piecewise constant signals. No interpolation or display rounding is applied.
+ * A sample applies from its minute (inclusive) until the next sample, or endMinute.
+ * Status: 0 configured on, 1 configured off, 2 auxiliary interlock, 3 auxiliary shortfall.
+ */
+export type PowerNodeSample = [minute:number,inputKW:number,outputKW:number,lossKW:number,terminalKW:number,requestedKW:number,status:number];
+export type PowerEdgeSample = [minute:number,powerKW:number];
+export interface PowerTrace {
+    version: 1;
+    endMinute: number;
+    eventMinutes: number[];
+    nodes: {nodeId:string;samples:PowerNodeSample[]}[];
+    edges: {edgeId:string;samples:PowerEdgeSample[]}[];
+}

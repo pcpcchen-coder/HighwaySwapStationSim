@@ -2,7 +2,7 @@
 
 **HighwaySwapSim** — 高速公路雙服務區供電、換電／充電營運與收益測算工作台。
 
-由 Codex / Astra 接手實作。工程工作版本 **0.3.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
+由 Codex / Astra 接手實作。工程工作版本 **0.4.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
 
 ## 已提供的操作
 
@@ -85,3 +85,8 @@ tests/                    核心及正式產物測試
 [公開工作網站](https://highway-swap-george.george-chen-1104.chatgpt.site) · [完整驗證紀錄](docs/VERIFICATION.md) · [驗證PPT](public/reports/HighwaySwapSim_Verification.pptx) · [獨立解析計算器與預期](data/verification/README.md)
 
 三個案例共288小時，47,489項獨立數值比對全通過，最大能量誤差2.96e-12 kWh，結算金額差0分；另有比較器故意破壞自驗與完整92設備三日守恆測試。這是指定輸入／模型契約的驗證，不能當作未經實測校準的獲利保證。期末庫存缺口會阻擋投資回報外推；成本與真實結算條款仍須確認。
+
+
+## 0.4.0 能量流驗算
+
+新增完整節點／連線圖與事件時間軸：拖動即時更新kW，切換小時kWh、點節點逐項守恆、對照功率積分與帳本、匯出完整數值。可一鍵執行92節點／96連線的三日完整案例。操作與數值契約見 [能量流驗算](docs/ENERGY_FLOW_UI.md)，新版驗證見 [驗證紀錄](docs/VERIFICATION.md)。原0.3.0簡報保留原版本的驗證範圍。

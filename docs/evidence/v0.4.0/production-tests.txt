@@ -1,0 +1,33 @@
+✔ production worker matches the canonical model and all three multi-day verification outputs (2568.304617ms)
+✔ XLSX preserves a Unicode surrogate pair spanning the former JSON chunk boundary (45.776001ms)
+✔ XLSX import rejects truncation even when a valid Project_JSON sheet survives (13.276136ms)
+✔ charging completion is an exact event, including a queued 1 kWh backlog (194.301741ms)
+✔ battery readiness triggers a swap at its exact threshold (33.500952ms)
+✔ hour boundary uses half-open event counts and arrival-locked prices (41.720914ms)
+✔ an incompatible swap cannot permanently block a compatible request (36.876344ms)
+✔ a swap pauses while its auxiliary source is unavailable (57.063955ms)
+✔ complete supply outage cannot power mechanical service or consume its stored inventory (456.177845ms)
+✔ a failed B transformer stops B swaps and B SSTs that need its auxiliary supply (1010.48467ms)
+✔ actual source meters and independent edge sums reconcile component ledgers (896.661172ms)
+✔ guns share stack capacity while respecting vehicle voltage times current (1.345458ms)
+✔ AC paralleling and direct bus-to-rack paths are rejected by preflight (1.613707ms)
+✔ scheduled activation cannot bypass AC-parallel validation (2.255569ms)
+✔ scheduled activation cannot create an unchecked DD bypass (11.921614ms)
+✔ a 65-route topology does not silently ignore its only live capacity (0.75438ms)
+✔ SOURCE_CHAIN retains an SST rated-output boundary (0.23575ms)
+✔ one transformer shares its input kVA limit across AC auxiliary and DC conversion paths (0.439403ms)
+✔ production Worker serves the HighwaySwapSim workbench (265.928403ms)
+✔ emits the catalog's animation and scrolling utilities (43.466021ms)
+✔ forwards progress semantics to the primitive (624.807851ms)
+✔ emits chart themes for the starter's media dark mode (626.367177ms)
+✔ renders sidebar skeletons deterministically (450.24627ms)
+✔ flow explorer renders every engineering node and edge, with accessible time controls and unavailable replay data (518.634394ms)
+✔ flow explorer renders actual constrained values and retains all JSON export and node audit controls (410.289867ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3020.494936

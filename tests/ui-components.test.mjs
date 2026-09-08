@@ -83,3 +83,28 @@ test("renders sidebar skeletons deterministically", async () => {
   assert.equal(first, second);
   assert.match(first, /--skeleton-width:70%/);
 });
+
+test("flow explorer renders every engineering node and edge, with accessible time controls and unavailable replay data", async () => {
+  const { FlowExplorer } = await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+  const { engineeringProject } = await import('../packages/engineering/index.ts');
+  const { replay } = await import('../packages/station-engine/index.ts');
+  const html = renderToStaticMarkup(React.createElement(FlowExplorer, { result: replay(engineeringProject()) }));
+  assert.equal((html.match(/data-node=/g) ?? []).length,92);
+  assert.equal((html.match(/data-edge=/g) ?? []).length,96);
+  for(const id of ['A-rack-0','B-rack-7','A-gun-0','B-gun-3','A-passenger','B-swap-bay']) assert.ok(html.includes(`data-node="${id}"`),id);
+  assert.match(html,/尚無可驗算的功率記錄/);
+  assert.match(html,/模擬時間軸（分鐘）/);
+  assert.match(html,/role="slider"/);
+  assert.match(html,/輸入 —/);
+});
+
+test("flow explorer renders actual constrained values and retains all JSON export and node audit controls", async () => {
+  const { FlowExplorer, flowTime } = await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+  const { verificationCases } = await import('../packages/verification/cases.ts');
+  const { simulate } = await import('../packages/station-engine/index.ts');
+  const html=renderToStaticMarkup(React.createElement(FlowExplorer,{result:simulate(verificationCases()[1].project)}));
+  assert.doesNotMatch(html,/尚無可驗算的功率記錄/);
+  assert.match(html,/逐項守恆/);assert.match(html,/匯出全圖數值 JSON/);
+  assert.match(html,/功率積分/);assert.match(html,/10\.20 kW/);
+  assert.equal(flowTime(.125),'D1 00:00:07.500');assert.equal(flowTime(1440),'D2 00:00:00.000');
+});

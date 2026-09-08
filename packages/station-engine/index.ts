@@ -4,9 +4,10 @@ import {allocatePower,outputCapacity} from '../electrical-engine/index.ts';
 import {bill} from '../economics-engine/index.ts';
 import {invoiceCents,apportionCents,sumMoney} from '../money/index.ts';
 import {validateTopology,sourceDiagnostics} from '../topology-engine/index.ts';
+import {createPowerTrace,recordPowerTrace} from '../power-trace/index.ts';
 import {parseProject} from '../schemas/index.ts';
 const ids:StationId[]=['A','B'];const EPS=1e-8;
-export const ENGINE_VERSION='0.3.0';
+export const ENGINE_VERSION='0.4.0';
 const blank=(r:ServiceRow):HourResult=>({day:r.day,hour:r.hour,station:r.station,requestedKWh:r.swapKWh+r.chargeKWh,deliveredKWh:0,swapCount:0,chargeCount:0,gridKWh:0,lossKWh:0,auxiliaryKWh:0,revenue:0,gridCost:0,auxiliaryGridCost:0,ready:0,queue:0,storedKWh:0,balanceResidual:0,peakKW:0});
 function finish(p:Project,hours:HourResult[],transactions:Transaction[],initial:number,final:number,diagnostics:RunResult['diagnostics'],componentEnergy:ComponentEnergy[]=[],edgeEnergy:EdgeEnergy[]=[],sourceMeters:SourceMeter[]=[]):RunResult{
  const sum=(key:keyof HourResult)=>hours.reduce((a,h)=>a+Number(h[key]),0),delivered=sum('deliveredKWh'),requested=sum('requestedKWh');
@@ -36,6 +37,7 @@ export function simulate(input:Project):RunResult{
  const schedule=[...p.equipmentSchedule].sort((a,b)=>a.atMinute-b.atMinute);let scheduleCursor=0;
  for(const s of ids){const energy=p.station[s].capacityKWh*(p.station[s].readySOC-p.station[s].returnSOC);if(transactions.some(j=>j.station===s&&j.kind==='swap'&&Math.abs(j.requestedKWh-energy)>1e-6))diagnostics.push({code:'SWAP_ENERGY_MISMATCH',severity:'warning',message:`${s} 需求與 SOC 窗口 ${energy} kWh 不符，無法配對的請求保留排隊。`});}
  const components=new Map<string,ComponentEnergy>(),edges=new Map<string,EdgeEnergy>(),meters=new Map<string,SourceMeter>();
+ const powerTrace=createPowerTrace(p);
  const costWeights=new Map<string,Map<string,number>>();let t=0,steps=0;const warned=new Set<string>();
  function recognize(job:Transaction,energy:number,time:number){job.deliveredKWh+=energy;const cents=invoiceCents(job.deliveredKWh,job.unitPrice!);const h=getHour(job.station,time);h.deliveredKWh+=energy;h.revenue+=(cents-Math.round((job.revenue??0)*100))/100;job.revenue=cents/100;}
  function completeSwaps(time:number){for(const s of ids){const st=states[s];for(const active of st.swapping.filter(a=>a.remaining<EPS)){active.battery.energy=p.station[s].capacityKWh*p.station[s].returnSOC;active.battery.reserved=false;active.job.completion=time;recognize(active.job,active.job.requestedKWh,time);getHour(s,time).swapCount++;}st.swapping=st.swapping.filter(a=>a.remaining>=EPS);}}
@@ -63,6 +65,9 @@ export function simulate(input:Project):RunResult{
    for(const [source,kw] of Object.entries(a.sourceImport)){sourceStep.set(source,(sourceStep.get(source)??0)+kw);const key=`${hi}:${source}`,weights=costWeights.get(key)??new Map<string,number>(),consumer=`${r.station}:${r.kind==='aux'?'aux':'traffic'}`;weights.set(consumer,(weights.get(consumer)??0)+kw*dt);costWeights.set(key,weights);}
    for(const f of a.nodeFlows){const n=nodeStep.get(f.nodeId)??{input:0,output:0,loss:0,terminal:0};n.input+=f.inputKW;n.output+=f.outputKW;n.loss+=f.lossKW;n.terminal+=f.terminalKW;nodeStep.set(f.nodeId,n);}for(const f of a.edgeFlows)edgeStep.set(f.edgeId,(edgeStep.get(f.edgeId)??0)+f.kw);
   });
+  const requestedPower=new Map<string,number>();for(const r of requests)requestedPower.set(r.sink,(requestedPower.get(r.sink)??0)+r.kw);
+  const auxiliaryShortfall=new Set(auxRequests.filter((r,i)=>support[i].delivered+1e-6<r.kw).map(r=>r.sink));
+  recordPowerTrace(powerTrace,p,t,nodeStep,edgeStep,requestedPower,blocked,auxiliaryShortfall);
   for(const [id,n] of nodeStep){const node=powerProject.topology.nodes.find(v=>v.id===id)!,key=`${hi}:${id}`,record=components.get(key)??{day,hour,nodeId:id,inputKWh:0,outputKWh:0,lossKWh:0,terminalKWh:0,peakOutputKW:0,capacityKW:outputCapacity(powerProject,node),maxBalanceResidual:0};record.inputKWh+=n.input*dt;record.outputKWh+=n.output*dt;record.lossKWh+=n.loss*dt;record.terminalKWh+=n.terminal*dt;record.peakOutputKW=Math.max(record.peakOutputKW,n.output);const out=p.topology.edges.filter(e=>e.source===id).reduce((sum,e)=>sum+(edgeStep.get(e.id)??0),0);record.maxBalanceResidual=Math.max(record.maxBalanceResidual,Math.abs(n.input-n.output-n.loss)*dt,Math.abs(n.output-out-n.terminal)*dt,node.type==='grid'?0:Math.abs(n.input-p.topology.edges.filter(e=>e.target===id).reduce((sum,e)=>sum+(edgeStep.get(e.id)??0),0))*dt);if(record.maxBalanceResidual>1e-6)throw Error('COMPONENT_BALANCE:'+id);if(n.output>record.capacityKW+1e-6)throw Error('COMPONENT_CAPACITY_EXCEEDED:'+id);components.set(key,record);}
   for(const [id,kw] of edgeStep){const edge=p.topology.edges.find(e=>e.id===id)!,key=`${hi}:${id}`,record=edges.get(key)??{day,hour,edgeId:id,source:edge.source,target:edge.target,kWh:0,peakKW:0};record.kWh+=kw*dt;record.peakKW=Math.max(record.peakKW,kw);edges.set(key,record);}
   for(const [id,kw] of sourceStep){const key=`${hi}:${id}`,station=p.topology.nodes.find(n=>n.id===id)!.station,record=meters.get(key)??{day,hour,sourceId:id,importKWh:0,peakKW:0,unitPrice:rate(station,t).gridPrice,cost:0};record.importKWh+=kw*dt;record.peakKW=Math.max(record.peakKW,kw);meters.set(key,record);}
@@ -73,6 +78,7 @@ export function simulate(input:Project):RunResult{
  for(const [key,m] of meters){const cents=invoiceCents(m.importKWh,m.unitPrice);m.cost=cents/100;const entries=[...(costWeights.get(key)??new Map()).entries()].sort((a,b)=>a[0].localeCompare(b[0])),parts=apportionCents(cents,entries.map(e=>e[1]));entries.forEach(([consumer],i)=>{const [s,kind]=consumer.split(':'),h=hourly.get(`${s}:${m.day*24+m.hour}`)!;h.gridCost+=parts[i]/100;if(kind==='aux')h.auxiliaryGridCost+=parts[i]/100;});}
  for(const s of ids){let before=initial[s];for(let hour=0;hour<p.horizonDays*24;hour++){const h=hourly.get(`${s}:${hour}`)!;h.revenue=Math.round(h.revenue*100)/100;h.gridCost=Math.round(h.gridCost*100)/100;h.auxiliaryGridCost=Math.round(h.auxiliaryGridCost*100)/100;h.balanceResidual=h.gridKWh-h.lossKWh-h.auxiliaryKWh-h.deliveredKWh-(h.storedKWh-before);before=h.storedKWh;if(Math.abs(h.balanceResidual)>.000001)throw Error(`ENERGY_BALANCE:${s}:${hour}:${h.balanceResidual}`);}}
  const result=finish(snapshot,hours,transactions,initial.A+initial.B,stored('A')+stored('B'),diagnostics,[...components.values()],[...edges.values()],[...meters.values()]);
+ result.powerTrace=powerTrace;
  if(result.totals.finalStoredKWh<result.totals.initialStoredKWh-.01)result.diagnostics.push({code:'ENDING_INVENTORY',severity:'warning',message:'期末庫存能源低於期初；代表日不具能源持續性，停止投資回報外推。'});
  return result;
 }
