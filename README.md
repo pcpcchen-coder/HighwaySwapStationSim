@@ -4,6 +4,8 @@
 
 由 Codex / Astra 接手實作。工程工作版本 **0.4.1**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
 
+操作順序、JSON／XLSX保存差異與案例載入注意事項，請先閱讀 [操作手冊](docs/USER_GUIDE.md)。
+
 ## 已提供的操作
 
 |工作頁|功能|
@@ -13,6 +15,7 @@
 |站務配置|電池數量、容量、SOC、工位、作業時間、充電槍與共享功率|
 |逐時案例|每站每日24筆時序，逐日編輯需求與到站鎖定單價|
 |效率比較|來源摘要／組裝效率、相同交付能量比較、避免重複乘效率|
+|能量流驗算|完整節點／連線圖、當下功率／每小時電量／任意區間累計、守恆驗算與數值匯出|
 |模擬結果|Web Worker受限模擬、排隊／庫存、逐元件與連線能量帳、實際來源電表|
 |三例獨立驗證|3／4／5日受控案例、即時總計比較、47,489項封存比對與PPT|
 |獲利能力|成本輸入、代表日外推、月度爬坡、NPV／IRR／回收期及資金缺口|
@@ -60,8 +63,9 @@ tests/                    核心及正式產物測試
 
 ## 文件
 
+- [操作手冊](docs/USER_GUIDE.md) — 先配置、再設計、重算、驗算與保存；匯入恢復及覆寫行為。
 - [執行決策](docs/EXECUTION_CONTEXT.md) — 使用指定repo、由Codex接手，覆蓋原Kimi執行限定。
-- [完整 Master Prompt](docs/MASTER_PROMPT.md) — 原0–100章、101–114章、設備容量115–122章與連續多日／獨立驗證123–129章。
+- [完整 Master Prompt](docs/MASTER_PROMPT.md) — 原0–100章、101–114章、設備容量115–122章、連續多日／獨立驗證123–129章及能量流／區間累計130–131章。
 - [架構](docs/ARCHITECTURE.md)、[電力模型](docs/ELECTRICAL_MODEL.md)、[經濟模型](docs/ECONOMIC_MODEL.md)。
 - [假設](docs/ASSUMPTIONS.md)、[資料來源](data/reference/source-manifest.json)、[驗證](docs/VERIFICATION.md)。
 - [交接與下一步](docs/HANDOFF.md)、[產品路線](docs/ROADMAP.md)。
