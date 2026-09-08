@@ -1,0 +1,7 @@
+"use client";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Input } from '../ui/input';
+export function Choice({value,onChange,options,label}:{value:string;onChange:(value:string)=>void;options:[string,string][];label:string}){return <label className="field"><span>{label}</span><Select value={value} onValueChange={onChange}><SelectTrigger className="w-full"><SelectValue/></SelectTrigger><SelectContent>{options.map(([key,text])=><SelectItem key={key} value={key}>{text}</SelectItem>)}</SelectContent></Select></label>;}
+export function NumberField({label,value,onChange,unit='',min=0,max=1000000000,step='any'}:{label:string;value:number|null;onChange:(value:number|null)=>void;unit?:string;min?:number;max?:number;step?:number|string}){return <label className="field"><span>{label} <small>{unit}</small></span><Input type="number" min={min} max={max} step={step} value={value??''} placeholder="尚未填寫" onChange={e=>{const v=e.target.value===''?null:Number(e.target.value);if(v===null||Number.isFinite(v))onChange(v);}}/></label>;}
+export function Stat({label,value,unit,note}:{label:string;value:string;unit?:string;note?:string}){return <article className="stat"><div className="eyebrow">{label}</div><div className="stat-value">{value}<span>{unit}</span></div>{note&&<p>{note}</p>}</article>;}
+export const fmt=(v:number,digits=0)=>!Number.isFinite(v)?'—':new Intl.NumberFormat('zh-TW',{maximumFractionDigits:digits,minimumFractionDigits:digits}).format(v);
