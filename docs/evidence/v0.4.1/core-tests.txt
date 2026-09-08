@@ -1,0 +1,56 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> highway-swap-station-sim@0.4.1 test:core
+> node --test tests/*.test.ts
+
+✔ XLSX is a real ZIP workbook and preserves exact canonical project (27.989689ms)
+✔ source rows retain discrepancy and exact billing (2.879766ms)
+✔ schema round trip and migration are deterministic; reject duplicate hours and unsupported version (12.04869ms)
+✔ kernel deterministic RNG, stable event order and registry isolation (0.390499ms)
+✔ efficiency assembly matches independent fixture and rejects double counting (0.581854ms)
+✔ valid preset; AC/DC errors and directed loops rejected (1.263996ms)
+✔ shared upstream grid cap and open edge constrain delivered power (1.207433ms)
+✔ financial analytic fixtures and no-root states (1.715657ms)
+✔ constrained simulation conserves energy, bounds inventory and is reproducible (311.090628ms)
+✔ no supply does not create charged batteries; shortage remains unserved (49.380194ms)
+✔ supplement reconciles exact energy, AC allocation, concurrency and gun current limits (4.7464ms)
+✔ detailed topology retains individual SSTs, racks, guns, AC source ownership and schema migration (27.878301ms)
+✔ box transformer and shared stack boundaries constrain concurrent branch demand (3.321216ms)
+✔ DC intertie shares capacity without adding power or shorting AC sources (0.538039ms)
+✔ detailed physical case conserves energy and disabled guns cannot serve jobs (3854.287535ms)
+✔ finance: independent reference NPV, IRR and simple payback (2.643865ms)
+✔ finance: long negative startup gives a negative IRR instead of a false 409500 percent return (1.759272ms)
+✔ finance: trailing and leading zero periods do not change a 20 percent IRR (0.47133ms)
+✔ finance: ambiguous roots, representability and invalid values have explicit unavailable states (1.350175ms)
+✔ finance: 1, 3 and 5 day identical operation normalizes to the same investment projection (2.687982ms)
+✔ finance: fixed auxiliary energy runs every operating day regardless of traffic ramp (0.35012ms)
+✔ finance: monthly cash bridge separates traffic energy, fixed energy and other costs (0.273185ms)
+✔ finance: a changed draft cannot mix financial or operational inputs with an earlier result (1.00987ms)
+✔ finance: inventory depletion blocks investment extrapolation without inventing a replacement cost (1.554789ms)
+✔ finance: missing costs, source replay and zero-grid losses cannot masquerade as profit (1.917227ms)
+✔ money: ten distinct 1.005 CNY invoices settle to 10.10 CNY, not a combined 10.05 CNY (53.808366ms)
+✔ money: individual and aggregate ledgers reject amounts outside the declared 1e12-cent range (0.388587ms)
+✔ finance: extreme finite monthly inputs return an unavailable projection (0.220067ms)
+✔ 480 kW for 0.125 minutes delivers exactly 1 kWh, then the timeline shows zero (60.781504ms)
+✔ sub-microsecond closing event and zero-load off/on changes remain selectable (52.661117ms)
+✔ unserved terminal demand is distinct from zero demand and from auxiliary interlocks (35.006734ms)
+✔ transformer outages close SST auxiliary interlocks at exact event boundaries (1480.449823ms)
+✔ unrecorded legacy and replay results cannot be mistaken for simulated zero (139.973757ms)
+✔ all three independent multi-day cases reconcile every node, edge and physical source hour to raw power traces (376.509871ms)
+ℹ V01_SST_3D: {"checks":2887,"maxDelta":8.526512829121202e-14,"events":7,"bytes":3672}
+ℹ V02_PCS_AC_EV_4D: {"checks":6729,"maxDelta":8.526512829121202e-14,"events":9,"bytes":7231}
+ℹ V03_OUTAGE_CROSSSITE_5D: {"checks":4212,"maxDelta":1.5631940186722204e-13,"events":12,"bytes":5108}
+✔ complete 92-node/96-edge three-day case retains every signal and reconciles all hourly ledgers (3544.125805ms)
+ℹ COMPLETE_3D: {"checks":34340,"maxDelta":3.637978807091713e-12,"events":788,"bytes":1054122}
+✔ cumulative partial-minute selection integrates real power and excludes the closing event from its peak (26.713403ms)
+✔ cumulative midnight selection with an outage matches independent rectangular energy areas (155.891436ms)
+✔ cumulative multi-day totals match all ledgers and do not double count cross-site transfers or swap stock (269.392593ms)
+✔ cumulative range normalization gives empty ranges zero energy and does not invent traces for old or replay results (20.223532ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6358.104897

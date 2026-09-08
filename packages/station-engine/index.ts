@@ -7,7 +7,7 @@ import {validateTopology,sourceDiagnostics} from '../topology-engine/index.ts';
 import {createPowerTrace,recordPowerTrace} from '../power-trace/index.ts';
 import {parseProject} from '../schemas/index.ts';
 const ids:StationId[]=['A','B'];const EPS=1e-8;
-export const ENGINE_VERSION='0.4.0';
+export const ENGINE_VERSION='0.4.1';
 const blank=(r:ServiceRow):HourResult=>({day:r.day,hour:r.hour,station:r.station,requestedKWh:r.swapKWh+r.chargeKWh,deliveredKWh:0,swapCount:0,chargeCount:0,gridKWh:0,lossKWh:0,auxiliaryKWh:0,revenue:0,gridCost:0,auxiliaryGridCost:0,ready:0,queue:0,storedKWh:0,balanceResidual:0,peakKW:0});
 function finish(p:Project,hours:HourResult[],transactions:Transaction[],initial:number,final:number,diagnostics:RunResult['diagnostics'],componentEnergy:ComponentEnergy[]=[],edgeEnergy:EdgeEnergy[]=[],sourceMeters:SourceMeter[]=[]):RunResult{
  const sum=(key:keyof HourResult)=>hours.reduce((a,h)=>a+Number(h[key]),0),delivered=sum('deliveredKWh'),requested=sum('requestedKWh');

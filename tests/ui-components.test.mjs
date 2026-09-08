@@ -108,3 +108,14 @@ test("flow explorer renders actual constrained values and retains all JSON expor
   assert.match(html,/功率積分/);assert.match(html,/10\.20 kW/);
   assert.equal(flowTime(.125),'D1 00:00:07.500');assert.equal(flowTime(1440),'D2 00:00:00.000');
 });
+
+test("cumulative summary renders physical boundary totals in kWh and explains intermediate transfer exclusion", async () => {
+  const { FlowSummary }=await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+  const { verificationCases }=await import('../packages/verification/cases.ts');
+  const { simulate }=await import('../packages/station-engine/index.ts');
+  const { flowView }=await import('../packages/power-trace/index.ts');
+  const view=flowView(simulate(verificationCases()[1].project),1445,'cumulative',1435);
+  const html=renderToStaticMarkup(React.createElement(FlowSummary,{view}));
+  assert.match(html,/累計總輸入（電網）/);assert.match(html,/累計總輸出（末端）/);assert.match(html,/累計總損耗/);
+  assert.match(html,/3\.40/);assert.match(html,/3\.33/);assert.match(html,/0\.07/);assert.match(html,/kWh/);assert.match(html,/避免中間設備逐級加總而重複計量/);
+});

@@ -1,0 +1,28 @@
+{
+  "engineVersion": "0.4.1",
+  "schemaVersion": "1.3",
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "coreTests": {
+    "passed": 39,
+    "failed": 0
+  },
+  "productionTests": {
+    "passed": 26,
+    "failed": 0
+  },
+  "totalTests": 65,
+  "independentAnalyticComparisons": {
+    "passed": 47489,
+    "failed": 0
+  },
+  "cumulativeScope": [
+    "partial-minute exact integration",
+    "midnight with outage",
+    "full-horizon ledger reconciliation",
+    "interval additivity",
+    "empty and unavailable states",
+    "physical source and terminal boundaries"
+  ],
+  "browserInteractionTested": false
+}

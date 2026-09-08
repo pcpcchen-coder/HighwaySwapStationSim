@@ -20,31 +20,34 @@ export function sampleAt<T extends number[]>(samples:T[],minute:number):T|undefi
 /** Intersection integration; compressed signals may span many tariff hours. */
 export function integrateSignal(samples:number[][],column:number,from:number,to:number,endMinute:number){let energy=0;for(let i=0;i<samples.length;i++){const start=Math.max(from,samples[i][0]),end=Math.min(to,samples[i+1]?.[0]??endMinute);if(end>start)energy+=samples[i][column]*(end-start)/60;}return energy;}
 
-export type FlowMode='power'|'energy';
+export type FlowMode='power'|'energy'|'cumulative';
 export interface FlowNode {
  id:string;input:number;output:number;loss:number;terminal:number;requested:number|null;capacityKW:number;peakKW:number;
- status:'off'|'interlock'|'shortfall'|'mixed'|'limited'|'idle'|'flow'|'unmodeled'|'unknown';
+ status:'off'|'interlock'|'shortfall'|'mixed'|'limited'|'idle'|'flow'|'unmodeled'|'unknown'|'empty';
  incoming:number;outgoing:number;conversionResidual:number;branchResidual:number;connectionResidual:number;
 }
 export interface FlowEdge {id:string;source:string;target:string;value:number;domain:'AC'|'DC';off:boolean;}
 export interface FlowView {available:boolean;mode:FlowMode;unit:'kW'|'kWh';minute:number;from:number;to:number;nodes:FlowNode[];edges:FlowEdge[];grid:number;loss:number;terminal:number;maxResidual:number;}
-export function flowView(result:RunResult,minute:number,mode:FlowMode):FlowView {
+/** Cumulative selection is [clamped start, clamped minute). Start beyond end
+ * becomes an empty interval; unavailable traces never imply measured zero. */
+export function flowView(result:RunResult,minute:number,mode:FlowMode,startMinute=0):FlowView {
  const p=result.parameterSnapshot,horizon=p.horizonDays*1440,t=Math.max(0,Math.min(Number.isFinite(minute)?minute:0,horizon)),probe=t,trace=result.powerTrace;
  const hour=Math.min(Math.floor(probe/60),horizon/60-1),day=Math.floor(hour/24),hourInDay=hour%24;
  const available=result.mode==='CONSTRAINED'&&(mode==='energy'||!!trace&&probe<=trace.endMinute);
  const stateIndex=trace?sampleIndex(trace.eventMinutes,probe):-1;
- const from=mode==='energy'?hour*60:trace?.eventMinutes[stateIndex]??0,to=mode==='energy'?(hour+1)*60:trace?.eventMinutes[stateIndex+1]??trace?.endMinute??horizon;
+ const from=mode==='cumulative'?Math.max(0,Math.min(Number.isFinite(startMinute)?startMinute:0,t)):mode==='energy'?hour*60:trace?.eventMinutes[stateIndex]??0,to=mode==='cumulative'?t:mode==='energy'?(hour+1)*60:trace?.eventMinutes[stateIndex+1]??trace?.endMinute??horizon;
  const nodeSignals=new Map(trace?.nodes.map(n=>[n.nodeId,n.samples])??[]),edgeSignals=new Map(trace?.edges.map(e=>[e.edgeId,e.samples])??[]);
  const nodeHour=new Map(mode==='energy'?result.componentEnergy.filter(n=>n.day===day&&n.hour===hourInDay).map(n=>[n.nodeId,n]):[]),edgeHour=new Map(mode==='energy'?result.edgeEnergy.filter(e=>e.day===day&&e.hour===hourInDay).map(e=>[e.edgeId,e]):[]);
  const nodes:FlowNode[]=p.topology.nodes.map(n=>{const signal=nodeSignals.get(n.id),sample=signal&&sampleAt(signal,probe),h=nodeHour.get(n.id);const power=mode==='power';
-  const input=power?sample?.[1]??0:h?.inputKWh??0,output=power?sample?.[2]??0:h?.outputKWh??0,loss=power?sample?.[3]??0:h?.lossKWh??0,terminal=power?sample?.[4]??0:h?.terminalKWh??0;
+  const interval=mode==='cumulative'?nodeInterval(signal??[],from,to,trace?.endMinute??horizon):null;
+  const input=interval?interval.energy[0]:power?sample?.[1]??0:h?.inputKWh??0,output=interval?interval.energy[1]:power?sample?.[2]??0:h?.outputKWh??0,loss=interval?interval.energy[2]:power?sample?.[3]??0:h?.lossKWh??0,terminal=interval?interval.energy[3]:power?sample?.[4]??0:h?.terminalKWh??0;
   let code=sample?.[6]??(n.enabled?0:1),mixed=false;
-  if(!power&&signal){const statuses=new Set([sampleAt(signal,from)?.[6]??0,...signal.filter(s=>s[0]>from&&s[0]<to).map(s=>s[6])]);mixed=statuses.size>1;code=[...statuses][0];}
-  const status:FlowNode['status']=!available||!signal?'unknown':mixed?'mixed':code===1?'off':code===2?'interlock':code===3?'shortfall':n.type==='compensation'?'unmodeled':power&&sample&&sample[5]>terminal+1e-6?'limited':output>0?'flow':'idle';
-  return {id:n.id,input,output,loss,terminal,requested:power&&sample?sample[5]:null,capacityKW:outputCapacity(p,n),peakKW:power?output:h?.peakOutputKW??0,status,incoming:0,outgoing:0,conversionResidual:input-output-loss,branchResidual:0,connectionResidual:0};
+  if(!power&&signal){const statuses=interval?.statuses??new Set([sampleAt(signal,from)?.[6]??0,...signal.filter(s=>s[0]>from&&s[0]<to).map(s=>s[6])]);mixed=statuses.size>1;code=[...statuses][0]??0;}
+  const status:FlowNode['status']=!available||!signal?'unknown':interval&&from===to?'empty':mixed?'mixed':code===1?'off':code===2?'interlock':code===3?'shortfall':n.type==='compensation'?'unmodeled':power&&sample&&sample[5]>terminal+1e-6?'limited':output>0?'flow':'idle';
+  return {id:n.id,input,output,loss,terminal,requested:power&&sample?sample[5]:null,capacityKW:outputCapacity(p,n),peakKW:interval?interval.peak:power?output:h?.peakOutputKW??0,status,incoming:0,outgoing:0,conversionResidual:input-output-loss,branchResidual:0,connectionResidual:0};
  });
  const byNode=new Map(nodes.map(n=>[n.id,n]));
- const edges=p.topology.edges.map(e=>{const source=p.topology.nodes.find(n=>n.id===e.source),flow=mode==='power'?sampleAt(edgeSignals.get(e.id)??[],probe)?.[1]??0:edgeHour.get(e.id)?.kWh??0;
+ const edges=p.topology.edges.map(e=>{const source=p.topology.nodes.find(n=>n.id===e.source),flow=mode==='cumulative'?integrateSignal(edgeSignals.get(e.id)??[],1,from,to,trace?.endMinute??horizon):mode==='power'?sampleAt(edgeSignals.get(e.id)??[],probe)?.[1]??0:edgeHour.get(e.id)?.kWh??0;
   const domain=source?equipmentRegistry.get(source.type).ports(source).find(port=>port.direction==='output')?.domain??'DC':'DC';
   const edge={id:e.id,source:e.source,target:e.target,value:flow,domain,off:!e.enabled||['off','interlock'].includes(byNode.get(e.source)?.status??'')||['off','interlock'].includes(byNode.get(e.target)?.status??'')};
   const a=byNode.get(e.source),b=byNode.get(e.target);if(a)a.outgoing+=flow;if(b)b.incoming+=flow;return edge;
@@ -53,5 +56,12 @@ export function flowView(result:RunResult,minute:number,mode:FlowMode):FlowView 
  nodes.forEach((n,i)=>{n.branchResidual=n.output-n.outgoing-n.terminal;n.connectionResidual=p.topology.nodes[i].type==='grid'?0:n.input-n.incoming;if(p.topology.nodes[i].type==='grid')grid+=n.input;loss+=n.loss;terminal+=n.terminal;maxResidual=Math.max(maxResidual,Math.abs(n.conversionResidual),Math.abs(n.branchResidual),Math.abs(n.connectionResidual));});
  maxResidual=Math.max(maxResidual,Math.abs(grid-loss-terminal));
  return {available,mode,unit:mode==='power'?'kW':'kWh',minute:t,from,to,nodes,edges,grid,loss,terminal,maxResidual};
+}
+/** One pass per node; endpoint events with zero intersection cannot change the
+ * selected interval's peak or operating status. */
+function nodeInterval(samples:PowerNodeSample[],from:number,to:number,endMinute:number){const energy=[0,0,0,0],statuses=new Set<number>();let peak=0;
+ for(let i=0;i<samples.length;i++){const sample=samples[i];if(sample[0]>=to)break;const start=Math.max(from,sample[0]),end=Math.min(to,samples[i+1]?.[0]??endMinute);if(end<=start)continue;
+  const hours=(end-start)/60;for(let k=0;k<4;k++)energy[k]+=sample[k+1]*hours;peak=Math.max(peak,sample[2]);statuses.add(sample[6]);
+ }return {energy,peak,statuses};
 }
 function sampleIndex(times:number[],time:number){let lo=0,hi=times.length-1,result=-1;while(lo<=hi){const mid=(lo+hi)>>1;if(times[mid]<=time){result=mid;lo=mid+1;}else hi=mid-1;}return result;}
