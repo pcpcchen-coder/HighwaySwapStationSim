@@ -1,0 +1,30 @@
+[
+  {
+    "id": "SRC-POWER-01",
+    "originalFilename": "4fad09cd-ec51-4df2-a939-e2e2008ef4fa.png",
+    "sha256": "343029f0f7967098dc5ca7926e3d83aaa73db784ae41a8afb88399013bb24d99",
+    "transcription": "docs/MASTER_PROMPT.md",
+    "rawImagePublished": false
+  },
+  {
+    "id": "SRC-EFF-01",
+    "originalFilename": "49445e09-e2f4-4b77-9ac3-cf6b6fd002be.png",
+    "sha256": "b0c91b125c8346487938f1e8416524e38e0dc29cd1a08654b78ef95e097d7f20",
+    "transcription": "docs/MASTER_PROMPT.md",
+    "rawImagePublished": false
+  },
+  {
+    "id": "SRC-SCENE-01",
+    "originalFilename": "1ef7a1af-c2f4-4f67-97a3-df052bdfebb6.png",
+    "sha256": "d0b078d5e53e7c3f024208c2a025ef99d38b650cb91d4c4844d062a2ddb821fe",
+    "transcription": "docs/MASTER_PROMPT.md",
+    "rawImagePublished": false
+  },
+  {
+    "id": "SRC-FIN-01",
+    "originalFilename": "60ba9dbd-5af0-4741-bffe-7595c6873064.png",
+    "sha256": "059f1f3afea5570dde8cbf50ef9e76f47eb4f0708b4991480ddded02c6761b67",
+    "transcription": "docs/MASTER_PROMPT.md",
+    "rawImagePublished": false
+  }
+]
