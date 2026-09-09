@@ -1,5 +1,7 @@
 # 交接 — 0.5.0 / schema 1.3
 
+介面更新（2026-09-09）：依使用者要求移除上方「原始八月重播／舊模型」快捷按鈕與未使用匯入，操作手冊同步。此變更不改計算模型。
+
 新增單台轉換效率與整套設備設定交換，操作與檔案契約見 [EQUIPMENT_SETTINGS.md](EQUIPMENT_SETTINGS.md)，Master Prompt 追加 133 章。
 
 - `packages/equipment-efficiency` 集中解析 SST／箱變／PCS／DD 的 optional params.efficiency，缺省繼承全域；ASSEMBLY 才能覆寫。箱變輸出容量同步使用有效效率，保留共享輸入 kVA×PF 邊界；輸出額定設備不重乘自身效率。
