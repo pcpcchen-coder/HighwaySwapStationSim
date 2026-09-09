@@ -1,5 +1,7 @@
 # 交接 — 0.5.0 / schema 1.3
 
+介面續更（2026-09-09）：移除「完整設備案例 · 513 kWh」按鈕，頂端僅留物理案例。首次專案採 physicalProjection(engineeringProject())，result 初始為 null，避免呈現原表重播成果。總覽保留設備圖、財務可先填成本、三例入口可執行；無成功結果時禁止 XLSX／加入比較。原 Worker 測算、成功後快照及舊結果保留行為不變；不在 SSR 同步執行模擬。
+
 介面更新（2026-09-09）：依使用者要求移除上方「原始八月重播／舊模型」快捷按鈕與未使用匯入，操作手冊同步。此變更不改計算模型。
 
 新增單台轉換效率與整套設備設定交換，操作與檔案契約見 [EQUIPMENT_SETTINGS.md](EQUIPMENT_SETTINGS.md)，Master Prompt 追加 133 章。

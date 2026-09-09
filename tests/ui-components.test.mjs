@@ -137,3 +137,17 @@ test('equipment settings render individual overrides, inheritance, scope and cur
  const inherited=renderToStaticMarkup(React.createElement(NodeEfficiencyEditor,{...props,node:p.topology.nodes.find(n=>n.id==='B-sst-0')}));assert.match(inherited,/沿用全域效率/);assert.match(inherited,/98\.0000%/);
  p.efficiency.transformer=0;const invalid=renderToStaticMarkup(React.createElement(EquipmentEfficiencyTable,props));assert.match(invalid,/參數待修正/);
 });
+
+
+test("financial setup and independent case launchers remain available before the first run",async()=>{
+ const { FinancePanel }=await vite.ssrLoadModule('/components/simulator/panels.tsx');
+ const { VerificationPanel }=await vite.ssrLoadModule('/components/simulator/verification.tsx');
+ const { engineeringProject,physicalProjection }=await import('../packages/engineering/index.ts');
+ const project=physicalProjection(engineeringProject());
+ const html=renderToStaticMarkup(React.createElement(FinancePanel,{project,setProject:()=>{},result:null}));
+ for(const label of ['初始投資 CAPEX','每日固定成本','尚未測算','載入財務示範值'])assert.ok(html.includes(label),label);
+ assert.doesNotMatch(html,/日已結算收入|假設投資淨現值 NPV/);
+ const cases=renderToStaticMarkup(React.createElement(VerificationPanel,{result:null,busy:false,onRun:()=>{}}));
+ assert.equal((cases.match(/>載入並測算<\/button>/g)??[]).length,3);
+ assert.match(cases,/尚無與三個固定驗證輸入完全相同的結果快照/);
+});
