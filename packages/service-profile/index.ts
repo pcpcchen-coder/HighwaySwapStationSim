@@ -1,3 +1,4 @@
+import { csvRecords } from '../tabular/index.ts';
 import type { Project, ServiceRow, StationId } from '../contracts/index.ts';
 import { serviceRowSchema } from '../schemas/index.ts';
 
@@ -23,17 +24,6 @@ function fileRows(p:Project){return checkedRows(p.services,p.horizonDays,true).m
 export function exportServiceCSV(p:Project){return '\uFEFF'+[SERVICE_COLUMNS.join(','),...fileRows(p).map(r=>SERVICE_COLUMNS.map(k=>r[k]===null?'':String(r[k])).join(','))].join('\r\n')+'\r\n';}
 export function exportServiceJSON(p:Project){return JSON.stringify({format:FORMAT,version:1,dayBase:1,horizonDays:p.horizonDays,rows:fileRows(p)},null,2);}
 
-/** CSV supports BOM, CRLF, quoted/escaped cells; numeric conversion is strict. */
-function csvRecords(text:string){const records:string[][]=[];let row:string[]=[],field='',quoted=false,closed=false;
- const cell=()=>{row.push(field);field='';closed=false;};
- const record=()=>{cell();if(row.some(v=>v.trim()!==''))records.push(row);row=[];if(records.length>1489)error('需求檔超過 1,488 列。');};
- for(let i=0;i<text.length;i++){const c=text[i];if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++;}else{quoted=false;closed=true;}}else field+=c;continue;}
-  if(c===','){cell();continue;}if(c==='\r'||c==='\n'){record();if(c==='\r'&&text[i+1]==='\n')i++;continue;}
-  if(closed){if(c===' '||c==='\t')continue;error('CSV 引號結束後有不合法字元。');}
-  if(c==='"'){if(field.trim())error('CSV 引號必須位於儲存格開頭。');field='';quoted=true;}else field+=c;
- }
- if(quoted)error('CSV 引號未關閉。');if(field||row.length||closed)record();return records;
-}
 function strictRow(raw:unknown,i:number):Record<string,unknown>{if(!raw||typeof raw!=='object'||Array.isArray(raw))error(`第 ${i+1} 筆需求必須是資料物件。`);const r=raw as Record<string,unknown>,keys=Object.keys(r);
  if(keys.length!==SERVICE_COLUMNS.length||SERVICE_COLUMNS.some(k=>!Object.hasOwn(r,k)))error(`第 ${i+1} 筆的欄位不完整或包含未知欄位，請使用匯出的需求格式。`);return r;
 }

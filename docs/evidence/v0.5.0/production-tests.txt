@@ -1,0 +1,36 @@
+✔ production worker matches the canonical model and all three multi-day verification outputs (4502.908722ms)
+✔ XLSX preserves a Unicode surrogate pair spanning the former JSON chunk boundary (75.530058ms)
+✔ XLSX import rejects truncation even when a valid Project_JSON sheet survives (24.843802ms)
+✔ charging completion is an exact event, including a queued 1 kWh backlog (298.020822ms)
+✔ battery readiness triggers a swap at its exact threshold (43.383758ms)
+✔ hour boundary uses half-open event counts and arrival-locked prices (49.028619ms)
+✔ an incompatible swap cannot permanently block a compatible request (83.966722ms)
+✔ a swap pauses while its auxiliary source is unavailable (72.513061ms)
+✔ complete supply outage cannot power mechanical service or consume its stored inventory (538.969372ms)
+✔ a failed B transformer stops B swaps and B SSTs that need its auxiliary supply (1624.89239ms)
+✔ actual source meters and independent edge sums reconcile component ledgers (1600.945094ms)
+✔ guns share stack capacity while respecting vehicle voltage times current (2.828168ms)
+✔ AC paralleling and direct bus-to-rack paths are rejected by preflight (3.769916ms)
+✔ scheduled activation cannot bypass AC-parallel validation (5.339697ms)
+✔ scheduled activation cannot create an unchecked DD bypass (39.52263ms)
+✔ a 65-route topology does not silently ignore its only live capacity (3.082256ms)
+✔ SOURCE_CHAIN retains an SST rated-output boundary (0.515394ms)
+✔ one transformer shares its input kVA limit across AC auxiliary and DC conversion paths (1.134985ms)
+✔ production Worker serves the HighwaySwapSim workbench (402.358864ms)
+✔ emits the catalog's animation and scrolling utilities (97.870141ms)
+✔ forwards progress semantics to the primitive (855.819592ms)
+✔ emits chart themes for the starter's media dark mode (500.063698ms)
+✔ renders sidebar skeletons deterministically (987.895548ms)
+✔ flow explorer renders every engineering node and edge, with accessible time controls and unavailable replay data (757.646667ms)
+✔ flow explorer renders actual constrained values and retains all JSON export and node audit controls (928.964028ms)
+✔ cumulative summary renders physical boundary totals in kWh and explains intermediate transfer exclusion (323.068007ms)
+✔ demand editor renders current draft values, import/export, arrival controls and source billing fields (112.946433ms)
+✔ equipment settings render individual overrides, inheritance, scope and current draft exports (69.299369ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5393.805482

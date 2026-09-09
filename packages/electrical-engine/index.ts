@@ -1,20 +1,18 @@
 import type { Project, Equipment, Topology } from '../contracts/index.ts';
+import { equipmentEfficiency } from '../equipment-efficiency/index.ts';
 import { equipmentRegistry } from '../../plugins/equipment/index.ts';
 export function pathEfficiency(p:Project,path:'sst'|'pcs'){const e=p.efficiency;return e.mode==='SOURCE_CHAIN'?(path==='sst'?e.sstSource:e.pcsSource):(path==='sst'?e.sst*e.charger:e.transformer*e.pcs*e.charger);}
 export function compareEfficiency(p:Project,deliveredKWh=10000){const sst=pathEfficiency(p,'sst'),pcs=pathEfficiency(p,'pcs');return {sst,pcs,percentagePoints:(sst-pcs)*100,purchaseSavingPercent:(1-pcs/sst)*100,sstInputKWh:deliveredKWh/sst,pcsInputKWh:deliveredKWh/pcs};}
 export function validateEfficiencyBoundaries(boundaries:{includedStages:string[]}[]){const seen=new Set<string>();for(const b of boundaries)for(const stage of b.includedStages){if(seen.has(stage))throw Error('EFFICIENCY_BOUNDARY_OVERLAP');seen.add(stage);}}
 function routes(topology:Topology,sink:string):{nodes:Equipment[];edges:string[]}[]{const nodes=new Map(topology.nodes.map(n=>[n.id,n])),parents=new Map<string,typeof topology.edges>();for(const e of topology.edges)if(e.enabled)parents.set(e.target,[...(parents.get(e.target)??[]),e]);const result:{nodes:Equipment[];edges:string[]}[]=[];
  function visit(id:string,path:Equipment[],edges:string[]){const node=nodes.get(id);if(!node?.enabled||path.some(n=>n.id===id))return;const next=[node,...path];if(node.type==='grid'){if(result.length>=4096)throw Error('PATH_LIMIT_EXCEEDED: topology has more than 4096 supply routes; calculation stopped without silent truncation');result.push({nodes:next,edges});return;}for(const e of parents.get(id)??[])visit(e.source,next,[e.id,...edges]);}visit(sink,[],[]);return result;}
-export function outputCapacity(p:Project,n:Equipment){return n.type==='transformer'?n.params.kva*n.params.pf*p.efficiency.transformer:equipmentRegistry.get(n.type).capacity(n);}
+export function outputCapacity(p:Project,n:Equipment){return n.type==='transformer'?n.params.kva*n.params.pf*equipmentEfficiency(p,n):equipmentRegistry.get(n.type).capacity(n);}
 export interface PowerAllocation {sink:string;requested:number;delivered:number;grid:number;loss:number;sourceImport:Record<string,number>;nodeFlows:{nodeId:string;inputKW:number;outputKW:number;lossKW:number;terminalKW:number}[];edgeFlows:{edgeId:string;source:string;target:string;kw:number}[];}
 /** Greedy feasible dispatch, not an optimizer. Every path consumes the same shared output-capacity ledger. */
 export function allocatePower(p:Project,requests:{sink:string;kw:number}[]):PowerAllocation[]{const used=new Map<string,number>(),usedInput=new Map<string,number>();return requests.map(request=>{
  if(!Number.isFinite(request.kw)||request.kw<0)throw Error('INVALID_POWER_REQUEST');let remaining=request.kw,grid=0;const sourceImport:Record<string,number>={},nodeFlows:PowerAllocation['nodeFlows']=[],edgeFlows:PowerAllocation['edgeFlows']=[];
  for(const route of routes(p.topology,request.sink)){if(remaining<=1e-10)break;const path=route.nodes,hasCharger=path.some(n=>n.type==='charger');
- const efficiencies=path.map(n=>{let eta=({sst:p.efficiency.sst,pcs:p.efficiency.pcs,transformer:p.efficiency.transformer,charger:p.efficiency.charger} as Record<string,number>)[n.type]??1;
- // Calibrate SOURCE_CHAIN to individual stages; never move all loss behind an output-rated SST.
- if(p.efficiency.mode==='SOURCE_CHAIN'&&hasCharger){if(n.type==='sst')eta=p.efficiency.sstSource/p.efficiency.charger;if(n.type==='transformer')eta=p.efficiency.pcsSource/p.efficiency.pcs/p.efficiency.charger;}
- if(!(eta>0&&eta<=1))throw Error('INCONSISTENT_EFFICIENCY_BOUNDARY');return eta;});
+ const efficiencies=path.map(n=>equipmentEfficiency(p,n,hasCharger));
  let suffix=1;const factors:number[]=[];for(let i=path.length-1;i>=0;i--){factors[i]=1/suffix;suffix*=efficiencies[i];}
  let delivered=remaining;path.forEach((n,i)=>{delivered=Math.min(delivered,Math.max(0,outputCapacity(p,n)-(used.get(n.id)??0))/factors[i]);if(n.type==='transformer')delivered=Math.min(delivered,Math.max(0,n.params.kva*n.params.pf-(usedInput.get(n.id)??0))*efficiencies[i]/factors[i]);});if(delivered<=0)continue;
  path.forEach((n,i)=>{const output=delivered*factors[i],input=output/efficiencies[i];used.set(n.id,(used.get(n.id)??0)+output);usedInput.set(n.id,(usedInput.get(n.id)??0)+input);nodeFlows.push({nodeId:n.id,inputKW:input,outputKW:output,lossKW:input-output,terminalKW:i===path.length-1?output:0});if(i<path.length-1)edgeFlows.push({edgeId:route.edges[i],source:n.id,target:path[i+1].id,kw:output});});

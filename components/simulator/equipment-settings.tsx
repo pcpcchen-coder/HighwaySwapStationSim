@@ -1,0 +1,32 @@
+"use client";
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '../ui/button';
+import { Switch } from '../ui/switch';
+import { Table,TableBody,TableCell,TableHead,TableHeader,TableRow } from '../ui/table';
+import { NumberField,fmt } from './controls';
+import type { Equipment,Project } from '../../packages/contracts/index.ts';
+import { supportsEfficiency } from '../../packages/equipment-efficiency/index.ts';
+import { exportEquipmentCSV,exportEquipmentJSON,importEquipmentProfile,setEquipmentEfficiency,parameterNote } from '../../packages/equipment-profile/index.ts';
+import { outputCapacity } from '../../packages/electrical-engine/index.ts';
+type Props={project:Project;setProject:(p:Project)=>void};
+function save(data:string,format:'csv'|'json') {const url=URL.createObjectURL(new Blob([data],{type:format==='csv'?'text/csv;charset=utf-8':'application/json'})),a=document.createElement('a');a.href=url;a.download=`HighwaySwapSim-equipment.${format}`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+export function EquipmentTransfer({project,setProject}:Props){
+ const [error,setError]=useState(''),[message,setMessage]=useState(''),[busy,setBusy]=useState(false),file=useRef<HTMLInputElement>(null),latest=useRef(project),sequence=useRef(0);latest.current=project;useEffect(()=>()=>{sequence.current++;},[]);
+ function attempt(action:()=>void){try{action();setError('');}catch(e){setMessage('');setError(e instanceof Error?e.message:String(e));}}
+ async function read(f:File){const request=++sequence.current;setBusy(true);setError('');setMessage('');try{
+  const format=f.name.split('.').pop()?.toLowerCase();if(format!=='csv'&&format!=='json')throw Error('請選整套設備 JSON 或設備參數 CSV。');if(f.size>8*1024*1024)throw Error('設備設定檔上限為 8 MiB。');
+  const text=await f.text();if(sequence.current!==request)return;const r=importEquipmentProfile(latest.current,text,format);setProject(r.project);setMessage(`已套用 ${r.rows} 台設備${format==='json'?'及整套供電、站務、效率與停機設定':'參數'}。請重新測算以更新能量流與結果 XLSX。`);
+ }catch(e){if(sequence.current===request)setError(e instanceof Error?e.message:String(e));}finally{if(sequence.current===request)setBusy(false);}}
+ return <section className="panel mb-4"><div className="panel-heading"><div><p className="eyebrow">EQUIPMENT CONFIGURATION</p><h2>保存與批次調整設備設定</h2></div></div><div className="flex flex-wrap gap-3"><input ref={file} type="file" hidden accept=".json,.csv" aria-label="選擇設備設定檔" onChange={e=>{const f=e.target.files?.[0];e.target.value='';if(f)void read(f);}}/><Button variant="outline" disabled={busy} onClick={()=>file.current?.click()}>{busy?'讀取設定中…':'匯入設備 JSON / CSV'}</Button><Button variant="outline" onClick={()=>attempt(()=>save(exportEquipmentJSON(project),'json'))}>匯出整套設備 JSON</Button><Button variant="outline" onClick={()=>attempt(()=>save(exportEquipmentCSV(project),'csv'))}>匯出設備參數 CSV</Button></div>
+ <p className="panel-note mt-3">JSON 保存目前全部設備、連線、額定參數、個別／全域效率、A/B 站務、工程配置、期別與停機排程；匯入會取代整套設定，保留目前需求、價格、天數及財務設定。CSV 可用 Excel 修改並另存 UTF-8，以設備 ID＋欄位合併，未列出的設定保留。</p>
+ <p className="panel-note">CSV 效率填 0–1 比例（98%＝0.98，須大於 0），空白表示沿用全域。它不新增設備或變更連線；整套移轉請用設備 JSON。匯出目前草稿不必先測算，尚有不合法設定時請先修正或用上方專案 JSON 備份。<a className="underline" href="https://github.com/pcpcchen-coder/HighwaySwapStationSim/blob/main/docs/EQUIPMENT_SETTINGS.md" target="_blank" rel="noreferrer">設備設定與檔案格式 ↗</a></p>
+ {error&&<p className="notice error" role="alert">{error}</p>}{message&&<p className="notice success" role="status">{message}</p>}</section>;
+}
+export function NodeEfficiencyEditor({project,setProject,node}:{node:Equipment}&Props){const [error,setError]=useState('');if(!supportsEfficiency(node.type))return <p className="tiny muted">此元件目前無獨立轉換損耗模型；節點能量效率視為 100%。</p>;
+ const override=node.params.efficiency!==undefined,assembly=project.efficiency.mode==='ASSEMBLY',eta=override?node.params.efficiency:project.efficiency[node.type];
+ function apply(v:number|null){try{setProject(setEquipmentEfficiency(project,node.id,v));setError('');}catch(e){setError(String((e as Error).message));}}
+ return <div className="space-y-2 my-3"><label className="switch-label"><Switch aria-label={`${node.id} 使用個別效率`} checked={override} disabled={!assembly&&!override} onCheckedChange={checked=>apply(checked?eta:null)}/>使用個別效率</label>{assembly&&!override&&<p className="panel-note">沿用全域效率：{fmt(eta*100,4)}%</p>}{assembly&&override&&<NumberField label={override?'此設備效率':'沿用全域效率'} value={eta*100} unit="%" min={0.000001} max={100} onChange={v=>{if(!override){setError('請先開啟「使用個別效率」，或到效率頁修改全域預設。');return;}if(v===null){setError('效率不可空白；關閉開關可恢复沿用全域。');return;}apply(v/100);}}/>}{!assembly&&<p className="notice">來源摘要依路徑校準；個別效率請切換「設備組裝乘積」。</p>}{error&&<p role="alert" className="notice error">{error}</p>}<p className="tiny muted">{node.type==='transformer'?'箱變輸入上限為 kVA × PF，輸出上限再乘有效效率。':'效率只換算輸入與損耗，額定輸出 kW 不再乘自身效率。'}{node.type==='charger'?' 充電機已包含 DD 與內部電纜，不重複扣除。':''}</p></div>;
+}
+function capacityLabel(project:Project,node:Equipment){try{return `${fmt(outputCapacity(project,node),3)} kW`;}catch{return '參數待修正';}}
+export function EquipmentEfficiencyTable({project,setProject}:Props){const nodes=project.topology.nodes.filter(n=>supportsEfficiency(n.type));return <section className="panel mt-4"><div className="panel-heading"><div><p className="eyebrow">PER-DEVICE EFFICIENCY</p><h2>每台設備的有效效率</h2></div><span className="pill">{nodes.length} 台轉換設備</span></div><p className="panel-note">個別設定優先，關閉開關後沿用全域。預留／停用設備也保存設定，但是否運作仍由啟停狀態及排程決定。變更後請重新測算。</p><div className="table-scroll"><Table><TableHeader><TableRow><TableHead>設備</TableHead><TableHead>效率設定</TableHead><TableHead>有效輸出容量</TableHead></TableRow></TableHeader><TableBody>{nodes.map(node=><TableRow key={node.id}><TableCell>{node.station} 區 · {node.name}<br/><code>{node.id}</code><br/>{node.enabled?'啟用':'停用／預留'}</TableCell><TableCell><NodeEfficiencyEditor project={project} setProject={setProject} node={node}/></TableCell><TableCell>{project.efficiency.mode==='ASSEMBLY'?capacityLabel(project,node):'依摘要路徑校準'}</TableCell></TableRow>)}</TableBody></Table></div></section>;}
+export function EquipmentRecordedFields({node}:{node:Equipment}){const fields=Object.keys(node.params).filter(k=>['kWh','slots','swapSeconds','outputEfficiency','length','kvar'].includes(k));return fields.length>0?<details className="my-4"><summary>規格紀錄與計算範圍</summary>{fields.map(key=><p className="tiny muted my-2" key={key}><code>{key} = {node.params[key]}</code><br/>{parameterNote(node,key)}</p>)}</details>:null;}

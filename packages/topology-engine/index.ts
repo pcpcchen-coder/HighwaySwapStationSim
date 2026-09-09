@@ -1,4 +1,5 @@
 import type { Diagnostic, Project, Topology } from '../contracts/index.ts';
+import { supportsEfficiency } from '../equipment-efficiency/index.ts';
 import { equipmentRegistry } from '../../plugins/equipment/index.ts';
 export function validateTopology(topology: Topology): Diagnostic[] {
     const d: Diagnostic[] = [];
@@ -8,6 +9,8 @@ export function validateTopology(topology: Topology): Diagnostic[] {
     if (new Set(topology.edges.map(e => e.id)).size !== topology.edges.length)
         d.push({ code: 'DUPLICATE_EDGE', severity: 'error', message: '連線 ID 重複' });
     for (const n of nodes.values()) {
+        if (n.params.efficiency !== undefined && (!supportsEfficiency(n.type) || !Number.isFinite(n.params.efficiency) || n.params.efficiency <= 0 || n.params.efficiency > 1))
+            d.push({code:'INVALID_EFFICIENCY',severity:'error',message:`${n.id}: 個別效率須為 0 < η ≤ 1，且僅支援轉換設備`,target:n.id});
         try {
             const p = equipmentRegistry.get(n.type);
             for (const field of p.parameters) {

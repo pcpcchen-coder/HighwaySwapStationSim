@@ -20,5 +20,7 @@ test('production worker matches the canonical model and all three multi-day veri
     assert.ok(message.result.totals.maxBalanceResidual < .01);
     assert.ok(Math.abs(message.result.totals.requestedKWh - 77801.2) < 1e-6);
     for(const fixture of verificationCases()){self.onmessage({data:{id:43,project:fixture.project}});assert.equal(message.error,undefined,fixture.id);assert.deepEqual(message.result,simulate(fixture.project),fixture.id+' full compiled/source output equivalence');}
+    const custom=verificationCases()[1].project;custom.topology.nodes.find(n=>n.id==='A-transformer').params.efficiency=.9;custom.topology.nodes.find(n=>n.id==='B-charger').params.efficiency=.8;
+    self.onmessage({data:{id:44,project:custom}});assert.equal(message.error,undefined);assert.deepEqual(message.result,simulate(custom),'individual efficiency survives production Worker bundling');
   } finally { delete globalThis.self; }
 });

@@ -128,3 +128,12 @@ test("demand editor renders current draft values, import/export, arrival control
  for(const text of ['匯入需求 CSV / JSON','匯出需求 CSV','匯出需求 JSON','每小時到站方式','隨機種子','本日換電量依 SOC 重算','來源換電總價','來源充電總價','不必先測算','SOC'])assert.ok(html.includes(text),text);
  assert.match(html,/aria-label="第 1 天 A 區 0 時 充電車次"[^>]*value="7"/);assert.match(html,/accept=".csv,.json"/);
 });
+
+test('equipment settings render individual overrides, inheritance, scope and current draft exports',async()=>{
+ const { EquipmentTransfer,NodeEfficiencyEditor,EquipmentEfficiencyTable }=await vite.ssrLoadModule('/components/simulator/equipment-settings.tsx');
+ const { engineeringProject }=await import('../packages/engineering/index.ts');const p=engineeringProject(),node=p.topology.nodes.find(n=>n.id==='A-sst-0');node.params.efficiency=.91;
+ const props={project:p,setProject:()=>{}};const html=renderToStaticMarkup(React.createElement(EquipmentTransfer,props));for(const text of ['匯入設備 JSON / CSV','匯出整套設備 JSON','匯出設備參數 CSV','保留目前需求','停機排程','目前草稿'])assert.ok(html.includes(text),text);
+ const custom=renderToStaticMarkup(React.createElement(NodeEfficiencyEditor,{...props,node}));assert.match(custom,/value="91"/);assert.match(custom,/checked/);
+ const inherited=renderToStaticMarkup(React.createElement(NodeEfficiencyEditor,{...props,node:p.topology.nodes.find(n=>n.id==='B-sst-0')}));assert.match(inherited,/沿用全域效率/);assert.match(inherited,/98\.0000%/);
+ p.efficiency.transformer=0;const invalid=renderToStaticMarkup(React.createElement(EquipmentEfficiencyTable,props));assert.match(invalid,/參數待修正/);
+});

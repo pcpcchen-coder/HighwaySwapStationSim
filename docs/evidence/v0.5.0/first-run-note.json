@@ -1,0 +1,8 @@
+{
+  "test": "shared transformer input rating and individual efficiencies agree at every branch boundary",
+  "initialStatus": "FAIL",
+  "observedPCSInputKW": 62,
+  "expectedPCSInputKW": 60,
+  "cause": "New fixture requested 12 kW auxiliary load but retained the base fixture 10 kW auxiliary nameplate, so 2 kW remained for PCS.",
+  "correction": "Set auxiliary nameplate to 20 kW, retain 12 kW request and all independent expected values. No production formula changed to satisfy this test."
+}

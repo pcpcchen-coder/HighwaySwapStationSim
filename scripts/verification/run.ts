@@ -71,7 +71,7 @@ function capacityFromSnapshot(node: J, project: J): number {
   switch (node.type) {
     case 'grid': case 'mv-cable': return node.params.kva * node.params.pf;
     // Formal rating boundary: transformer kVA*PF is INPUT capacity.
-    case 'transformer': return node.params.kva * node.params.pf * project.efficiency.transformer;
+    case 'transformer': return node.params.kva * node.params.pf * (node.params.efficiency ?? project.efficiency.transformer);
     case 'bus': return node.params.voltage * node.params.amps / 1000;
     case 'gun': return node.params.vehicleVoltage > node.params.voltage ? 0 : Math.min(node.params.kw, node.params.amps * node.params.vehicleVoltage / 1000);
     case 'compensation': return 0;
@@ -279,7 +279,7 @@ async function main() {
   const expected = JSON.parse(expectedText), fixtures = JSON.parse(fixtureText);
   if (expected.cases.length !== 3 || fixtures.cases.length !== 3) throw Error('Exactly three cases required');
   if (sha(fixtureText) !== expected.fixtureSHA256) throw Error('Fixture hash differs from immutable oracle');
-  const codeFiles=['packages/service-profile/index.ts','packages/schemas/index.ts','packages/contracts/index.ts','packages/power-trace/index.ts','packages/station-engine/index.ts','packages/electrical-engine/index.ts','packages/money/index.ts','packages/verification/cases.ts','plugins/equipment/index.ts','data/verification/fixtures.json'];
+  const codeFiles=['packages/equipment-efficiency/index.ts','packages/equipment-profile/index.ts','packages/topology-engine/index.ts','packages/tabular/index.ts','packages/service-profile/index.ts','packages/schemas/index.ts','packages/contracts/index.ts','packages/power-trace/index.ts','packages/station-engine/index.ts','packages/electrical-engine/index.ts','packages/money/index.ts','packages/verification/cases.ts','plugins/equipment/index.ts','data/verification/fixtures.json'];
   const codeSHA256=Object.fromEntries(await Promise.all(codeFiles.map(async file=>[file,sha(await readFile(join(REPO,file),'utf8'))])));
   const runnerSHA256=sha(await readFile(resolve(process.argv[1]),'utf8'));
   const { simulate } = await import(pathToFileURL(join(REPO, 'packages/station-engine/index.ts')).href);

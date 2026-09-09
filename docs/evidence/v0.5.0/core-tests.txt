@@ -1,0 +1,69 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> highway-swap-station-sim@0.5.0 test:core
+> node --test tests/*.test.ts
+
+✔ XLSX is a real ZIP workbook and preserves exact canonical project (75.562581ms)
+✔ source rows retain discrepancy and exact billing (5.609395ms)
+✔ schema round trip and migration are deterministic; reject duplicate hours and unsupported version (6.007918ms)
+✔ kernel deterministic RNG, stable event order and registry isolation (0.449561ms)
+✔ efficiency assembly matches independent fixture and rejects double counting (1.222895ms)
+✔ valid preset; AC/DC errors and directed loops rejected (1.619269ms)
+✔ shared upstream grid cap and open edge constrain delivered power (1.113307ms)
+✔ financial analytic fixtures and no-root states (4.801751ms)
+✔ constrained simulation conserves energy, bounds inventory and is reproducible (642.642766ms)
+✔ no supply does not create charged batteries; shortage remains unserved (71.641163ms)
+✔ supplement reconciles exact energy, AC allocation, concurrency and gun current limits (8.454237ms)
+✔ detailed topology retains individual SSTs, racks, guns, AC source ownership and schema migration (73.689825ms)
+✔ box transformer and shared stack boundaries constrain concurrent branch demand (1.737553ms)
+✔ DC intertie shares capacity without adding power or shorting AC sources (0.778507ms)
+✔ detailed physical case conserves energy and disabled guns cannot serve jobs (5125.433293ms)
+✔ per-device conversion overrides affect only their own branch; absent values follow defaults (6.596063ms)
+✔ an output-rated SST keeps its nameplate output when efficiency decreases (3.472138ms)
+✔ shared transformer input rating and individual efficiencies agree at every branch boundary (1.978264ms)
+✔ full equipment JSON and editable CSV preserve exact values, topology order, inheritance and schedules (130.679966ms)
+✔ equipment imports reject invalid batches, unsupported efficiencies and unsafe scheduled wiring without mutation (164.588833ms)
+✔ individual efficiency changes propagate to multi-day physical ledgers, energy trace and saved XLSX (1236.531769ms)
+✔ configuration import rejects dropped or misspelled settings and impossible source calibration; names roundtrip safely (66.623479ms)
+✔ finance: independent reference NPV, IRR and simple payback (9.587384ms)
+✔ finance: long negative startup gives a negative IRR instead of a false 409500 percent return (3.390776ms)
+✔ finance: trailing and leading zero periods do not change a 20 percent IRR (0.965617ms)
+✔ finance: ambiguous roots, representability and invalid values have explicit unavailable states (8.853272ms)
+✔ finance: 1, 3 and 5 day identical operation normalizes to the same investment projection (10.638967ms)
+✔ finance: fixed auxiliary energy runs every operating day regardless of traffic ramp (1.183671ms)
+✔ finance: monthly cash bridge separates traffic energy, fixed energy and other costs (1.65868ms)
+✔ finance: a changed draft cannot mix financial or operational inputs with an earlier result (6.162096ms)
+✔ finance: inventory depletion blocks investment extrapolation without inventing a replacement cost (0.807589ms)
+✔ finance: missing costs, source replay and zero-grid losses cannot masquerade as profit (4.101821ms)
+✔ money: ten distinct 1.005 CNY invoices settle to 10.10 CNY, not a combined 10.05 CNY (130.578681ms)
+✔ money: individual and aggregate ledgers reject amounts outside the declared 1e12-cent range (0.659669ms)
+✔ finance: extreme finite monthly inputs return an unavailable projection (0.354733ms)
+✔ 480 kW for 0.125 minutes delivers exactly 1 kWh, then the timeline shows zero (129.444537ms)
+✔ sub-microsecond closing event and zero-load off/on changes remain selectable (94.196468ms)
+✔ unserved terminal demand is distinct from zero demand and from auxiliary interlocks (108.200935ms)
+✔ transformer outages close SST auxiliary interlocks at exact event boundaries (2649.055247ms)
+✔ unrecorded legacy and replay results cannot be mistaken for simulated zero (63.434192ms)
+✔ all three independent multi-day cases reconcile every node, edge and physical source hour to raw power traces (839.104833ms)
+ℹ V01_SST_3D: {"checks":2887,"maxDelta":8.526512829121202e-14,"events":7,"bytes":3672}
+ℹ V02_PCS_AC_EV_4D: {"checks":6729,"maxDelta":8.526512829121202e-14,"events":9,"bytes":7231}
+ℹ V03_OUTAGE_CROSSSITE_5D: {"checks":4212,"maxDelta":1.5631940186722204e-13,"events":12,"bytes":5108}
+✔ complete 92-node/96-edge three-day case retains every signal and reconciles all hourly ledgers (4406.342665ms)
+ℹ COMPLETE_3D: {"checks":34340,"maxDelta":3.637978807091713e-12,"events":788,"bytes":1054122}
+✔ cumulative partial-minute selection integrates real power and excludes the closing event from its peak (30.948307ms)
+✔ cumulative midnight selection with an outage matches independent rectangular energy areas (241.915042ms)
+✔ cumulative multi-day totals match all ledgers and do not double count cross-site transfers or swap stock (366.855309ms)
+✔ cumulative range normalization gives empty ranges zero energy and does not invent traces for old or replay results (32.007938ms)
+✔ demand CSV/JSON roundtrip preserves every day, raw prices, nulls and non-demand configuration (80.878614ms)
+✔ partial imports update keys atomically and reversed files retain seeded event order (2046.030148ms)
+✔ invalid import batches never mutate project and reject malformed, ambiguous or out-of-range values (45.914284ms)
+✔ replace requires full coverage; merge does not resize days or erase omitted rows (6.909028ms)
+✔ imported hourly events have independent expected arrival times, vehicle kWh, billing and grid totals (638.37253ms)
+✔ manual values preserve raw prices and SOC conflicts require explicit recalculation (5.50632ms)
+ℹ tests 52
+ℹ suites 0
+ℹ pass 52
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9575.250778

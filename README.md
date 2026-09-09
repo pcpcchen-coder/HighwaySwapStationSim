@@ -2,7 +2,7 @@
 
 **HighwaySwapSim** — 高速公路雙服務區供電、換電／充電營運與收益測算工作台。
 
-由 Codex / Astra 接手實作。工程工作版本 **0.4.2**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
+由 Codex / Astra 接手實作。工程工作版本 **0.5.0**，完整需求保留於 [Master Prompt](docs/MASTER_PROMPT.md)，當前範圍與限制見 [交接文件](docs/HANDOFF.md)。
 
 操作順序、JSON／XLSX保存差異與案例載入注意事項，請先閱讀 [操作手冊](docs/USER_GUIDE.md)。
 
@@ -105,3 +105,7 @@ tests/                    核心及正式產物測試
 「逐時案例」可修改每天、每站的換電／充電車次及總需求，新增目前草稿的需求 CSV／JSON 匯出與原子匯入；支援部分列合併及全期取代。CSV 可用 Excel 編輯後另存 UTF-8 匯回。需求不重建供電設計，修改後須重新測算才能更新能量流與結果 XLSX。
 
 提供均勻／固定種子到站設定、來源總價欄位及明確 SOC 重算。檔案格式與先後步驟見 [逐時需求操作](docs/SERVICE_PROFILE.md) 和 [操作手冊](docs/USER_GUIDE.md)。
+
+## 0.5.0 設備設定與個別效率
+
+SST、箱變、PCS及DD／超充堆可各自覆寫轉換效率，未設定時繼承全域。供電設計新增整套設備JSON及設備參數CSV匯入匯出，保留拓撲、排程、站務與效率；CSV可透過Excel UTF-8批次調整既有設備。匯入驗證完整通過才套用，修改後須重算。參數作用、規格紀錄與操作順序見 [設備設定文件](docs/EQUIPMENT_SETTINGS.md)。
