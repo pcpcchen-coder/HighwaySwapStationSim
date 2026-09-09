@@ -8,8 +8,10 @@ import type {ChargeArrival,SwapArrival,VehicleChargeProfile} from '../service-fl
 const n=z.number().finite(),nonnegative=n.nonnegative(),nullable=nonnegative.nullable(),ratio=n.min(0).max(1).nullable(),id=z.string().min(1).max(200),station=z.enum(['A','B']);
 const physical=<K extends PhysicalKind>(kind:K)=>z.custom<PhysicalConfigMap[K]>(v=>validatePhysicalDraft(kind,v).length===0,`不合法的 ${kind} 設定（未知值請填 null）`);
 function fleetPart<T>(key:string){return z.custom<T>(value=>{try{parseFleetDraft({swaps:[],profiles:[],guns:[],swapArrivals:[],chargeArrivals:[],[key]:[value]});return true;}catch{return false;}},`不合法的 ${key} 設定`);}
-const battery=z.object({id,family:id,capacityKWh:nullable,soh:ratio,initialSOC:ratio}).strict();
-const slot=z.object({id,sink:id,battery,chargeKW:nullable,chargeEfficiency:ratio}).strict();
+const energySOC=z.array(z.object({soc:n.min(0).max(1),energyFraction:ratio}).strict()).max(1000).nullable();
+const chargeBands=z.array(z.object({fromSOC:n.min(0).max(1),toSOC:n.min(0).max(1),voltageV:nullable,maxKW:nullable,maxCurrentA:nullable}).strict()).max(1000).nullable();
+const battery=z.object({id,family:id,capacityKWh:nullable,soh:ratio,initialSOC:ratio,energySOC:energySOC.optional()}).strict();
+const slot=z.object({id,sink:id,battery,chargeKW:nullable,chargeEfficiency:ratio,chargeBands:chargeBands.optional()}).strict();
 const overrides=z.array(z.object({enabled:z.boolean(),slot}).strict()).max(500);
 const interval=z.object({fromMinute:nonnegative,toMinute:nonnegative}).strict().refine(v=>v.toMinute>v.fromMinute);
 export const detailedSchema=z.object({

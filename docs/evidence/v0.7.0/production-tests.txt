@@ -1,0 +1,45 @@
+✔ production worker matches the canonical model and all three multi-day verification outputs (6292.032309ms)
+✔ XLSX preserves a Unicode surrogate pair spanning the former JSON chunk boundary (104.37343ms)
+✔ XLSX import rejects truncation even when a valid Project_JSON sheet survives (22.471892ms)
+✔ charging completion is an exact event, including a queued 1 kWh backlog (410.669331ms)
+✔ battery readiness triggers a swap at its exact threshold (78.016458ms)
+✔ hour boundary uses half-open event counts and arrival-locked prices (51.658517ms)
+✔ an incompatible swap cannot permanently block a compatible request (40.68575ms)
+✔ a swap pauses while its auxiliary source is unavailable (62.441812ms)
+✔ complete supply outage cannot power mechanical service or consume its stored inventory (632.221253ms)
+✔ a failed B transformer stops B swaps and B SSTs that need its auxiliary supply (1656.51413ms)
+✔ actual source meters and independent edge sums reconcile component ledgers (1594.235881ms)
+✔ guns share stack capacity while respecting vehicle voltage times current (1.78618ms)
+✔ AC paralleling and direct bus-to-rack paths are rejected by preflight (3.360397ms)
+✔ scheduled activation cannot bypass AC-parallel validation (3.345667ms)
+✔ scheduled activation cannot create an unchecked DD bypass (34.61228ms)
+✔ a 65-route topology does not silently ignore its only live capacity (1.575848ms)
+✔ SOURCE_CHAIN retains an SST rated-output boundary (0.730931ms)
+✔ one transformer shares its input kVA limit across AC auxiliary and DC conversion paths (0.868415ms)
+✔ production Worker serves the HighwaySwapSim workbench (777.567713ms)
+✔ emits the catalog's animation and scrolling utilities (97.805797ms)
+✔ forwards progress semantics to the primitive (1180.386225ms)
+✔ emits chart themes for the starter's media dark mode (1011.455037ms)
+✔ renders sidebar skeletons deterministically (375.912091ms)
+✔ flow explorer renders every engineering node and edge, with accessible time controls and unavailable replay data (1037.9285ms)
+✔ flow explorer renders actual constrained values and retains all JSON export and node audit controls (670.393351ms)
+✔ cumulative summary renders physical boundary totals in kWh and explains intermediate transfer exclusion (279.990488ms)
+✔ demand editor renders current draft values, import/export, arrival controls and source billing fields (71.7742ms)
+✔ equipment settings render individual overrides, inheritance, scope and current draft exports (82.221106ms)
+✔ financial setup and independent case launchers remain available before the first run (217.708665ms)
+✔ SOC controls expose percentages per station and capacity summaries follow the applied window (84.28813ms)
+✔ complete settings expose nullable fields, explicit apply and both exchange formats (204.866063ms)
+✔ complete finance separates missing costs and actual cross-month billing in immutable results (2118.239844ms)
+✔ complete flow and live verification render actual PV storage values and fixed-case comparisons (906.363144ms)
+✔ battery inspector distinguishes cursor SOC, stored energy, recharge power and cumulative endpoint (2.589791ms)
+✔ missing battery state remains unavailable, never an empty or full pack (0.446251ms)
+✔ battery ready state reflects configurable target below 100 percent (1.595677ms)
+✔ SOC verification controls preserve busy state and require a matching completed result (1.997791ms)
+ℹ tests 37
+ℹ suites 0
+ℹ pass 37
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9362.025816

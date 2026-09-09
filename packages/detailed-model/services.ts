@@ -1,14 +1,27 @@
 import type {Project} from '../contracts/index.ts';
+import type {Passenger} from './contracts.ts';
 import type {FleetConfig,BatterySlotConfig} from '../service-fleet/contracts.ts';
 import {SeededRandom} from '../sim-kernel/index.ts';
 import {known} from '../physical-models/index.ts';
+
+/** Materialize slot parameters without requiring unrelated service or electrical drafts to be runnable. */
+export function compileTruckSlots(p:Project,s:'A'|'B'):BatterySlotConfig[]{
+ const st=p.station[s],c=p.detailed!;
+ const slots:BatterySlotConfig[]=Array.from({length:st.batteries},(_,i)=>{const id=`${s}-rack-${i}`,override=c.service.truckSlotOverrides.find(o=>o.enabled&&o.slot.id===id);return override?structuredClone(override.slot):{id,sink:id,battery:{id:`${id}-initial`,family:`truck-${s}`,capacityKWh:st.capacityKWh,soh:1,initialSOC:st.readySOC},chargeKW:st.batteryChargeKW,chargeEfficiency:1};});
+ return slots;
+}
+export function compilePassengerSlots(pc:Passenger):BatterySlotConfig[]{
+ const s=pc.station;
+ const slots=Array.from({length:pc.slots},(_,i):BatterySlotConfig=>{const id=`${s}-passenger-rack-${i}`,override=pc.slotOverrides.find(o=>o.enabled&&o.slot.id===id);return override?structuredClone(override.slot):{id,sink:id,battery:{id:`${id}-initial`,family:`CATL-${s}`,capacityKWh:pc.capacityKWh,soh:pc.soh,initialSOC:pc.initialSOC},chargeKW:pc.batteryChargeKW,chargeEfficiency:pc.batteryEfficiency};});
+ return slots;
+}
 
 /** Rebuild derived demand from the CURRENT station/SOC/hourly design without
  * replacing the user's explicit per-pack, per-vehicle, or electrical settings. */
 export function compileFleet(p:Project):FleetConfig{
  const c=p.detailed!,result:FleetConfig={swaps:[],profiles:structuredClone(c.service.profiles),guns:[],swapArrivals:structuredClone(c.service.swapArrivals),chargeArrivals:structuredClone(c.service.chargeArrivals)};
  for(const s of ['A','B'] as const){const st=p.station[s];
-  const slots:BatterySlotConfig[]=Array.from({length:st.batteries},(_,i)=>{const id=`${s}-rack-${i}`,override=c.service.truckSlotOverrides.find(o=>o.enabled&&o.slot.id===id);return override?structuredClone(override.slot):{id,sink:id,battery:{id:`${id}-initial`,family:`truck-${s}`,capacityKWh:st.capacityKWh,soh:1,initialSOC:st.readySOC},chargeKW:st.batteryChargeKW,chargeEfficiency:1};});
+  const slots=compileTruckSlots(p,s);
   result.swaps.push({id:`${s}-truck`,station:s,kind:'truck-swap',enabled:true,bays:st.bays,swapMinutes:st.swapMinutes,readySOC:st.readySOC,slots});
  }
  for(const n of p.topology.nodes.filter(n=>n.type==='gun')){
@@ -21,13 +34,13 @@ export function compileFleet(p:Project):FleetConfig{
   for(const row of p.services)for(const kind of ['swap','charge'] as const){const count=kind==='swap'?row.swapCount:row.chargeCount,energy=kind==='swap'?row.swapKWh:row.chargeKWh;
    if(count>0&&energy<=0)throw Error(`逐時${kind}需求有車次但沒有電量：${row.station} D${row.day+1} ${row.hour}時`);
    for(let i=0;i<count;i++){const atMinute=row.day*1440+row.hour*60+(p.arrival==='SEEDED'?rng.next()*60:i*60/count),id=`hourly-${row.station}-${row.day}-${row.hour}-${kind}-${ordinal++}`,unitPrice=p.billing==='SOURCE_DISPLAY_PRICE'?(kind==='swap'?row.swapTotalRaw:row.chargeTotalRaw):row.gridPrice+(kind==='swap'?row.swapFee:row.chargeFee);
-    if(kind==='swap'){const st=p.station[row.station],refill=energy/count,returnSOC=st.readySOC-refill/st.capacityKWh;if(returnSOC<st.returnSOC-1e-8||returnSOC>=st.readySOC)throw Error(`逐時換電電量 ${row.station} 第${row.day+1}天 ${row.hour}時 超出設定SOC窗口；請修改需求或用逐車事件指定回站SOC。`);result.swapArrivals.push({id,fleetId:`${row.station}-truck`,atMinute,returnSOC,unitPrice,returnedPack:null});}
+    if(kind==='swap'){const st=p.station[row.station];result.swapArrivals.push({id,fleetId:`${row.station}-truck`,atMinute,returnSOC:null,requestedKWh:energy/count,minReturnSOC:st.returnSOC,unitPrice,returnedPack:null});}
     else if(energy>0)result.chargeArrivals.push({id,station:row.station,atMinute,unitPrice,gunsRequired:1,energyKWh:energy/count,profileId:null,initialSOC:null,targetSOC:null,temperatureC:null,temperatureSchedule:[],allowedGunIds:null});
    }
   }
  }
  for(const pc of c.service.passenger)if(pc.enabled){const s=pc.station;
-  const slots=Array.from({length:pc.slots},(_,i):BatterySlotConfig=>{const id=`${s}-passenger-rack-${i}`,override=pc.slotOverrides.find(o=>o.enabled&&o.slot.id===id);return override?structuredClone(override.slot):{id,sink:id,battery:{id:`${id}-initial`,family:`CATL-${s}`,capacityKWh:pc.capacityKWh,soh:pc.soh,initialSOC:pc.initialSOC},chargeKW:pc.batteryChargeKW,chargeEfficiency:pc.batteryEfficiency};});
+  const slots=compilePassengerSlots(pc);
   result.swaps.push({id:`${s}-passenger`,station:s,kind:'passenger-swap',enabled:true,bays:pc.bays,swapMinutes:pc.swapSeconds/60,readySOC:pc.readySOC,slots});
   for(const row of pc.arrivals)for(let i=0;i<row.count;i++)result.swapArrivals.push({id:`passenger-${row.id}-${i}`,fleetId:`${s}-passenger`,atMinute:row.atMinute,returnSOC:row.returnSOC??pc.returnSOC,unitPrice:row.unitPrice,returnedPack:null});
  }

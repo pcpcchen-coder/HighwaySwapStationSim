@@ -42,12 +42,16 @@ export function detailedReadiness(p:Project):ReadinessIssue[]{
  for(const s of c.solar)if(s.config.enabled){matchEta(`${s.id}-mppt`,s.config.mpptEfficiency);if(s.export?.enabled)matchEta(`${s.id}-export-converter`,s.export.efficiency);}
  for(const pc of c.service.passenger)if(pc.enabled)matchEta(`${pc.station}-passenger-charger`,pc.chargerEfficiency);
  for(const b of c.backup)if(b.config.enabled)matchEta(`${b.id}-inverter`,b.inverterEfficiency);
- try{const fleet=compileFleet(p);validateFleetConfig(fleet);
+ try{const fleet=compileFleet(p);
   // Reserve actual service sinks, including user-overridden slot connections.
   // Equipment type alone is insufficient: an unrelated rack may be a test load.
+  const batterySinks=new Set(fleet.swaps.filter(f=>f.enabled).flatMap(f=>f.slots.map(s=>s.sink)));
+  for(const sink of batterySinks)if(!p.topology.nodes.some(n=>n.id===sink&&['rack','passenger-rack'].includes(n.type)))issues.push({path:`service.${sink}`,message:'電池艙必須連接獨立的電池庫存端點（rack／passenger-rack），不得直接使用母線或充電槍端點。'});
+  for(const m of c.physics)if(batterySinks.has(m.nodeId)&&(m.curve.enabled||m.cable.enabled))issues.push({path:`${m.nodeId}.batteryEfficiency`,message:'電池庫存端的充電效率由逐艙 chargeEfficiency 計算；不可再用電纜／轉換曲線取代。請將電纜及充電機損耗設在上游獨立節點，SOC 充電曲線設在逐艙 chargeBands。'});
   const serviceSinks=new Set([...fleet.swaps.filter(f=>f.enabled).flatMap(f=>f.slots.map(s=>s.sink)),...fleet.guns.map(g=>g.sink)]);
   for(const pc of c.service.passenger)if(pc.enabled)serviceSinks.add(`${pc.station}-passenger-aux`);
   for(const load of c.loads)if(serviceSinks.has(load.nodeId))issues.push({path:`loads.${load.nodeId}`,message:'自訂輔助負載不可重用電池倉、充電槍或自動乘用車站用電端點；請建立獨立負載節點'});
+  validateFleetConfig(fleet);
  }catch(e){issues.push({path:'service',message:e instanceof Error?e.message:String(e)});}
  return issues;
 }

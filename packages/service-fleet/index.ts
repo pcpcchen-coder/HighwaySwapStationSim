@@ -1,10 +1,16 @@
 import {parseFleetDraft} from './validation.ts';
-import type {AllocatedPower,BatterySpec,BatteryState,ChargeArrival,ChargeBand,FleetConfig,FleetTotals,PowerRequest,RuntimeAvailability,ServiceEvent,ServiceSnapshot,ServiceTransaction,SwapArrival,SwapFleetConfig,VehicleChargeProfile} from './contracts.ts';
+import {energyAtSOC,socAtEnergy,validateEnergySOC} from './battery-energy.ts';
+export {energyAtSOC,socAtEnergy,validateEnergySOC} from './battery-energy.ts';
+import type {AllocatedPower,BatteryInspection,BatterySpec,BatteryState,ChargeArrival,ChargeBand,FleetConfig,FleetTotals,PowerRequest,RuntimeAvailability,ServiceEvent,ServiceSnapshot,ServiceTransaction,SwapArrival,SwapFleetConfig,VehicleChargeProfile} from './contracts.ts';
 export * from './contracts.ts';
 const EPS=1e-8;
 const need=(v:number|null|undefined,path:string,min=0,max=Infinity):number=>{if(v===null||v===undefined||!Number.isFinite(v)||v<min||v>max)throw Error(`MISSING_OR_INVALID:${path}`);return v;};
 const ratio=(v:number|null|undefined,path:string)=>need(v,path,Number.EPSILON,1);
-function batteryCheck(b:BatterySpec,path:string,initial=true){if(!b.id||!b.family)throw Error(`MISSING_ID:${path}`);ratio(b.soh,`${path}.soh`);need(b.capacityKWh,`${path}.capacityKWh`,Number.EPSILON,5000);if(initial)need(b.initialSOC,`${path}.initialSOC`,0,1);}
+function batteryCheck(b:BatterySpec,path:string,initial=true){if(!b.id||!b.family)throw Error(`MISSING_ID:${path}`);ratio(b.soh,`${path}.soh`);need(b.capacityKWh,`${path}.capacityKWh`,Number.EPSILON,5000);if(initial)need(b.initialSOC,`${path}.initialSOC`,0,1);validateEnergySOC(b.energySOC,`${path}.energySOC`);}
+function chargeBandsCheck(bands:ChargeBand[],path:string,tolerance=EPS):void {
+ if(!bands.length||bands.length>1000)throw Error(`MISSING:${path}.bands`);
+ let end=0;for(const b of bands){if(!Number.isFinite(b.fromSOC)||!Number.isFinite(b.toSOC)||b.fromSOC<0||Math.abs(b.fromSOC-end)>tolerance||b.toSOC<=b.fromSOC||b.toSOC>1)throw Error(`CURVE_COVERAGE:${path}`);need(b.voltageV,`${path}.voltage`,Number.EPSILON,2000);need(b.maxKW,`${path}.maxKW`);need(b.maxCurrentA,`${path}.maxCurrentA`);end=b.toSOC;}if(Math.abs(end-1)>tolerance)throw Error(`CURVE_COVERAGE:${path}`);
+}
 /** Matches the existing 6-decimal / half-up-to-cent contract; integration can inject the production invoiceCents. */
 export function serviceInvoiceCents(energy:number,price:number):number {
  need(energy,'invoice.energy',0,1e9);need(price,'invoice.price',0,1e6);
@@ -17,24 +23,27 @@ export function validateFleetConfig(c:FleetConfig):void {
  unique(c.swaps.map(f=>f.id),'fleet');unique(c.guns.map(g=>g.id),'gun');unique(c.profiles.map(p=>p.id),'profile');
  unique([...c.swapArrivals,...c.chargeArrivals].map(j=>j.id),'job');
  unique(c.swaps.filter(f=>f.enabled).flatMap(f=>f.slots.map(s=>s.id)),'slot');
+ unique([...c.swaps.filter(f=>f.enabled).flatMap(f=>f.slots.map(s=>s.sink)),...c.guns.filter(g=>g.enabled).map(g=>g.sink)],'service-sink');
  unique(c.swaps.filter(f=>f.enabled).flatMap(f=>f.slots.map(s=>s.battery.id)),'battery');
  for(const f of c.swaps)if(f.enabled){
   need(f.bays,`${f.id}.bays`,1,100);if(!Number.isInteger(f.bays))throw Error(`INTEGER:${f.id}.bays`);
   need(f.swapMinutes,`${f.id}.swapMinutes`,Number.EPSILON);ratio(f.readySOC,`${f.id}.readySOC`);
   if(!f.slots.length)throw Error(`MISSING:${f.id}.slots`);
-  for(const s of f.slots){if(!s.sink)throw Error(`MISSING:${s.id}.sink`);batteryCheck(s.battery,s.id);need(s.chargeKW,`${s.id}.chargeKW`,0);ratio(s.chargeEfficiency,`${s.id}.chargeEfficiency`);if(s.battery.initialSOC!>f.readySOC!+EPS)throw Error(`INITIAL_ABOVE_READY:${s.id}`);}
+  for(const s of f.slots){if(!s.sink)throw Error(`MISSING:${s.id}.sink`);batteryCheck(s.battery,s.id);need(s.chargeKW,`${s.id}.chargeKW`,0);ratio(s.chargeEfficiency,`${s.id}.chargeEfficiency`);if(s.chargeBands!=null)chargeBandsCheck(s.chargeBands,s.id,1e-12);if(s.battery.initialSOC!>f.readySOC!+EPS)throw Error(`INITIAL_ABOVE_READY:${s.id}`);}
  }
  for(const p of c.profiles)if(p.enabled){
   need(p.capacityKWh,`${p.id}.capacityKWh`,Number.EPSILON,5000);ratio(p.soh,`${p.id}.soh`);ratio(p.chargeEfficiency,`${p.id}.chargeEfficiency`);
   if(!p.bands?.length)throw Error(`MISSING:${p.id}.bands`);
-  let end=0;for(const b of p.bands){if(Math.abs(b.fromSOC-end)>EPS||b.toSOC<=b.fromSOC||b.toSOC>1)throw Error(`CURVE_COVERAGE:${p.id}`);need(b.voltageV,`${p.id}.voltage`,Number.EPSILON,2000);need(b.maxKW,`${p.id}.maxKW`);need(b.maxCurrentA,`${p.id}.maxCurrentA`);end=b.toSOC;}if(Math.abs(end-1)>EPS)throw Error(`CURVE_COVERAGE:${p.id}`);
+  chargeBandsCheck(p.bands,p.id);
   if(p.temperatureBands!==null){if(!p.temperatureBands.length)throw Error(`MISSING:${p.id}.temperatureBands`);let end=-Infinity;for(const b of p.temperatureBands){need(b.minC,`${p.id}.temperature.min`,-273.15);need(b.maxC,`${p.id}.temperature.max`,-273.15);need(b.multiplier,`${p.id}.temperature.multiplier`,0,1);if(b.minC<end||b.maxC<=b.minC)throw Error(`TEMPERATURE_OVERLAP:${p.id}`);end=b.maxC;}}
  }
  for(const g of c.guns){if(!g.sink||!g.terminal)throw Error(`MISSING:${g.id}.mapping`);need(g.maxKW,`${g.id}.maxKW`);need(g.maxCurrentA,`${g.id}.maxCurrentA`);need(g.maxVoltageV,`${g.id}.maxVoltageV`,Number.EPSILON);}
  for(const a of c.swapArrivals){
   const f=c.swaps.find(f=>f.id===a.fleetId);if(!f?.enabled)throw Error(`DISABLED_OR_MISSING_FLEET:${a.fleetId}`);
-  need(a.atMinute,`${a.id}.atMinute`);need(a.unitPrice,`${a.id}.unitPrice`);need(a.returnSOC,`${a.id}.returnSOC`,0,f.readySOC!);
-  if(a.returnedPack){batteryCheck(a.returnedPack,`${a.id}.returnedPack`,false);if(a.returnedPack.initialSOC!==null&&Math.abs(a.returnedPack.initialSOC-a.returnSOC!)>EPS)throw Error(`RETURN_SOC_CONFLICT:${a.id}`);}
+  need(a.atMinute,`${a.id}.atMinute`);need(a.unitPrice,`${a.id}.unitPrice`);
+  if(a.requestedKWh!=null){need(a.requestedKWh,`${a.id}.requestedKWh`,Number.EPSILON);need(a.minReturnSOC,`${a.id}.minReturnSOC`,0,f.readySOC!);if(a.returnSOC!==null)throw Error(`TWO_ENERGY_TRUTHS:${a.id}`);}
+  else {need(a.returnSOC,`${a.id}.returnSOC`,0,f.readySOC!);if(a.minReturnSOC!=null)throw Error(`MIN_RETURN_SOC_WITHOUT_ENERGY:${a.id}`);}
+  if(a.returnedPack){batteryCheck(a.returnedPack,`${a.id}.returnedPack`,false);if(a.returnedPack.initialSOC!==null&&(a.requestedKWh!=null||Math.abs(a.returnedPack.initialSOC-a.returnSOC!)>EPS))throw Error(`RETURN_SOC_CONFLICT:${a.id}`);}
  }
  for(const a of c.chargeArrivals){
   need(a.atMinute,`${a.id}.atMinute`);need(a.unitPrice,`${a.id}.unitPrice`);if(a.gunsRequired!==1&&a.gunsRequired!==2)throw Error(`GUN_COUNT:${a.id}`);
@@ -45,7 +54,7 @@ export function validateFleetConfig(c:FleetConfig):void {
  }
 }
 interface SlotRuntime {fleet:SwapFleetConfig; slotIndex:number; state:BatteryState;}
-interface SwapRuntime {arrival:SwapArrival; transaction:ServiceTransaction; slot:SlotRuntime; remainingMinutes:number;}
+interface SwapRuntime {arrival:SwapArrival; transaction:ServiceTransaction; slot:SlotRuntime; remainingMinutes:number; incomingKWh:number;}
 interface ChargeRuntime {arrival:ChargeArrival; transaction:ServiceTransaction; storedKWh:number; targetKWh:number;}
 /** A service-only event engine. All allocations must come from one shared electrical allocator. */
 export class ServiceFleet {
@@ -57,7 +66,7 @@ export class ServiceFleet {
  private invoiceCents:(energy:number,price:number)=>number;
  constructor(input:FleetConfig,invoiceCents:(energy:number,price:number)=>number=serviceInvoiceCents){
   this.invoiceCents=invoiceCents;input=parseFleetDraft(input);validateFleetConfig(input);this.config=structuredClone(input);this.pendingSwap=[...this.config.swapArrivals].sort((a,b)=>a.atMinute-b.atMinute);this.pendingCharge=[...this.config.chargeArrivals].sort((a,b)=>a.atMinute-b.atMinute);
-  for(const f of this.config.swaps)if(f.enabled)f.slots.forEach((s,slotIndex)=>{const b=s.battery;this.slots.push({fleet:f,slotIndex,state:{slotId:s.id,sink:s.sink,batteryId:b.id,family:b.family,capacityKWh:b.capacityKWh!,soh:b.soh!,energyKWh:b.capacityKWh!*b.soh!*b.initialSOC!,reserved:false}});});
+  for(const f of this.config.swaps)if(f.enabled)f.slots.forEach((s,slotIndex)=>{const b=s.battery;this.slots.push({fleet:f,slotIndex,state:{slotId:s.id,sink:s.sink,batteryId:b.id,family:b.family,capacityKWh:b.capacityKWh!,soh:b.soh!,energyKWh:energyAtSOC(b.capacityKWh!,b.soh!,b.initialSOC!,b.energySOC),reserved:false,...(b.energySOC!==undefined?{energySOC:structuredClone(b.energySOC)}:{})}});});
   this.initialStoredKWh=this.slots.reduce((a,s)=>a+s.state.energyKWh,0);
  }
  private enabled(sink:string){return !this.availability.disabledSinks?.includes(sink);}
@@ -69,29 +78,42 @@ export class ServiceFleet {
  private soc(j:ChargeRuntime){const p=this.profile(j.arrival)!;return j.storedKWh/(p.capacityKWh!*p.soh!);}
  private band(j:ChargeRuntime):{[K in keyof ChargeBand]:NonNullable<ChargeBand[K]>}|undefined{const p=this.profile(j.arrival);if(!p)return;const soc=this.soc(j);return (p.bands!.find(b=>soc>=b.fromSOC-EPS&&soc<b.toSOC-EPS)??p.bands!.at(-1)) as {[K in keyof ChargeBand]:NonNullable<ChargeBand[K]>};}
  private temperatureMultiplier(j:ChargeRuntime){const p=this.profile(j.arrival);if(!p?.temperatureBands)return 1;let temp=j.arrival.temperatureC!;for(const e of j.arrival.temperatureSchedule)if(e.atMinute<=this.now+EPS)temp=e.temperatureC;const b=p.temperatureBands.find((b,i)=>temp>=b.minC&&(temp<b.maxC||(i===p.temperatureBands!.length-1&&temp===b.maxC)));if(!b)throw Error(`TEMPERATURE_OUTSIDE_PROFILE:${j.arrival.id}:${temp}`);return b.multiplier;}
+ private target(s:SlotRuntime):number {const b=s.state;return energyAtSOC(b.capacityKWh,b.soh,s.fleet.readySOC!,b.energySOC);}
+ private slotBand(s:SlotRuntime):ChargeBand|undefined {const bands=s.fleet.slots[s.slotIndex].chargeBands;if(!bands)return;const b=s.state,soc=socAtEnergy(b.capacityKWh,b.soh,b.energyKWh,b.energySOC);return bands.find(b=>soc>=b.fromSOC-1e-12&&soc<b.toSOC-1e-12)??bands.at(-1);}
+ private slotRequestKW(s:SlotRuntime):number {const config=s.fleet.slots[s.slotIndex],band=this.slotBand(s);return band?Math.min(config.chargeKW!,band.maxKW!,band.voltageV!*band.maxCurrentA!/1000):config.chargeKW!;}
+ /** Pair absolute demand with the actual outgoing and returned pack, without changing its kWh. */
+ private incoming(a:SwapArrival,s:SlotRuntime):number|undefined {
+  const b=s.state,p=a.returnedPack;if(p&&p.family!==b.family)return;
+  const capacity=p?.capacityKWh??b.capacityKWh,soh=p?.soh??b.soh,map=p?p.energySOC:b.energySOC;
+  if(a.requestedKWh!=null){const incoming=b.energyKWh-a.requestedKWh,min=energyAtSOC(capacity,soh,a.minReturnSOC!,map),max=energyAtSOC(capacity,soh,s.fleet.readySOC!,map);if(incoming<min-EPS||incoming>max+EPS)return;return Math.max(0,incoming);}
+  const incoming=energyAtSOC(capacity,soh,a.returnSOC!,map);return b.energyKWh+EPS>=incoming?incoming:undefined;
+ }
  private emit(e:ServiceEvent){this.log.push(e);}
  /** Process all zero-duration events at the current clock. Call after every advance and availability change. */
  activate(atMinute=this.now,availability:RuntimeAvailability=this.availability):ServiceEvent[]{
   if(Math.abs(atMinute-this.now)>EPS)throw Error('ACTIVATE_CLOCK_MISMATCH');const from=this.log.length;this.availability=structuredClone(availability);
-  for(const active of this.swapping.filter(a=>a.remainingMinutes<=EPS)){
+  // Check simultaneous arrivals atomically: all dispatched packs leave before their replacements enter.
+  const completing=this.swapping.filter(a=>a.remainingMinutes<=EPS),departing=new Set(completing.map(a=>a.slot.state.batteryId)),residentIds=new Set(this.slots.filter(s=>!departing.has(s.state.batteryId)).map(s=>s.state.batteryId));
+  for(const active of completing){const incomingId=active.arrival.returnedPack?.id??`${active.arrival.id}:returned`;if(residentIds.has(incomingId))throw Error(`DUPLICATE_RESIDENT_BATTERY:${incomingId}`);residentIds.add(incomingId);}
+  for(const active of completing){
    const b=active.slot.state,j=active.arrival,t=active.transaction,outgoing=b.energyKWh,pack=j.returnedPack;
-   const capacity=pack?.capacityKWh??b.capacityKWh,soh=pack?.soh??b.soh,incoming=capacity*soh*j.returnSOC!,delivered=outgoing-incoming;
+   const capacity=pack?.capacityKWh??b.capacityKWh,soh=pack?.soh??b.soh,incoming=active.incomingKWh,delivered=outgoing-incoming;
    if(delivered<-EPS)throw Error(`NEGATIVE_SWAP_TRANSFER:${j.id}`);
    t.outgoingBatteryId=b.batteryId;t.incomingBatteryId=pack?.id??`${j.id}:returned`;t.completion=this.now;
    const revenueDelta=this.recognized(t,Math.max(0,delivered));
-   Object.assign(b,{batteryId:t.incomingBatteryId,family:pack?.family??b.family,capacityKWh:capacity,soh,energyKWh:incoming,reserved:false});
+   Object.assign(b,{batteryId:t.incomingBatteryId,family:pack?.family??b.family,capacityKWh:capacity,soh,energyKWh:incoming,reserved:false,energySOC:pack?structuredClone(pack.energySOC??null):b.energySOC});
    this.emit({atMinute:this.now,station:t.station,kind:'swap-complete',serviceKind:t.kind,jobId:j.id,slotId:b.slotId,outgoingKWh:outgoing,returnedKWh:incoming,deliveredKWh:delivered,terminalKWh:0,batteryLossKWh:0,storedChangeKWh:incoming-outgoing,revenueDelta});
   }
   this.swapping=this.swapping.filter(a=>a.remainingMinutes>EPS);
   for(const active of this.charging.filter(a=>a.transaction.deliveredKWh>=a.transaction.requestedKWh!-EPS)){active.transaction.completion=this.now;this.emit({atMinute:this.now,station:active.transaction.station,kind:'charge-complete',serviceKind:'direct-charge',jobId:active.arrival.id,terminalKWh:0,batteryLossKWh:0,storedChangeKWh:0,outgoingKWh:0,returnedKWh:0,deliveredKWh:0,revenueDelta:0});}
   this.charging=this.charging.filter(a=>a.transaction.completion===null);
-  while(this.pendingSwap[0]?.atMinute<=this.now+EPS){const a=this.pendingSwap.shift()!,f=this.config.swaps.find(f=>f.id===a.fleetId)!;this.makeTransaction(a.id,f.station,f.kind,a.atMinute,a.unitPrice!,null);this.swapQueue.push(a);}
+  while(this.pendingSwap[0]?.atMinute<=this.now+EPS){const a=this.pendingSwap.shift()!,f=this.config.swaps.find(f=>f.id===a.fleetId)!;this.makeTransaction(a.id,f.station,f.kind,a.atMinute,a.unitPrice!,a.requestedKWh??null);this.swapQueue.push(a);}
   while(this.pendingCharge[0]?.atMinute<=this.now+EPS){const a=this.pendingCharge.shift()!,p=this.profile(a),requested=p?p.capacityKWh!*p.soh!*(a.targetSOC!-a.initialSOC!)/p.chargeEfficiency!:a.energyKWh!;this.makeTransaction(a.id,a.station,'direct-charge',a.atMinute,a.unitPrice!,requested);this.chargeQueue.push(a);}
   for(const f of this.config.swaps.filter(f=>f.enabled&&this.operating(f.id)))while(this.swapping.filter(a=>a.slot.fleet.id===f.id).length<f.bays!){
-   let selected:{index:number;slot:SlotRuntime}|undefined;
-   for(let i=0;i<this.swapQueue.length;i++){const a=this.swapQueue[i];if(a.fleetId!==f.id)continue;const slot=this.slots.find(s=>s.fleet.id===f.id&&!s.state.reserved&&this.enabled(s.state.sink)&&s.state.energyKWh>=s.state.capacityKWh*s.state.soh*f.readySOC!-EPS&&(!a.returnedPack||a.returnedPack.family===s.state.family)&&s.state.energyKWh+EPS>=(a.returnedPack?.capacityKWh??s.state.capacityKWh)*(a.returnedPack?.soh??s.state.soh)*a.returnSOC!);if(slot){selected={index:i,slot};break;}}
-   if(!selected)break;const a=this.swapQueue.splice(selected.index,1)[0],t=this.transaction(a.id),b=selected.slot.state;const incoming=(a.returnedPack?.capacityKWh??b.capacityKWh)*(a.returnedPack?.soh??b.soh)*a.returnSOC!;
-   t.requestedKWh=b.energyKWh-incoming;t.start=this.now;b.reserved=true;this.swapping.push({arrival:a,transaction:t,slot:selected.slot,remainingMinutes:f.swapMinutes!});
+   let selected:{index:number;slot:SlotRuntime;incomingKWh:number}|undefined;
+   for(let i=0;i<this.swapQueue.length;i++){const a=this.swapQueue[i];if(a.fleetId!==f.id)continue;for(const slot of this.slots){if(slot.fleet.id!==f.id||slot.state.reserved||!this.enabled(slot.state.sink)||slot.state.energyKWh<this.target(slot)-EPS)continue;const incomingKWh=this.incoming(a,slot);if(incomingKWh!==undefined){selected={index:i,slot,incomingKWh};break;}}if(selected)break;}
+   if(!selected)break;const a=this.swapQueue.splice(selected.index,1)[0],t=this.transaction(a.id),b=selected.slot.state;
+   t.requestedKWh=a.requestedKWh??b.energyKWh-selected.incomingKWh;t.start=this.now;b.reserved=true;this.swapping.push({arrival:a,transaction:t,slot:selected.slot,remainingMinutes:f.swapMinutes!,incomingKWh:selected.incomingKWh});
   }
   for(let qi=0;qi<this.chargeQueue.length;){const a=this.chargeQueue[qi],used=new Set(this.charging.flatMap(j=>j.transaction.gunIds));const profile=this.profile(a),requiredVoltage=profile?Math.max(...profile.bands!.filter(b=>b.fromSOC<a.targetSOC!&&b.toSOC>a.initialSOC!).map(b=>b.voltageV!)):0;const free=this.config.guns.filter(g=>g.enabled&&this.enabled(g.sink)&&g.station===a.station&&!used.has(g.id)&&(a.allowedGunIds===null||a.allowedGunIds.includes(g.id))&&g.maxVoltageV>=requiredVoltage);
    const choice=a.gunsRequired===1?free.slice(0,1):free.map(g=>free.filter(h=>h.terminal===g.terminal).slice(0,2)).find(gs=>gs.length===2)??[];
@@ -101,7 +123,7 @@ export class ServiceFleet {
  }
  powerRequests():PowerRequest[]{
   const requests:PowerRequest[]=[];
-  for(const s of this.slots){const b=s.state,config=s.fleet.slots[s.slotIndex];if(!b.reserved&&this.enabled(b.sink)&&b.energyKWh<b.capacityKWh*b.soh*s.fleet.readySOC!-EPS)requests.push({id:`battery:${s.fleet.id}:${b.slotId}`,sink:b.sink,kw:config.chargeKW!,station:s.fleet.station,kind:'battery',serviceKind:s.fleet.kind,fleetId:s.fleet.id,batteryId:b.batteryId,slotId:b.slotId});}
+  for(const s of this.slots){const b=s.state,band=this.slotBand(s);if(!b.reserved&&this.enabled(b.sink)&&b.energyKWh<this.target(s)-EPS)requests.push({id:`battery:${s.fleet.id}:${b.slotId}`,sink:b.sink,kw:this.slotRequestKW(s),station:s.fleet.station,kind:'battery',serviceKind:s.fleet.kind,fleetId:s.fleet.id,batteryId:b.batteryId,slotId:b.slotId,...(band?{voltageV:band.voltageV!}:{})});}
   for(const j of this.charging){const p=this.profile(j.arrival),band=this.band(j),multiplier=this.temperatureMultiplier(j);const guns=j.transaction.gunIds.map(id=>this.config.guns.find(g=>g.id===id)!);const caps=guns.map(g=>!this.enabled(g.sink)?0:band?(band.voltageV>g.maxVoltageV?0:Math.min(g.maxKW,g.maxCurrentA*band.voltageV/1000)):g.maxKW);
    const sum=caps.reduce((a,b)=>a+b,0),cap=band?Math.min(band.maxKW,band.maxCurrentA*band.voltageV/1000)*multiplier:sum,factor=sum?Math.min(1,cap/sum):0;
    guns.forEach((g,i)=>requests.push({id:`gun:${j.arrival.id}:${g.id}`,sink:g.sink,kw:caps[i]*factor,station:j.arrival.station,kind:'gun',serviceKind:'direct-charge',jobId:j.arrival.id,...(band?{voltageV:band.voltageV}:{})}));
@@ -111,7 +133,7 @@ export class ServiceFleet {
  nextEventMinute(power:AllocatedPower,ceiling=Infinity):number {
   let next=Math.min(ceiling,this.pendingSwap[0]?.atMinute??Infinity,this.pendingCharge[0]?.atMinute??Infinity);
   for(const a of this.swapping)if(this.operating(a.slot.fleet.id))next=Math.min(next,this.now+a.remainingMinutes);
-  for(const s of this.slots){const q=power[`battery:${s.fleet.id}:${s.state.slotId}`]??0;if(q>EPS){const eta=s.fleet.slots[s.slotIndex].chargeEfficiency!,remaining=s.state.capacityKWh*s.state.soh*s.fleet.readySOC!-s.state.energyKWh;next=Math.min(next,this.now+60*remaining/(q*eta));}}
+  for(const s of this.slots){const q=power[`battery:${s.fleet.id}:${s.state.slotId}`]??0;if(q>EPS){const b=s.state,eta=s.fleet.slots[s.slotIndex].chargeEfficiency!,band=this.slotBand(s),target=band?energyAtSOC(b.capacityKWh,b.soh,Math.min(s.fleet.readySOC!,band.toSOC),b.energySOC):this.target(s),remaining=target-b.energyKWh;next=Math.min(next,this.now+60*remaining/(q*eta));}}
   for(const j of this.charging){const q=j.transaction.gunIds.reduce((v,id)=>v+(power[`gun:${j.arrival.id}:${id}`]??0),0),p=this.profile(j.arrival);for(const e of j.arrival.temperatureSchedule)if(e.atMinute>this.now+EPS)next=Math.min(next,e.atMinute);
    if(q>EPS){next=Math.min(next,this.now+60*(j.transaction.requestedKWh!-j.transaction.deliveredKWh)/q);if(p){const band=this.band(j)!;next=Math.min(next,this.now+60*(p.capacityKWh!*p.soh!*Math.min(band.toSOC,j.arrival.targetSOC!)-j.storedKWh)/(q*p.chargeEfficiency!));}}
   }
@@ -131,8 +153,10 @@ export class ServiceFleet {
  /** Small event-loop state: no transaction or ledger cloning. */
  stationState(station:'A'|'B'):{storedKWh:number;ready:number;queue:number;activeSwaps:number;activeCharges:number}{
   const slots=this.slots.filter(s=>s.fleet.station===station);
-  return {storedKWh:slots.reduce((v,s)=>v+s.state.energyKWh,0),ready:slots.filter(s=>!s.state.reserved&&this.enabled(s.state.sink)&&s.state.energyKWh>=s.state.capacityKWh*s.state.soh*s.fleet.readySOC!-EPS).length,queue:this.swapQueue.filter(a=>this.config.swaps.find(f=>f.id===a.fleetId)!.station===station).length+this.chargeQueue.filter(a=>a.station===station).length,activeSwaps:this.swapping.filter(a=>a.slot.fleet.station===station).length,activeCharges:this.charging.filter(a=>a.arrival.station===station).length};
+  return {storedKWh:slots.reduce((v,s)=>v+s.state.energyKWh,0),ready:slots.filter(s=>!s.state.reserved&&this.enabled(s.state.sink)&&s.state.energyKWh>=this.target(s)-EPS).length,queue:this.swapQueue.filter(a=>this.config.swaps.find(f=>f.id===a.fleetId)!.station===station).length+this.chargeQueue.filter(a=>a.station===station).length,activeSwaps:this.swapping.filter(a=>a.slot.fleet.station===station).length,activeCharges:this.charging.filter(a=>a.arrival.station===station).length};
  }
+ /** Lightweight per-slot state at the current event clock; no ledger or transaction cloning. */
+ batteryStates():BatteryInspection[]{return this.slots.map(s=>{const b=s.state,targetEnergyKWh=this.target(s),remainingKWh=Math.max(0,targetEnergyKWh-b.energyKWh),enabled=this.enabled(b.sink);return {...structuredClone(b),fleetId:s.fleet.id,station:s.fleet.station,serviceKind:s.fleet.kind,readySOC:s.fleet.readySOC!,soc:socAtEnergy(b.capacityKWh,b.soh,b.energyKWh,b.energySOC),effectiveCapacityKWh:b.capacityKWh*b.soh,targetEnergyKWh,remainingKWh,requestedKW:!b.reserved&&enabled&&remainingKWh>EPS?this.slotRequestKW(s):0,enabled,operating:this.operating(s.fleet.id)};});}
  activeFleetSwaps(fleetId:string):number{return this.swapping.filter(a=>a.slot.fleet.id===fleetId).length;}
  /** Connector-to-stored efficiency keyed by physical slot sink. */
  slotEtaMap():Record<string,number>{return Object.fromEntries(this.slots.map(s=>[s.state.sink,s.fleet.slots[s.slotIndex].chargeEfficiency!]));}

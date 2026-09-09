@@ -1,10 +1,14 @@
 export type StationId = 'A' | 'B';
 export type ServiceKind = 'truck-swap' | 'passenger-swap' | 'direct-charge';
+export interface EnergySOCPoint {soc:number; energyFraction:number|null;}
+/** Piecewise linear stored-energy fraction versus BMS SOC; absent/null means the explicit linear assumption. */
 export interface BatterySpec {
- id:string; family:string; capacityKWh:number|null; soh:number|null; initialSOC:number|null;
+ id:string; family:string; capacityKWh:number|null; soh:number|null; initialSOC:number|null; energySOC?:EnergySOCPoint[]|null;
 }
 export interface BatterySlotConfig {
  id:string; sink:string; battery:BatterySpec; chargeKW:number|null; chargeEfficiency:number|null;
+ /** Optional connector-side SOC power/current/voltage limits; null/absent retains fixed chargeKW. */
+ chargeBands?:ChargeBand[]|null;
 }
 export interface SwapFleetConfig {
  id:string; station:StationId; kind:'truck-swap'|'passenger-swap'; enabled:boolean;
@@ -22,6 +26,8 @@ export interface SwapArrival {
  id:string; fleetId:string; atMinute:number; returnSOC:number|null; unitPrice:number|null;
  /** null means exchange with a returned pack of exactly the dispatched pack capacity, SOH and family. */
  returnedPack:BatterySpec|null;
+ /** Absolute net swap energy mode: preserve requested kWh; derive return SOC from the paired pack. */
+ requestedKWh?:number|null; minReturnSOC?:number|null;
 }
 export interface ChargeArrival {
  id:string; station:StationId; atMinute:number; unitPrice:number|null; gunsRequired:1|2;
@@ -52,5 +58,6 @@ export interface FleetTotals {
  outgoingKWh:number; returnedKWh:number; swapDeliveredKWh:number; directTerminalKWh:number;
  directStoredKWh:number; directBatteryLossKWh:number; revenue:number; completed:number; inventoryResidualKWh:number;
 }
-export interface BatteryState {slotId:string; sink:string; batteryId:string; family:string; capacityKWh:number; soh:number; energyKWh:number; reserved:boolean;}
+export interface BatteryState {slotId:string; sink:string; batteryId:string; family:string; capacityKWh:number; soh:number; energyKWh:number; reserved:boolean; energySOC?:EnergySOCPoint[]|null;}
+export interface BatteryInspection extends BatteryState {fleetId:string; station:StationId; serviceKind:SwapFleetConfig['kind']; readySOC:number; soc:number; effectiveCapacityKWh:number; targetEnergyKWh:number; remainingKWh:number; requestedKW:number; enabled:boolean; operating:boolean;}
 export interface ServiceSnapshot {atMinute:number; batteries:BatteryState[]; transactions:ServiceTransaction[]; totals:FleetTotals;}

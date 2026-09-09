@@ -1,4 +1,5 @@
 "use client";
+import {SocVerificationPanel} from './soc-verification';
 import {useMemo,useState} from 'react';
 import {Button} from '../ui/button';
 import {Table,TableHeader,TableHead,TableBody,TableCell,TableRow} from '../ui/table';
@@ -15,6 +16,7 @@ export function DetailedVerificationPanel({result,busy,onRun}:{result:RunResult|
  function execute(id:string){try{setError(null);onRun(detailedCaseProject(id));}catch(e){setError(e instanceof Error?e.message:String(e));}}
  const emptyMessage=comparison.state==='NO_RESULT'?'尚未執行新增驗證案例。請選擇下方 3 日、4 日或 5 日案例。':comparison.state==='INPUT_MISMATCH'?'上次結果的完整參數快照與固定驗證案例不同，不能沿用其預期數值。請載入固定案例並測算。':comparison.state==='MODE_MISMATCH'?'此結果為來源回放；請執行受限物理測算後比對。':'結果缺少完整模型帳本，請重新執行所選案例。';
  return <>
+  <SocVerificationPanel result={result} busy={busy} onRun={onRun}/>
   <section className="panel mt-6" aria-labelledby="detailed-verification-title">
    <div className="panel-heading"><div><p className="eyebrow">V04–V06 · LIVE INDEPENDENT VERIFICATION</p><h2 id="detailed-verification-title">新增完整模型，親自執行與驗算。</h2></div></div>
    <p className="panel-note">三個固定案例採獨立 Python Decimal 70 位精度期望值。按下執行後，使用網站同一個測算引擎產生結果，再逐項比較。載入案例會替換目前設計、參數與到站資料；需要保留的自訂方案請先匯出。</p>

@@ -1,0 +1,52 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> highway-swap-station-sim@0.7.0 build
+> bash scripts/build-verified.sh
+
+/usr/bin/timeout
+Running bounded vinext build...
+
+  vinext build  (Vite 8.0.13)
+
+▲ [WARNING] Proxy environment variables detected. We'll use your proxy for fetch requests.
+
+
+[1/5] analyze client references...
+transforming...✓ 132 modules transformed.
+rendering chunks...
+✓ built in 1.09s
+[2/5] analyze server references...
+transforming...✓ 744 modules transformed.
+rendering chunks...
+✓ built in 1.26s
+[3/5] build rsc environment...
+transforming...✓ 138 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 941ms
+[4/5] build client environment...
+transforming...✓ 2614 modules transformed.
+rendering chunks...
+computing gzip size...
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 2.43s
+[5/5] build ssr environment...
+transforming...✓ 755 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 1.64s
+
+  Route (app)
+  ─ ? /
+
+  ? Unknown
+
+  ? Some routes could not be classified. vinext currently uses static analysis
+    and cannot detect dynamic API usage (headers(), cookies(), etc.) at build time.
+    Automatic classification will be improved in a future release.
+
+  Build complete. Run `vinext start` to start the production server.

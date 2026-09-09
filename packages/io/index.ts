@@ -1,3 +1,4 @@
+import {batteryWorkbookRows} from '../battery-trace/index.ts';
 import {detailedRows} from '../detailed-profile/index.ts';
 import {evaluateExtendedFinance} from '../extended-finance/index.ts';
 import { capacityCase } from '../engineering/index.ts';
@@ -90,7 +91,7 @@ export function exportWorkbook(project: Project, result: RunResult) {
     if(project.detailed){
       sheets.push({name:'Detailed_Settings',rows:[['JSON pointer','Type','Value (null = 待填)'],...detailedRows(project.detailed)]});
       const d=result.detailedResult;
-      if(d){for(const [name,values] of [['Service_Detail',d.fleet.transactions],['Battery_Inventory',d.fleet.batteries],['Service_Events',d.serviceEvents],['Storage_Ledger',d.storage],['Electrical_Readings',d.electrical],['PV_Ledger',d.pv],['Export_Meters',d.exports??[]],['Switching_Events',d.switching],['Inventory_Flows',d.inventory]] as const)sheets.push({name,rows:objectRows(values as unknown as Record<string,unknown>[])});sheets.push({name:'Site_Energy_Boundary',rows:Object.entries(d.energy).map(([key,value])=>[key,value??null])});
+      if(d){const batteries=batteryWorkbookRows(d.batteryTrace);for(const [name,values] of [['Service_Detail',d.fleet.transactions],['Battery_Inventory',d.fleet.batteries],['Battery_SOC_Trace',batteries.intervals],['Battery_SOC_Curves',batteries.curves],['Service_Events',d.serviceEvents],['Storage_Ledger',d.storage],['Electrical_Readings',d.electrical],['PV_Ledger',d.pv],['Export_Meters',d.exports??[]],['Switching_Events',d.switching],['Inventory_Flows',d.inventory]] as const)sheets.push({name,rows:objectRows(values as unknown as Record<string,unknown>[])});sheets.push({name:'Site_Energy_Boundary',rows:Object.entries(d.energy).map(([key,value])=>[key,value??null])});
        try{const f=evaluateExtendedFinance(result,project.detailed.finance,d.inventory);for(const [name,values]of [['Monthly_Bills',f.billing.rows],['Inventory_Valuation',f.inventory.rows],['Lifecycle_Cashflows',f.projection.rows],['Finance_Missing',[...f.billing.issues,...f.inventory.issues,...f.observed.issues,...f.projection.issues]]] as const)sheets.push({name,rows:objectRows(values as unknown as Record<string,unknown>[])});sheets.push({name:'Finance_Summary',rows:[['Section','Full result JSON'],['Observed',JSON.stringify(f.observed)],['Inventory',JSON.stringify({...f.inventory,rows:undefined})],['Projection',JSON.stringify({...f.projection,rows:undefined})]]});}
        catch(error){sheets.push({name:'Finance_Missing',rows:[['Status','Reason'],['VALIDATION_ERROR',String(error)]]});}
       }

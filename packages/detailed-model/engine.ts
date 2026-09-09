@@ -6,6 +6,8 @@ import {compileFleet} from './services.ts';
 import {ServiceFleet,type PowerRequest,type ServiceEvent} from '../service-fleet/index.ts';
 import {allocateDetailedPower,sourceTypes} from '../detailed-network/index.ts';
 import {physicsPolicy,type PolicyState} from './policy.ts';
+import {createBatteryTrace,recordBatteryTrace} from '../battery-trace/index.ts';
+import {energyAtSOC} from '../service-fleet/battery-energy.ts';
 import {createPowerTrace,recordPowerTrace} from '../power-trace/index.ts';
 import {validateTopology} from '../topology-engine/index.ts';
 import {invoiceCents,apportionCents,sumMoney} from '../money/index.ts';
@@ -31,7 +33,7 @@ export function simulateDetailed(input:Project):RunResult{
  const hi=(t:number)=>Math.max(0,Math.min(hourCount-1,Math.floor((t+1e-9)/60))),hour=(s:StationId,t:number)=>hours[hi(t)*2+(s==='A'?0:1)];
  const rows=new Map(p.services.map(r=>[`${r.station}:${r.day*24+r.hour}`,r])),price=(s:StationId,t:number)=>rows.get(`${s}:${hi(t)}`)!.gridPrice;
  const initial={A:fleet.stationState('A').storedKWh,B:fleet.stationState('B').storedKWh};
- const detail:DetailedResult={fleet:fleet.snapshot(),serviceEvents:[],storage:[],electrical:[],pv:[],switching:[],inventory:[],exports:[],energy:{pvKWh:0,exportKWh:0,storageInitialKWh:0,storageFinalKWh:0,storageLossKWh:0,auxiliaryKWh:0,networkLossKWh:0,balanceResidualKWh:0}};
+ const detail:DetailedResult={batteryTrace:createBatteryTrace(horizon),fleet:fleet.snapshot(),serviceEvents:[],storage:[],electrical:[],pv:[],switching:[],inventory:[],exports:[],energy:{pvKWh:0,exportKWh:0,storageInitialKWh:0,storageFinalKWh:0,storageLossKWh:0,auxiliaryKWh:0,networkLossKWh:0,balanceResidualKWh:0}};
  const storeStates=new Map<string,StorageState>(),initialStores=new Map<string,number>();
  for(const s of c.storage)if(s.config.enabled){const state={energyKWh:s.config.capacityKWh!*s.initialSOH!*s.initialSOC!,soh:s.initialSOH!,equivalentCycles:0};storeStates.set(s.id,state);initialStores.set(s.id,state.energyKWh);detail.energy.storageInitialKWh+=state.energyKWh;}
  const temperatures=new Map(c.physics.map(m=>[m.nodeId,m.temperatureC??(m.transformer.enabled?m.transformer.windingTemperatureC:m.cable.conductorTemperatureC)??25]));
@@ -44,6 +46,10 @@ export function simulateDetailed(input:Project):RunResult{
  const schedule=[...p.equipmentSchedule.map(e=>({...e,params:{}})),...c.construction].sort((a,b)=>a.atMinute-b.atMinute);let cursor=0,t=0,previous=0,steps=0;
  const lastOutput=new Map<string,number>(),runningSST=new Set<string>(),overheat=new Set<string>(c.physics.filter(m=>m.thermal.enabled&&temperatures.get(m.nodeId)!>=m.thermal.maximumConductorC!).map(m=>m.nodeId));
  const diagnostics:RunResult['diagnostics']=[{code:'DETAILED_ENERGY_MODEL',severity:'warning',message:'完整能量級模型：分支電壓與定時保護按使用者參數；不等同現場暫態／短路保護認證。'}];
+ const slots=fleetConfig.swaps.filter(f=>f.enabled).flatMap(f=>f.slots);
+ if(slots.some(s=>!s.chargeBands))diagnostics.push({code:'BATTERY_FIXED_POWER_ASSUMPTION',severity:'warning',message:'部分電池艙未提供 SOC 分段充電曲線，採額定固定功率並受供電限制；請填入 BMS／實測曲線以評估高 SOC 回充時間。'});
+ if(slots.some(s=>!s.battery.energySOC))diagnostics.push({code:'BATTERY_LINEAR_SOC_ASSUMPTION',severity:'warning',message:'部分電池未提供能量–SOC 對應曲線，採容量 × SOH × SOC 線性換算。'});
+ if(slots.some(s=>s.chargeEfficiency===1))diagnostics.push({code:'BATTERY_UNITY_EFFICIENCY_ASSUMPTION',severity:'warning',message:'部分電池艙內部充電效率設定為 100%；此值不含上游充電機效率，請確認實測值。'});
  if(c.topology.sharedDD)diagnostics.push({code:'SHARING_MATRIX_ASSUMPTION',severity:'warning',message:`DD 2/6台共用矩陣採 ${c.topology.sharingMode}；請用設備規格確認可達端口。`});
  function consumeEvents(events:ServiceEvent[]){for(const e of events){const h=hour(e.station,e.atMinute);h.deliveredKWh+=e.deliveredKWh;h.revenue+=e.revenueDelta;if(e.kind==='swap-complete')h.swapCount++;if(e.kind==='charge-complete')h.chargeCount++;}}
  consumeEvents(fleet.activate(0));
@@ -140,6 +146,7 @@ export function simulateDetailed(input:Project):RunResult{
   for(const [source,kw]of sourcePeak){const meter=meters.get(`${hidx}:${source}`);if(meter)meter.peakKW=Math.max(meter.peakKW,kw);}
   const demand=new Map<string,number>();for(const r of requests)demand.set(r.sink,(demand.get(r.sink)??0)+r.kw);
   recordPowerTrace(trace,network,t,nodeStep,edgeStep,demand,blocked,shortfall);
+  recordBatteryTrace(detail.batteryTrace!,fleet.batteryStates(),t,next,accepted,eta);
   for(const [id,f]of nodeStep){const node=network.topology.nodes.find(n=>n.id===id)!,key=`${hidx}:${id}`,capacity=policy.capacity!(node),record=components.get(key)??{day,hour:hourNumber,nodeId:id,inputKWh:0,outputKWh:0,lossKWh:0,terminalKWh:0,peakOutputKW:0,capacityKW:capacity,maxBalanceResidual:0};
    const incoming=p.topology.edges.filter(e=>e.target===id).reduce((v,e)=>v+(edgeStep.get(e.id)??0),0),outgoing=p.topology.edges.filter(e=>e.source===id).reduce((v,e)=>v+(edgeStep.get(e.id)??0),0);
    const residual=Math.max(Math.abs(f.input-f.output-f.loss),Math.abs(f.output-outgoing-f.terminal),sourceTypes.has(node.type)?0:Math.abs(f.input-incoming));if(residual>1e-6||f.output>capacity+1e-6)throw Error(`DETAILED_COMPONENT_BALANCE:${id}:${residual}`);
@@ -160,6 +167,7 @@ export function simulateDetailed(input:Project):RunResult{
   for(const n of network.topology.nodes)if(!nodeStep.has(n.id))lastOutput.set(n.id,0);
   previous=t;t=next;consumeEvents(fleet.activate(t,{disabledSinks:disabled,pausedFleetIds:paused}));
  }
+ recordBatteryTrace(detail.batteryTrace!,fleet.batteryStates(),horizon,horizon,{},eta);
  detail.fleet=fleet.snapshot();detail.serviceEvents=fleet.events();
  for(const s of stations){const state=fleet.stationState(s),h=hour(s,horizon);h.storedKWh=state.storedKWh;h.ready=state.ready;h.queue=state.queue;}
  for(const [key,m]of meters){const cents=invoiceCents(m.importKWh,m.unitPrice);m.cost=cents/100;const weights=[...(costWeights.get(key)??new Map()).entries()].sort((a,b)=>a[0].localeCompare(b[0])),parts=apportionCents(cents,weights.map(e=>e[1]));for(let i=0;i<weights.length;i++){const [station,kind,pool]=JSON.parse(weights[i][0]) as [StationId,string,string],h=hour(station,(m.day*24+m.hour)*60);h.gridCost+=parts[i]/100;if(kind==='aux')h.auxiliaryGridCost+=parts[i]/100;if(pool)poolCosts.set(pool,(poolCosts.get(pool)??0)+parts[i]/100);}}
@@ -169,16 +177,18 @@ export function simulateDetailed(input:Project):RunResult{
  // routeAllowed, so upstream storage values can be determined without cycles.
  const storedUnitCost=new Map<string,number>();
  for(const s of c.storage)if(s.config.enabled){const records=detail.storage.filter(r=>r.id===s.id),opening=initialStores.get(s.id)!,inflow=records.reduce((v,r)=>v+r.inputKWh*s.config.chargeEfficiency!,0),closing=storeStates.get(s.id)!.energyKWh,flow={poolId:s.id,openingKWh:opening,inflowKWh:inflow,inflowPurchaseCost:poolCosts.get(s.id)??0,issuedKWh:Math.max(0,opening+inflow-closing),closingKWh:closing};detail.inventory.push(flow);const setting=c.finance.inventory.pools.find(x=>x.poolId===s.id);if(setting?.openingValue!==null&&setting?.openingValue!==undefined&&setting.additionalConversionCost!==null){const value=weightedInventory(flow,setting.openingValue,setting.additionalConversionCost);if(value)storedUnitCost.set(`${s.id}-source`,(setting.openingValue+flow.inflowPurchaseCost+setting.additionalConversionCost)/(opening+inflow||1));}}
- for(const f of fleetConfig.swaps.filter(f=>f.enabled)){const opening=f.slots.reduce((v,s)=>v+s.battery.capacityKWh!*s.battery.soh!*s.battery.initialSOC!,0),slotIds=new Set(f.slots.map(s=>s.id)),events=detail.serviceEvents.filter(e=>e.slotId&&slotIds.has(e.slotId)),inflow=events.reduce((v,e)=>v+(e.kind==='battery-charge'?e.storedChangeKWh:0),0),issued=events.reduce((v,e)=>v+e.outgoingKWh-e.returnedKWh,0),closing=detail.fleet.batteries.filter(b=>slotIds.has(b.slotId)).reduce((v,b)=>v+b.energyKWh,0);let cost=poolCosts.get(f.id)??0,internalTransferCost=0,complete=true;
+ for(const f of fleetConfig.swaps.filter(f=>f.enabled)){const opening=f.slots.reduce((v,s)=>v+energyAtSOC(s.battery.capacityKWh!,s.battery.soh!,s.battery.initialSOC!,s.battery.energySOC),0),slotIds=new Set(f.slots.map(s=>s.id)),events=detail.serviceEvents.filter(e=>e.slotId&&slotIds.has(e.slotId)),inflow=events.reduce((v,e)=>v+(e.kind==='battery-charge'?e.storedChangeKWh:0),0),issued=events.reduce((v,e)=>v+e.outgoingKWh-e.returnedKWh,0),closing=detail.fleet.batteries.filter(b=>slotIds.has(b.slotId)).reduce((v,b)=>v+b.energyKWh,0);let cost=poolCosts.get(f.id)??0,internalTransferCost=0,complete=true;
   for(const [source,kWh]of poolSourceEnergy.get(f.id)??[]){const node=p.topology.nodes.find(n=>n.id===source);if(node?.type==='storage-source'||node?.type==='ups-source'){if(!storedUnitCost.has(source))complete=false;else {const transfer=kWh*storedUnitCost.get(source)!;cost+=transfer;internalTransferCost+=transfer;}}}
   if(complete)detail.inventory.push({poolId:f.id,openingKWh:opening,inflowKWh:inflow,inflowPurchaseCost:cost,internalTransferCost,issuedKWh:issued,closingKWh:closing});
  }
  for(const j of detail.fleet.transactions){const h=hour(j.station,j.arrival);h.requestedKWh+=j.requestedKWh??0;}
+ const unmetAbsolute=detail.fleet.transactions.filter(j=>j.completion===null&&fleetConfig.swapArrivals.some(a=>a.id===j.id&&a.requestedKWh!==null&&a.requestedKWh!==undefined));
+ if(unmetAbsolute.length)diagnostics.push({code:'UNSERVED_ABSOLUTE_SWAP_DEMAND',severity:'warning',message:`${unmetAbsolute.length} 個固定電量換電請求未完成，原始 kWh 已保留在未服務需求；請檢查有效容量、回站 SOC 下限、供電、庫存與工位。`});
  const unresolved=detail.fleet.transactions.filter(j=>j.requestedKWh===null).length;if(unresolved)diagnostics.push({code:'UNRESOLVED_SWAP_ENERGY',severity:'warning',message:`${unresolved} 個未配對換電請求尚無實際出站電池，總需求能量不完整；請同時查看未完成車次。`});
  const sum=(key:keyof HourResult)=>hours.reduce((v,h)=>v+Number(h[key]),0),delivered=sum('deliveredKWh'),grid=sum('gridKWh'),loss=sum('lossKWh'),final=fleet.stationState('A').storedKWh+fleet.stationState('B').storedKWh;
  detail.energy.storageFinalKWh=[...storeStates.values()].reduce((v,s)=>v+s.energyKWh,0);detail.energy.auxiliaryKWh=sum('auxiliaryKWh');detail.energy.networkLossKWh=loss-detail.energy.storageLossKWh;
  detail.energy.balanceResidualKWh=grid+detail.energy.pvKWh-detail.energy.exportKWh!-loss-detail.energy.auxiliaryKWh-delivered-(final-initial.A-initial.B)-(detail.energy.storageFinalKWh-detail.energy.storageInitialKWh);
  if(Math.abs(detail.energy.balanceResidualKWh)>1e-6)throw Error(`DETAILED_SITE_BALANCE:${detail.energy.balanceResidualKWh}`);
  const transactions=detail.fleet.transactions.map(j=>({id:j.id,station:j.station,kind:j.kind==='direct-charge'?'charge' as const:'swap' as const,arrival:j.arrival,start:j.start,completion:j.completion,requestedKWh:j.requestedKWh??0,deliveredKWh:j.deliveredKWh,unitPrice:j.unitPrice,revenue:j.revenue,equipmentId:j.gunIds.join('+')||j.outgoingBatteryId}));
- return {engineVersion:'0.6.0',parameterSnapshot:snapshot,mode:'CONSTRAINED',hours,transactions,diagnostics,powerTrace:trace,componentEnergy:[...components.values()],edgeEnergy:[...edges.values()],sourceMeters:[...meters.values()],detailedResult:detail,totals:{deliveredKWh:delivered,requestedKWh:sum('requestedKWh'),gridKWh:grid,lossKWh:loss,revenue:sumMoney(hours.map(h=>h.revenue)),gridCost:sumMoney(hours.map(h=>h.gridCost)),auxiliaryGridCost:sumMoney(hours.map(h=>h.auxiliaryGridCost)),completed:detail.fleet.totals.completed,unservedKWh:Math.max(0,sum('requestedKWh')-delivered),initialStoredKWh:initial.A+initial.B,finalStoredKWh:final,maxBalanceResidual:Math.max(Math.abs(detail.energy.balanceResidualKWh),...hours.map(h=>Math.abs(h.balanceResidual)))}};
+ return {engineVersion:'0.7.0',parameterSnapshot:snapshot,mode:'CONSTRAINED',hours,transactions,diagnostics,powerTrace:trace,componentEnergy:[...components.values()],edgeEnergy:[...edges.values()],sourceMeters:[...meters.values()],detailedResult:detail,totals:{deliveredKWh:delivered,requestedKWh:sum('requestedKWh'),gridKWh:grid,lossKWh:loss,revenue:sumMoney(hours.map(h=>h.revenue)),gridCost:sumMoney(hours.map(h=>h.gridCost)),auxiliaryGridCost:sumMoney(hours.map(h=>h.auxiliaryGridCost)),completed:detail.fleet.totals.completed,unservedKWh:Math.max(0,sum('requestedKWh')-delivered),initialStoredKWh:initial.A+initial.B,finalStoredKWh:final,maxBalanceResidual:Math.max(Math.abs(detail.energy.balanceResidualKWh),...hours.map(h=>Math.abs(h.balanceResidual)))}};
 }

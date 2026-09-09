@@ -2,6 +2,7 @@ import type { StationId, RunResult } from '../contracts/index.ts';
 import type { CableConfig, ThermalConfig, EfficiencyCurveConfig, TransformerLossConfig, CompensationConfig, ProtectionConfig, StorageConfig, StoragePolicy, PvConfig, AtsConfig } from '../physical-models/index.ts';
 import type { BatterySlotConfig, ChargeArrival, SwapArrival, VehicleChargeProfile, ServiceSnapshot, ServiceEvent } from '../service-fleet/contracts.ts';
 import type { ExtendedFinanceConfig, InventoryFlow } from '../extended-finance/contracts.ts';
+import type { BatteryTrace } from '../battery-trace/index.ts';
 import type { TopologyOptions } from '../detailed-network/topology.ts';
 
 export interface NodePhysics {
@@ -48,6 +49,7 @@ export interface DetailedConfig {
 export interface StorageLedger {fromMinute:number;toMinute:number;id:string;station:StationId;inputKWh:number;outputKWh:number;lossKWh:number;storedKWh:number;deltaKWh:number;soh:number;cycles:number;initialStoredKWh:number;inputKW:number;outputKW:number;selfDischargeKWh:number;capacitySpillKWh:number;}
 export interface ElectricalReading {fromMinute:number;toMinute:number;nodeId:string;currentA:number;voltageV:number;reactiveKvar:number;temperatureC:number|null;}
 export interface DetailedResult {
+ batteryTrace?:BatteryTrace;
  fleet:ServiceSnapshot; serviceEvents:ServiceEvent[]; storage:StorageLedger[]; electrical:ElectricalReading[];
  pv:{fromMinute:number;toMinute:number;id:string;availableKWh:number;generatedKWh:number;curtailedKWh:number}[];
  exports?:{day:number;hour:number;id:string;kWh:number;unitPrice:number;revenue:number}[];

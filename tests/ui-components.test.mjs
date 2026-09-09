@@ -193,3 +193,33 @@ test('complete flow and live verification render actual PV storage values and fi
  const html=renderToStaticMarkup(React.createElement(FlowExplorer,{result}));assert.equal((html.match(/data-node=/g)??[]).length,result.parameterSnapshot.topology.nodes.length);for(const label of ['外部總輸入','全站總損耗','逐台儲能庫存與損耗'])assert.ok(html.includes(label),label);
  const verified=renderToStaticMarkup(React.createElement(DetailedVerificationPanel,{result,busy:false,onRun:()=>{}}));for(const label of ['載入並執行 3 日','載入並執行 4 日','載入並執行 5 日','全部通過','獨立預期','匯出驗證報告 JSON'])assert.ok(verified.includes(label),label);
 });
+
+// Append to tests/ui-components.test.mjs after root integrates battery-trace contracts.
+test("battery inspector distinguishes cursor SOC, stored energy, recharge power and cumulative endpoint",async()=>{
+ const {BatterySOCPanel}=await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+ const state={slotId:'A-rack-0',sink:'A-rack-0',batteryId:'swap-001:returned',family:'truck-A',effectiveCapacityKWh:410.4,capacityKWh:513,soh:.8,energyKWh:164.16,soc:.4,readySOC:.9,remainingKWh:205.2,inputKW:560,storedKW:537.6,status:'charging',atMinute:15};
+ const html=renderToStaticMarkup(React.createElement(BatterySOCPanel,{state,minute:15,mode:'cumulative'}));
+ for(const text of ['終點 SOC','累計終點的庫存狀態','164.16','205.20','560.00','537.60','410.40','90.00','80.00','swap-001:returned','充電中','SOC 仍顯示游標時刻，不做累加'])assert.ok(html.includes(text),text);
+ assert.match(html,/role="meter"/);assert.match(html,/aria-valuenow="40"/);assert.match(html,/D1 00:15:00.000/);
+});
+
+test("missing battery state remains unavailable, never an empty or full pack",async()=>{
+ const {BatterySOCPanel}=await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+ const html=renderToStaticMarkup(React.createElement(BatterySOCPanel,{state:null,minute:15,mode:'power'}));
+ assert.match(html,/此刻 SOC —/);assert.match(html,/沒有此電池艙的 SOC 記錄/);assert.match(html,/不代表電池為空/);assert.doesNotMatch(html,/role="meter"/);assert.doesNotMatch(html,/0.00/);
+});
+
+test("battery ready state reflects configurable target below 100 percent",async()=>{
+ const {BatterySOCPanel}=await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+ const state={slotId:'A-rack-0',sink:'A-rack-0',batteryId:'ready-pack',family:'truck-A',effectiveCapacityKWh:513,capacityKWh:513,soh:1,energyKWh:410.4,soc:.8,readySOC:.8,remainingKWh:0,inputKW:0,storedKW:0,status:'ready',atMinute:50};
+ const html=renderToStaticMarkup(React.createElement(BatterySOCPanel,{state,minute:50,mode:'energy'}));
+ assert.match(html,/達標可換出/);assert.match(html,/aria-valuenow="80"/);assert.match(html,/此刻 SOC/);assert.doesNotMatch(html,/已充滿/);
+});
+
+
+test("SOC verification controls preserve busy state and require a matching completed result",async()=>{
+ const {SocVerificationPanel}=await vite.ssrLoadModule('/components/simulator/soc-verification.tsx');
+ const html=renderToStaticMarkup(React.createElement(SocVerificationPanel,{result:null,busy:true,onRun:()=>{}}));
+ for(const text of ['電池 SOC 三日驗證','SOC-1','SOC-2','SOC-3','案例 JSON','選擇一個三日案例','合成驗證假設'])assert.ok(html.includes(text),text);
+ assert.ok((html.match(/disabled=""/g)??[]).length>=4);assert.doesNotMatch(html,/本次結果的列示數值符合獨立預期/);
+});

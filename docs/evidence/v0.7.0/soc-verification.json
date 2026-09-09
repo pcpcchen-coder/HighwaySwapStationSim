@@ -1,0 +1,2015 @@
+{
+  "status": "passed",
+  "oracle": "Decimal precision 60; analytic constant-power energy integration; inverse piecewise-linear stored-energy/SOC map; no production imports",
+  "tolerance": 0.000001,
+  "checks": 1100,
+  "maxAbsoluteError": 2.615365701785777e-10,
+  "syntheticCurve": true,
+  "reports": [
+    {
+      "id": "linear_taper",
+      "days": 3,
+      "totals": {
+        "deliveredKWh": 1231.1999999999998,
+        "requestedKWh": 1231.1999999999998,
+        "gridKWh": 1343.607258098311,
+        "lossKWh": 112.40725809831109,
+        "revenue": 1231.2,
+        "gridCost": 1343.58,
+        "auxiliaryGridCost": 0,
+        "completed": 3,
+        "unservedKWh": 0,
+        "initialStoredKWh": 1026,
+        "finalStoredKWh": 1026.0000000000005,
+        "maxBalanceResidual": 4.547473508864641e-13
+      },
+      "serviceTotals": {
+        "initialStoredKWh": 1026,
+        "finalStoredKWh": 1026.0000000000005,
+        "batteryTerminalKWh": 1282.4999999999993,
+        "batteryLossKWh": 51.30000000000013,
+        "outgoingKWh": 1539,
+        "returnedKWh": 307.8,
+        "swapDeliveredKWh": 1231.2,
+        "directTerminalKWh": 0,
+        "directStoredKWh": 0,
+        "directBatteryLossKWh": 0,
+        "revenue": 1231.2,
+        "completed": 3,
+        "inventoryResidualKWh": -1.3642420526593924e-12
+      },
+      "rows": [
+        {
+          "minute": 0,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 7.499999,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 7.5,
+          "energyKWh": 102.60000000000001,
+          "soc": 0.2,
+          "remainingKWh": 410.4,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 15,
+          "energyKWh": 169.8,
+          "soc": 0.3309941520467837,
+          "remainingKWh": 343.2,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 22.5,
+          "energyKWh": 237,
+          "soc": 0.4619883040935672,
+          "remainingKWh": 276,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 146.67057788207686
+        },
+        {
+          "minute": 30,
+          "energyKWh": 304.2,
+          "soc": 0.5929824561403508,
+          "remainingKWh": 208.8,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 220.0058668231153
+        },
+        {
+          "minute": 37.5,
+          "energyKWh": 371.40000000000003,
+          "soc": 0.7239766081871346,
+          "remainingKWh": 141.59999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 293.3411557641537
+        },
+        {
+          "minute": 41.85267857142857,
+          "energyKWh": 410.40000000000003,
+          "soc": 0.8,
+          "remainingKWh": 102.59999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 335.9018145245778
+        },
+        {
+          "minute": 45,
+          "energyKWh": 424.49999999999994,
+          "soc": 0.8274853801169589,
+          "remainingKWh": 88.50000000000006,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 351.2891296148851
+        },
+        {
+          "minute": 52.5,
+          "energyKWh": 458.0999999999999,
+          "soc": 0.8929824561403507,
+          "remainingKWh": 54.90000000000009,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 387.95677408540433
+        },
+        {
+          "minute": 53.30357142857143,
+          "energyKWh": 461.70000000000005,
+          "soc": 0.9000000000000001,
+          "remainingKWh": 51.299999999999955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 391.8854502786742
+        },
+        {
+          "minute": 60,
+          "energyKWh": 476.70000000000005,
+          "soc": 0.9292397660818714,
+          "remainingKWh": 36.299999999999955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 408.25493441729884
+        },
+        {
+          "minute": 67.5,
+          "energyKWh": 493.50000000000006,
+          "soc": 0.9619883040935674,
+          "remainingKWh": 19.499999999999943,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 426.58875665255846
+        },
+        {
+          "minute": 75,
+          "energyKWh": 510.3,
+          "soc": 0.9947368421052631,
+          "remainingKWh": 2.6999999999999886,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 444.9225788878181
+        },
+        {
+          "minute": 76.20535714285714,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 82.5,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 90,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 97.5,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 105,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 112.5,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 120,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277027
+        },
+        {
+          "minute": 1440,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1447.499999,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1447.5,
+          "energyKWh": 102.60000000000001,
+          "soc": 0.2,
+          "remainingKWh": 410.4,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1455,
+          "energyKWh": 169.8,
+          "soc": 0.3309941520467837,
+          "remainingKWh": 343.2,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 1462.5,
+          "energyKWh": 237,
+          "soc": 0.4619883040935672,
+          "remainingKWh": 276,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 146.67057788207686
+        },
+        {
+          "minute": 1470,
+          "energyKWh": 304.2,
+          "soc": 0.5929824561403508,
+          "remainingKWh": 208.8,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 220.0058668231153
+        },
+        {
+          "minute": 1477.5,
+          "energyKWh": 371.40000000000003,
+          "soc": 0.7239766081871346,
+          "remainingKWh": 141.59999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 293.3411557641537
+        },
+        {
+          "minute": 1481.8526785714287,
+          "energyKWh": 410.4000000000007,
+          "soc": 0.8000000000000014,
+          "remainingKWh": 102.59999999999928,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.90181452457875
+        },
+        {
+          "minute": 1485,
+          "energyKWh": 424.5000000000003,
+          "soc": 0.8274853801169596,
+          "remainingKWh": 88.49999999999972,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 351.28912961488544
+        },
+        {
+          "minute": 1492.5,
+          "energyKWh": 458.1000000000003,
+          "soc": 0.8929824561403514,
+          "remainingKWh": 54.89999999999969,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 387.9567740854047
+        },
+        {
+          "minute": 1493.3035714285713,
+          "energyKWh": 461.70000000000005,
+          "soc": 0.9000000000000001,
+          "remainingKWh": 51.299999999999955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 391.8854502786741
+        },
+        {
+          "minute": 1500,
+          "energyKWh": 476.7000000000003,
+          "soc": 0.9292397660818719,
+          "remainingKWh": 36.29999999999973,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 408.254934417299
+        },
+        {
+          "minute": 1507.5,
+          "energyKWh": 493.5000000000003,
+          "soc": 0.9619883040935678,
+          "remainingKWh": 19.499999999999716,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 426.58875665255863
+        },
+        {
+          "minute": 1515,
+          "energyKWh": 510.3000000000003,
+          "soc": 0.9947368421052637,
+          "remainingKWh": 2.6999999999997044,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 444.9225788878182
+        },
+        {
+          "minute": 1516.205357142857,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 1522.5,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 1530,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 1537.5,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 1545,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 1552.5,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 1560,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277004
+        },
+        {
+          "minute": 2880,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2887.499999,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2887.5,
+          "energyKWh": 102.60000000000001,
+          "soc": 0.2,
+          "remainingKWh": 410.4,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2895,
+          "energyKWh": 169.8,
+          "soc": 0.3309941520467837,
+          "remainingKWh": 343.2,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 2902.5,
+          "energyKWh": 237,
+          "soc": 0.4619883040935672,
+          "remainingKWh": 276,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 146.67057788207686
+        },
+        {
+          "minute": 2910,
+          "energyKWh": 304.2,
+          "soc": 0.5929824561403508,
+          "remainingKWh": 208.8,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 220.0058668231153
+        },
+        {
+          "minute": 2917.5,
+          "energyKWh": 371.40000000000003,
+          "soc": 0.7239766081871346,
+          "remainingKWh": 141.59999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 293.3411557641537
+        },
+        {
+          "minute": 2921.8526785714284,
+          "energyKWh": 410.39999999999867,
+          "soc": 0.7999999999999974,
+          "remainingKWh": 102.60000000000133,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.90181452457654
+        },
+        {
+          "minute": 2925,
+          "energyKWh": 424.49999999999926,
+          "soc": 0.8274853801169576,
+          "remainingKWh": 88.50000000000074,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 351.28912961488436
+        },
+        {
+          "minute": 2932.5,
+          "energyKWh": 458.0999999999992,
+          "soc": 0.8929824561403493,
+          "remainingKWh": 54.90000000000077,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 387.95677408540354
+        },
+        {
+          "minute": 2933.3035714285716,
+          "energyKWh": 461.70000000000005,
+          "soc": 0.9000000000000001,
+          "remainingKWh": 51.299999999999955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 391.8854502786741
+        },
+        {
+          "minute": 2940,
+          "energyKWh": 476.69999999999976,
+          "soc": 0.9292397660818709,
+          "remainingKWh": 36.30000000000024,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 408.25493441729844
+        },
+        {
+          "minute": 2947.5,
+          "energyKWh": 493.4999999999998,
+          "soc": 0.9619883040935668,
+          "remainingKWh": 19.500000000000227,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 426.58875665255806
+        },
+        {
+          "minute": 2955,
+          "energyKWh": 510.2999999999997,
+          "soc": 0.9947368421052626,
+          "remainingKWh": 2.700000000000273,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 444.9225788878177
+        },
+        {
+          "minute": 2956.2053571428573,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        },
+        {
+          "minute": 2962.5,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        },
+        {
+          "minute": 2970,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        },
+        {
+          "minute": 2977.5,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        },
+        {
+          "minute": 2985,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        },
+        {
+          "minute": 2992.5,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        },
+        {
+          "minute": 3000,
+          "energyKWh": 513.0000000000005,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 447.86908603277055
+        }
+      ]
+    },
+    {
+      "id": "nonlinear_taper",
+      "days": 3,
+      "totals": {
+        "deliveredKWh": 1292.7599999999998,
+        "requestedKWh": 1292.7599999999998,
+        "gridKWh": 1410.7876210032257,
+        "lossKWh": 118.0276210032266,
+        "revenue": 1292.76,
+        "gridCost": 1410.78,
+        "auxiliaryGridCost": 0,
+        "completed": 3,
+        "unservedKWh": 0,
+        "initialStoredKWh": 1026,
+        "finalStoredKWh": 1026.0000000000005,
+        "maxBalanceResidual": 1.1368683772161603e-12
+      },
+      "serviceTotals": {
+        "initialStoredKWh": 1026,
+        "finalStoredKWh": 1026.0000000000005,
+        "batteryTerminalKWh": 1346.6249999999982,
+        "batteryLossKWh": 53.865000000000116,
+        "outgoingKWh": 1539,
+        "returnedKWh": 246.24000000000004,
+        "swapDeliveredKWh": 1292.76,
+        "directTerminalKWh": 0,
+        "directStoredKWh": 0,
+        "directBatteryLossKWh": 0,
+        "revenue": 1292.76,
+        "completed": 3,
+        "inventoryResidualKWh": -2.2737367544323206e-12
+      },
+      "rows": [
+        {
+          "minute": 0,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 7.499999,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 7.5,
+          "energyKWh": 82.08000000000001,
+          "soc": 0.20000000000000004,
+          "remainingKWh": 430.91999999999996,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 15,
+          "energyKWh": 149.28000000000003,
+          "soc": 0.3637426900584796,
+          "remainingKWh": 363.71999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 21.241071428571427,
+          "energyKWh": 205.2,
+          "soc": 0.49999999999999994,
+          "remainingKWh": 307.8,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 134.3607258098311
+        },
+        {
+          "minute": 22.5,
+          "energyKWh": 216.48000000000002,
+          "soc": 0.5183235867446394,
+          "remainingKWh": 296.52,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 146.67057788207686
+        },
+        {
+          "minute": 30,
+          "energyKWh": 283.68,
+          "soc": 0.6274853801169591,
+          "remainingKWh": 229.32,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 220.0058668231153
+        },
+        {
+          "minute": 37.5,
+          "energyKWh": 350.88,
+          "soc": 0.7366471734892788,
+          "remainingKWh": 162.12,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 293.3411557641537
+        },
+        {
+          "minute": 41.85267857142857,
+          "energyKWh": 389.88,
+          "soc": 0.8,
+          "remainingKWh": 123.12,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 335.9018145245778
+        },
+        {
+          "minute": 45,
+          "energyKWh": 403.9799999999999,
+          "soc": 0.822904483430799,
+          "remainingKWh": 109.0200000000001,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 351.2891296148851
+        },
+        {
+          "minute": 52.5,
+          "energyKWh": 437.5799999999999,
+          "soc": 0.8774853801169589,
+          "remainingKWh": 75.42000000000007,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 387.9567740854043
+        },
+        {
+          "minute": 55.59375,
+          "energyKWh": 451.44000000000005,
+          "soc": 0.9000000000000001,
+          "remainingKWh": 61.559999999999945,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 403.0821774294934
+        },
+        {
+          "minute": 60,
+          "energyKWh": 461.31000000000006,
+          "soc": 0.9160331384015596,
+          "remainingKWh": 51.68999999999994,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 413.8532979927084
+        },
+        {
+          "minute": 67.5,
+          "energyKWh": 478.11000000000007,
+          "soc": 0.9433235867446395,
+          "remainingKWh": 34.88999999999993,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 432.187120227968
+        },
+        {
+          "minute": 75,
+          "energyKWh": 494.9100000000001,
+          "soc": 0.9706140350877195,
+          "remainingKWh": 18.089999999999918,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 450.52094246322764
+        },
+        {
+          "minute": 82.5,
+          "energyKWh": 511.7100000000001,
+          "soc": 0.9979044834307993,
+          "remainingKWh": 1.2899999999999068,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 468.8547646984872
+        },
+        {
+          "minute": 83.07589285714286,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440864
+        },
+        {
+          "minute": 90,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440864
+        },
+        {
+          "minute": 97.5,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440864
+        },
+        {
+          "minute": 105,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440864
+        },
+        {
+          "minute": 112.5,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440864
+        },
+        {
+          "minute": 120,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440864
+        },
+        {
+          "minute": 1440,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1447.499999,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1447.5,
+          "energyKWh": 82.08000000000001,
+          "soc": 0.20000000000000004,
+          "remainingKWh": 430.91999999999996,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1455,
+          "energyKWh": 149.28000000000003,
+          "soc": 0.3637426900584796,
+          "remainingKWh": 363.71999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 1461.2410714285713,
+          "energyKWh": 205.19999999999914,
+          "soc": 0.49999999999999784,
+          "remainingKWh": 307.80000000000086,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 134.36072580983017
+        },
+        {
+          "minute": 1462.5,
+          "energyKWh": 216.48000000000002,
+          "soc": 0.5183235867446394,
+          "remainingKWh": 296.52,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 146.67057788207686
+        },
+        {
+          "minute": 1470,
+          "energyKWh": 283.68,
+          "soc": 0.6274853801169591,
+          "remainingKWh": 229.32,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 220.0058668231153
+        },
+        {
+          "minute": 1477.5,
+          "energyKWh": 350.88,
+          "soc": 0.7366471734892788,
+          "remainingKWh": 162.12,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 293.3411557641537
+        },
+        {
+          "minute": 1481.8526785714287,
+          "energyKWh": 389.88000000000073,
+          "soc": 0.8000000000000012,
+          "remainingKWh": 123.11999999999927,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.90181452457875
+        },
+        {
+          "minute": 1485,
+          "energyKWh": 403.9800000000003,
+          "soc": 0.8229044834307997,
+          "remainingKWh": 109.0199999999997,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 351.28912961488544
+        },
+        {
+          "minute": 1492.5,
+          "energyKWh": 437.5800000000003,
+          "soc": 0.8774853801169595,
+          "remainingKWh": 75.41999999999967,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 387.9567740854047
+        },
+        {
+          "minute": 1495.59375,
+          "energyKWh": 451.44000000000005,
+          "soc": 0.9000000000000001,
+          "remainingKWh": 61.559999999999945,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 403.0821774294933
+        },
+        {
+          "minute": 1500,
+          "energyKWh": 461.31000000000006,
+          "soc": 0.9160331384015596,
+          "remainingKWh": 51.68999999999994,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 413.8532979927083
+        },
+        {
+          "minute": 1507.5,
+          "energyKWh": 478.11000000000007,
+          "soc": 0.9433235867446395,
+          "remainingKWh": 34.88999999999993,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 432.1871202279679
+        },
+        {
+          "minute": 1515,
+          "energyKWh": 494.9100000000001,
+          "soc": 0.9706140350877195,
+          "remainingKWh": 18.089999999999918,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 450.5209424632275
+        },
+        {
+          "minute": 1522.5,
+          "energyKWh": 511.71000000000004,
+          "soc": 0.9979044834307993,
+          "remainingKWh": 1.2899999999999636,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 468.85476469848714
+        },
+        {
+          "minute": 1523.075892857143,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440836
+        },
+        {
+          "minute": 1530,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440836
+        },
+        {
+          "minute": 1537.5,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440836
+        },
+        {
+          "minute": 1545,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440836
+        },
+        {
+          "minute": 1552.5,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440836
+        },
+        {
+          "minute": 1560,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440836
+        },
+        {
+          "minute": 2880,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2887.499999,
+          "energyKWh": 512.9999999999999,
+          "soc": 0.9999999999999998,
+          "remainingKWh": 1.1368683772161603e-13,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2887.5,
+          "energyKWh": 82.08000000000001,
+          "soc": 0.20000000000000004,
+          "remainingKWh": 430.91999999999996,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2895,
+          "energyKWh": 149.28000000000003,
+          "soc": 0.3637426900584796,
+          "remainingKWh": 363.71999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 2901.2410714285716,
+          "energyKWh": 205.20000000000118,
+          "soc": 0.5000000000000019,
+          "remainingKWh": 307.7999999999988,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 134.3607258098324
+        },
+        {
+          "minute": 2902.5,
+          "energyKWh": 216.48000000000002,
+          "soc": 0.5183235867446394,
+          "remainingKWh": 296.52,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 146.67057788207686
+        },
+        {
+          "minute": 2910,
+          "energyKWh": 283.68,
+          "soc": 0.6274853801169591,
+          "remainingKWh": 229.32,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 220.0058668231153
+        },
+        {
+          "minute": 2917.5,
+          "energyKWh": 350.88,
+          "soc": 0.7366471734892788,
+          "remainingKWh": 162.12,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 293.3411557641537
+        },
+        {
+          "minute": 2921.8526785714284,
+          "energyKWh": 389.8799999999987,
+          "soc": 0.7999999999999978,
+          "remainingKWh": 123.12000000000131,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.90181452457654
+        },
+        {
+          "minute": 2925,
+          "energyKWh": 403.9799999999993,
+          "soc": 0.8229044834307981,
+          "remainingKWh": 109.02000000000072,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 351.28912961488436
+        },
+        {
+          "minute": 2932.5,
+          "energyKWh": 437.57999999999925,
+          "soc": 0.8774853801169578,
+          "remainingKWh": 75.42000000000075,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 387.95677408540354
+        },
+        {
+          "minute": 2935.59375,
+          "energyKWh": 451.43999999999954,
+          "soc": 0.8999999999999992,
+          "remainingKWh": 61.56000000000046,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 403.08217742949273
+        },
+        {
+          "minute": 2940,
+          "energyKWh": 461.30999999999955,
+          "soc": 0.9160331384015588,
+          "remainingKWh": 51.69000000000045,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 413.8532979927077
+        },
+        {
+          "minute": 2947.5,
+          "energyKWh": 478.10999999999956,
+          "soc": 0.9433235867446386,
+          "remainingKWh": 34.89000000000044,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 432.18712022796734
+        },
+        {
+          "minute": 2955,
+          "energyKWh": 494.90999999999957,
+          "soc": 0.9706140350877186,
+          "remainingKWh": 18.09000000000043,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 450.52094246322696
+        },
+        {
+          "minute": 2962.5,
+          "energyKWh": 511.7099999999995,
+          "soc": 0.9979044834307984,
+          "remainingKWh": 1.2900000000004752,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 468.8547646984866
+        },
+        {
+          "minute": 2963.0758928571427,
+          "energyKWh": 512.9999999999991,
+          "soc": 0.9999999999999984,
+          "remainingKWh": 9.094947017729282e-13,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 470.26254033440784
+        },
+        {
+          "minute": 2970,
+          "energyKWh": 513.0000000000003,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344089
+        },
+        {
+          "minute": 2977.5,
+          "energyKWh": 513.0000000000003,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344089
+        },
+        {
+          "minute": 2985,
+          "energyKWh": 513.0000000000003,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344089
+        },
+        {
+          "minute": 2992.5,
+          "energyKWh": 513.0000000000003,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344089
+        },
+        {
+          "minute": 3000,
+          "energyKWh": 513.0000000000003,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344089
+        }
+      ]
+    },
+    {
+      "id": "nonlinear_curtailed_outage",
+      "days": 3,
+      "totals": {
+        "deliveredKWh": 1292.7599999999998,
+        "requestedKWh": 1292.7599999999998,
+        "gridKWh": 1410.7876210032246,
+        "lossKWh": 118.02762100322647,
+        "revenue": 1292.76,
+        "gridCost": 1410.78,
+        "auxiliaryGridCost": 0,
+        "completed": 3,
+        "unservedKWh": 0,
+        "initialStoredKWh": 1026,
+        "finalStoredKWh": 1025.9999999999998,
+        "maxBalanceResidual": 1.3642420526593924e-12
+      },
+      "serviceTotals": {
+        "initialStoredKWh": 1026,
+        "finalStoredKWh": 1025.9999999999998,
+        "batteryTerminalKWh": 1346.6249999999984,
+        "batteryLossKWh": 53.86500000000008,
+        "outgoingKWh": 1538.9999999999998,
+        "returnedKWh": 246.24000000000004,
+        "swapDeliveredKWh": 1292.7599999999998,
+        "directTerminalKWh": 0,
+        "directStoredKWh": 0,
+        "directBatteryLossKWh": 0,
+        "revenue": 1292.76,
+        "completed": 3,
+        "inventoryResidualKWh": -1.3642420526593924e-12
+      },
+      "rows": [
+        {
+          "minute": 0,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 7.499999,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 7.5,
+          "energyKWh": 82.08000000000001,
+          "soc": 0.20000000000000004,
+          "remainingKWh": 430.91999999999996,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 15,
+          "energyKWh": 149.28000000000003,
+          "soc": 0.3637426900584796,
+          "remainingKWh": 363.71999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 20,
+          "energyKWh": 194.0800000000001,
+          "soc": 0.47290448343079944,
+          "remainingKWh": 318.9199999999999,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 122.22548156839737
+        },
+        {
+          "minute": 22.482142857142858,
+          "energyKWh": 205.20000000003975,
+          "soc": 0.5000000000000645,
+          "remainingKWh": 307.7999999999603,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 134.3607258098744
+        },
+        {
+          "minute": 22.5,
+          "energyKWh": 205.28000000004005,
+          "soc": 0.5001299545159844,
+          "remainingKWh": 307.71999999995995,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 134.44802972528072
+        },
+        {
+          "minute": 30,
+          "energyKWh": 238.8800000001599,
+          "soc": 0.554710851202339,
+          "remainingKWh": 274.1199999998401,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 171.1156741959307
+        },
+        {
+          "minute": 35,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 0,
+          "status": "waiting-power",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 37.5,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 0,
+          "status": "waiting-power",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 42,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 45,
+          "energyKWh": 288.16000000023996,
+          "soc": 0.6347628330088368,
+          "remainingKWh": 224.83999999976004,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 224.89488608611273
+        },
+        {
+          "minute": 52.5,
+          "energyKWh": 355.36000000023995,
+          "soc": 0.7439246263811565,
+          "remainingKWh": 157.63999999976005,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 298.2301750271512
+        },
+        {
+          "minute": 56.35267857142857,
+          "energyKWh": 389.8800000001199,
+          "soc": 0.8000000000001948,
+          "remainingKWh": 123.11999999988012,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.9018145247086
+        },
+        {
+          "minute": 60,
+          "energyKWh": 406.22000000011985,
+          "soc": 0.8265432098767379,
+          "remainingKWh": 106.77999999988015,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 353.73363924638375
+        },
+        {
+          "minute": 67.5,
+          "energyKWh": 439.8200000001199,
+          "soc": 0.8811241065628979,
+          "remainingKWh": 73.17999999988012,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 390.4012837169029
+        },
+        {
+          "minute": 70.09375,
+          "energyKWh": 451.44000000006,
+          "soc": 0.9000000000000975,
+          "remainingKWh": 61.559999999939976,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 403.08217742955867
+        },
+        {
+          "minute": 75,
+          "energyKWh": 462.43000000006003,
+          "soc": 0.917852501624529,
+          "remainingKWh": 50.56999999993997,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 415.07555280845764
+        },
+        {
+          "minute": 82.5,
+          "energyKWh": 479.23000000006004,
+          "soc": 0.945142949967609,
+          "remainingKWh": 33.769999999939955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 433.40937504371726
+        },
+        {
+          "minute": 90,
+          "energyKWh": 496.03000000006006,
+          "soc": 0.9724333983106889,
+          "remainingKWh": 16.969999999939944,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 451.7431972789768
+        },
+        {
+          "minute": 97.5,
+          "energyKWh": 512.8300000000601,
+          "soc": 0.9997238466537688,
+          "remainingKWh": 0.16999999993993242,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 470.07701951423644
+        },
+        {
+          "minute": 97.57589285714286,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344084
+        },
+        {
+          "minute": 105,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344084
+        },
+        {
+          "minute": 112.5,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344084
+        },
+        {
+          "minute": 120,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344084
+        },
+        {
+          "minute": 1440,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1447.499999,
+          "energyKWh": 513,
+          "soc": 1,
+          "remainingKWh": 0,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1447.5,
+          "energyKWh": 82.08000000000001,
+          "soc": 0.20000000000000004,
+          "remainingKWh": 430.91999999999996,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 1455,
+          "energyKWh": 149.28000000000003,
+          "soc": 0.3637426900584796,
+          "remainingKWh": 363.71999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 1460,
+          "energyKWh": 194.0800000000001,
+          "soc": 0.47290448343079944,
+          "remainingKWh": 318.9199999999999,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 122.22548156839737
+        },
+        {
+          "minute": 1462.482142857143,
+          "energyKWh": 205.20000000003992,
+          "soc": 0.5000000000000648,
+          "remainingKWh": 307.79999999996005,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 134.36072580987457
+        },
+        {
+          "minute": 1462.5,
+          "energyKWh": 205.28000000004005,
+          "soc": 0.5001299545159844,
+          "remainingKWh": 307.71999999995995,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 134.44802972528072
+        },
+        {
+          "minute": 1470,
+          "energyKWh": 238.8800000001599,
+          "soc": 0.554710851202339,
+          "remainingKWh": 274.1199999998401,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 171.1156741959307
+        },
+        {
+          "minute": 1475,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 0,
+          "status": "waiting-power",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 1477.5,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 0,
+          "status": "waiting-power",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 1482,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 1485,
+          "energyKWh": 288.16000000023996,
+          "soc": 0.6347628330088368,
+          "remainingKWh": 224.83999999976004,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 224.89488608611273
+        },
+        {
+          "minute": 1492.5,
+          "energyKWh": 355.36000000023995,
+          "soc": 0.7439246263811565,
+          "remainingKWh": 157.63999999976005,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 298.2301750271512
+        },
+        {
+          "minute": 1496.3526785714287,
+          "energyKWh": 389.8800000001204,
+          "soc": 0.8000000000001957,
+          "remainingKWh": 123.11999999987961,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.90181452470915
+        },
+        {
+          "minute": 1500,
+          "energyKWh": 406.2200000001199,
+          "soc": 0.826543209876738,
+          "remainingKWh": 106.77999999988009,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 353.73363924638375
+        },
+        {
+          "minute": 1507.5,
+          "energyKWh": 439.82000000011993,
+          "soc": 0.8811241065628979,
+          "remainingKWh": 73.17999999988007,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 390.401283716903
+        },
+        {
+          "minute": 1510.09375,
+          "energyKWh": 451.44000000006,
+          "soc": 0.9000000000000975,
+          "remainingKWh": 61.559999999939976,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 403.08217742955867
+        },
+        {
+          "minute": 1515,
+          "energyKWh": 462.43000000006003,
+          "soc": 0.917852501624529,
+          "remainingKWh": 50.56999999993997,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 415.07555280845764
+        },
+        {
+          "minute": 1522.5,
+          "energyKWh": 479.23000000006004,
+          "soc": 0.945142949967609,
+          "remainingKWh": 33.769999999939955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 433.40937504371726
+        },
+        {
+          "minute": 1530,
+          "energyKWh": 496.03000000006006,
+          "soc": 0.9724333983106889,
+          "remainingKWh": 16.969999999939944,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 451.7431972789769
+        },
+        {
+          "minute": 1537.5,
+          "energyKWh": 512.8300000000601,
+          "soc": 0.9997238466537688,
+          "remainingKWh": 0.16999999993993242,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 470.07701951423644
+        },
+        {
+          "minute": 1537.575892857143,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344082
+        },
+        {
+          "minute": 1545,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344082
+        },
+        {
+          "minute": 1552.5,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344082
+        },
+        {
+          "minute": 1560,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.2625403344082
+        },
+        {
+          "minute": 2880,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2887.499999,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "swapping",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2887.5,
+          "energyKWh": 82.08000000000001,
+          "soc": 0.20000000000000004,
+          "remainingKWh": 430.91999999999996,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 0
+        },
+        {
+          "minute": 2895,
+          "energyKWh": 149.28000000000003,
+          "soc": 0.3637426900584796,
+          "remainingKWh": 363.71999999999997,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 73.33528894103843
+        },
+        {
+          "minute": 2900,
+          "energyKWh": 194.0800000000001,
+          "soc": 0.47290448343079944,
+          "remainingKWh": 318.9199999999999,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 122.22548156839737
+        },
+        {
+          "minute": 2902.4821428571427,
+          "energyKWh": 205.2000000000389,
+          "soc": 0.5000000000000632,
+          "remainingKWh": 307.7999999999611,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 134.36072580987343
+        },
+        {
+          "minute": 2902.5,
+          "energyKWh": 205.28000000004005,
+          "soc": 0.5001299545159844,
+          "remainingKWh": 307.71999999995995,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 134.44802972528072
+        },
+        {
+          "minute": 2910,
+          "energyKWh": 238.8800000001599,
+          "soc": 0.554710851202339,
+          "remainingKWh": 274.1199999998401,
+          "inputKW": 280.00000000099874,
+          "status": "charging",
+          "gridKWh": 171.1156741959307
+        },
+        {
+          "minute": 2915,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 0,
+          "status": "waiting-power",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 2917.5,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 0,
+          "status": "waiting-power",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 2922,
+          "energyKWh": 261.28000000023997,
+          "soc": 0.591098115659909,
+          "remainingKWh": 251.71999999976003,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 195.56077050969736
+        },
+        {
+          "minute": 2925,
+          "energyKWh": 288.16000000023996,
+          "soc": 0.6347628330088368,
+          "remainingKWh": 224.83999999976004,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 224.89488608611273
+        },
+        {
+          "minute": 2932.5,
+          "energyKWh": 355.36000000023995,
+          "soc": 0.7439246263811565,
+          "remainingKWh": 157.63999999976005,
+          "inputKW": 560,
+          "status": "charging",
+          "gridKWh": 298.2301750271512
+        },
+        {
+          "minute": 2936.3526785714284,
+          "energyKWh": 389.88000000011834,
+          "soc": 0.8000000000001923,
+          "remainingKWh": 123.11999999988166,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 335.90181452470694
+        },
+        {
+          "minute": 2940,
+          "energyKWh": 406.2200000001189,
+          "soc": 0.8265432098767364,
+          "remainingKWh": 106.77999999988111,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 353.73363924638267
+        },
+        {
+          "minute": 2947.5,
+          "energyKWh": 439.8200000001189,
+          "soc": 0.8811241065628962,
+          "remainingKWh": 73.17999999988109,
+          "inputKW": 280,
+          "status": "charging",
+          "gridKWh": 390.4012837169019
+        },
+        {
+          "minute": 2950.09375,
+          "energyKWh": 451.44000000006,
+          "soc": 0.9000000000000975,
+          "remainingKWh": 61.559999999939976,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 403.0821774295586
+        },
+        {
+          "minute": 2955,
+          "energyKWh": 462.43000000006003,
+          "soc": 0.917852501624529,
+          "remainingKWh": 50.56999999993997,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 415.07555280845764
+        },
+        {
+          "minute": 2962.5,
+          "energyKWh": 479.23000000006004,
+          "soc": 0.945142949967609,
+          "remainingKWh": 33.769999999939955,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 433.4093750437172
+        },
+        {
+          "minute": 2970,
+          "energyKWh": 496.03000000006006,
+          "soc": 0.9724333983106889,
+          "remainingKWh": 16.969999999939944,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 451.7431972789768
+        },
+        {
+          "minute": 2977.5,
+          "energyKWh": 512.8300000000601,
+          "soc": 0.9997238466537688,
+          "remainingKWh": 0.16999999993993242,
+          "inputKW": 140,
+          "status": "charging",
+          "gridKWh": 470.07701951423644
+        },
+        {
+          "minute": 2977.5758928571427,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440813
+        },
+        {
+          "minute": 2985,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440813
+        },
+        {
+          "minute": 2992.5,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440813
+        },
+        {
+          "minute": 3000,
+          "energyKWh": 512.9999999999998,
+          "soc": 0.9999999999999996,
+          "remainingKWh": 2.2737367544323206e-13,
+          "inputKW": 0,
+          "status": "ready",
+          "gridKWh": 470.26254033440813
+        }
+      ]
+    },
+    {
+      "id": "hourly_soh_410.4",
+      "transaction": {
+        "id": "hourly-A-0-0-swap-0",
+        "station": "A",
+        "kind": "truck-swap",
+        "arrival": 0,
+        "start": null,
+        "completion": null,
+        "requestedKWh": 410.4,
+        "deliveredKWh": 0,
+        "storedVehicleKWh": 0,
+        "unitPrice": 1,
+        "revenue": 0,
+        "gunIds": []
+      },
+      "totals": {
+        "deliveredKWh": 0,
+        "requestedKWh": 410.4,
+        "gridKWh": 0,
+        "lossKWh": 0,
+        "revenue": 0,
+        "gridCost": 0,
+        "auxiliaryGridCost": 0,
+        "completed": 0,
+        "unservedKWh": 410.4,
+        "initialStoredKWh": 923.4000000000001,
+        "finalStoredKWh": 923.4000000000001,
+        "maxBalanceResidual": 0
+      }
+    },
+    {
+      "id": "hourly_soh_300",
+      "transaction": {
+        "id": "hourly-A-0-0-swap-0",
+        "station": "A",
+        "kind": "truck-swap",
+        "arrival": 0,
+        "start": 0,
+        "completion": 7.5,
+        "requestedKWh": 300,
+        "deliveredKWh": 300,
+        "storedVehicleKWh": 0,
+        "unitPrice": 1,
+        "revenue": 300,
+        "gunIds": [],
+        "outgoingBatteryId": "initial",
+        "incomingBatteryId": "hourly-A-0-0-swap-0:returned"
+      },
+      "totals": {
+        "deliveredKWh": 300,
+        "requestedKWh": 300,
+        "gridKWh": 327.3896827724934,
+        "lossKWh": 27.389682772492968,
+        "revenue": 300,
+        "gridCost": 327.39,
+        "auxiliaryGridCost": 0,
+        "completed": 1,
+        "unservedKWh": 0,
+        "initialStoredKWh": 923.4000000000001,
+        "finalStoredKWh": 923.4000000000001,
+        "maxBalanceResidual": 4.547473508864641e-13
+      }
+    }
+  ]
+}
