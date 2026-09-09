@@ -151,3 +151,24 @@ test("financial setup and independent case launchers remain available before the
  assert.equal((cases.match(/>載入並測算<\/button>/g)??[]).length,3);
  assert.match(cases,/尚無與三個固定驗證輸入完全相同的結果快照/);
 });
+
+
+test("SOC controls expose percentages per station and capacity summaries follow the applied window",async()=>{
+ const { StationPanel }=await vite.ssrLoadModule('/components/simulator/panels.tsx');
+ const { EngineeringPanel }=await vite.ssrLoadModule('/components/simulator/facility.tsx');
+ const { SocRangeEditor }=await vite.ssrLoadModule('/components/simulator/soc-settings.tsx');
+ const { engineeringProject,physicalProjection }=await import('../packages/engineering/index.ts');
+ const { applyStationSOC }=await import('../packages/station-settings/index.ts');
+ const p=applyStationSOC(physicalProjection(engineeringProject()),'A',.2,.8);
+ const props={project:p,setProject:()=>{}};
+ for(const Component of [StationPanel,EngineeringPanel]){
+  const html=renderToStaticMarkup(React.createElement(Component,props));
+  for(const label of ['A 區回收 SOC 下限','A 區交付 SOC 上限','B 區回收 SOC 下限','B 區交付 SOC 上限','套用 A 區 SOC 並同步全期換電需求','套用 B 區 SOC 並同步全期換電需求','307.8000','410.4000'])assert.ok(html.includes(label),label);
+  assert.doesNotMatch(html,/Ready SOC|回收 SOC <small>0–1/);
+ }
+ const capacity=renderToStaticMarkup(React.createElement(EngineeringPanel,props));
+ assert.match(capacity,/2,528\.13/);assert.match(capacity,/連續補電餘量/);assert.doesNotMatch(capacity,/3370\.84/);
+ const invalid={...p,station:{...p.station,A:{...p.station.A,returnSOC:.9,readySOC:.8}}};
+ const html=renderToStaticMarkup(React.createElement(SocRangeEditor,{...props,project:invalid,station:'A'}));
+ assert.match(html,/role="alert"/);assert.match(html,/disabled/);assert.doesNotMatch(html,/每次補電預覽/);
+});

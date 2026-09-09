@@ -1,0 +1,2065 @@
+{
+  "generatedAt": "2026-09-09T02:22:17.134Z",
+  "task": "Exactly three independent multi-day analytic verification scenarios",
+  "status": "PASS",
+  "validatorMutationChecks": [
+    {
+      "label": "physical source meter +1 kWh",
+      "reusedCaseId": "V01_SST_3D",
+      "mutationPath": "sourceMeters[0].importKWh",
+      "original": 46.99248120300752,
+      "mutated": 47.99248120300752,
+      "expectedStatus": "FAIL",
+      "observedStatus": "FAIL",
+      "detected": true,
+      "failedAssertions": 8,
+      "exampleFailurePaths": [
+        "V01_SST_3D.sourceHour[0:A-grid].importKWh",
+        "V01_SST_3D.sourceHour[0:A-grid].energyForInvoiceMicroKWh",
+        "V01_SST_3D.sourceHour[0:A-grid].costExact",
+        "V01_SST_3D.sourceTotal[A-grid].importKWh",
+        "V01_SST_3D.sourceTotal[A-grid].costExact",
+        "V01_SST_3D.totals.gridCostExact"
+      ],
+      "excludedFromMainAssertionCounts": true
+    },
+    {
+      "label": "source-hour invoice +0.01 CNY",
+      "reusedCaseId": "V01_SST_3D",
+      "mutationPath": "sourceMeters[0].cost",
+      "original": 23.5,
+      "mutated": 23.51,
+      "expectedStatus": "FAIL",
+      "observedStatus": "FAIL",
+      "detected": true,
+      "failedAssertions": 6,
+      "exampleFailurePaths": [
+        "V01_SST_3D.hour[0].settledSourceCost",
+        "V01_SST_3D.sourceHour[0:A-grid].costSettled",
+        "V01_SST_3D.day[0].totals.gridCostSettled",
+        "V01_SST_3D.day[0].totals.modeledOperatingContributionSettled",
+        "V01_SST_3D.sourceTotal[A-grid].costSettled",
+        "V01_SST_3D.totals.sourceCostReconciliation"
+      ],
+      "excludedFromMainAssertionCounts": true
+    }
+  ],
+  "comparisonHistory": {
+    "firstRun": null,
+    "resolvedRun": {
+      "status": "PASS",
+      "assertions": 47489,
+      "failed": 0
+    }
+  },
+  "tolerance": {
+    "kWh": 0.000001,
+    "kW": 0.000001,
+    "minutes": 0.000001,
+    "count": 0,
+    "settledCurrencyCents": 0,
+    "currencyBinaryRepresentationNoiseCNY": 1e-8,
+    "unroundedAnalyticalCNY": 0.000001
+  },
+  "interpretation": "Analytic implementation verification, not validation against measured equipment or operating records.",
+  "peakExpectations": "Derived independently from positive-duration intersection of immutable analytic charge intervals and hour windows, using fixture stage efficiencies; never hourly-energy-as-peak or implementation allocator.",
+  "zeroFlowConvention": "An absent physical node/edge/source-hour record is zero only when the oracle expects zero; nonzero expected records must exist.",
+  "revenueConvention": "C02: half-open completion intervals; arrival price locked; cumulative delivered-session invoice increments accrued to each delivery interval, including unfinished-session deliveries. Daily/horizon settlement also compared.",
+  "codeSHA256": {
+    "packages/equipment-efficiency/index.ts": "919a20c965f5a1f02fb07a6ae37c71987c1c341857847b96ae3f37b613ead680",
+    "packages/equipment-profile/index.ts": "f806e0f3047b2141ab7ab4f0ba07ad14d738107560b1ce996b53d323be14f3f4",
+    "packages/topology-engine/index.ts": "25277afc124d4d4f10646b670117ceb2090de4fc0539f01726345506be95d8c1",
+    "packages/tabular/index.ts": "8fcfc7a638930735aa512fa5ffa6821bf00b98c8009b5ce272ccd8a1ecfc8ab5",
+    "packages/service-profile/index.ts": "8d090962b343ac62a84a194003e68b9f44863719e5a318a6aea48bda8ac093d1",
+    "packages/schemas/index.ts": "e11328e08d671e775d61adec103139b37520ddeb835f2af5dc19248ceef2c19d",
+    "packages/contracts/index.ts": "432e0a83f6a07ec109bd184c88d37eb3cdf218105ca2b5a603003ef21bcdc1df",
+    "packages/power-trace/index.ts": "f613bb9982130cd0c9c87beb1615e896d3fa3e51a3a3a1de6abc90da4358cf22",
+    "packages/station-engine/index.ts": "dd1e36af46baeb8372a7fff36ffc583282ceb323c3bc76b7849a6360d878755d",
+    "packages/electrical-engine/index.ts": "f32d91692f665078369aa53764a8fbee28b1ca433973af72ba5e0bade490d34f",
+    "packages/money/index.ts": "2b1de534011b4b461a276e1ca59661a008c9034d2ae70480c75544cb671b9b29",
+    "packages/verification/cases.ts": "f2d0e88204fd460ad87430c6aefe52113893317a6b6461dd01710dfb115ffe59",
+    "plugins/equipment/index.ts": "b0881cb32737542a318f549ada2e37eae02b84f625d398372bc48989fa277f72",
+    "data/verification/fixtures.json": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209"
+  },
+  "runnerSHA256": "956f79c35652d158a0279d74ad047e06c8095d761ac9734b3d1e3201631a4c8a",
+  "repo": "/workspace/sites/highway-swap-station-sim",
+  "expectedPath": "/workspace/sites/highway-swap-station-sim/data/verification/expected.json",
+  "fixturePath": "/workspace/sites/highway-swap-station-sim/data/verification/fixtures.json",
+  "expectedSHA256": "ea9c02a3d6b9b9a47f955fb707accbef97de7d184820e1d7ab687f1c65be208f",
+  "fixtureSHA256": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209",
+  "assertions": 47489,
+  "passed": 47489,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "V01_SST_3D",
+      "name": "Three-day SST swap inventory cycle",
+      "status": "PASS",
+      "engineVersion": "0.5.0",
+      "assertions": 8957,
+      "passed": 8957,
+      "failed": 0,
+      "categories": {
+        "structure": {
+          "assertions": 811,
+          "passed": 811,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.energy": {
+          "assertions": 1440,
+          "passed": 1440,
+          "failed": 0,
+          "maxAbsError": 2.0339285811132868e-13,
+          "maxErrorPath": "V01_SST_3D.hour[26].A.gridKWh"
+        },
+        "hourly.station.state": {
+          "assertions": 432,
+          "passed": 432,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.revenue": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.exactCost": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 1.0169642905566434e-13,
+          "maxErrorPath": "V01_SST_3D.hour[26].A.gridCostExact"
+        },
+        "conservation.station": {
+          "assertions": 288,
+          "passed": 288,
+          "failed": 0,
+          "maxAbsError": 1.0658141036401503e-13,
+          "maxErrorPath": "V01_SST_3D.hour[1].A.reportedBalanceResidual"
+        },
+        "hourly.station.peak": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.request": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.component.energy": {
+          "assertions": 1728,
+          "passed": 1728,
+          "failed": 0,
+          "maxAbsError": 2.0339285811132868e-13,
+          "maxErrorPath": "V01_SST_3D.hour[26].node[A-grid].inputKWh"
+        },
+        "hourly.component.terminal": {
+          "assertions": 576,
+          "passed": 576,
+          "failed": 0,
+          "maxAbsError": 1.8918200339612667e-13,
+          "maxErrorPath": "V01_SST_3D.hour[26].node[A-charger].terminalKWh"
+        },
+        "hourly.component.peak": {
+          "assertions": 576,
+          "passed": 576,
+          "failed": 0,
+          "maxAbsError": 7.105427357601002e-15,
+          "maxErrorPath": "V01_SST_3D.hour[0].node[A-sst].peakOutputKW"
+        },
+        "capacity.snapshotMetadata": {
+          "assertions": 72,
+          "passed": 72,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "capacity.feasibility": {
+          "assertions": 72,
+          "passed": 72,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "conservation.component": {
+          "assertions": 270,
+          "passed": 270,
+          "failed": 0,
+          "maxAbsError": 1.199040866595169e-13,
+          "maxErrorPath": "V01_SST_3D.hour[1].node[A-charger].conversionBalance"
+        },
+        "hourly.edge.energy": {
+          "assertions": 432,
+          "passed": 432,
+          "failed": 0,
+          "maxAbsError": 2.0339285811132868e-13,
+          "maxErrorPath": "V01_SST_3D.hour[26].edge[A-grid->A-sst].kWh"
+        },
+        "hourly.edge.peak": {
+          "assertions": 432,
+          "passed": 432,
+          "failed": 0,
+          "maxAbsError": 7.105427357601002e-15,
+          "maxErrorPath": "V01_SST_3D.hour[0].edge[A-sst->A-bus].peakKW"
+        },
+        "hourly.source.settlement": {
+          "assertions": 72,
+          "passed": 72,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "money.reconciliation": {
+          "assertions": 74,
+          "passed": 74,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.energy": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 2.0339285811132868e-13,
+          "maxErrorPath": "V01_SST_3D.sourceHour[26:A-grid].importKWh"
+        },
+        "hourly.source.invoice": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.invoiceQuantization": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.exactCost": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 1.0169642905566434e-13,
+          "maxErrorPath": "V01_SST_3D.sourceHour[26:A-grid].costExact"
+        },
+        "hourly.source.peak": {
+          "assertions": 144,
+          "passed": 144,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.tariff": {
+          "assertions": 18,
+          "passed": 18,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.identity": {
+          "assertions": 12,
+          "passed": 12,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.time": {
+          "assertions": 24,
+          "passed": 24,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.energy": {
+          "assertions": 12,
+          "passed": 12,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.tariff": {
+          "assertions": 6,
+          "passed": 6,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.invoice": {
+          "assertions": 6,
+          "passed": 6,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "daily.station": {
+          "assertions": 96,
+          "passed": 96,
+          "failed": 0,
+          "maxAbsError": 2.4158453015843406e-13,
+          "maxErrorPath": "V01_SST_3D.day[1].station[A].batteryChargeKWh"
+        },
+        "daily.totals": {
+          "assertions": 60,
+          "passed": 60,
+          "failed": 0,
+          "maxAbsError": 4.831690603168681e-13,
+          "maxErrorPath": "V01_SST_3D.day[1].totals.batteryChargeKWh"
+        },
+        "daily.component": {
+          "assertions": 72,
+          "passed": 72,
+          "failed": 0,
+          "maxAbsError": 2.4158453015843406e-13,
+          "maxErrorPath": "V01_SST_3D.day[1].node[A-charger].outputKWh"
+        },
+        "daily.edge": {
+          "assertions": 18,
+          "passed": 18,
+          "failed": 0,
+          "maxAbsError": 1.9895196601282805e-13,
+          "maxErrorPath": "V01_SST_3D.day[1].edge[A-grid->A-sst].kWh"
+        },
+        "aggregate.component": {
+          "assertions": 24,
+          "passed": 24,
+          "failed": 0,
+          "maxAbsError": 5.115907697472721e-13,
+          "maxErrorPath": "V01_SST_3D.nodeTotal[A-charger].outputKWh"
+        },
+        "aggregate.edge": {
+          "assertions": 6,
+          "passed": 6,
+          "failed": 0,
+          "maxAbsError": 3.410605131648481e-13,
+          "maxErrorPath": "V01_SST_3D.edgeTotal[A-grid->A-sst].kWh"
+        },
+        "aggregate.source": {
+          "assertions": 6,
+          "passed": 6,
+          "failed": 0,
+          "maxAbsError": 3.410605131648481e-13,
+          "maxErrorPath": "V01_SST_3D.sourceTotal[A-grid].importKWh"
+        },
+        "totals": {
+          "assertions": 25,
+          "passed": 25,
+          "failed": 0,
+          "maxAbsError": 9.094947017729282e-13,
+          "maxErrorPath": "V01_SST_3D.totals.batteryChargeKWh"
+        },
+        "conservation.total": {
+          "assertions": 1,
+          "passed": 1,
+          "failed": 0,
+          "maxAbsError": 1.0658141036401503e-13,
+          "maxErrorPath": "V01_SST_3D.totals.maxBalanceResidual"
+        }
+      },
+      "maxErrors": {
+        "count": {
+          "absolute": 0,
+          "path": null
+        },
+        "identity": {
+          "absolute": 0,
+          "path": null
+        },
+        "boolean": {
+          "absolute": 0,
+          "path": null
+        },
+        "kWh": {
+          "absolute": 9.094947017729282e-13,
+          "path": "V01_SST_3D.totals.batteryChargeKWh"
+        },
+        "CNY_cent": {
+          "absolute": 0,
+          "path": null
+        },
+        "CNY_unrounded": {
+          "absolute": 3.7769093408357435e-13,
+          "path": "V01_SST_3D.totals.settlementRoundingDifference"
+        },
+        "kW": {
+          "absolute": 7.105427357601002e-15,
+          "path": "V01_SST_3D.hour[0].node[A-sst].peakOutputKW"
+        },
+        "fraction": {
+          "absolute": 0,
+          "path": null
+        },
+        "min": {
+          "absolute": 0,
+          "path": null
+        }
+      },
+      "failures": [],
+      "actualDerivedTotals": {
+        "gridKWh": 644.4683136412467,
+        "lossKWh": 44.46831364124609,
+        "auxiliaryKWh": 0,
+        "batteryChargeKWh": 600.0000000000009,
+        "evDeliveredKWh": 0,
+        "swapDeliveredKWh": 600,
+        "deliveredKWh": 600,
+        "storedDeltaKWh": -2.5579538487363607e-13,
+        "completedSessions": 6,
+        "revenueExact": 480,
+        "revenueSettled": 480,
+        "gridCostExact": 322.23415682062335,
+        "gridCostSettled": 322.26,
+        "modeledOperatingContributionExact": 157.76584317937665,
+        "modeledOperatingContributionSettled": 157.74,
+        "initialStoredKWh": 200,
+        "finalStoredKWh": 199.99999999999974,
+        "endReadyPacks": 2,
+        "endQueuedSessions": 0,
+        "requestedKWh": 600,
+        "unservedKWh": 0,
+        "balanceResidualKWh": 8.242295734817162e-13,
+        "maxWaitMinutes": 0,
+        "inventoryRestorationRequiredKWh": 2.5579538487363607e-13,
+        "settlementRoundingDifference": 0.02584317937663627,
+        "revenue": 480,
+        "gridCost": 322.26,
+        "auxiliaryGridCost": 0,
+        "completed": 6,
+        "maxBalanceResidual": 1.0658141036401503e-13
+      },
+      "expectedTotals": {
+        "gridKWh": "644.468313641245972073039742212675",
+        "lossKWh": "44.468313641245972073039742212675",
+        "auxiliaryKWh": "0.000000000000000000000000000000",
+        "batteryChargeKWh": "600.000000000000000000000000000000",
+        "evDeliveredKWh": "0.000000000000000000000000000000",
+        "swapDeliveredKWh": "600.000000000000000000000000000000",
+        "deliveredKWh": "600.000000000000000000000000000000",
+        "storedDeltaKWh": "0.000000000000000000000000000000",
+        "completedSessions": "6.000000000000000000000000000000",
+        "revenueExact": "480.000000000000000000000000000000",
+        "revenueSettled": "480.000000000000000000000000000000",
+        "gridCostExact": "322.234156820622986036519871106337",
+        "gridCostSettled": "322.260000000000000000000000000000",
+        "modeledOperatingContributionExact": "157.765843179377013963480128893663",
+        "modeledOperatingContributionSettled": "157.740000000000000000000000000000",
+        "initialStoredKWh": "200.000000000000000000000000000000",
+        "finalStoredKWh": "200.000000000000000000000000000000",
+        "endReadyPacks": "2.000000000000000000000000000000",
+        "endQueuedSessions": "0.000000000000000000000000000000",
+        "requestedKWh": "600.000000000000000000000000000000",
+        "unservedKWh": "0.000000000000000000000000000000",
+        "balanceResidualKWh": "0.000000000000000000000000000000",
+        "maxWaitMinutes": "0.000000000000000000000000000000",
+        "inventoryRestorationRequiredKWh": "0.000000000000000000000000000000",
+        "settlementRoundingDifference": "0.025843179377013963480128893663"
+      },
+      "dailyActual": [
+        {
+          "day": 0,
+          "totals": {
+            "gridKWh": 214.82277121374895,
+            "lossKWh": 14.822771213748698,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 200.00000000000037,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 200,
+            "deliveredKWh": 200,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 160,
+            "revenueSettled": 160,
+            "gridCostExact": 107.41138560687448,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 200,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 107.41999999999999,
+            "modeledOperatingContributionExact": 52.588614393125525,
+            "modeledOperatingContributionSettled": 52.58,
+            "balanceResidualKWh": 2.5579538487363607e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 107.41138560687448,
+              "lossKWh": 7.411385606874349,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000018,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 53.70569280343724,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 107.41138560687448,
+              "lossKWh": 7.411385606874349,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000018,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 53.70569280343724,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 1,
+          "totals": {
+            "gridKWh": 214.82277121374906,
+            "lossKWh": 14.822771213748707,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 200.00000000000048,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 200,
+            "deliveredKWh": 200,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 160,
+            "revenueSettled": 160,
+            "gridCostExact": 107.41138560687453,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 200,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 107.41999999999999,
+            "modeledOperatingContributionExact": 52.58861439312547,
+            "modeledOperatingContributionSettled": 52.58,
+            "balanceResidualKWh": 3.694822225952521e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 107.41138560687453,
+              "lossKWh": 7.4113856068743535,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000024,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 53.705692803437266,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 107.41138560687453,
+              "lossKWh": 7.4113856068743535,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000024,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 53.705692803437266,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 2,
+          "totals": {
+            "gridKWh": 214.82277121374867,
+            "lossKWh": 14.822771213748679,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 200.0000000000001,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 200,
+            "deliveredKWh": 200,
+            "storedDeltaKWh": -2.5579538487363607e-13,
+            "completedSessions": 2,
+            "revenueExact": 160,
+            "revenueSettled": 160,
+            "gridCostExact": 107.41138560687433,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 199.99999999999974,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 107.41999999999999,
+            "modeledOperatingContributionExact": 52.58861439312567,
+            "modeledOperatingContributionSettled": 52.58,
+            "balanceResidualKWh": 2.5579538487363607e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 107.41138560687433,
+              "lossKWh": 7.411385606874339,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000006,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": -1.2789769243681803e-13,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 53.70569280343717,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 99.99999999999987,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 107.41138560687433,
+              "lossKWh": 7.411385606874339,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000006,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": -1.2789769243681803e-13,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 53.70569280343717,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 99.99999999999987,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        }
+      ],
+      "rawCounts": {
+        "hours": 144,
+        "componentEnergy": 72,
+        "edgeEnergy": 54,
+        "sourceMeters": 18,
+        "transactions": 6
+      },
+      "diagnostics": [
+        {
+          "code": "SOURCE_TOTAL_MISMATCH",
+          "severity": "warning",
+          "message": "A 區原圖充電總計 35 次 / 12,430 kWh；逐列 36 次 / 14,480 kWh，差額等於 12 時一列。"
+        },
+        {
+          "code": "SOURCE_AMBIGUITY",
+          "severity": "warning",
+          "message": "A 12 時 1 次 / 2,050 kWh 與「閒」欄語意未确认；原值保留。"
+        },
+        {
+          "code": "MISSING_COST",
+          "severity": "warning",
+          "message": "CAPEX / 固定成本尚未填妥；不能判定真實獲利。"
+        }
+      ],
+      "elapsedMs": 304.75074199999995,
+      "actualPath": "/workspace/scratch/75e090c675fe/soc-verification/actual-V01_SST_3D.json"
+    },
+    {
+      "id": "V02_PCS_AC_EV_4D",
+      "name": "Four-day transformer and PCS EV charging with continuous AC load",
+      "status": "PASS",
+      "engineVersion": "0.5.0",
+      "assertions": 25431,
+      "passed": 25431,
+      "failed": 0,
+      "categories": {
+        "structure": {
+          "assertions": 6119,
+          "passed": 6119,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.energy": {
+          "assertions": 1920,
+          "passed": 1920,
+          "failed": 0,
+          "maxAbsError": 4.263256414560601e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].A.gridKWh"
+        },
+        "hourly.station.state": {
+          "assertions": 576,
+          "passed": 576,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.revenue": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.exactCost": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 2.842170943040401e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[84].A.gridCostExact"
+        },
+        "conservation.station": {
+          "assertions": 384,
+          "passed": 384,
+          "failed": 0,
+          "maxAbsError": 8.526512829121202e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].A.reportedBalanceResidual"
+        },
+        "hourly.station.peak": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.request": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.component.energy": {
+          "assertions": 4032,
+          "passed": 4032,
+          "failed": 0,
+          "maxAbsError": 7.815970093361102e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].node[A-pcs].outputKWh"
+        },
+        "hourly.component.terminal": {
+          "assertions": 1344,
+          "passed": 1344,
+          "failed": 0,
+          "maxAbsError": 3.552713678800501e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].node[A-charger].terminalKWh"
+        },
+        "hourly.component.peak": {
+          "assertions": 1344,
+          "passed": 1344,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].node[A-transformer].peakOutputKW"
+        },
+        "capacity.snapshotMetadata": {
+          "assertions": 816,
+          "passed": 816,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "capacity.feasibility": {
+          "assertions": 816,
+          "passed": 816,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "conservation.component": {
+          "assertions": 3072,
+          "passed": 3072,
+          "failed": 0,
+          "maxAbsError": 1.199040866595169e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].node[A-charger].conversionBalance"
+        },
+        "hourly.edge.energy": {
+          "assertions": 1152,
+          "passed": 1152,
+          "failed": 0,
+          "maxAbsError": 7.815970093361102e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].edge[A-pcs->A-bus].kWh"
+        },
+        "hourly.edge.peak": {
+          "assertions": 1152,
+          "passed": 1152,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.hour[12].edge[A-transformer->A-lv].peakKW"
+        },
+        "hourly.source.settlement": {
+          "assertions": 96,
+          "passed": 96,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "money.reconciliation": {
+          "assertions": 98,
+          "passed": 98,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.energy": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 4.263256414560601e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.sourceHour[12:A-grid].importKWh"
+        },
+        "hourly.source.invoice": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.invoiceQuantization": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.exactCost": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 2.842170943040401e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.sourceHour[84:A-grid].costExact"
+        },
+        "hourly.source.peak": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.tariff": {
+          "assertions": 192,
+          "passed": 192,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.identity": {
+          "assertions": 16,
+          "passed": 16,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.time": {
+          "assertions": 32,
+          "passed": 32,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.energy": {
+          "assertions": 16,
+          "passed": 16,
+          "failed": 0,
+          "maxAbsError": 1.2789769243681803e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.transaction[A:charge:720].deliveredKWh"
+        },
+        "transaction.tariff": {
+          "assertions": 8,
+          "passed": 8,
+          "failed": 0,
+          "maxAbsError": 1.1102230246251565e-16,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.transaction[A:charge:3600].unitPrice"
+        },
+        "transaction.invoice": {
+          "assertions": 8,
+          "passed": 8,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "daily.station": {
+          "assertions": 128,
+          "passed": 128,
+          "failed": 0,
+          "maxAbsError": 1.7053025658242404e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.day[0].station[A].gridKWh"
+        },
+        "daily.totals": {
+          "assertions": 80,
+          "passed": 80,
+          "failed": 0,
+          "maxAbsError": 3.410605131648481e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.day[0].totals.gridKWh"
+        },
+        "daily.component": {
+          "assertions": 168,
+          "passed": 168,
+          "failed": 0,
+          "maxAbsError": 1.7053025658242404e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.day[0].node[A-grid].inputKWh"
+        },
+        "daily.edge": {
+          "assertions": 48,
+          "passed": 48,
+          "failed": 0,
+          "maxAbsError": 1.7053025658242404e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.day[0].edge[A-grid->A-transformer].kWh"
+        },
+        "aggregate.component": {
+          "assertions": 42,
+          "passed": 42,
+          "failed": 0,
+          "maxAbsError": 9.094947017729282e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.nodeTotal[A-grid].inputKWh"
+        },
+        "aggregate.edge": {
+          "assertions": 12,
+          "passed": 12,
+          "failed": 0,
+          "maxAbsError": 9.094947017729282e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.edgeTotal[A-grid->A-transformer].kWh"
+        },
+        "aggregate.source": {
+          "assertions": 6,
+          "passed": 6,
+          "failed": 0,
+          "maxAbsError": 9.094947017729282e-13,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.sourceTotal[A-grid].importKWh"
+        },
+        "totals": {
+          "assertions": 25,
+          "passed": 25,
+          "failed": 0,
+          "maxAbsError": 2.9558577807620168e-12,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.totals.balanceResidualKWh"
+        },
+        "conservation.total": {
+          "assertions": 1,
+          "passed": 1,
+          "failed": 0,
+          "maxAbsError": 8.526512829121202e-14,
+          "maxErrorPath": "V02_PCS_AC_EV_4D.totals.maxBalanceResidual"
+        }
+      },
+      "maxErrors": {
+        "count": {
+          "absolute": 0,
+          "path": null
+        },
+        "identity": {
+          "absolute": 0,
+          "path": null
+        },
+        "boolean": {
+          "absolute": 0,
+          "path": null
+        },
+        "kWh": {
+          "absolute": 2.9558577807620168e-12,
+          "path": "V02_PCS_AC_EV_4D.totals.balanceResidualKWh"
+        },
+        "CNY_cent": {
+          "absolute": 0,
+          "path": null
+        },
+        "CNY_unrounded": {
+          "absolute": 2.7284841053187847e-12,
+          "path": "V02_PCS_AC_EV_4D.totals.gridCostExact"
+        },
+        "kW": {
+          "absolute": 1.4210854715202004e-14,
+          "path": "V02_PCS_AC_EV_4D.hour[12].node[A-transformer].peakOutputKW"
+        },
+        "fraction": {
+          "absolute": 1.1102230246251565e-16,
+          "path": "V02_PCS_AC_EV_4D.transaction[A:charge:3600].unitPrice"
+        },
+        "min": {
+          "absolute": 0,
+          "path": null
+        }
+      },
+      "failures": [],
+      "actualDerivedTotals": {
+        "gridKWh": 2854.278553526671,
+        "lossKWh": 134.27855352667387,
+        "auxiliaryKWh": 1919.9999999999998,
+        "batteryChargeKWh": 0,
+        "evDeliveredKWh": 800.0000000000006,
+        "swapDeliveredKWh": 0,
+        "deliveredKWh": 800.0000000000005,
+        "storedDeltaKWh": 0,
+        "completedSessions": 8,
+        "revenueExact": 680,
+        "revenueSettled": 680,
+        "gridCostExact": 1569.853204439668,
+        "gridCostSettled": 1569.44,
+        "modeledOperatingContributionExact": -889.8532044396679,
+        "modeledOperatingContributionSettled": -889.44,
+        "initialStoredKWh": 200,
+        "finalStoredKWh": 200,
+        "endReadyPacks": 2,
+        "endQueuedSessions": 0,
+        "requestedKWh": 800,
+        "unservedKWh": 0,
+        "balanceResidualKWh": -2.9558577807620168e-12,
+        "maxWaitMinutes": 0,
+        "inventoryRestorationRequiredKWh": 0,
+        "settlementRoundingDifference": -0.41320443966787934,
+        "revenue": 680,
+        "gridCost": 1569.44,
+        "auxiliaryGridCost": 1077.12,
+        "completed": 8,
+        "maxBalanceResidual": 8.526512829121202e-14
+      },
+      "expectedTotals": {
+        "gridKWh": "2854.278553526673827425707124955245",
+        "lossKWh": "134.278553526673827425707124955245",
+        "auxiliaryKWh": "1920.000000000000000000000000000000",
+        "batteryChargeKWh": "0.000000000000000000000000000000",
+        "evDeliveredKWh": "800.000000000000000000000000000000",
+        "swapDeliveredKWh": "0.000000000000000000000000000000",
+        "deliveredKWh": "800.000000000000000000000000000000",
+        "storedDeltaKWh": "0.000000000000000000000000000000",
+        "completedSessions": "8.000000000000000000000000000000",
+        "revenueExact": "680.000000000000000000000000000000",
+        "revenueSettled": "680.000000000000000000000000000000",
+        "gridCostExact": "1569.853204439670605084138918725385",
+        "gridCostSettled": "1569.440000000000000000000000000000",
+        "modeledOperatingContributionExact": "-889.853204439670605084138918725385",
+        "modeledOperatingContributionSettled": "-889.440000000000000000000000000000",
+        "initialStoredKWh": "200.000000000000000000000000000000",
+        "finalStoredKWh": "200.000000000000000000000000000000",
+        "endReadyPacks": "2.000000000000000000000000000000",
+        "endQueuedSessions": "0.000000000000000000000000000000",
+        "requestedKWh": "800.000000000000000000000000000000",
+        "unservedKWh": "0.000000000000000000000000000000",
+        "balanceResidualKWh": "0.000000000000000000000000000000",
+        "maxWaitMinutes": "0.000000000000000000000000000000",
+        "inventoryRestorationRequiredKWh": "0.000000000000000000000000000000",
+        "settlementRoundingDifference": "-0.413204439670605084138918725385"
+      },
+      "dailyActual": [
+        {
+          "day": 0,
+          "totals": {
+            "gridKWh": 713.5696383816688,
+            "lossKWh": 33.5696383816685,
+            "auxiliaryKWh": 479.99999999999994,
+            "batteryChargeKWh": 0,
+            "evDeliveredKWh": 200.00000000000014,
+            "swapDeliveredKWh": 0,
+            "deliveredKWh": 200.00000000000014,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 140,
+            "revenueSettled": 140,
+            "gridCostExact": 285.4278553526676,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 200,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 285.36,
+            "modeledOperatingContributionExact": -145.42785535266762,
+            "modeledOperatingContributionSettled": -145.36,
+            "balanceResidualKWh": 2.5579538487363607e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 70,
+              "revenueSettled": 70,
+              "gridCostExact": 142.7139276763338,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 70,
+              "revenueSettled": 70,
+              "gridCostExact": 142.7139276763338,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 1,
+          "totals": {
+            "gridKWh": 713.5696383816688,
+            "lossKWh": 33.5696383816685,
+            "auxiliaryKWh": 479.99999999999994,
+            "batteryChargeKWh": 0,
+            "evDeliveredKWh": 200.00000000000014,
+            "swapDeliveredKWh": 0,
+            "deliveredKWh": 200.00000000000014,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 160,
+            "revenueSettled": 160,
+            "gridCostExact": 356.7848191908344,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 200,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 356.68000000000035,
+            "modeledOperatingContributionExact": -196.7848191908344,
+            "modeledOperatingContributionSettled": -196.68,
+            "balanceResidualKWh": 2.5579538487363607e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 178.3924095954172,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 80,
+              "revenueSettled": 80,
+              "gridCostExact": 178.3924095954172,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 2,
+          "totals": {
+            "gridKWh": 713.5696383816688,
+            "lossKWh": 33.5696383816685,
+            "auxiliaryKWh": 479.99999999999994,
+            "batteryChargeKWh": 0,
+            "evDeliveredKWh": 200.00000000000014,
+            "swapDeliveredKWh": 0,
+            "deliveredKWh": 200.00000000000014,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 180,
+            "revenueSettled": 180,
+            "gridCostExact": 428.1417830290012,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 200,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 428.04000000000013,
+            "modeledOperatingContributionExact": -248.1417830290012,
+            "modeledOperatingContributionSettled": -248.04,
+            "balanceResidualKWh": 2.5579538487363607e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 90,
+              "revenueSettled": 90,
+              "gridCostExact": 214.0708915145006,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 90,
+              "revenueSettled": 90,
+              "gridCostExact": 214.0708915145006,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 3,
+          "totals": {
+            "gridKWh": 713.5696383816688,
+            "lossKWh": 33.5696383816685,
+            "auxiliaryKWh": 479.99999999999994,
+            "batteryChargeKWh": 0,
+            "evDeliveredKWh": 200.00000000000014,
+            "swapDeliveredKWh": 0,
+            "deliveredKWh": 200.00000000000014,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 200,
+            "revenueSettled": 200,
+            "gridCostExact": 499.49874686716794,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 200,
+            "endReadyPacks": 2,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 499.3599999999997,
+            "modeledOperatingContributionExact": -299.49874686716794,
+            "modeledOperatingContributionSettled": -299.36,
+            "balanceResidualKWh": 2.5579538487363607e-13
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 100,
+              "revenueSettled": 100,
+              "gridCostExact": 249.74937343358397,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 356.7848191908344,
+              "lossKWh": 16.78481919083425,
+              "auxiliaryKWh": 239.99999999999997,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 100.00000000000007,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 100.00000000000007,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 100,
+              "revenueSettled": 100,
+              "gridCostExact": 249.74937343358397,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 100,
+              "endReadyPacks": 1,
+              "endQueuedSessions": 0
+            }
+          }
+        }
+      ],
+      "rawCounts": {
+        "hours": 192,
+        "componentEnergy": 816,
+        "edgeEnergy": 624,
+        "sourceMeters": 192,
+        "transactions": 8
+      },
+      "diagnostics": [
+        {
+          "code": "SOURCE_TOTAL_MISMATCH",
+          "severity": "warning",
+          "message": "A 區原圖充電總計 35 次 / 12,430 kWh；逐列 36 次 / 14,480 kWh，差額等於 12 時一列。"
+        },
+        {
+          "code": "SOURCE_AMBIGUITY",
+          "severity": "warning",
+          "message": "A 12 時 1 次 / 2,050 kWh 與「閒」欄語意未确认；原值保留。"
+        },
+        {
+          "code": "MISSING_COST",
+          "severity": "warning",
+          "message": "CAPEX / 固定成本尚未填妥；不能判定真實獲利。"
+        }
+      ],
+      "elapsedMs": 1238.421052,
+      "actualPath": "/workspace/scratch/75e090c675fe/soc-verification/actual-V02_PCS_AC_EV_4D.json"
+    },
+    {
+      "id": "V03_OUTAGE_CROSSSITE_5D",
+      "name": "Five-day cross-site supply with overnight charging, outage, queue recovery and inventory deficit",
+      "status": "PASS",
+      "engineVersion": "0.5.0",
+      "assertions": 13101,
+      "passed": 13101,
+      "failed": 0,
+      "categories": {
+        "structure": {
+          "assertions": 1046,
+          "passed": 1046,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.energy": {
+          "assertions": 2400,
+          "passed": 2400,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[95].A.storedDeltaKWh"
+        },
+        "hourly.station.state": {
+          "assertions": 720,
+          "passed": 720,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.revenue": {
+          "assertions": 240,
+          "passed": 240,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.exactCost": {
+          "assertions": 240,
+          "passed": 240,
+          "failed": 0,
+          "maxAbsError": 7.105427357601002e-15,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[119].A.gridCostExact"
+        },
+        "conservation.station": {
+          "assertions": 480,
+          "passed": 480,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[95].A.reportedBalanceResidual"
+        },
+        "hourly.station.peak": {
+          "assertions": 240,
+          "passed": 240,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.station.request": {
+          "assertions": 240,
+          "passed": 240,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.component.energy": {
+          "assertions": 2520,
+          "passed": 2520,
+          "failed": 0,
+          "maxAbsError": 1.5631940186722204e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[72].node[A-sst].outputKWh"
+        },
+        "hourly.component.terminal": {
+          "assertions": 840,
+          "passed": 840,
+          "failed": 0,
+          "maxAbsError": 3.552713678800501e-14,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[72].node[A-charger].terminalKWh"
+        },
+        "hourly.component.peak": {
+          "assertions": 840,
+          "passed": 840,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-14,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[23].node[A-sst].peakOutputKW"
+        },
+        "hourly.edge.energy": {
+          "assertions": 720,
+          "passed": 720,
+          "failed": 0,
+          "maxAbsError": 1.5631940186722204e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[72].edge[A-sst->A-bus].kWh"
+        },
+        "hourly.edge.peak": {
+          "assertions": 720,
+          "passed": 720,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-14,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[23].edge[A-sst->A-bus].peakKW"
+        },
+        "hourly.source.settlement": {
+          "assertions": 120,
+          "passed": 120,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "money.reconciliation": {
+          "assertions": 122,
+          "passed": 122,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "capacity.snapshotMetadata": {
+          "assertions": 77,
+          "passed": 77,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "capacity.feasibility": {
+          "assertions": 77,
+          "passed": 77,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "conservation.component": {
+          "assertions": 297,
+          "passed": 297,
+          "failed": 0,
+          "maxAbsError": 1.5587531265737198e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.hour[72].node[A-sst].conversionBalance"
+        },
+        "hourly.source.energy": {
+          "assertions": 120,
+          "passed": 120,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.invoice": {
+          "assertions": 120,
+          "passed": 120,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.invoiceQuantization": {
+          "assertions": 120,
+          "passed": 120,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.exactCost": {
+          "assertions": 120,
+          "passed": 120,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-14,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.sourceHour[119:A-grid].costExact"
+        },
+        "hourly.source.peak": {
+          "assertions": 120,
+          "passed": 120,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "hourly.source.tariff": {
+          "assertions": 11,
+          "passed": 11,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.identity": {
+          "assertions": 20,
+          "passed": 20,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.time": {
+          "assertions": 40,
+          "passed": 40,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.energy": {
+          "assertions": 20,
+          "passed": 20,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "transaction.tariff": {
+          "assertions": 10,
+          "passed": 10,
+          "failed": 0,
+          "maxAbsError": 1.1102230246251565e-16,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.transaction[A:swap:4260].unitPrice"
+        },
+        "transaction.invoice": {
+          "assertions": 10,
+          "passed": 10,
+          "failed": 0,
+          "maxAbsError": 0,
+          "maxErrorPath": null
+        },
+        "daily.station": {
+          "assertions": 160,
+          "passed": 160,
+          "failed": 0,
+          "maxAbsError": 1.7053025658242404e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.day[3].station[A].batteryChargeKWh"
+        },
+        "daily.totals": {
+          "assertions": 100,
+          "passed": 100,
+          "failed": 0,
+          "maxAbsError": 3.410605131648481e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.day[3].totals.batteryChargeKWh"
+        },
+        "daily.component": {
+          "assertions": 105,
+          "passed": 105,
+          "failed": 0,
+          "maxAbsError": 6.821210263296962e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.day[3].node[A-sst].outputKWh"
+        },
+        "daily.edge": {
+          "assertions": 30,
+          "passed": 30,
+          "failed": 0,
+          "maxAbsError": 6.821210263296962e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.day[3].edge[A-sst->A-bus].kWh"
+        },
+        "aggregate.component": {
+          "assertions": 21,
+          "passed": 21,
+          "failed": 0,
+          "maxAbsError": 1.2505552149377763e-12,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.nodeTotal[A-sst].outputKWh"
+        },
+        "aggregate.edge": {
+          "assertions": 6,
+          "passed": 6,
+          "failed": 0,
+          "maxAbsError": 1.2505552149377763e-12,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.edgeTotal[A-sst->A-bus].kWh"
+        },
+        "aggregate.source": {
+          "assertions": 3,
+          "passed": 3,
+          "failed": 0,
+          "maxAbsError": 1.1368683772161603e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.sourceTotal[A-grid].costExact"
+        },
+        "totals": {
+          "assertions": 25,
+          "passed": 25,
+          "failed": 0,
+          "maxAbsError": 4.547473508864641e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.totals.batteryChargeKWh"
+        },
+        "conservation.total": {
+          "assertions": 1,
+          "passed": 1,
+          "failed": 0,
+          "maxAbsError": 1.4210854715202004e-13,
+          "maxErrorPath": "V03_OUTAGE_CROSSSITE_5D.totals.maxBalanceResidual"
+        }
+      },
+      "maxErrors": {
+        "count": {
+          "absolute": 0,
+          "path": null
+        },
+        "identity": {
+          "absolute": 0,
+          "path": null
+        },
+        "boolean": {
+          "absolute": 0,
+          "path": null
+        },
+        "kWh": {
+          "absolute": 1.2505552149377763e-12,
+          "path": "V03_OUTAGE_CROSSSITE_5D.nodeTotal[A-sst].outputKWh"
+        },
+        "CNY_cent": {
+          "absolute": 0,
+          "path": null
+        },
+        "CNY_unrounded": {
+          "absolute": 1.1368683772161603e-13,
+          "path": "V03_OUTAGE_CROSSSITE_5D.sourceTotal[A-grid].costExact"
+        },
+        "kW": {
+          "absolute": 1.4210854715202004e-14,
+          "path": "V03_OUTAGE_CROSSSITE_5D.hour[23].node[A-sst].peakOutputKW"
+        },
+        "fraction": {
+          "absolute": 1.1102230246251565e-16,
+          "path": "V03_OUTAGE_CROSSSITE_5D.transaction[A:swap:4260].unitPrice"
+        },
+        "min": {
+          "absolute": 0,
+          "path": null
+        }
+      },
+      "failures": [],
+      "actualDerivedTotals": {
+        "gridKWh": 953.2760472610097,
+        "lossKWh": 65.77604726100977,
+        "auxiliaryKWh": 0,
+        "batteryChargeKWh": 887.5000000000005,
+        "evDeliveredKWh": 0,
+        "swapDeliveredKWh": 1000,
+        "deliveredKWh": 1000,
+        "storedDeltaKWh": -112.49999999999997,
+        "completedSessions": 10,
+        "revenueExact": 1050,
+        "revenueSettled": 1050,
+        "gridCostExact": 660.5800214822771,
+        "gridCostSettled": 660.59,
+        "modeledOperatingContributionExact": 389.41997851772294,
+        "modeledOperatingContributionSettled": 389.41,
+        "initialStoredKWh": 200,
+        "finalStoredKWh": 87.50000000000003,
+        "endReadyPacks": 0,
+        "endQueuedSessions": 0,
+        "requestedKWh": 1000,
+        "unservedKWh": 0,
+        "balanceResidualKWh": -1.4210854715202004e-13,
+        "maxWaitMinutes": 1567.5,
+        "inventoryRestorationRequiredKWh": 112.49999999999997,
+        "settlementRoundingDifference": 0.009978517722970537,
+        "revenue": 1050,
+        "gridCost": 660.59,
+        "auxiliaryGridCost": 0,
+        "completed": 10,
+        "maxBalanceResidual": 1.4210854715202004e-13
+      },
+      "expectedTotals": {
+        "gridKWh": "953.276047261009667024704618689581",
+        "lossKWh": "65.776047261009667024704618689581",
+        "auxiliaryKWh": "0.000000000000000000000000000000",
+        "batteryChargeKWh": "887.500000000000000000000000000000",
+        "evDeliveredKWh": "0.000000000000000000000000000000",
+        "swapDeliveredKWh": "1000.000000000000000000000000000000",
+        "deliveredKWh": "1000.000000000000000000000000000000",
+        "storedDeltaKWh": "-112.500000000000000000000000000000",
+        "completedSessions": "10.000000000000000000000000000000",
+        "revenueExact": "1050.000000000000000000000000000000",
+        "revenueSettled": "1050.000000000000000000000000000000",
+        "gridCostExact": "660.580021482277121374865735767991",
+        "gridCostSettled": "660.590000000000000000000000000000",
+        "modeledOperatingContributionExact": "389.419978517722878625134264232009",
+        "modeledOperatingContributionSettled": "389.410000000000000000000000000000",
+        "initialStoredKWh": "200.000000000000000000000000000000",
+        "finalStoredKWh": "87.500000000000000000000000000000",
+        "endReadyPacks": "0.000000000000000000000000000000",
+        "endQueuedSessions": "0.000000000000000000000000000000",
+        "requestedKWh": "1000.000000000000000000000000000000",
+        "unservedKWh": "0.000000000000000000000000000000",
+        "balanceResidualKWh": "0.000000000000000000000000000000",
+        "maxWaitMinutes": "1567.500000000000000000000000000000",
+        "inventoryRestorationRequiredKWh": "112.500000000000000000000000000000",
+        "settlementRoundingDifference": "0.009978517722878625134264232009"
+      },
+      "dailyActual": [
+        {
+          "day": 0,
+          "totals": {
+            "gridKWh": 93.98496240601504,
+            "lossKWh": 6.484962406015047,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 87.50000000000003,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 200,
+            "deliveredKWh": 200,
+            "storedDeltaKWh": -112.49999999999997,
+            "completedSessions": 2,
+            "revenueExact": 190,
+            "revenueSettled": 190,
+            "gridCostExact": 37.59398496240602,
+            "initialStoredKWh": 200,
+            "finalStoredKWh": 87.50000000000003,
+            "endReadyPacks": 0,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 37.59,
+            "modeledOperatingContributionExact": 152.406015037594,
+            "modeledOperatingContributionSettled": 152.41,
+            "balanceResidualKWh": -2.842170943040401e-14
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 46.99248120300752,
+              "lossKWh": 3.2424812030075234,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 43.750000000000014,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": -56.249999999999986,
+              "completedSessions": 1,
+              "revenueExact": 70,
+              "revenueSettled": 70,
+              "gridCostExact": 18.79699248120301,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 46.99248120300752,
+              "lossKWh": 3.2424812030075234,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 43.750000000000014,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": -56.249999999999986,
+              "completedSessions": 1,
+              "revenueExact": 120,
+              "revenueSettled": 120,
+              "gridCostExact": 18.79699248120301,
+              "initialStoredKWh": 100,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 1,
+          "totals": {
+            "gridKWh": 0,
+            "lossKWh": 0,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 0,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 0,
+            "deliveredKWh": 0,
+            "storedDeltaKWh": 0,
+            "completedSessions": 0,
+            "revenueExact": 0,
+            "revenueSettled": 0,
+            "gridCostExact": 0,
+            "initialStoredKWh": 87.50000000000003,
+            "finalStoredKWh": 87.50000000000003,
+            "endReadyPacks": 0,
+            "endQueuedSessions": 2,
+            "gridCostSettled": 0,
+            "modeledOperatingContributionExact": 0,
+            "modeledOperatingContributionSettled": 0,
+            "balanceResidualKWh": 0
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 0,
+              "lossKWh": 0,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 0,
+              "storedDeltaKWh": 0,
+              "completedSessions": 0,
+              "revenueExact": 0,
+              "revenueSettled": 0,
+              "gridCostExact": 0,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 1
+            },
+            "B": {
+              "gridKWh": 0,
+              "lossKWh": 0,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 0,
+              "storedDeltaKWh": 0,
+              "completedSessions": 0,
+              "revenueExact": 0,
+              "revenueSettled": 0,
+              "gridCostExact": 0,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 1
+            }
+          }
+        },
+        {
+          "day": 2,
+          "totals": {
+            "gridKWh": 0,
+            "lossKWh": 0,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 0,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 0,
+            "deliveredKWh": 0,
+            "storedDeltaKWh": 0,
+            "completedSessions": 0,
+            "revenueExact": 0,
+            "revenueSettled": 0,
+            "gridCostExact": 0,
+            "initialStoredKWh": 87.50000000000003,
+            "finalStoredKWh": 87.50000000000003,
+            "endReadyPacks": 0,
+            "endQueuedSessions": 4,
+            "gridCostSettled": 0,
+            "modeledOperatingContributionExact": 0,
+            "modeledOperatingContributionSettled": 0,
+            "balanceResidualKWh": 0
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 0,
+              "lossKWh": 0,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 0,
+              "storedDeltaKWh": 0,
+              "completedSessions": 0,
+              "revenueExact": 0,
+              "revenueSettled": 0,
+              "gridCostExact": 0,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 2
+            },
+            "B": {
+              "gridKWh": 0,
+              "lossKWh": 0,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 0,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 0,
+              "deliveredKWh": 0,
+              "storedDeltaKWh": 0,
+              "completedSessions": 0,
+              "revenueExact": 0,
+              "revenueSettled": 0,
+              "gridCostExact": 0,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 2
+            }
+          }
+        },
+        {
+          "day": 3,
+          "totals": {
+            "gridKWh": 644.468313641246,
+            "lossKWh": 44.46831364124604,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 600.0000000000003,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 600,
+            "deliveredKWh": 600,
+            "storedDeltaKWh": 0,
+            "completedSessions": 6,
+            "revenueExact": 630,
+            "revenueSettled": 630,
+            "gridCostExact": 451.12781954887214,
+            "initialStoredKWh": 87.50000000000003,
+            "finalStoredKWh": 87.50000000000003,
+            "endReadyPacks": 0,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 451.14000000000004,
+            "modeledOperatingContributionExact": 178.87218045112786,
+            "modeledOperatingContributionSettled": 178.86,
+            "balanceResidualKWh": 0
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 322.234156820623,
+              "lossKWh": 22.23415682062302,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 300.00000000000017,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 300,
+              "deliveredKWh": 300,
+              "storedDeltaKWh": 0,
+              "completedSessions": 3,
+              "revenueExact": 270,
+              "revenueSettled": 270,
+              "gridCostExact": 225.56390977443607,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 322.234156820623,
+              "lossKWh": 22.23415682062302,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 300.00000000000017,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 300,
+              "deliveredKWh": 300,
+              "storedDeltaKWh": 0,
+              "completedSessions": 3,
+              "revenueExact": 360,
+              "revenueSettled": 360,
+              "gridCostExact": 225.56390977443607,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 0
+            }
+          }
+        },
+        {
+          "day": 4,
+          "totals": {
+            "gridKWh": 214.82277121374867,
+            "lossKWh": 14.82277121374868,
+            "auxiliaryKWh": 0,
+            "batteryChargeKWh": 200.0000000000001,
+            "evDeliveredKWh": 0,
+            "swapDeliveredKWh": 200,
+            "deliveredKWh": 200,
+            "storedDeltaKWh": 0,
+            "completedSessions": 2,
+            "revenueExact": 230,
+            "revenueSettled": 230,
+            "gridCostExact": 171.85821697099894,
+            "initialStoredKWh": 87.50000000000003,
+            "finalStoredKWh": 87.50000000000003,
+            "endReadyPacks": 0,
+            "endQueuedSessions": 0,
+            "gridCostSettled": 171.86,
+            "modeledOperatingContributionExact": 58.14178302900106,
+            "modeledOperatingContributionSettled": 58.14,
+            "balanceResidualKWh": 0
+          },
+          "stations": {
+            "A": {
+              "gridKWh": 107.41138560687433,
+              "lossKWh": 7.41138560687434,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000006,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 110,
+              "revenueSettled": 110,
+              "gridCostExact": 85.92910848549947,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 0
+            },
+            "B": {
+              "gridKWh": 107.41138560687433,
+              "lossKWh": 7.41138560687434,
+              "auxiliaryKWh": 0,
+              "batteryChargeKWh": 100.00000000000006,
+              "evDeliveredKWh": 0,
+              "swapDeliveredKWh": 100,
+              "deliveredKWh": 100,
+              "storedDeltaKWh": 0,
+              "completedSessions": 1,
+              "revenueExact": 120,
+              "revenueSettled": 120,
+              "gridCostExact": 85.92910848549947,
+              "initialStoredKWh": 43.750000000000014,
+              "finalStoredKWh": 43.750000000000014,
+              "endReadyPacks": 0,
+              "endQueuedSessions": 0
+            }
+          }
+        }
+      ],
+      "rawCounts": {
+        "hours": 240,
+        "componentEnergy": 77,
+        "edgeEnergy": 66,
+        "sourceMeters": 11,
+        "transactions": 10
+      },
+      "diagnostics": [
+        {
+          "code": "SOURCE_TOTAL_MISMATCH",
+          "severity": "warning",
+          "message": "A 區原圖充電總計 35 次 / 12,430 kWh；逐列 36 次 / 14,480 kWh，差額等於 12 時一列。"
+        },
+        {
+          "code": "SOURCE_AMBIGUITY",
+          "severity": "warning",
+          "message": "A 12 時 1 次 / 2,050 kWh 與「閒」欄語意未确认；原值保留。"
+        },
+        {
+          "code": "MISSING_COST",
+          "severity": "warning",
+          "message": "CAPEX / 固定成本尚未填妥；不能判定真實獲利。"
+        },
+        {
+          "code": "ENDING_INVENTORY",
+          "severity": "warning",
+          "message": "期末庫存能源低於期初；代表日不具能源持續性，停止投資回報外推。"
+        }
+      ],
+      "elapsedMs": 687.8678150000001,
+      "actualPath": "/workspace/scratch/75e090c675fe/soc-verification/actual-V03_OUTAGE_CROSSSITE_5D.json"
+    }
+  ]
+}
