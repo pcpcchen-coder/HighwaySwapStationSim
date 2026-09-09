@@ -1,3 +1,4 @@
+import { detailedTopology } from '../detailed-model/topology.ts';
 import type { Project, Topology, StationId, Equipment, EngineeringConfig } from '../contracts/index.ts';
 import { defaultProject } from '../reference/index.ts';
 import { makeNode } from '../../plugins/equipment/index.ts';
@@ -68,7 +69,7 @@ export function engineeringTopology(p:Project):Topology {
  // A metering feeds B SST independently of grid B.
  link('A-meter','B-out-sst');
  for(const [s,t] of [['A','B'],['B','A']] as const)for(const kind of ['sst','pcs']){add(s,'dc-cable',`tie-${kind}`,1030,kind==='sst'?710:810,`跨站母聯 ${kind==='sst'?'1':'2'}`,{length:150},c.intertie);link(`${s}-bus-${kind}`,`${s}-tie-${kind}`,c.intertie);link(`${s}-tie-${kind}`,`${t}-feed-${kind}`,c.intertie);}
- return {nodes,edges};
+ return p.detailed?detailedTopology(p,{nodes,edges}):{nodes,edges};
 }
 export function engineeringProject():Project {
  const p=defaultProject();p.name='513 kWh · 完整雙站設備案例';p.engineering=engineeringDefaults();

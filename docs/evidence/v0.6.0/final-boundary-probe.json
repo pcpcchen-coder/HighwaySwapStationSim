@@ -1,0 +1,3196 @@
+[
+  {
+    "label": "aux-on-fleet-rack",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 0,
+      "requestedKWh": 0,
+      "gridKWh": 96.67024704618692,
+      "lossKWh": 24.670247046186883,
+      "revenue": 0,
+      "gridCost": 96.48,
+      "auxiliaryGridCost": 96.48,
+      "completed": 0,
+      "unservedKWh": 0,
+      "initialStoredKWh": 200,
+      "finalStoredKWh": 200,
+      "maxBalanceResidual": 4.440892098500626e-16
+    },
+    "energy": {
+      "pvKWh": 0,
+      "exportKWh": 0,
+      "storageInitialKWh": 0,
+      "storageFinalKWh": 0,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 72.00000000000003,
+      "networkLossKWh": 24.670247046186883,
+      "balanceResidualKWh": 0
+    },
+    "pv": [],
+    "storage": []
+  },
+  {
+    "label": "aux-on-fleet-gun",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 1025.0000000000002,
+      "requestedKWh": 1024.9999999999995,
+      "gridKWh": 1145.0000000000007,
+      "lossKWh": 0,
+      "revenue": 1025,
+      "gridCost": 617.55,
+      "auxiliaryGridCost": 60,
+      "completed": 25,
+      "unservedKWh": 0,
+      "initialStoredKWh": 1600,
+      "finalStoredKWh": 1600,
+      "maxBalanceResidual": 4.547473508864641e-13
+    },
+    "energy": {
+      "pvKWh": 0,
+      "exportKWh": 0,
+      "storageInitialKWh": 0,
+      "storageFinalKWh": 0,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 120.00000000000003,
+      "networkLossKWh": 0,
+      "balanceResidualKWh": 4.547473508864641e-13
+    },
+    "pv": [],
+    "storage": []
+  },
+  {
+    "label": "double-passenger-auto-aux",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 1024.9999999999995,
+      "requestedKWh": 1024.9999999999995,
+      "gridKWh": 1265,
+      "lossKWh": 0,
+      "revenue": 1025,
+      "gridCost": 677.55,
+      "auxiliaryGridCost": 120,
+      "completed": 25,
+      "unservedKWh": 0,
+      "initialStoredKWh": 1600,
+      "finalStoredKWh": 1600,
+      "maxBalanceResidual": 4.547473508864641e-13
+    },
+    "energy": {
+      "pvKWh": 0,
+      "exportKWh": 0,
+      "storageInitialKWh": 0,
+      "storageFinalKWh": 0,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 239.99999999999994,
+      "networkLossKWh": 0,
+      "balanceResidualKWh": 4.547473508864641e-13
+    },
+    "pv": [],
+    "storage": []
+  },
+  {
+    "label": "grid-limit-on-DD",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 180.00000000000006,
+      "requestedKWh": 420,
+      "gridKWh": 128.8936627282493,
+      "lossKWh": 8.893662728249204,
+      "revenue": 180,
+      "gridCost": 128.88,
+      "auxiliaryGridCost": 0,
+      "completed": 4,
+      "unservedKWh": 239.99999999999994,
+      "initialStoredKWh": 200,
+      "finalStoredKWh": 140,
+      "maxBalanceResidual": 2.842170943040401e-14
+    },
+    "energy": {
+      "pvKWh": 0,
+      "exportKWh": 0,
+      "storageInitialKWh": 0,
+      "storageFinalKWh": 0,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 0,
+      "networkLossKWh": 8.893662728249204,
+      "balanceResidualKWh": 2.842170943040401e-14
+    },
+    "pv": [],
+    "storage": []
+  },
+  {
+    "label": "grid-limit-on-PV-overwritten",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 0,
+      "requestedKWh": 0,
+      "gridKWh": 0,
+      "lossKWh": 23.111111111111086,
+      "revenue": 12,
+      "gridCost": 0,
+      "auxiliaryGridCost": 0,
+      "completed": 0,
+      "unservedKWh": 0,
+      "initialStoredKWh": 200,
+      "finalStoredKWh": 200,
+      "maxBalanceResidual": 3.623767952376511e-13
+    },
+    "energy": {
+      "pvKWh": 111.11111111111104,
+      "exportKWh": 47.99999999999996,
+      "storageInitialKWh": 0,
+      "storageFinalKWh": 0,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 39.99999999999999,
+      "networkLossKWh": 23.111111111111086,
+      "balanceResidualKWh": 7.105427357601002e-15
+    },
+    "pv": [
+      {
+        "fromMinute": 720,
+        "toMinute": 721,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 721,
+        "toMinute": 722,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 722,
+        "toMinute": 723,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 723,
+        "toMinute": 724,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 724,
+        "toMinute": 725,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 725,
+        "toMinute": 726,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 726,
+        "toMinute": 727,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 727,
+        "toMinute": 728,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 728,
+        "toMinute": 729,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 729,
+        "toMinute": 730,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 730,
+        "toMinute": 731,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 731,
+        "toMinute": 732,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 732,
+        "toMinute": 733,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 733,
+        "toMinute": 734,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 734,
+        "toMinute": 735,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 735,
+        "toMinute": 736,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 736,
+        "toMinute": 737,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 737,
+        "toMinute": 738,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 738,
+        "toMinute": 739,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 739,
+        "toMinute": 740,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 740,
+        "toMinute": 741,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 741,
+        "toMinute": 742,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 742,
+        "toMinute": 743,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 743,
+        "toMinute": 744,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 744,
+        "toMinute": 745,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 745,
+        "toMinute": 746,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 746,
+        "toMinute": 747,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 747,
+        "toMinute": 748,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 748,
+        "toMinute": 749,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 749,
+        "toMinute": 750,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 750,
+        "toMinute": 751,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 751,
+        "toMinute": 752,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 752,
+        "toMinute": 753,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 753,
+        "toMinute": 754,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 754,
+        "toMinute": 755,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 755,
+        "toMinute": 756,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 756,
+        "toMinute": 757,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 757,
+        "toMinute": 758,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 758,
+        "toMinute": 759,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 759,
+        "toMinute": 760,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 760,
+        "toMinute": 761,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 761,
+        "toMinute": 762,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 762,
+        "toMinute": 763,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 763,
+        "toMinute": 764,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 764,
+        "toMinute": 765,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 765,
+        "toMinute": 766,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 766,
+        "toMinute": 767,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 767,
+        "toMinute": 768,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 768,
+        "toMinute": 769,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 769,
+        "toMinute": 770,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 770,
+        "toMinute": 771,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 771,
+        "toMinute": 772,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 772,
+        "toMinute": 773,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 773,
+        "toMinute": 774,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 774,
+        "toMinute": 775,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 775,
+        "toMinute": 776,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 776,
+        "toMinute": 777,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 777,
+        "toMinute": 778,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 778,
+        "toMinute": 779,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      },
+      {
+        "fromMinute": 779,
+        "toMinute": 780,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.8518518518518519,
+        "curtailedKWh": 0.14814814814814814
+      }
+    ],
+    "storage": []
+  },
+  {
+    "label": "scheduled-eta-A-ess-in",
+    "issues": [],
+    "error": "PhysicalInputError: dispatch: 超過儲能端口功率。"
+  },
+  {
+    "label": "scheduled-eta-A-ess-out",
+    "issues": [],
+    "error": "Error: DETAILED_SITE_BALANCE:-22.500000000499313"
+  },
+  {
+    "label": "scheduled-eta-A-pv-mppt",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 0,
+      "requestedKWh": 0,
+      "gridKWh": 50.000000000000036,
+      "lossKWh": 164.00000000000017,
+      "revenue": 0,
+      "gridCost": 0,
+      "auxiliaryGridCost": 0,
+      "completed": 0,
+      "unservedKWh": 0,
+      "initialStoredKWh": 200,
+      "finalStoredKWh": 200,
+      "maxBalanceResidual": 2.2737367544323206e-13
+    },
+    "energy": {
+      "pvKWh": 450,
+      "exportKWh": 0,
+      "storageInitialKWh": 70,
+      "storageFinalKWh": 70,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 336.0000000000001,
+      "networkLossKWh": 164.00000000000017,
+      "balanceResidualKWh": -2.2737367544323206e-13
+    },
+    "pv": [
+      {
+        "fromMinute": 720,
+        "toMinute": 721,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 721,
+        "toMinute": 722,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 722,
+        "toMinute": 723,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 723,
+        "toMinute": 724,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 724,
+        "toMinute": 725,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 725,
+        "toMinute": 726,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 726,
+        "toMinute": 727,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 727,
+        "toMinute": 728,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 728,
+        "toMinute": 729,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 729,
+        "toMinute": 730,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 730,
+        "toMinute": 731,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 731,
+        "toMinute": 732,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 732,
+        "toMinute": 733,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 733,
+        "toMinute": 734,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 734,
+        "toMinute": 735,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 735,
+        "toMinute": 736,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 736,
+        "toMinute": 737,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 737,
+        "toMinute": 738,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 738,
+        "toMinute": 739,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 739,
+        "toMinute": 740,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 740,
+        "toMinute": 741,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 741,
+        "toMinute": 742,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 742,
+        "toMinute": 743,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 743,
+        "toMinute": 744,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 744,
+        "toMinute": 745,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 745,
+        "toMinute": 746,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 746,
+        "toMinute": 747,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 747,
+        "toMinute": 748,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 748,
+        "toMinute": 749,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 749,
+        "toMinute": 750,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 750,
+        "toMinute": 751,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 751,
+        "toMinute": 752,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 752,
+        "toMinute": 753,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 753,
+        "toMinute": 754,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 754,
+        "toMinute": 755,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 755,
+        "toMinute": 756,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 756,
+        "toMinute": 757,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 757,
+        "toMinute": 758,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 758,
+        "toMinute": 759,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 759,
+        "toMinute": 760,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 760,
+        "toMinute": 761,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 761,
+        "toMinute": 762,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 762,
+        "toMinute": 763,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 763,
+        "toMinute": 764,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 764,
+        "toMinute": 765,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 765,
+        "toMinute": 766,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 766,
+        "toMinute": 767,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 767,
+        "toMinute": 768,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 768,
+        "toMinute": 769,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 769,
+        "toMinute": 770,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 770,
+        "toMinute": 771,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 771,
+        "toMinute": 772,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 772,
+        "toMinute": 773,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 773,
+        "toMinute": 774,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 774,
+        "toMinute": 775,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 775,
+        "toMinute": 776,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 776,
+        "toMinute": 777,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 777,
+        "toMinute": 778,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 778,
+        "toMinute": 779,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 779,
+        "toMinute": 780,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2160,
+        "toMinute": 2161,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2161,
+        "toMinute": 2162,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2162,
+        "toMinute": 2163,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2163,
+        "toMinute": 2164,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2164,
+        "toMinute": 2165,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2165,
+        "toMinute": 2166,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2166,
+        "toMinute": 2167,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2167,
+        "toMinute": 2168,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2168,
+        "toMinute": 2169,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2169,
+        "toMinute": 2170,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2170,
+        "toMinute": 2171,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2171,
+        "toMinute": 2172,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2172,
+        "toMinute": 2173,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2173,
+        "toMinute": 2174,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2174,
+        "toMinute": 2175,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2175,
+        "toMinute": 2176,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2176,
+        "toMinute": 2177,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2177,
+        "toMinute": 2178,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2178,
+        "toMinute": 2179,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2179,
+        "toMinute": 2180,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2180,
+        "toMinute": 2181,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2181,
+        "toMinute": 2182,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2182,
+        "toMinute": 2183,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2183,
+        "toMinute": 2184,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2184,
+        "toMinute": 2185,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2185,
+        "toMinute": 2186,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2186,
+        "toMinute": 2187,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2187,
+        "toMinute": 2188,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2188,
+        "toMinute": 2189,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2189,
+        "toMinute": 2190,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2190,
+        "toMinute": 2191,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2191,
+        "toMinute": 2192,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2192,
+        "toMinute": 2193,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2193,
+        "toMinute": 2194,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2194,
+        "toMinute": 2195,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2195,
+        "toMinute": 2196,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2196,
+        "toMinute": 2197,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2197,
+        "toMinute": 2198,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2198,
+        "toMinute": 2199,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2199,
+        "toMinute": 2200,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2200,
+        "toMinute": 2201,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2201,
+        "toMinute": 2202,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2202,
+        "toMinute": 2203,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2203,
+        "toMinute": 2204,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2204,
+        "toMinute": 2205,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2205,
+        "toMinute": 2206,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2206,
+        "toMinute": 2207,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2207,
+        "toMinute": 2208,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2208,
+        "toMinute": 2209,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2209,
+        "toMinute": 2210,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2210,
+        "toMinute": 2211,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2211,
+        "toMinute": 2212,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2212,
+        "toMinute": 2213,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2213,
+        "toMinute": 2214,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2214,
+        "toMinute": 2215,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2215,
+        "toMinute": 2216,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2216,
+        "toMinute": 2217,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2217,
+        "toMinute": 2218,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2218,
+        "toMinute": 2219,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 2219,
+        "toMinute": 2220,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3600,
+        "toMinute": 3601,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3601,
+        "toMinute": 3602,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3602,
+        "toMinute": 3603,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3603,
+        "toMinute": 3604,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3604,
+        "toMinute": 3605,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3605,
+        "toMinute": 3606,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3606,
+        "toMinute": 3607,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3607,
+        "toMinute": 3608,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3608,
+        "toMinute": 3609,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3609,
+        "toMinute": 3610,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3610,
+        "toMinute": 3611,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3611,
+        "toMinute": 3612,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3612,
+        "toMinute": 3613,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3613,
+        "toMinute": 3614,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3614,
+        "toMinute": 3615,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3615,
+        "toMinute": 3616,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3616,
+        "toMinute": 3617,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3617,
+        "toMinute": 3618,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3618,
+        "toMinute": 3619,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3619,
+        "toMinute": 3620,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3620,
+        "toMinute": 3621,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3621,
+        "toMinute": 3622,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3622,
+        "toMinute": 3623,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3623,
+        "toMinute": 3624,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3624,
+        "toMinute": 3625,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3625,
+        "toMinute": 3626,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3626,
+        "toMinute": 3627,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3627,
+        "toMinute": 3628,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3628,
+        "toMinute": 3629,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3629,
+        "toMinute": 3630,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3630,
+        "toMinute": 3631,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3631,
+        "toMinute": 3632,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3632,
+        "toMinute": 3633,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3633,
+        "toMinute": 3634,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3634,
+        "toMinute": 3635,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3635,
+        "toMinute": 3636,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3636,
+        "toMinute": 3637,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3637,
+        "toMinute": 3638,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3638,
+        "toMinute": 3639,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3639,
+        "toMinute": 3640,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3640,
+        "toMinute": 3641,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3641,
+        "toMinute": 3642,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3642,
+        "toMinute": 3643,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3643,
+        "toMinute": 3644,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3644,
+        "toMinute": 3645,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3645,
+        "toMinute": 3646,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3646,
+        "toMinute": 3647,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3647,
+        "toMinute": 3648,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3648,
+        "toMinute": 3649,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3649,
+        "toMinute": 3650,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3650,
+        "toMinute": 3651,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3651,
+        "toMinute": 3652,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3652,
+        "toMinute": 3653,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3653,
+        "toMinute": 3654,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3654,
+        "toMinute": 3655,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3655,
+        "toMinute": 3656,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3656,
+        "toMinute": 3657,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3657,
+        "toMinute": 3658,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3658,
+        "toMinute": 3659,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 3659,
+        "toMinute": 3660,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5040,
+        "toMinute": 5041,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5041,
+        "toMinute": 5042,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5042,
+        "toMinute": 5043,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5043,
+        "toMinute": 5044,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5044,
+        "toMinute": 5045,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5045,
+        "toMinute": 5046,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5046,
+        "toMinute": 5047,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5047,
+        "toMinute": 5048,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5048,
+        "toMinute": 5049,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5049,
+        "toMinute": 5050,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5050,
+        "toMinute": 5051,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5051,
+        "toMinute": 5052,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5052,
+        "toMinute": 5053,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5053,
+        "toMinute": 5054,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5054,
+        "toMinute": 5055,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5055,
+        "toMinute": 5056,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5056,
+        "toMinute": 5057,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5057,
+        "toMinute": 5058,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5058,
+        "toMinute": 5059,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5059,
+        "toMinute": 5060,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5060,
+        "toMinute": 5061,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5061,
+        "toMinute": 5062,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5062,
+        "toMinute": 5063,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5063,
+        "toMinute": 5064,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5064,
+        "toMinute": 5065,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5065,
+        "toMinute": 5066,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5066,
+        "toMinute": 5067,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5067,
+        "toMinute": 5068,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5068,
+        "toMinute": 5069,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5069,
+        "toMinute": 5070,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5070,
+        "toMinute": 5071,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5071,
+        "toMinute": 5072,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5072,
+        "toMinute": 5073,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5073,
+        "toMinute": 5074,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5074,
+        "toMinute": 5075,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5075,
+        "toMinute": 5076,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5076,
+        "toMinute": 5077,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5077,
+        "toMinute": 5078,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5078,
+        "toMinute": 5079,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5079,
+        "toMinute": 5080,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5080,
+        "toMinute": 5081,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5081,
+        "toMinute": 5082,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5082,
+        "toMinute": 5083,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5083,
+        "toMinute": 5084,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5084,
+        "toMinute": 5085,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5085,
+        "toMinute": 5086,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5086,
+        "toMinute": 5087,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5087,
+        "toMinute": 5088,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5088,
+        "toMinute": 5089,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5089,
+        "toMinute": 5090,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5090,
+        "toMinute": 5091,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5091,
+        "toMinute": 5092,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5092,
+        "toMinute": 5093,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5093,
+        "toMinute": 5094,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5094,
+        "toMinute": 5095,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5095,
+        "toMinute": 5096,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5096,
+        "toMinute": 5097,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5097,
+        "toMinute": 5098,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5098,
+        "toMinute": 5099,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      },
+      {
+        "fromMinute": 5099,
+        "toMinute": 5100,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 1.875,
+        "curtailedKWh": 0.125
+      }
+    ],
+    "storage": [
+      {
+        "fromMinute": 720,
+        "toMinute": 721,
+        "id": "A-ess",
+        "station": "A",
+        "initialStoredKWh": 50,
+        "inputKW": 50,
+        "outputKW": 0,
+        "selfDischargeKWh": 0,
+        "capacitySpillKWh": 0,
+        "inputKWh": 0.8333333333333334,
+        "outputKWh": 0,
+        "lossKWh": 0.08333333333333331,
+        "storedKWh": 50.75,
+        "deltaKWh": 0.75,
+        "soh": 1,
+        "cycles": 0.00375
+      },
+      {
+        "fromMinute": 721,
+        "toMinute": 722,
+        "id": "A-ess",
+        "station": "A",
+        "initialStoredKWh": 50.75,
+        "inputKW": 50,
+        "outputKW": 0,
+        "selfDischargeKWh": 0,
+        "capacitySpillKWh": 0,
+        "inputKWh": 0.8333333333333334,
+        "outputKWh": 0,
+        "lossKWh": 0.08333333333333331,
+        "storedKWh": 51.5,
+        "deltaKWh": 0.75,
+        "soh": 1,
+        "cycles": 0.0075
+      },
+      {
+        "fromMinute": 722,
+        "toMinute": 723,
+        "id": "A-ess",
+        "station": "A",
+        "initialStoredKWh": 51.5,
+        "inputKW": 50,
+        "outputKW": 0,
+        "selfDischargeKWh": 0,
+        "capacitySpillKWh": 0,
+        "inputKWh": 0.8333333333333334,
+        "outputKWh": 0,
+        "lossKWh": 0.08333333333333331,
+        "storedKWh": 52.25,
+        "deltaKWh": 0.75,
+        "soh": 1,
+        "cycles": 0.01125
+      },
+      {
+        "fromMinute": 723,
+        "toMinute": 724,
+        "id": "A-ess",
+        "station": "A",
+        "initialStoredKWh": 52.25,
+        "inputKW": 50,
+        "outputKW": 0,
+        "selfDischargeKWh": 0,
+        "capacitySpillKWh": 0,
+        "inputKWh": 0.8333333333333334,
+        "outputKWh": 0,
+        "lossKWh": 0.08333333333333331,
+        "storedKWh": 53,
+        "deltaKWh": 0.75,
+        "soh": 1,
+        "cycles": 0.015
+      },
+      {
+        "fromMinute": 724,
+        "toMinute": 725,
+        "id": "A-ess",
+        "station": "A",
+        "initialStoredKWh": 53,
+        "inputKW": 50,
+        "outputKW": 0,
+        "selfDischargeKWh": 0,
+        "capacitySpillKWh": 0,
+        "inputKWh": 0.8333333333333334,
+        "outputKWh": 0,
+        "lossKWh": 0.08333333333333331,
+        "storedKWh": 53.75,
+        "deltaKWh": 0.75,
+        "soh": 1,
+        "cycles": 0.01875
+      }
+    ]
+  },
+  {
+    "label": "scheduled-eta-PV-export",
+    "issues": [],
+    "totals": {
+      "deliveredKWh": 0,
+      "requestedKWh": 0,
+      "gridKWh": 0,
+      "lossKWh": 32.40000000036989,
+      "revenue": 11.9,
+      "gridCost": 0,
+      "auxiliaryGridCost": 0,
+      "completed": 0,
+      "unservedKWh": 0,
+      "initialStoredKWh": 200,
+      "finalStoredKWh": 200,
+      "maxBalanceResidual": 1.9895196601282805e-13
+    },
+    "energy": {
+      "pvKWh": 120.00000000099999,
+      "exportKWh": 47.60000000062991,
+      "storageInitialKWh": 0,
+      "storageFinalKWh": 0,
+      "storageLossKWh": 0,
+      "auxiliaryKWh": 39.99999999999999,
+      "networkLossKWh": 32.40000000036989,
+      "balanceResidualKWh": 1.9895196601282805e-13
+    },
+    "pv": [
+      {
+        "fromMinute": 720,
+        "toMinute": 721,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 721,
+        "toMinute": 722,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 722,
+        "toMinute": 723,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 723,
+        "toMinute": 724,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 724,
+        "toMinute": 725,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 725,
+        "toMinute": 726,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 726,
+        "toMinute": 727,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 727,
+        "toMinute": 728,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 728,
+        "toMinute": 729,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 729,
+        "toMinute": 730,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 730,
+        "toMinute": 731,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 731,
+        "toMinute": 732,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 732,
+        "toMinute": 733,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 733,
+        "toMinute": 734,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 734,
+        "toMinute": 735,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 735,
+        "toMinute": 736,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 736,
+        "toMinute": 737,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 737,
+        "toMinute": 738,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 738,
+        "toMinute": 739,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 739,
+        "toMinute": 740,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 740,
+        "toMinute": 741,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 741,
+        "toMinute": 742,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 742,
+        "toMinute": 743,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 743,
+        "toMinute": 744,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 744,
+        "toMinute": 745,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 745,
+        "toMinute": 746,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 746,
+        "toMinute": 747,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 747,
+        "toMinute": 748,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 748,
+        "toMinute": 749,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 749,
+        "toMinute": 750,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 750,
+        "toMinute": 751,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 751,
+        "toMinute": 752,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 752,
+        "toMinute": 753,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 753,
+        "toMinute": 754,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 754,
+        "toMinute": 755,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 755,
+        "toMinute": 756,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 756,
+        "toMinute": 757,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 757,
+        "toMinute": 758,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 758,
+        "toMinute": 759,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 759,
+        "toMinute": 760,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 760,
+        "toMinute": 761,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 761,
+        "toMinute": 762,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 762,
+        "toMinute": 763,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 763,
+        "toMinute": 764,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 764,
+        "toMinute": 765,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 765,
+        "toMinute": 766,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 766,
+        "toMinute": 767,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 767,
+        "toMinute": 768,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 768,
+        "toMinute": 769,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 769,
+        "toMinute": 770,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 770,
+        "toMinute": 771,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 771,
+        "toMinute": 772,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 772,
+        "toMinute": 773,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 773,
+        "toMinute": 774,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 774,
+        "toMinute": 775,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 775,
+        "toMinute": 776,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 776,
+        "toMinute": 777,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 777,
+        "toMinute": 778,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 778,
+        "toMinute": 779,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      },
+      {
+        "fromMinute": 779,
+        "toMinute": 780,
+        "id": "A-pv",
+        "availableKWh": 2,
+        "generatedKWh": 2.0000000000166653,
+        "curtailedKWh": 0
+      }
+    ],
+    "storage": []
+  }
+]

@@ -1,3 +1,4 @@
+import { simulateDetailed } from '../detailed-model/engine.ts';
 import type {Project,RunResult,HourResult,Transaction,StationId,ServiceRow,ComponentEnergy,EdgeEnergy,SourceMeter} from '../contracts/index.ts';
 import {SeededRandom} from '../sim-kernel/index.ts';
 import {allocatePower,outputCapacity} from '../electrical-engine/index.ts';
@@ -19,7 +20,7 @@ interface ActiveSwap{job:Transaction;battery:Battery;remaining:number;}
 interface State{batteries:Battery[];swapQueue:Transaction[];chargeQueue:Transaction[];charging:Transaction[];swapping:ActiveSwap[];}
 interface Request{sink:string;kw:number;station:StationId;kind:'aux'|'battery'|'gun'|'legacy';index:number;}
 export function simulate(input:Project):RunResult{
- const p=parseProject(input);if(p.mode==='SOURCE_REPLAY')return replay(p);const snapshot=structuredClone(p),horizon=p.horizonDays*1440;
+ const p=parseProject(input);if(p.mode==='SOURCE_REPLAY')return replay(p);if(p.detailed)return simulateDetailed(p);const snapshot=structuredClone(p),horizon=p.horizonDays*1440;
  const diagnostics=[...validateTopology(p.topology),...sourceDiagnostics(p)];if(diagnostics.some(d=>d.severity==='error'))throw Error(diagnostics.filter(d=>d.severity==='error').map(d=>d.message).join('\n'));
  for(const s of ids)if(!p.engineering&&!p.topology.nodes.some(n=>n.id===`${s}-charger`&&n.type==='charger'))throw Error(`Missing station sink: ${s}-charger`);
  if(p.engineering&&p.efficiency.mode!=='ASSEMBLY')throw Error('詳細多分支供電需使用設備組裝效率模式');

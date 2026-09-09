@@ -56,6 +56,7 @@ export interface StationConfig {
     auxiliaryKW: number;
 }
 export interface Project {
+    detailed?: import('../detailed-model/contracts.ts').DetailedConfig;
     schemaVersion: '1.3';
     horizonDays: number;
     moneyPolicy: 'CNY_CENT_HALF_UP';
@@ -136,6 +137,7 @@ export interface Transaction {
     deliveredKWh: number;
 }
 export interface RunResult {
+    detailedResult?: import('../detailed-model/contracts.ts').DetailedResult;
     /** Present only for constrained runs recorded by engine 0.4+. */
     powerTrace?: PowerTrace;
     engineVersion: string;

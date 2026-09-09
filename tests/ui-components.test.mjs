@@ -172,3 +172,24 @@ test("SOC controls expose percentages per station and capacity summaries follow 
  const html=renderToStaticMarkup(React.createElement(SocRangeEditor,{...props,project:invalid,station:'A'}));
  assert.match(html,/role="alert"/);assert.match(html,/disabled/);assert.doesNotMatch(html,/每次補電預覽/);
 });
+
+
+test('complete settings expose nullable fields, explicit apply and both exchange formats',async()=>{
+ const {DetailedSettingsPanel}=await vite.ssrLoadModule('/components/simulator/detailed-settings.tsx');
+ const {completeProject}=await vite.ssrLoadModule('/packages/detailed-model/project.ts');
+ const html=renderToStaticMarkup(React.createElement(DetailedSettingsPanel,{project:completeProject(),setProject:()=>{}}));
+ for(const text of ['完整模型設定','套用並重建設備連接','匯入完整模型 JSON／CSV','匯出本頁草稿 CSV','待填','物理測算必要資料'])assert.ok(html.includes(text),text);
+});
+test('complete finance separates missing costs and actual cross-month billing in immutable results',async()=>{
+ const {DetailedFinancePanel}=await vite.ssrLoadModule('/components/simulator/detailed-finance-panel.tsx');
+ const {v04Project,v06Project}=await vite.ssrLoadModule('/packages/detailed-verification/index.ts');
+ const {simulateDetailed}=await vite.ssrLoadModule('/packages/detailed-model/engine.ts');
+ const missing=renderToStaticMarkup(React.createElement(DetailedFinancePanel,{result:simulateDetailed(v04Project())}));assert.match(missing,/尚未確認/);assert.match(missing,/待處理/);
+ const complete=renderToStaticMarkup(React.createElement(DetailedFinancePanel,{result:simulateDetailed(v06Project())}));for(const value of ['942.06','557.55','2026-01','2026-02'])assert.ok(complete.includes(value),value);
+});
+test('complete flow and live verification render actual PV storage values and fixed-case comparisons',async()=>{
+ const {FlowExplorer}=await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');const {DetailedVerificationPanel}=await vite.ssrLoadModule('/components/simulator/detailed-verification.tsx');
+ const {v05Project}=await vite.ssrLoadModule('/packages/detailed-verification/index.ts');const {simulateDetailed}=await vite.ssrLoadModule('/packages/detailed-model/engine.ts');const result=simulateDetailed(v05Project());
+ const html=renderToStaticMarkup(React.createElement(FlowExplorer,{result}));assert.equal((html.match(/data-node=/g)??[]).length,result.parameterSnapshot.topology.nodes.length);for(const label of ['外部總輸入','全站總損耗','逐台儲能庫存與損耗'])assert.ok(html.includes(label),label);
+ const verified=renderToStaticMarkup(React.createElement(DetailedVerificationPanel,{result,busy:false,onRun:()=>{}}));for(const label of ['載入並執行 3 日','載入並執行 4 日','載入並執行 5 日','全部通過','獨立預期','匯出驗證報告 JSON'])assert.ok(verified.includes(label),label);
+});

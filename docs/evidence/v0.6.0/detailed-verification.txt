@@ -1,0 +1,7 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> highway-swap-station-sim@0.6.0 verify:detailed
+> python3 data/verification/calculate-detailed.py && node scripts/verification/run-detailed.ts
+
+{"output": "/workspace/sites/highway-swap-station-sim/data/verification/detailed-expected.json", "cases": 3, "oracleSelfChecks": "passed", "implementationCompared": false}
+{"allPassed":true,"cases":[{"id":"V04_PROJECT_SHARED_DD_TIE_3D","status":"passed","checks":18,"ledgerChecks":3963,"maxDelta":7.498925924664945e-10,"ledgerMaxDelta":3.410605131648481e-13},{"id":"V05_PROJECT_PV_ESS_UPS_4D","status":"passed","checks":11,"ledgerChecks":9987,"maxDelta":1.0800249583553523e-12,"ledgerMaxDelta":7.105427357601002e-14},{"id":"V06_PROJECT_PASSENGER_TARIFF_5D","status":"passed","checks":21,"ledgerChecks":19803,"maxDelta":3.637978807091713e-12,"ledgerMaxDelta":3.552713678800501e-14}],"report":"artifacts/verification/detailed-comparison.json"}

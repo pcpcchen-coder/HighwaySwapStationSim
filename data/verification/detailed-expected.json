@@ -1,0 +1,607 @@
+{
+  "format": "HighwaySwapSim.IndependentGapOracle",
+  "version": 1,
+  "arithmetic": "Python Decimal precision70; money ROUND_HALF_UP 2 decimals",
+  "implementationCompared": false,
+  "cases": [
+    {
+      "id": "V04_SHARED_DD_TIE_3D",
+      "horizonDays": 3,
+      "assumptions": {
+        "sstOutputKW": 200,
+        "sharedDDOutputKW": 100,
+        "bDDOutputKW": 40,
+        "sstEfficiency": "0.98",
+        "ddEfficiency": "0.95",
+        "allocationPriority": [
+          "rack",
+          "A external gun",
+          "B external gun"
+        ],
+        "cableLoss": 0,
+        "otherLoads": 0,
+        "voltageCurrentLimits": "non-binding",
+        "tie": "same-side SST-to-PCS support path, no AC paralleling"
+      },
+      "intervals": [
+        {
+          "day": 0,
+          "fromMinute": 0,
+          "toMinute": 60,
+          "tieClosed": true,
+          "rackKW": "60",
+          "aGunKW": "40",
+          "bGunKW": "40",
+          "sharedDDOutputKW": "100",
+          "tieKW": "42.10526315789473684210526315789473684210526315789473684210526315789474",
+          "sstOutputKW": "147.3684210526315789473684210526315789473684210526315789473684210526316",
+          "gridKW": "150.3759398496240601503759398496240601503759398496240601503759398496241",
+          "durationHours": "1",
+          "ddLossKW": "7.368421052631578947368421052631578947368421052631578947368421052631520",
+          "sstLossKW": "3.007518796992481203007518796992481203007518796992481203007518796992506"
+        },
+        {
+          "day": 0,
+          "fromMinute": 60,
+          "toMinute": 90,
+          "tieClosed": true,
+          "rackKW": "0",
+          "aGunKW": "80",
+          "bGunKW": "0",
+          "sharedDDOutputKW": "80",
+          "tieKW": "0",
+          "sstOutputKW": "84.21052631578947368421052631578947368421052631578947368421052631578947",
+          "gridKW": "85.92910848549946294307196562835660580021482277121374865735767991407089",
+          "durationHours": "0.5",
+          "ddLossKW": "4.210526315789473684210526315789473684210526315789473684210526315789440",
+          "sstLossKW": "1.718582169709989258861439312567132116004296455424274973147153598281432"
+        },
+        {
+          "day": 0,
+          "fromMinute": 90,
+          "toMinute": 120,
+          "tieClosed": true,
+          "rackKW": "0",
+          "aGunKW": "0",
+          "bGunKW": "0",
+          "sharedDDOutputKW": "0",
+          "tieKW": "0",
+          "sstOutputKW": "0",
+          "gridKW": "0",
+          "durationHours": "0.5",
+          "ddLossKW": "0.000000000000000000000000000000000000000000000000000000000000000000000",
+          "sstLossKW": "0.0000000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "day": 1,
+          "fromMinute": 1440,
+          "toMinute": 1500,
+          "tieClosed": false,
+          "rackKW": "60",
+          "aGunKW": "40",
+          "bGunKW": "0",
+          "sharedDDOutputKW": "100",
+          "tieKW": "0",
+          "sstOutputKW": "105.2631578947368421052631578947368421052631578947368421052631578947368",
+          "gridKW": "107.4113856068743286788399570354457572502685284640171858216970998925886",
+          "durationHours": "1",
+          "ddLossKW": "5.263157894736842105263157894736842105263157894736842105263157894736800",
+          "sstLossKW": "2.148227712137486573576799140708915145005370569280343716433941997851789"
+        },
+        {
+          "day": 1,
+          "fromMinute": 1500,
+          "toMinute": 1530,
+          "tieClosed": true,
+          "rackKW": "0",
+          "aGunKW": "80",
+          "bGunKW": "40",
+          "sharedDDOutputKW": "80",
+          "tieKW": "42.10526315789473684210526315789473684210526315789473684210526315789474",
+          "sstOutputKW": "126.3157894736842105263157894736842105263157894736842105263157894736842",
+          "gridKW": "128.8936627282491944146079484425349087003222341568206229860365198711063",
+          "durationHours": "0.5",
+          "ddLossKW": "6.315789473684210526315789473684210526315789473684210526315789473684160",
+          "sstLossKW": "2.577873254564983888292158968850698174006444683136412459720730397422147"
+        },
+        {
+          "day": 1,
+          "fromMinute": 1530,
+          "toMinute": 1560,
+          "tieClosed": true,
+          "rackKW": "0",
+          "aGunKW": "0",
+          "bGunKW": "40",
+          "sharedDDOutputKW": "0",
+          "tieKW": "42.10526315789473684210526315789473684210526315789473684210526315789474",
+          "sstOutputKW": "42.10526315789473684210526315789473684210526315789473684210526315789474",
+          "gridKW": "42.96455424274973147153598281417830290010741138560687432867883995703545",
+          "durationHours": "0.5",
+          "ddLossKW": "2.105263157894736842105263157894736842105263157894736842105263157894720",
+          "sstLossKW": "0.8592910848549946294307196562835660580021482277121374865735767991407159"
+        },
+        {
+          "day": 2,
+          "fromMinute": 2880,
+          "toMinute": 2940,
+          "tieClosed": true,
+          "rackKW": "60",
+          "aGunKW": "40",
+          "bGunKW": "40",
+          "sharedDDOutputKW": "100",
+          "tieKW": "42.10526315789473684210526315789473684210526315789473684210526315789474",
+          "sstOutputKW": "147.3684210526315789473684210526315789473684210526315789473684210526316",
+          "gridKW": "150.3759398496240601503759398496240601503759398496240601503759398496241",
+          "durationHours": "1",
+          "ddLossKW": "7.368421052631578947368421052631578947368421052631578947368421052631520",
+          "sstLossKW": "3.007518796992481203007518796992481203007518796992481203007518796992506"
+        },
+        {
+          "day": 2,
+          "fromMinute": 2940,
+          "toMinute": 2970,
+          "tieClosed": true,
+          "rackKW": "0",
+          "aGunKW": "80",
+          "bGunKW": "0",
+          "sharedDDOutputKW": "80",
+          "tieKW": "0",
+          "sstOutputKW": "84.21052631578947368421052631578947368421052631578947368421052631578947",
+          "gridKW": "85.92910848549946294307196562835660580021482277121374865735767991407089",
+          "durationHours": "0.5",
+          "ddLossKW": "4.210526315789473684210526315789473684210526315789473684210526315789440",
+          "sstLossKW": "1.718582169709989258861439312567132116004296455424274973147153598281432"
+        },
+        {
+          "day": 2,
+          "fromMinute": 2970,
+          "toMinute": 3000,
+          "tieClosed": true,
+          "rackKW": "0",
+          "aGunKW": "0",
+          "bGunKW": "0",
+          "sharedDDOutputKW": "0",
+          "tieKW": "0",
+          "sstOutputKW": "0",
+          "gridKW": "0",
+          "durationHours": "0.5",
+          "ddLossKW": "0.000000000000000000000000000000000000000000000000000000000000000000000",
+          "sstLossKW": "0.0000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "expected": {
+        "rackReplenishmentKWh": "180.0",
+        "aEVKWh": "240.0",
+        "bEVKWh": "120.0",
+        "gridKWh": "580.0214822771213748657357679914070891514500537056928034371643394199784",
+        "ddLossKWh": "28.42105263157894736842105263157894736842105263157894736842105263157872",
+        "sstLossKWh": "11.60042964554242749731471535982814178302900107411385606874328678839967",
+        "crossBusTieKWh": "126.3157894736842105263157894736842105263157894736842105263157894736842",
+        "completedEVs": 6,
+        "aEVCompletionMinute": [
+          "90",
+          "1530",
+          "2970"
+        ],
+        "bEVCompletionMinute": [
+          "60",
+          "1560",
+          "2940"
+        ],
+        "lossKWh": "40.02148227712137486573576799140708915145005370569280343716433941997839",
+        "terminalKWh": "540.0"
+      }
+    },
+    {
+      "id": "V05_PV_ESS_UPS_4D",
+      "horizonDays": 4,
+      "assumptions": {
+        "essCapacityKWh": 100,
+        "essMinSOC": "0.1",
+        "essMaxSOC": 1,
+        "essChargeEfficiency": "0.9",
+        "essDischargeEfficiency": "0.8",
+        "upsCapacityKWh": 20,
+        "upsMinSOC": "0.5",
+        "upsMaxSOC": 1,
+        "upsChargeEfficiency": "0.8",
+        "upsDischargeEfficiency": "0.8",
+        "selfDischargePerHour": 0,
+        "calendarFadePerDay": 0,
+        "cycleFadePerEquivalentCycle": 0,
+        "gridExport": false,
+        "ATSDelayMinutes": 0,
+        "allOtherLoads": 0
+      },
+      "days": [
+        {
+          "day": 0,
+          "openingESSKWh": "50",
+          "essAfterChargeKWh": "95.0",
+          "closingESSKWh": "50.0",
+          "openingUPSKWh": "20",
+          "upsAfterDischargeKWh": "10",
+          "closingUPSKWh": "20.00",
+          "pvAvailableRawKWh": "120",
+          "pvHarvestedRawKWh": "100",
+          "pvBusKWh": "90",
+          "curtailedRawEquivalentKWh": "20",
+          "curtailedBusEquivalentKWh": "18.0",
+          "mainTerminalKWh": "76",
+          "upsTerminalKWh": "8",
+          "unservedUPSKWh": "0",
+          "gridKWh": "12.5",
+          "pvLossKWh": "10",
+          "essLossKWh": "14.00",
+          "upsLossKWh": "4.50",
+          "terminalKWh": "84",
+          "lossKWh": "28.50"
+        },
+        {
+          "day": 1,
+          "openingESSKWh": "50.0",
+          "essAfterChargeKWh": "95.0",
+          "closingESSKWh": "50.0",
+          "openingUPSKWh": "20.00",
+          "upsAfterDischargeKWh": "10.00",
+          "closingUPSKWh": "20.00",
+          "pvAvailableRawKWh": "120",
+          "pvHarvestedRawKWh": "100",
+          "pvBusKWh": "90",
+          "curtailedRawEquivalentKWh": "20",
+          "curtailedBusEquivalentKWh": "18.0",
+          "mainTerminalKWh": "76",
+          "upsTerminalKWh": "8",
+          "unservedUPSKWh": "0",
+          "gridKWh": "12.5",
+          "pvLossKWh": "10",
+          "essLossKWh": "14.00",
+          "upsLossKWh": "4.50",
+          "terminalKWh": "84",
+          "lossKWh": "28.50"
+        },
+        {
+          "day": 2,
+          "openingESSKWh": "50.0",
+          "essAfterChargeKWh": "95.0",
+          "closingESSKWh": "50.0",
+          "openingUPSKWh": "20.00",
+          "upsAfterDischargeKWh": "10.00",
+          "closingUPSKWh": "20.00",
+          "pvAvailableRawKWh": "120",
+          "pvHarvestedRawKWh": "100",
+          "pvBusKWh": "90",
+          "curtailedRawEquivalentKWh": "20",
+          "curtailedBusEquivalentKWh": "18.0",
+          "mainTerminalKWh": "76",
+          "upsTerminalKWh": "8.000",
+          "unservedUPSKWh": "8.000",
+          "gridKWh": "12.5",
+          "pvLossKWh": "10",
+          "essLossKWh": "14.00",
+          "upsLossKWh": "4.50000",
+          "terminalKWh": "84.000",
+          "lossKWh": "28.50000"
+        },
+        {
+          "day": 3,
+          "openingESSKWh": "50.0",
+          "essAfterChargeKWh": "95.0",
+          "closingESSKWh": "50.0",
+          "openingUPSKWh": "20.00",
+          "upsAfterDischargeKWh": "10.00",
+          "closingUPSKWh": "20.00",
+          "pvAvailableRawKWh": "120",
+          "pvHarvestedRawKWh": "100",
+          "pvBusKWh": "90",
+          "curtailedRawEquivalentKWh": "20",
+          "curtailedBusEquivalentKWh": "18.0",
+          "mainTerminalKWh": "76",
+          "upsTerminalKWh": "8",
+          "unservedUPSKWh": "0",
+          "gridKWh": "12.5",
+          "pvLossKWh": "10",
+          "essLossKWh": "14.00",
+          "upsLossKWh": "4.50",
+          "terminalKWh": "84",
+          "lossKWh": "28.50"
+        }
+      ],
+      "expected": {
+        "pvAvailableRawKWh": "480",
+        "pvHarvestedRawKWh": "400",
+        "pvBusKWh": "360",
+        "curtailedRawEquivalentKWh": "80",
+        "curtailedBusEquivalentKWh": "72.0",
+        "mainTerminalKWh": "304",
+        "upsTerminalKWh": "32.000",
+        "unservedUPSKWh": "8.000",
+        "gridKWh": "50.0",
+        "pvLossKWh": "40",
+        "essLossKWh": "56.00",
+        "upsLossKWh": "18.00000",
+        "terminalKWh": "336.000",
+        "lossKWh": "114.00000",
+        "initialStoredKWh": "70",
+        "finalStoredKWh": "70.00"
+      }
+    },
+    {
+      "id": "V06_PASSENGER_TARIFF_5D",
+      "horizonDays": 5,
+      "assumptions": {
+        "startDate": "2026-01-30",
+        "passengerCapacityKWh": 100,
+        "passengerReadySOC": 1,
+        "passengerReturnSOC": 0,
+        "passengerInitialSOC": 1,
+        "passengerBays": 1,
+        "passengerSwapMinutes": "7.5",
+        "passengerChargeKW": 50,
+        "allEfficiencies": 1,
+        "otherLoads": 0,
+        "allServicePrices": 1,
+        "basicA": "capacity1000kVA * 2 CNY/kVA/month",
+        "basicB": "observed15minPeak80kW * 3 CNY/kW/month",
+        "peakWindow": "clock-aligned 15 minutes; observed period only",
+        "energySettlement": "HALF_UP 2 decimals for each source/hour, then sum"
+      },
+      "days": [
+        {
+          "day": 0,
+          "date": "2026-01-30",
+          "station": "A",
+          "directKWh": "75.00",
+          "passengerKWh": "100",
+          "importKWh": "175.00",
+          "energyCost": "87.51",
+          "hourlyImportKWh": {
+            "0": "75.00",
+            "9": "43.75",
+            "10": "50",
+            "11": "6.25"
+          },
+          "source15MinutePeakKW": "200",
+          "revenue": "175.00"
+        },
+        {
+          "day": 0,
+          "date": "2026-01-30",
+          "station": "B",
+          "directKWh": "30.00",
+          "passengerKWh": "0",
+          "importKWh": "30.00",
+          "energyCost": "24.00",
+          "hourlyImportKWh": {
+            "0": "30.00"
+          },
+          "source15MinutePeakKW": "80",
+          "revenue": "30.00"
+        },
+        {
+          "day": 1,
+          "date": "2026-01-31",
+          "station": "A",
+          "directKWh": "75.00",
+          "passengerKWh": "100",
+          "importKWh": "175.00",
+          "energyCost": "87.51",
+          "hourlyImportKWh": {
+            "0": "75.00",
+            "9": "43.75",
+            "10": "50",
+            "11": "6.25"
+          },
+          "source15MinutePeakKW": "200",
+          "revenue": "175.00"
+        },
+        {
+          "day": 1,
+          "date": "2026-01-31",
+          "station": "B",
+          "directKWh": "30.00",
+          "passengerKWh": "0",
+          "importKWh": "30.00",
+          "energyCost": "24.00",
+          "hourlyImportKWh": {
+            "0": "30.00"
+          },
+          "source15MinutePeakKW": "80",
+          "revenue": "30.00"
+        },
+        {
+          "day": 2,
+          "date": "2026-02-01",
+          "station": "A",
+          "directKWh": "75.00",
+          "passengerKWh": "100",
+          "importKWh": "175.00",
+          "energyCost": "87.51",
+          "hourlyImportKWh": {
+            "0": "75.00",
+            "9": "43.75",
+            "10": "50",
+            "11": "6.25"
+          },
+          "source15MinutePeakKW": "200",
+          "revenue": "175.00"
+        },
+        {
+          "day": 2,
+          "date": "2026-02-01",
+          "station": "B",
+          "directKWh": "30.00",
+          "passengerKWh": "0",
+          "importKWh": "30.00",
+          "energyCost": "24.00",
+          "hourlyImportKWh": {
+            "0": "30.00"
+          },
+          "source15MinutePeakKW": "80",
+          "revenue": "30.00"
+        },
+        {
+          "day": 3,
+          "date": "2026-02-02",
+          "station": "A",
+          "directKWh": "75.00",
+          "passengerKWh": "100",
+          "importKWh": "175.00",
+          "energyCost": "87.51",
+          "hourlyImportKWh": {
+            "0": "75.00",
+            "9": "43.75",
+            "10": "50",
+            "11": "6.25"
+          },
+          "source15MinutePeakKW": "200",
+          "revenue": "175.00"
+        },
+        {
+          "day": 3,
+          "date": "2026-02-02",
+          "station": "B",
+          "directKWh": "30.00",
+          "passengerKWh": "0",
+          "importKWh": "30.00",
+          "energyCost": "24.00",
+          "hourlyImportKWh": {
+            "0": "30.00"
+          },
+          "source15MinutePeakKW": "80",
+          "revenue": "30.00"
+        },
+        {
+          "day": 4,
+          "date": "2026-02-03",
+          "station": "A",
+          "directKWh": "75.00",
+          "passengerKWh": "100",
+          "importKWh": "175.00",
+          "energyCost": "87.51",
+          "hourlyImportKWh": {
+            "0": "75.00",
+            "9": "43.75",
+            "10": "50",
+            "11": "6.25"
+          },
+          "source15MinutePeakKW": "200",
+          "revenue": "175.00"
+        },
+        {
+          "day": 4,
+          "date": "2026-02-03",
+          "station": "B",
+          "directKWh": "30.00",
+          "passengerKWh": "0",
+          "importKWh": "30.00",
+          "energyCost": "24.00",
+          "hourlyImportKWh": {
+            "0": "30.00"
+          },
+          "source15MinutePeakKW": "80",
+          "revenue": "30.00"
+        }
+      ],
+      "months": {
+        "2026-01": {
+          "days": 2,
+          "calendarDays": 31,
+          "A": {
+            "kWh": "350.00",
+            "energyCost": "175.02",
+            "basicChargeEstimate": "129.03",
+            "estimatedInvoice": "304.05"
+          },
+          "B": {
+            "kWh": "60.00",
+            "energyCost": "48.00",
+            "basicChargeEstimate": "15.48",
+            "estimatedInvoice": "63.48"
+          },
+          "partialMonthPolicy": "PRORATE_OBSERVED_ESTIMATE",
+          "strictFullMonthInvoice": null
+        },
+        "2026-02": {
+          "days": 3,
+          "calendarDays": 28,
+          "A": {
+            "kWh": "525.00",
+            "energyCost": "262.53",
+            "basicChargeEstimate": "214.29",
+            "estimatedInvoice": "476.82"
+          },
+          "B": {
+            "kWh": "90.00",
+            "energyCost": "72.00",
+            "basicChargeEstimate": "25.71",
+            "estimatedInvoice": "97.71"
+          },
+          "partialMonthPolicy": "PRORATE_OBSERVED_ESTIMATE",
+          "strictFullMonthInvoice": null
+        }
+      },
+      "expected": {
+        "passengerTransactions": 5,
+        "passengerDeliveredKWh": "500",
+        "passengerRevenue": "500",
+        "sourceAKWh": "875",
+        "sourceBKWh": "150",
+        "sourceAObservedPeakKW": "200",
+        "sourceBObservedPeakKW": "80",
+        "deliveredKWh": "1025",
+        "gridKWh": "1025",
+        "lossKWh": "0",
+        "initialPassengerStockKWh": "100",
+        "finalPassengerStockKWh": "100",
+        "revenue": "1025.00",
+        "energyCharge": "557.55",
+        "proratedBasicChargeEstimate": "384.51",
+        "estimatedInvoice": "942.06",
+        "cashContributionAfterEstimatedBill": "82.94",
+        "passengerSwapCompletionMinutes": [
+          "547.5",
+          "1987.5",
+          "3427.5",
+          "4867.5",
+          "6307.5"
+        ],
+        "passengerChargeCompletionMinutes": [
+          "667.5",
+          "2107.5",
+          "3547.5",
+          "4987.5",
+          "6427.5"
+        ]
+      },
+      "inventorySubcase": {
+        "openingKWh": "100",
+        "openingValue": "40",
+        "inflowKWh": "100",
+        "inflowCost": "60",
+        "issuedKWh": "150",
+        "closingKWh": "50",
+        "averageCost": "0.5",
+        "costOfGoodsSold": "75.0",
+        "closingValue": "25.0",
+        "cashContribution": "40",
+        "stockAdjustedContribution": "25.0"
+      }
+    }
+  ],
+  "pvExportGolden": {
+    "pvAvailableKWh": "120",
+    "localLoadKWh": "40",
+    "mpptEfficiency": "0.9",
+    "exportEfficiency": "0.8",
+    "exportConverterKW": "50",
+    "exportLimitKW": "48",
+    "gridImportKWh": "0",
+    "exportKWh": "48",
+    "pvGeneratedKWh": "111.1111111111111111111111111111111111111111111111111111111111111111111",
+    "curtailedKWh": "8.8888888888888888888888888888888888888888888888888888888888888888889",
+    "lossKWh": "23.1111111111111111111111111111111111111111111111111111111111111111111",
+    "exportUnitPrice": "0.25",
+    "exportRevenue": "12"
+  }
+}

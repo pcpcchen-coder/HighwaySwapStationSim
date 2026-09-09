@@ -1,0 +1,55 @@
+{
+  "version": "0.6.0",
+  "timestamp": "2026-09-09T04:08:43.967384+00:00",
+  "allPassed": true,
+  "checks": [
+    {
+      "command": "npm run test:core",
+      "exitCode": 0,
+      "passed": 134,
+      "failed": 0,
+      "log": "core-tests.txt"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "typecheck.txt"
+    },
+    {
+      "command": "npm run verify:scenarios",
+      "exitCode": 0,
+      "passed": 47489,
+      "failed": 0,
+      "log": "original-verification.txt"
+    },
+    {
+      "command": "npm run verify:detailed",
+      "exitCode": 0,
+      "independentExpectedChecks": 50,
+      "ledgerChecks": 33753,
+      "failed": 0,
+      "log": "detailed-verification.txt"
+    },
+    {
+      "command": "Sites build-site.mjs (npm run build)",
+      "exitCode": 0,
+      "log": "build.txt"
+    },
+    {
+      "command": "node --test tests/*.test.mjs",
+      "exitCode": 0,
+      "passed": 33,
+      "failed": 0,
+      "log": "production-tests.txt"
+    }
+  ],
+  "limitations": [
+    "Quasi-static energy/event model; no AC network phase-angle or EMT solution",
+    "No human browser or desktop Excel/PowerPoint test in this release",
+    "No field data calibration or guarantee of future profit"
+  ],
+  "reportSHA256": {
+    "HighwaySwapSim-v0.6-Verification.pptx": "3b867713bcd051458436634178b619b9bf5ef564e935ee7665618e6a22de7c2e",
+    "HighwaySwapSim-v0.6-Verification.pdf": "d92df982a92d3591ab209a8d50bce4a5679a76e7dbd8fb69b99923e06360eac0"
+  }
+}

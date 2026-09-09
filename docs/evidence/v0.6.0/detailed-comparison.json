@@ -1,0 +1,494 @@
+{
+  "format": "HighwaySwapSim.DetailedIntegrationVerification",
+  "timestamp": "2026-09-09T04:06:01.313Z",
+  "sourceSHA256": {
+    "packages/contracts/index.ts": "336826b146d8963e557ce665f46cc5e32b56d48fe469cafd86defd90e3ff7681",
+    "packages/detailed-model/contracts.ts": "0e3d2cff0daf849f1a688467326bd86c0c1ad41c8913864ee03e051a3cbb87aa",
+    "packages/detailed-model/defaults.ts": "5e1fabfc2ced9daf235a294e7b5118db0cac49fee449f75d1b9fc3adfc9c5ef8",
+    "packages/detailed-model/engine.ts": "15472ee1a26baf46ca7b21598006d7063faa50d7884b93614d8f4f2375143d45",
+    "packages/detailed-model/policy.ts": "d3bd0eeeec8af1d1a7d3c2f022bf5d9ecd9e48346081400aa2ca15fdd500522c",
+    "packages/detailed-model/project.ts": "d10330098ddba02cfb1e34a51da6924aa2545199db788deb58cf716545aa6c9f",
+    "packages/detailed-model/readiness.ts": "e812046154e04e3bbe5adb6421026b85ee9a71d7835138cdcac56ef91683d978",
+    "packages/detailed-model/schema.ts": "de1cd88210db04f2bf12097b712bb5a076eaa0af6350b078094c24af3e3499a7",
+    "packages/detailed-model/services.ts": "2c16cc7d42aae362fdb8e5dbb3b64ff7957489f66723991da170c43bf27c48f7",
+    "packages/detailed-model/templates.ts": "58b37b0a3321ede663a49c391b86276fa0329d248f195f7d7aed4f7b25c5175c",
+    "packages/detailed-model/topology.ts": "5de205724a484a44de6a4ea5490af14e5910aa76b5521207048f8f3a911d3fa6",
+    "packages/detailed-network/index.ts": "a6e8cddcf56763d0dd30de685df4dfee93eb3ca47e34d9632f6b2fe0b8524c5e",
+    "packages/detailed-network/topology.ts": "3e7a68e03a5634ef9414da6dccce4eb924de34144589701322db9d07e0823942",
+    "packages/detailed-profile/index.ts": "033418013d3cd008c59e5a881481723693b28bac2411a28a8a69668d76fe9944",
+    "packages/detailed-verification/checks.ts": "a62e4558ca41df5c1d621d2c11b4f01ecca1d08ee64b747d5e2c927ec8991a1a",
+    "packages/detailed-verification/index.ts": "1245c9a2b11fa3a7f4e2f7810e2fe8852fb0d06b591d95c604fe156f47b2df5e",
+    "packages/economics-engine/index.ts": "27821ab7da7659f4aacb5bdc17d918d1c2440bb595584d1709eebff905a2bb55",
+    "packages/electrical-engine/index.ts": "f32d91692f665078369aa53764a8fbee28b1ca433973af72ba5e0bade490d34f",
+    "packages/engineering/index.ts": "0248fa4aeb9e68c7882eef1b7280d53ba8308f1da7a0ad0ab3ea2082de95ba30",
+    "packages/equipment-efficiency/index.ts": "919a20c965f5a1f02fb07a6ae37c71987c1c341857847b96ae3f37b613ead680",
+    "packages/equipment-profile/index.ts": "35ac89f6d897eb8a71fb9fd62e7fe94c83ae48dccfb4153694c2398002005f36",
+    "packages/extended-finance/contracts.ts": "a51933f89c0bd74d0e5b2e0911c3a5b73492c526597b78cfae7ec84e09c27583",
+    "packages/extended-finance/index.ts": "5ecf72e07307b87223f669fe1caaf23d90ea1bb7401ad91f6df4850b00830e8e",
+    "packages/extended-finance/projection-metrics.ts": "e794e1c342e2b9cf4a0fb5ada015e55939fceaf9d1a4f2b8cb7fa779b8a05839",
+    "packages/extended-finance/validation.ts": "dd696d8b17debbfc86c094f441f53e7c2375e0159d8ef9cad19e2e2767ace9a7",
+    "packages/flow-boundary/index.ts": "7201eefa0f5820bc64ec13b661139c0bb4d3a86b7f497bdeb54c46569c06a53d",
+    "packages/io/index.ts": "6b3c955732fa19a57680d14d18251632195f6beb577847dbf9f4787c5cf65958",
+    "packages/money/index.ts": "2b1de534011b4b461a276e1ca59661a008c9034d2ae70480c75544cb671b9b29",
+    "packages/physical-models/index.ts": "fefd375fa23ea37a0fd57319c7347198b69b429c95d0670942ab3214d03e485a",
+    "packages/physical-models/schema.ts": "4a24929089b218ec74f64b7b90191be083dba7b49d3fe066d544c033fca54ba3",
+    "packages/power-trace/index.ts": "639ffe73e8eb775e1fe2c2b643df409610ca7d81010f9db1f4658ca312a52c4c",
+    "packages/reference/index.ts": "46b3030e84915ebff9a922ce151730304fd0c39614770f0a6baf88bdd8707334",
+    "packages/schemas/index.ts": "9a43bc182fbb7633c1fe3670ed3e638ad1d3678b7ab9c27f8bd76135d43560a9",
+    "packages/service-fleet/contracts.ts": "3786f74b463b5896384674271be1c2c5a4076a4120351bdd93e049c4d44f30ea",
+    "packages/service-fleet/index.ts": "22eee6d00e5995f23e2a387e1d14a9bb42d82ffd6f3967be3007d6916d29c587",
+    "packages/service-fleet/validation.ts": "ee47159ca86df981be4828eb6ee82fba7528a3bc482c162535504d4608c1d46d",
+    "packages/service-profile/index.ts": "8d090962b343ac62a84a194003e68b9f44863719e5a318a6aea48bda8ac093d1",
+    "packages/sim-kernel/index.ts": "eec12ab0a079563995a6f7bcd23961dbc02785dea4c80dd5abf28d1ab23bf711",
+    "packages/station-engine/index.ts": "87e130547226a66e9ca855de2201f30c4468cb8e4cbf2d45ee21397bd5e96b9a",
+    "packages/station-settings/index.ts": "ca7a5f11f0d0d27c8f7ab3c6835b1204c5419ba81a5a577bf4e460e0ddb1fdcd",
+    "packages/tabular/index.ts": "8fcfc7a638930735aa512fa5ffa6821bf00b98c8009b5ce272ccd8a1ecfc8ab5",
+    "packages/topology-engine/index.ts": "03049f0f671756b98c052dcc08861f509644ff8bb672d89cec9bbbd4a56716a1",
+    "packages/verification/cases.ts": "f2d0e88204fd460ad87430c6aefe52113893317a6b6461dd01710dfb115ffe59",
+    "plugins/equipment/index.ts": "1082253731edb96c41ffc9dc21a5dd8baceb78eea28ab5e173217e39bc591c93",
+    "data/verification/calculate-detailed.py": "acbd989f4c420c3e7a168c562066e58652c42fbcb07c28ba5c56c45cab3b825a",
+    "data/verification/calculate.py": "95f00e55151f4c79195f420b23d32fd1c1ff53cc22e568225de0916e35f377ac",
+    "data/verification/correction-boundaries-before.json": "d458332edc19961cd5d3207157d8d9dc5d2d072e6a106777de769f7335a0acbb",
+    "data/verification/corrections-C02.json": "0ccf976b9882a1d0c83644ca156e6e44f982271a238a54d4e569091ffb047c01",
+    "data/verification/corrections.json": "62549bafd4815a60024045b11cd9707fa9ca3c60c8e2f4e2a585ef9303dc619c",
+    "data/verification/detailed-expected.json": "0ea3df99af315eb5223bcd31d1ac7fb0e155bd48f953ca9dd898478874591ef5",
+    "data/verification/expected-summary.json": "f7a8ed934bbbd17d2c4269bfd936f0036e096ca0a0a6dcce7dc9fc7cf4d5fb1d",
+    "data/verification/expected.json": "ea9c02a3d6b9b9a47f955fb707accbef97de7d184820e1d7ab687f1c65be208f",
+    "data/verification/fixtures.json": "d119bc33a4961afad6d4970e9f0a974f88ae54543cce098379e8d945cad2d209",
+    "data/verification/release-summary.json": "abff94f71bc40e3a5663d66289dc952b70621e55e99faa13574f2adcd2060833",
+    "scripts/verification/detailed-checks.ts": "ac906fdc67fee3653d078047cc3377cceefcd0039b32cdf93f2976ecaad3c31d",
+    "scripts/verification/run-detailed.ts": "d9c8b7ffa3ec876b7d368621544e9040f527de827ffc7d03d881870c0827e87b",
+    "scripts/verification/run.ts": "956f79c35652d158a0279d74ad047e06c8095d761ac9734b3d1e3201631a4c8a"
+  },
+  "oracle": "data/verification/detailed-expected.json; independent Python Decimal70",
+  "inputFactory": "packages/detailed-verification/index.ts",
+  "allPassed": true,
+  "results": [
+    {
+      "id": "V04_PROJECT_SHARED_DD_TIE_3D",
+      "status": "passed",
+      "durationMs": 905,
+      "comparison": {
+        "id": "V04_PROJECT_SHARED_DD_TIE_3D",
+        "checks": 18,
+        "maxDelta": 7.498925924664945e-10,
+        "allPassed": true,
+        "rows": [
+          {
+            "name": "detailedEnergyBalance",
+            "actual": 9.094947017729282e-13,
+            "expected": 0,
+            "delta": 9.094947017729282e-13
+          },
+          {
+            "name": "fleetInventoryBalance",
+            "actual": 0,
+            "expected": 0,
+            "delta": 0
+          },
+          {
+            "name": "gridKWh",
+            "actual": 580.0214822771219,
+            "expected": 580.0214822771213,
+            "delta": 5.684341886080801e-13
+          },
+          {
+            "name": "lossKWh",
+            "actual": 40.02148227712141,
+            "expected": 40.02148227712137,
+            "delta": 3.552713678800501e-14
+          },
+          {
+            "name": "delivery",
+            "actual": 539.9999999999995,
+            "expected": 540,
+            "delta": 4.547473508864641e-13
+          },
+          {
+            "name": "revenue",
+            "actual": 540,
+            "expected": 540,
+            "delta": 0
+          },
+          {
+            "name": "completed",
+            "actual": 9,
+            "expected": 9,
+            "delta": 0
+          },
+          {
+            "name": "initialStock",
+            "actual": 200,
+            "expected": 200,
+            "delta": 0
+          },
+          {
+            "name": "finalStock",
+            "actual": 200,
+            "expected": 200,
+            "delta": 0
+          },
+          {
+            "name": "swapCompletion0",
+            "actual": 7.5,
+            "expected": 7.5,
+            "delta": 0
+          },
+          {
+            "name": "aCompletion0",
+            "actual": 97.49999999925011,
+            "expected": 97.5,
+            "delta": 7.498925924664945e-10
+          },
+          {
+            "name": "bCompletion0",
+            "actual": 67.5,
+            "expected": 67.5,
+            "delta": 0
+          },
+          {
+            "name": "swapCompletion1",
+            "actual": 1447.5,
+            "expected": 1447.5,
+            "delta": 0
+          },
+          {
+            "name": "aCompletion1",
+            "actual": 1537.4999999992501,
+            "expected": 1537.5,
+            "delta": 7.498783816117793e-10
+          },
+          {
+            "name": "bCompletion1",
+            "actual": 1567.5,
+            "expected": 1567.5,
+            "delta": 0
+          },
+          {
+            "name": "swapCompletion2",
+            "actual": 2887.5,
+            "expected": 2887.5,
+            "delta": 0
+          },
+          {
+            "name": "aCompletion2",
+            "actual": 2977.49999999925,
+            "expected": 2977.5,
+            "delta": 7.498783816117793e-10
+          },
+          {
+            "name": "bCompletion2",
+            "actual": 2947.5,
+            "expected": 2947.5,
+            "delta": 0
+          }
+        ]
+      },
+      "ledgers": {
+        "checks": 3963,
+        "maxDelta": 3.410605131648481e-13,
+        "allPassed": true
+      },
+      "totals": {
+        "deliveredKWh": 539.9999999999995,
+        "requestedKWh": 540,
+        "gridKWh": 580.0214822771219,
+        "lossKWh": 40.02148227712141,
+        "revenue": 540,
+        "gridCost": 580.01,
+        "auxiliaryGridCost": 0,
+        "completed": 9,
+        "unservedKWh": 4.547473508864641e-13,
+        "initialStoredKWh": 200,
+        "finalStoredKWh": 200,
+        "maxBalanceResidual": 9.094947017729282e-13
+      },
+      "energy": {
+        "pvKWh": 0,
+        "exportKWh": 0,
+        "storageInitialKWh": 0,
+        "storageFinalKWh": 0,
+        "storageLossKWh": 0,
+        "auxiliaryKWh": 0,
+        "networkLossKWh": 40.02148227712141,
+        "balanceResidualKWh": 9.094947017729282e-13
+      }
+    },
+    {
+      "id": "V05_PROJECT_PV_ESS_UPS_4D",
+      "status": "passed",
+      "durationMs": 1778,
+      "comparison": {
+        "id": "V05_PROJECT_PV_ESS_UPS_4D",
+        "checks": 11,
+        "maxDelta": 1.0800249583553523e-12,
+        "allPassed": true,
+        "rows": [
+          {
+            "name": "detailedEnergyBalance",
+            "actual": 1.0231815394945443e-12,
+            "expected": 0,
+            "delta": 1.0231815394945443e-12
+          },
+          {
+            "name": "fleetInventoryBalance",
+            "actual": 0,
+            "expected": 0,
+            "delta": 0
+          },
+          {
+            "name": "grid",
+            "actual": 50.000000000000036,
+            "expected": 50,
+            "delta": 3.552713678800501e-14
+          },
+          {
+            "name": "pvGeneration",
+            "actual": 400.0000000000011,
+            "expected": 400,
+            "delta": 1.0800249583553523e-12
+          },
+          {
+            "name": "totalLoss",
+            "actual": 114.00000000000003,
+            "expected": 114,
+            "delta": 2.842170943040401e-14
+          },
+          {
+            "name": "auxTerminal",
+            "actual": 336.0000000000001,
+            "expected": 336,
+            "delta": 1.1368683772161603e-13
+          },
+          {
+            "name": "storageInitial",
+            "actual": 70,
+            "expected": 70,
+            "delta": 0
+          },
+          {
+            "name": "storageFinal",
+            "actual": 70,
+            "expected": 70,
+            "delta": 0
+          },
+          {
+            "name": "curtail",
+            "actual": 79.99999999999994,
+            "expected": 80,
+            "delta": 5.684341886080802e-14
+          },
+          {
+            "name": "A-ess.final",
+            "actual": 50,
+            "expected": 50,
+            "delta": 0
+          },
+          {
+            "name": "A-ups.final",
+            "actual": 20,
+            "expected": 20,
+            "delta": 0
+          }
+        ]
+      },
+      "ledgers": {
+        "checks": 9987,
+        "maxDelta": 7.105427357601002e-14,
+        "allPassed": true
+      },
+      "totals": {
+        "deliveredKWh": 0,
+        "requestedKWh": 0,
+        "gridKWh": 50.000000000000036,
+        "lossKWh": 114.00000000000003,
+        "revenue": 0,
+        "gridCost": 0,
+        "auxiliaryGridCost": 0,
+        "completed": 0,
+        "unservedKWh": 0,
+        "initialStoredKWh": 200,
+        "finalStoredKWh": 200,
+        "maxBalanceResidual": 1.0231815394945443e-12
+      },
+      "energy": {
+        "pvKWh": 400.0000000000011,
+        "exportKWh": 0,
+        "storageInitialKWh": 70,
+        "storageFinalKWh": 70,
+        "storageLossKWh": 0,
+        "auxiliaryKWh": 336.0000000000001,
+        "networkLossKWh": 114.00000000000003,
+        "balanceResidualKWh": 1.0231815394945443e-12
+      }
+    },
+    {
+      "id": "V06_PROJECT_PASSENGER_TARIFF_5D",
+      "status": "passed",
+      "durationMs": 1188,
+      "comparison": {
+        "id": "V06_PROJECT_PASSENGER_TARIFF_5D",
+        "checks": 21,
+        "maxDelta": 3.637978807091713e-12,
+        "allPassed": true,
+        "rows": [
+          {
+            "name": "detailedEnergyBalance",
+            "actual": 6.821210263296962e-13,
+            "expected": 0,
+            "delta": 6.821210263296962e-13
+          },
+          {
+            "name": "fleetInventoryBalance",
+            "actual": -3.637978807091713e-12,
+            "expected": 0,
+            "delta": 3.637978807091713e-12
+          },
+          {
+            "name": "grid",
+            "actual": 1025.0000000000002,
+            "expected": 1025,
+            "delta": 2.2737367544323206e-13
+          },
+          {
+            "name": "delivered",
+            "actual": 1024.9999999999995,
+            "expected": 1025,
+            "delta": 4.547473508864641e-13
+          },
+          {
+            "name": "revenue",
+            "actual": 1025,
+            "expected": 1025,
+            "delta": 0
+          },
+          {
+            "name": "sourceHourEnergyBill",
+            "actual": 557.55,
+            "expected": 557.55,
+            "delta": 0
+          },
+          {
+            "name": "loss",
+            "actual": 0,
+            "expected": 0,
+            "delta": 0
+          },
+          {
+            "name": "initialStock14slotsPlusTruck",
+            "actual": 1600,
+            "expected": 1600,
+            "delta": 0
+          },
+          {
+            "name": "finalStock14slotsPlusTruck",
+            "actual": 1600,
+            "expected": 1600,
+            "delta": 0
+          },
+          {
+            "name": "passengerCount",
+            "actual": 5,
+            "expected": 5,
+            "delta": 0
+          },
+          {
+            "name": "passengerComplete0",
+            "actual": 547.5,
+            "expected": 547.5,
+            "delta": 0
+          },
+          {
+            "name": "passengerComplete1",
+            "actual": 1987.5,
+            "expected": 1987.5,
+            "delta": 0
+          },
+          {
+            "name": "passengerComplete2",
+            "actual": 3427.5,
+            "expected": 3427.5,
+            "delta": 0
+          },
+          {
+            "name": "passengerComplete3",
+            "actual": 4867.5,
+            "expected": 4867.5,
+            "delta": 0
+          },
+          {
+            "name": "passengerComplete4",
+            "actual": 6307.5,
+            "expected": 6307.5,
+            "delta": 0
+          },
+          {
+            "name": "estimatedInvoice",
+            "actual": 942.06,
+            "expected": 942.06,
+            "delta": 0
+          },
+          {
+            "name": "cashContribution",
+            "actual": 82.94000000000005,
+            "expected": 82.94,
+            "delta": 5.684341886080802e-14
+          },
+          {
+            "name": "A-grid.2026-01.15minutePeak",
+            "actual": 200,
+            "expected": 200,
+            "delta": 0
+          },
+          {
+            "name": "A-grid.2026-02.15minutePeak",
+            "actual": 200,
+            "expected": 200,
+            "delta": 0
+          },
+          {
+            "name": "B-grid.2026-01.15minutePeak",
+            "actual": 80,
+            "expected": 80,
+            "delta": 0
+          },
+          {
+            "name": "B-grid.2026-02.15minutePeak",
+            "actual": 80,
+            "expected": 80,
+            "delta": 0
+          }
+        ]
+      },
+      "ledgers": {
+        "checks": 19803,
+        "maxDelta": 3.552713678800501e-14,
+        "allPassed": true
+      },
+      "totals": {
+        "deliveredKWh": 1024.9999999999995,
+        "requestedKWh": 1024.9999999999995,
+        "gridKWh": 1025.0000000000002,
+        "lossKWh": 0,
+        "revenue": 1025,
+        "gridCost": 557.55,
+        "auxiliaryGridCost": 0,
+        "completed": 25,
+        "unservedKWh": 0,
+        "initialStoredKWh": 1600,
+        "finalStoredKWh": 1600,
+        "maxBalanceResidual": 6.821210263296962e-13
+      },
+      "energy": {
+        "pvKWh": 0,
+        "exportKWh": 0,
+        "storageInitialKWh": 0,
+        "storageFinalKWh": 0,
+        "storageLossKWh": 0,
+        "auxiliaryKWh": 0,
+        "networkLossKWh": 0,
+        "balanceResidualKWh": 6.821210263296962e-13
+      }
+    }
+  ]
+}

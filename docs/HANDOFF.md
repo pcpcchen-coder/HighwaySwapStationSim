@@ -1,3 +1,27 @@
+# 交接 — 0.6.0 / schema 1.3 / detailed 1
+
+本節為目前完整模型交接；下方 0.5.0 及更早內容保留歷史語義與證據，不代表新版仍缺少同一功能。操作以 [COMPLETE_MODEL_GUIDE.md](COMPLETE_MODEL_GUIDE.md)、[USER_GUIDE.md](USER_GUIDE.md) 為準。
+
+- `Project.detailed` 明確選入新引擎；新完整預設及成功結果為 v0.6.0。未含 `detailed` 的歷史專案仍用原引擎，來源重播亦保留原表算術。不可改舊 V01–V03 fixture 迎合新模型。
+- `detailed-model` 整合事件／物理／服務；`detailed-network` 以總負載評估非線性損耗及共享容量，補原圖 DD 外接槍、群組共享／互斥及受控方向母聯。預設 PCS 1600、每站 PCS 倉1–2／SST倉3–8、總24槍。
+- `physical-models` 提供線纜 I²R／壓降、RC 熱、效率曲線、箱變空載／銅損、無功、設定式保護、PV／ESS／UPS／ATS；`service-fleet` 提供逐包初始容量／SOH／SOC、乘用車、逐車 profile／雙槍。未知必要值保持 `null`，物理 readiness gate 與財務完整性分開。
+- `templates.ts` 與完整模型頁的「新增待填項目」建立欄位骨架／唯一 ID，不補容量或售價。新增先更新本頁草稿，再明確套用；新增端口才重建，重建前保存手改拓撲。無啟用開關的負載／事件／施工等缺值不能靠 `enabled=false` 規避。
+- `flow-boundary` 使用同次快照，任意子分鐘窗口精算自放電及庫存；連續 `[from,to)`、儲能步末 spill `(from,to]`、換電期末關帳政策有明確揭露。容量 spill 是離散 kWh，不冒充瞬時 kW；全站消除儲能內部移轉，不重複計光伏、回充或售電。
+- `extended-finance` 支援來源月帳單／15分鐘需量、周期加權存貨與內部轉撥消除、資產／租賃／OPEX、稅／應收／準備金及確認後的分月外推。部分月標示估計；缺資料的結論保持 `null`。物理施工事件與資產更換月仍須使用者一致設定。
+- `detailed-profile` 交換完整設定 JSON／結構化 CSV；XLSX 追加模型、服務／储能／外售／電氣及財務帳。快照內容比對允許物件 key 順序不同，但不忽略數值、陣列次序或設定差異；編輯不能修改舊 `parameterSnapshot`。
+
+## 最終發布驗證
+
+已知獨立對照基準：新 V04–V06 為 **33,803 項**（50 項獨立數值／事件＋33,753 項逐帳對照），舊 V01–V03 為 **47,489 項**。兩組引擎範圍不同；不要直接把合計當成彼此獨立的全功能證明。
+
+最終核心 134／134、正式 Worker／SSR 33／33、原獨立比較 47,489／47,489、新比較 33,803／33,803 全數通過；typecheck 與 Sites 正式建置退出碼均為 0。源檔 SHA256、日誌與簡報雜湊已封存於 [v0.6.0 證據](evidence/v0.6.0/release-checks.json)。詳細修正與邊界见 [驗證紀錄](VERIFICATION.md)。
+
+對外報告：[PPTX](../public/reports/HighwaySwapSim-v0.6-Verification.pptx)、[PDF](../public/reports/HighwaySwapSim-v0.6-Verification.pdf)。舊簡報保留原版本，不拿來冒充 v0.6 全部驗收。
+
+模型仍是準靜態、固定分支送端電壓、設定式故障／保護、一分鐘內事件切步與離散 ramp、啟發式 EMS。沒有全網潮流／電磁暫態／最優證明；周轉包初始 SOH 不是自動壽命模型；簡化財務不是所有供電／稅務契約。現場同步電表、SOC、交易、氣象、合約及成本的獨立校準尚須進行，不能宣稱真實獲利百分之百正確。
+
+---
+
 # 交接 — 0.5.0 / schema 1.3
 
 SOC介面更新（2026-09-09）：設備與容量／站務配置新增每站百分比上下限、預覽及明確套用。packages/station-settings只原子更新該站SOC及全期換電需求；不重建拓撲、不改其他需求或結果。移除舊0–1直接編輯欄位；容量提示改讀目前SOC。0–1存檔欄位及引擎物理公式不變。操作與獨立三日驗算見SOC_SETTINGS.md，Master追加134章。

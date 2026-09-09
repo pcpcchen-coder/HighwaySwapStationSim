@@ -7,7 +7,7 @@ import { validateTopology } from '../topology-engine/index.ts';
 import { csvCell, csvRecords } from '../tabular/index.ts';
 const FORMAT='HighwaySwapSim.EquipmentProfile';
 const COLUMNS=['equipmentId','type','field','value'] as const;
-const settingsSchema=projectSchema.innerType().pick({phase:true,station:true,efficiency:true,topology:true,equipmentSchedule:true,engineering:true}).extend({engineering:projectSchema.innerType().shape.engineering.unwrap().nullable()}).strict();
+const settingsSchema=projectSchema.innerType().pick({phase:true,station:true,efficiency:true,topology:true,equipmentSchedule:true,engineering:true,detailed:true}).extend({engineering:projectSchema.innerType().shape.engineering.unwrap().nullable()}).strict();
 const fileSchema=z.object({format:z.literal(FORMAT),version:z.literal(1),settings:settingsSchema}).strict();
 function rejectDroppedFields(raw:unknown,parsed:unknown,path='file'){
  if(raw&&typeof raw==='object'){const r=raw as Record<string,unknown>,p=parsed as Record<string,unknown>;for(const key of Object.keys(r)){if(!p||!Object.hasOwn(p,key))throw Error(`未知欄位 ${path}.${key}；未套用設定。`);rejectDroppedFields(r[key],p[key],`${path}.${key}`);}}
@@ -20,9 +20,9 @@ export function parameterNote(n:Equipment,key:string){
  if(key==='efficiency')return '轉換效率；未設定時沿用全域';
  if(key==='outputEfficiency')return '舊版規格紀錄，不參與計算；有效效率由全域或個別效率決定';
  if(key==='kWh')return '規格紀錄；庫存容量由「站務配置」決定';
- if(key==='slots'||key==='swapSeconds')return '乘用車規格紀錄；目前僅模擬站用負載';
- if(key==='length')return '長度紀錄；目前無電阻／I²R 損耗模型';
- if(key==='kvar')return '補償規格紀錄；目前不計無功補償';
+ if(key==='slots'||key==='swapSeconds')return '乘用車設計紀錄；完整營運參數於完整模型設定';
+ if(key==='length')return '設計長度紀錄；啟用阻抗模型時，請於完整模型設定填 lengthM';
+ if(key==='kvar')return '補償銘牌紀錄；啟用補償時，請於完整模型設定填 maximumKvar';
  return equipmentRegistry.get(n.type).parameters.some(p=>p.key===key)?'參與額定／容量限制':'額外規格紀錄，未參與計算';
 }
 export function editableParameter(n:Equipment,key:string){return key==='efficiency'?supportsEfficiency(n.type):equipmentRegistry.get(n.type).parameters.some(p=>p.key===key)&&!['length','kvar'].includes(key);}
@@ -46,7 +46,7 @@ function checked(p:Project):Project{
  if(p.engineering&&p.efficiency.mode!=='ASSEMBLY')throw Error('完整設備案例須使用設備組裝效率模式。');
  return p;
 }
-export function exportEquipmentJSON(p:Project){checked(p);return JSON.stringify({format:FORMAT,version:1,settings:{phase:p.phase,engineering:p.engineering??null,station:p.station,efficiency:p.efficiency,topology:p.topology,equipmentSchedule:p.equipmentSchedule}},null,2);}
+export function exportEquipmentJSON(p:Project){checked(p);return JSON.stringify({format:FORMAT,version:1,settings:{phase:p.phase,engineering:p.engineering??null,station:p.station,efficiency:p.efficiency,topology:p.topology,equipmentSchedule:p.equipmentSchedule,...(p.detailed?{detailed:p.detailed}:{})}},null,2);}
 export function exportEquipmentCSV(p:Project){checked(p);const rows:string[][]=[];
  for(const n of p.topology.nodes){for(const field of ['name','enabled','x','y'] as const)rows.push([n.id,n.type,field,String(n[field])]);
   for(const [key,value] of Object.entries(n.params))rows.push([n.id,n.type,`params.${key}`,String(value)]);
@@ -62,6 +62,7 @@ export function importEquipmentProfile(p:Project,content:string,format:'csv'|'js
   for(const n of s.topology.nodes){const allowed=new Set(equipmentRegistry.get(n.type).parameters.map(f=>f.key));if(supportsEfficiency(n.type))allowed.add('efficiency');for(const key of ({transformer:['outputEfficiency'],rack:['kWh'],passenger:['slots','swapSeconds']} as Record<string,string[]>)[n.type]??[])allowed.add(key);
    for(const key of Object.keys(n.params))if(!allowed.has(key)){const previous=p.topology.nodes.find(x=>x.id===n.id&&x.type===n.type);if(!previous||!Object.hasOwn(previous.params,key)||previous.params[key]!==n.params[key])throw Error(`${n.id}: 未知或未實作參數 ${key}。`);}
   }
+  if(s.detailed)candidate.detailed=s.detailed;else delete candidate.detailed;
   if(s.engineering)candidate.engineering=s.engineering;else delete candidate.engineering;
   return {project:checked(candidate),rows:s.topology.nodes.length};
  }

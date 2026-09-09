@@ -1,0 +1,15 @@
+/* Append to existing globals.css. Existing panel, table-scroll, stats-grid,
+ * two-column, notice, metric-line, diagnostic, Choice and Stat styling is reused. */
+.detailed-finance .finance-details{border-top:1px solid #e3eade;margin-top:16px;padding-top:12px}
+.detailed-finance .finance-details>summary{cursor:pointer;font-size:12px;font-weight:600;color:#3f6d56;padding:4px 0 12px;list-style-position:inside}
+.detailed-finance .finance-details>summary:focus-visible{outline:2px solid #087f70;outline-offset:3px;border-radius:3px}
+.detailed-finance .finance-issues{max-height:240px;overflow:auto;padding-right:8px}
+.detailed-finance .finance-issues .diagnostic{margin:0;padding:8px 0}
+.detailed-finance .finance-issues code{overflow-wrap:anywhere}
+.detailed-finance .table-scroll{max-height:520px;overflow:auto}
+.detailed-finance thead th{position:sticky;top:0;z-index:1}
+.detailed-finance td small{font-size:9px;color:#87968c}
+.detailed-finance .stat-value{white-space:normal;overflow-wrap:anywhere}
+.detailed-finance .formula-card strong{font-size:15px;overflow-wrap:anywhere}
+.detailed-finance .metric-line{gap:14px;align-items:baseline}
+.detailed-finance .metric-line strong{text-align:right;overflow-wrap:anywhere}
