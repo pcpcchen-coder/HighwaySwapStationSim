@@ -223,3 +223,15 @@ test("SOC verification controls preserve busy state and require a matching compl
  for(const text of ['電池 SOC 三日驗證','SOC-1','SOC-2','SOC-3','案例 JSON','選擇一個三日案例','合成驗證假設'])assert.ok(html.includes(text),text);
  assert.ok((html.match(/disabled=""/g)??[]).length>=4);assert.doesNotMatch(html,/本次結果的列示數值符合獨立預期/);
 });
+
+test('reference arrangement gives design and energy replay identical nodes and actual wire routes',async()=>{
+ const {NetworkDiagram}=await vite.ssrLoadModule('/components/simulator/topology.tsx');
+ const {FlowExplorer}=await vite.ssrLoadModule('/components/simulator/flow-explorer.tsx');
+ const {completeProject}=await import('../packages/detailed-model/project.ts');
+ const {replay}=await import('../packages/station-engine/index.ts');
+ const project=completeProject(),result=replay(project);
+ const design=renderToStaticMarkup(React.createElement(NetworkDiagram,{project})),flow=renderToStaticMarkup(React.createElement(FlowExplorer,{result}));
+ const positions=html=>[...html.matchAll(/data-node="([^"]+)" transform="([^"]+)"/g)].map(m=>[m[1],m[2]]);
+ assert.equal(positions(design).length,148);assert.deepEqual(positions(flow),positions(design));
+ for(const html of [design,flow]){assert.equal((html.match(/data-edge=/g)??[]).length,166);for(const text of ['圖面排列','重卡換電站','CATL 巧克力換電站','可擴展儲能／光伏'])assert.ok(html.includes(text),text);}
+});
