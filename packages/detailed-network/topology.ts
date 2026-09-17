@@ -5,12 +5,15 @@ export interface TopologyOptions {
  sharedDD: boolean;
  sharingMode: 'SIMULTANEOUS' | 'EXCLUSIVE';
  pcsRatingKW: number;
+ /** Explicit installed terminals, independent of how many DDs feed the group.
+  * Missing on old files means the legacy ceil(DD / 2) preset. */
+ swapTerminalCounts?: { pcs: number; sst: number };
  busTies: { station: StationId; enabled: boolean; direction: 'SST_TO_PCS' | 'PCS_TO_SST'; kw: number | null }[];
 }
 export function defaultTopologyOptions(): TopologyOptions {
  return { sharedDD:true, sharingMode:'EXCLUSIVE', pcsRatingKW:1600, busTies:(['A','B'] as const).map(station=>({station,enabled:false,direction:'SST_TO_PCS',kw:null})) };
 }
-/** The attachment's rack numbering is PCS 1–2, SST 3–8. DD outputs
+/** Rack numbering starts with the configured PCS count, then SST. DD outputs
  * share a finite pool; adding guns does not add upstream power. */
 export function augmentTopology(project: Project, base: Topology, options: TopologyOptions): Topology {
  const topology=structuredClone(base),{nodes,edges}=topology;
@@ -36,7 +39,7 @@ export function augmentTopology(project: Project, base: Topology, options: Topol
     const direct=edges.findIndex(e=>e.source===`${s}-dd-${i}`&&e.target===`${s}-rack-${i}`);if(direct>=0)edges.splice(direct,1);
     link(`${s}-dd-${i}`,group);link(group,`${s}-rack-${i}`);
    }
-   for(let i=0;i<Math.ceil(indices.length/2);i++){
+   for(let i=0;i<(options.swapTerminalCounts?.[kind]??Math.ceil(indices.length/2));i++){
     const terminal=`${s}-swap-terminal-${kind}-${i}`;
     add(s,'terminal',terminal,`換電站雙槍終端 ${kind.toUpperCase()} ${i+1}`,x+(i%2)*210,y+120+Math.floor(i/2)*220,{kw:960});link(group,terminal);
     for(let j=0;j<2;j++){const gun=`${s}-swap-gun-${kind}-${i*2+j}`;

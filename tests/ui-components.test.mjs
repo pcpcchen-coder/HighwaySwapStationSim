@@ -232,6 +232,6 @@ test('reference arrangement gives design and energy replay identical nodes and a
  const project=completeProject(),result=replay(project);
  const design=renderToStaticMarkup(React.createElement(NetworkDiagram,{project})),flow=renderToStaticMarkup(React.createElement(FlowExplorer,{result}));
  const positions=html=>[...html.matchAll(/data-node="([^"]+)" transform="([^"]+)"/g)].map(m=>[m[1],m[2]]);
- assert.equal(positions(design).length,148);assert.deepEqual(positions(flow),positions(design));
- for(const html of [design,flow]){assert.equal((html.match(/data-edge=/g)??[]).length,166);for(const text of ['圖面排列','重卡換電站','CATL 巧克力換電站','可擴展儲能／光伏'])assert.ok(html.includes(text),text);}
+ assert.equal(positions(design).length,142);assert.deepEqual(positions(flow),positions(design));
+ for(const html of [design,flow]){assert.equal((html.match(/data-edge=/g)??[]).length,160);assert.ok(!html.includes('data-node="A-swap-terminal-sst-2"'));assert.ok(!html.includes('data-node="B-swap-gun-sst-5"'));for(const text of ['圖面排列','重卡換電站','CATL 巧克力換電站','可擴展儲能／光伏'])assert.ok(html.includes(text),text);}
 });

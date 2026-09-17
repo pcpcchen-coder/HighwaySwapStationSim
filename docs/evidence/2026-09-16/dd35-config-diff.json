@@ -1,0 +1,456 @@
+[
+  [
+    "/detailed/assumptions/DD-MATRIX/note",
+    "按原圖 PCS 倉1–2、SST 倉3–8；2/6台DD共用組。預設回充與外槍互斥；可改同時共享，矩陣需設備方確認。",
+    "依使用者 2026-09-17 配置：PCS 倉1–3、SST 倉4–8，3/5台DD共用組；每側外接雙槍終端 PCS 1 台、SST 2 台。預設回充與外槍互斥；共享矩陣仍需設備方確認。"
+  ],
+  [
+    "/detailed/finance/assets/cost-A-swap-gun-sst-4",
+    {
+      "id": "cost-A-swap-gun-sst-4",
+      "equipmentId": "A-swap-gun-sst-4",
+      "name": "換電站外接槍 SST 5",
+      "ownership": null,
+      "quantity": 1,
+      "unitPurchaseCost": null,
+      "purchaseMonth": null,
+      "depreciationMonths": null,
+      "residualUnitValue": null,
+      "disposalMonth": null,
+      "disposalUnitProceeds": null,
+      "monthlyLeasePerUnit": null
+    },
+    null
+  ],
+  [
+    "/detailed/finance/assets/cost-A-swap-gun-sst-5",
+    {
+      "id": "cost-A-swap-gun-sst-5",
+      "equipmentId": "A-swap-gun-sst-5",
+      "name": "換電站外接槍 SST 6",
+      "ownership": null,
+      "quantity": 1,
+      "unitPurchaseCost": null,
+      "purchaseMonth": null,
+      "depreciationMonths": null,
+      "residualUnitValue": null,
+      "disposalMonth": null,
+      "disposalUnitProceeds": null,
+      "monthlyLeasePerUnit": null
+    },
+    null
+  ],
+  [
+    "/detailed/finance/assets/cost-A-swap-terminal-sst-2",
+    {
+      "id": "cost-A-swap-terminal-sst-2",
+      "equipmentId": "A-swap-terminal-sst-2",
+      "name": "換電站雙槍終端 SST 3",
+      "ownership": null,
+      "quantity": 1,
+      "unitPurchaseCost": null,
+      "purchaseMonth": null,
+      "depreciationMonths": null,
+      "residualUnitValue": null,
+      "disposalMonth": null,
+      "disposalUnitProceeds": null,
+      "monthlyLeasePerUnit": null
+    },
+    null
+  ],
+  [
+    "/detailed/finance/assets/cost-B-swap-gun-sst-4",
+    {
+      "id": "cost-B-swap-gun-sst-4",
+      "equipmentId": "B-swap-gun-sst-4",
+      "name": "換電站外接槍 SST 5",
+      "ownership": null,
+      "quantity": 1,
+      "unitPurchaseCost": null,
+      "purchaseMonth": null,
+      "depreciationMonths": null,
+      "residualUnitValue": null,
+      "disposalMonth": null,
+      "disposalUnitProceeds": null,
+      "monthlyLeasePerUnit": null
+    },
+    null
+  ],
+  [
+    "/detailed/finance/assets/cost-B-swap-gun-sst-5",
+    {
+      "id": "cost-B-swap-gun-sst-5",
+      "equipmentId": "B-swap-gun-sst-5",
+      "name": "換電站外接槍 SST 6",
+      "ownership": null,
+      "quantity": 1,
+      "unitPurchaseCost": null,
+      "purchaseMonth": null,
+      "depreciationMonths": null,
+      "residualUnitValue": null,
+      "disposalMonth": null,
+      "disposalUnitProceeds": null,
+      "monthlyLeasePerUnit": null
+    },
+    null
+  ],
+  [
+    "/detailed/finance/assets/cost-B-swap-terminal-sst-2",
+    {
+      "id": "cost-B-swap-terminal-sst-2",
+      "equipmentId": "B-swap-terminal-sst-2",
+      "name": "換電站雙槍終端 SST 3",
+      "ownership": null,
+      "quantity": 1,
+      "unitPurchaseCost": null,
+      "purchaseMonth": null,
+      "depreciationMonths": null,
+      "residualUnitValue": null,
+      "disposalMonth": null,
+      "disposalUnitProceeds": null,
+      "monthlyLeasePerUnit": null
+    },
+    null
+  ],
+  [
+    "/detailed/topology/swapTerminalCounts",
+    null,
+    {
+      "pcs": 1,
+      "sst": 2
+    }
+  ],
+  [
+    "/engineering/pcsSlotsPerSite",
+    2,
+    3
+  ],
+  [
+    "/topology/edges/A-dd-2>A-dd-group-pcs",
+    null,
+    {
+      "id": "A-dd-2>A-dd-group-pcs",
+      "source": "A-dd-2",
+      "target": "A-dd-group-pcs",
+      "enabled": true
+    }
+  ],
+  [
+    "/topology/edges/A-dd-2>A-dd-group-sst",
+    {
+      "id": "A-dd-2>A-dd-group-sst",
+      "source": "A-dd-2",
+      "target": "A-dd-group-sst",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/A-dd-group-pcs>A-rack-2",
+    null,
+    {
+      "id": "A-dd-group-pcs>A-rack-2",
+      "source": "A-dd-group-pcs",
+      "target": "A-rack-2",
+      "enabled": true
+    }
+  ],
+  [
+    "/topology/edges/A-dd-group-sst>A-rack-2",
+    {
+      "id": "A-dd-group-sst>A-rack-2",
+      "source": "A-dd-group-sst",
+      "target": "A-rack-2",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/A-dd-group-sst>A-swap-terminal-sst-2",
+    {
+      "id": "A-dd-group-sst>A-swap-terminal-sst-2",
+      "source": "A-dd-group-sst",
+      "target": "A-swap-terminal-sst-2",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/A-feed-pcs>A-dd-5",
+    null,
+    {
+      "id": "A-feed-pcs>A-dd-5",
+      "source": "A-feed-sst",
+      "target": "A-dd-5",
+      "enabled": true
+    }
+  ],
+  [
+    "/topology/edges/A-feed-sst>A-dd-2/source",
+    "A-feed-sst",
+    "A-feed-pcs"
+  ],
+  [
+    "/topology/edges/A-feed-sst>A-dd-5",
+    {
+      "id": "A-feed-sst>A-dd-5",
+      "source": "A-feed-sst",
+      "target": "A-dd-5",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/A-swap-terminal-sst-2>A-swap-gun-sst-4",
+    {
+      "id": "A-swap-terminal-sst-2>A-swap-gun-sst-4",
+      "source": "A-swap-terminal-sst-2",
+      "target": "A-swap-gun-sst-4",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/A-swap-terminal-sst-2>A-swap-gun-sst-5",
+    {
+      "id": "A-swap-terminal-sst-2>A-swap-gun-sst-5",
+      "source": "A-swap-terminal-sst-2",
+      "target": "A-swap-gun-sst-5",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/B-dd-2>B-dd-group-pcs",
+    null,
+    {
+      "id": "B-dd-2>B-dd-group-pcs",
+      "source": "B-dd-2",
+      "target": "B-dd-group-pcs",
+      "enabled": true
+    }
+  ],
+  [
+    "/topology/edges/B-dd-2>B-dd-group-sst",
+    {
+      "id": "B-dd-2>B-dd-group-sst",
+      "source": "B-dd-2",
+      "target": "B-dd-group-sst",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/B-dd-group-pcs>B-rack-2",
+    null,
+    {
+      "id": "B-dd-group-pcs>B-rack-2",
+      "source": "B-dd-group-pcs",
+      "target": "B-rack-2",
+      "enabled": true
+    }
+  ],
+  [
+    "/topology/edges/B-dd-group-sst>B-rack-2",
+    {
+      "id": "B-dd-group-sst>B-rack-2",
+      "source": "B-dd-group-sst",
+      "target": "B-rack-2",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/B-dd-group-sst>B-swap-terminal-sst-2",
+    {
+      "id": "B-dd-group-sst>B-swap-terminal-sst-2",
+      "source": "B-dd-group-sst",
+      "target": "B-swap-terminal-sst-2",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/B-feed-pcs>B-dd-5",
+    null,
+    {
+      "id": "B-feed-pcs>B-dd-5",
+      "source": "B-feed-sst",
+      "target": "B-dd-5",
+      "enabled": true
+    }
+  ],
+  [
+    "/topology/edges/B-feed-sst>B-dd-2/source",
+    "B-feed-sst",
+    "B-feed-pcs"
+  ],
+  [
+    "/topology/edges/B-feed-sst>B-dd-5",
+    {
+      "id": "B-feed-sst>B-dd-5",
+      "source": "B-feed-sst",
+      "target": "B-dd-5",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/B-swap-terminal-sst-2>B-swap-gun-sst-4",
+    {
+      "id": "B-swap-terminal-sst-2>B-swap-gun-sst-4",
+      "source": "B-swap-terminal-sst-2",
+      "target": "B-swap-gun-sst-4",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/edges/B-swap-terminal-sst-2>B-swap-gun-sst-5",
+    {
+      "id": "B-swap-terminal-sst-2>B-swap-gun-sst-5",
+      "source": "B-swap-terminal-sst-2",
+      "target": "B-swap-gun-sst-5",
+      "enabled": true
+    },
+    null
+  ],
+  [
+    "/topology/nodes/A-dd-2/name",
+    "DD 3 · SST",
+    "DD 3 · PCS"
+  ],
+  [
+    "/topology/nodes/A-dd-group-pcs/params/kw",
+    1120,
+    1680
+  ],
+  [
+    "/topology/nodes/A-dd-group-sst/params/kw",
+    3360,
+    2800
+  ],
+  [
+    "/topology/nodes/A-swap-gun-sst-4",
+    {
+      "id": "A-swap-gun-sst-4",
+      "type": "gun",
+      "name": "換電站外接槍 SST 5",
+      "station": "A",
+      "x": 440,
+      "y": 2055,
+      "enabled": true,
+      "params": {
+        "kw": 480,
+        "amps": 600,
+        "voltage": 1000,
+        "vehicleVoltage": 637.56
+      }
+    },
+    null
+  ],
+  [
+    "/topology/nodes/A-swap-gun-sst-5",
+    {
+      "id": "A-swap-gun-sst-5",
+      "type": "gun",
+      "name": "換電站外接槍 SST 6",
+      "station": "A",
+      "x": 535,
+      "y": 2055,
+      "enabled": true,
+      "params": {
+        "kw": 480,
+        "amps": 600,
+        "voltage": 1000,
+        "vehicleVoltage": 637.56
+      }
+    },
+    null
+  ],
+  [
+    "/topology/nodes/A-swap-terminal-sst-2",
+    {
+      "id": "A-swap-terminal-sst-2",
+      "type": "terminal",
+      "name": "換電站雙槍終端 SST 3",
+      "station": "A",
+      "x": 440,
+      "y": 1970,
+      "enabled": true,
+      "params": {
+        "kw": 960
+      }
+    },
+    null
+  ],
+  [
+    "/topology/nodes/B-dd-2/name",
+    "DD 3 · SST",
+    "DD 3 · PCS"
+  ],
+  [
+    "/topology/nodes/B-dd-group-pcs/params/kw",
+    1120,
+    1680
+  ],
+  [
+    "/topology/nodes/B-dd-group-sst/params/kw",
+    3360,
+    2800
+  ],
+  [
+    "/topology/nodes/B-swap-gun-sst-4",
+    {
+      "id": "B-swap-gun-sst-4",
+      "type": "gun",
+      "name": "換電站外接槍 SST 5",
+      "station": "B",
+      "x": 1680,
+      "y": 2055,
+      "enabled": true,
+      "params": {
+        "kw": 480,
+        "amps": 600,
+        "voltage": 1000,
+        "vehicleVoltage": 637.56
+      }
+    },
+    null
+  ],
+  [
+    "/topology/nodes/B-swap-gun-sst-5",
+    {
+      "id": "B-swap-gun-sst-5",
+      "type": "gun",
+      "name": "換電站外接槍 SST 6",
+      "station": "B",
+      "x": 1775,
+      "y": 2055,
+      "enabled": true,
+      "params": {
+        "kw": 480,
+        "amps": 600,
+        "voltage": 1000,
+        "vehicleVoltage": 637.56
+      }
+    },
+    null
+  ],
+  [
+    "/topology/nodes/B-swap-terminal-sst-2",
+    {
+      "id": "B-swap-terminal-sst-2",
+      "type": "terminal",
+      "name": "換電站雙槍終端 SST 3",
+      "station": "B",
+      "x": 1680,
+      "y": 1970,
+      "enabled": true,
+      "params": {
+        "kw": 960
+      }
+    },
+    null
+  ]
+]

@@ -10,10 +10,17 @@ export function referenceLayout(topology:Topology):Equipment[]{
   for(const [id,[x,y]]of Object.entries(fixed))put(s,id,x,y);
   for(let i=0;i<2;i++){put(s,`load-switch-${i}`,1500+i*300,640);put(s,`sst-${i}`,1500+i*300,820);put(s,`terminal-${i}`,2100+i*300,2000);}
   for(let i=0;i<4;i++)put(s,`gun-${i}`,2100+i%2*300,2200+Math.floor(i/2)*180);
-  // The screenshot places PCS bays 1–2 outward and SST bays 3–8 inward.
+  // Derive the bank from actual connections, including older saved designs.
+  const bankIndex={pcs:0,sst:0};
+  const ddPositions=new Map<number,{x:number;y:number}>();
+  for(const n of topology.nodes.filter(n=>n.station===s&&/-dd-\d+$/.test(n.id))){
+   const pcs=topology.edges.some(e=>e.target===n.id&&e.source===`${s}-feed-pcs`);
+   const kind=pcs?'pcs':'sst',i=bankIndex[kind]++,cols=pcs?2:3;
+   ddPositions.set(Number(n.id.split('-').at(-1)),{x:(pcs?450:1150)+i%cols*300,y:Math.floor(i/cols)*180});
+  }
   for(const n of topology.nodes.filter(n=>n.station===s)){
    const m=n.id.match(/-(dd|rack)-(\d+)$/);if(!m)continue;
-   const i=Number(m[2]),x=i<2?450+i*300:1150+(i-2)%3*300,y=(m[1]==='dd'?1800:2380)+(i<2?0:Math.floor((i-2)/3)*180);put(s,`${m[1]}-${i}`,x,y);
+   const i=Number(m[2]),p=ddPositions.get(i);if(p)put(s,`${m[1]}-${i}`,p.x,(m[1]==='dd'?1800:2380)+p.y);
   }
   for(const kind of ['pcs','sst']){
    put(s,`dd-group-${kind}`,kind==='pcs'?600:1450,2180);
