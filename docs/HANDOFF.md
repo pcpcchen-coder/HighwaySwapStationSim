@@ -1,3 +1,9 @@
+# 離線版啟動修正 — 2026-09-18
+
+修正離線入口缺少React匯入導致的空白頁，加入可重建的 `scripts/build-offline.mjs`、`offline/entry.tsx` 及兩項DOM/內嵌Worker整合測試。詳見 [OFFLINE_BUILD.md](OFFLINE_BUILD.md)。測試確認主畫面、三劇本、十年頁、低負載測算、能量流及JSON/XLSX往返；2/2通過，typecheck與正式建置通過。原生瀏覽器file://與CSP尚未驗收；本次未修改物理／年度模型或線上介面。
+
+---
+
 # 交接更新 — 2026-09-18：負載劇本與十年估算
 
 已加入高／中／低三個來源代表日、AC子集輸入與DC相減、年度2027–2036規劃頁及三情境設備能力批次檢核。操作、來源對照、單位假設、公式與匯出契約見 [LOAD_PLANNING.md](LOAD_PLANNING.md)。舊來源fixture未修改，模型版本標記沿用0.7.0；本次功能變更以本節日期與來源提交識別。

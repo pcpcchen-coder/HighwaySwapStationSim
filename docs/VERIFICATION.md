@@ -1,3 +1,9 @@
+## 2026-09-18：離線空白頁修正
+
+前次離線驗收只檢查語法、內嵌Worker計算與資源存在，未執行UI入口，因此漏掉 `React is not defined`。此次明確匯入React的createElement，以獨立入口建置並增加啟動失敗提示。詳細重建與測試範圍見 [OFFLINE_BUILD.md](OFFLINE_BUILD.md)。
+
+交付HTML的兩項整合測試2/2通過：主畫面掛載、三負載切換、年度頁、透過介面執行Worker、低負載52,212.536 kWh、能量流節點、JSON/XLSX資料及錯誤提示。typecheck與正式建置退出碼0。首次測試工具只送click，未觸發Radix分頁的mousedown；隨後Node的structuredClone將物件複製到錯誤realm，被普通物件驗證拒絕。修正測試事件與複製端點，未放寬產品驗證。DOM測試不處理樣式或真實layout，無原生Edge/Chrome的file://及CSP驗收。
+
 ## 2026-09-18：三負載AC/DC與十年規劃
 
 操作與數據契約見 [LOAD_PLANNING.md](LOAD_PLANNING.md)。来源144列與各站小計核對通過；年度另用Python Decimal40獨立轉錄比對，不讀應用程式或來源JSON。

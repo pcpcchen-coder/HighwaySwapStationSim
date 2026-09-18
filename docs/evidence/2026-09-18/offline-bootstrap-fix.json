@@ -1,0 +1,24 @@
+{
+  "date": "2026-09-18",
+  "defect": "Unbound React global in offline stdin TSX bootstrap",
+  "fix": "Real offline entry imports createElement and createRoot; explicit automatic JSX build",
+  "tests": {
+    "offlineDOMAndEmbeddedWorker": {
+      "passed": 2,
+      "total": 2,
+      "scriptRootMounted": true,
+      "presetASwapCounts": [
+        71,
+        51,
+        35
+      ],
+      "lowDeliveredKWh": 52212.536,
+      "jsonAndXlsxRoundtrip": true,
+      "startupFailureMessage": true
+    },
+    "typecheckExitCode": 0,
+    "productionBuildExitCode": 0
+  },
+  "scope": "JSDOM using delivered JavaScript, no CSS/layout; VM worker with receiver-realm plain-data clone. Not native Edge/Chrome file origin or CSP validation.",
+  "sameBytesAfterFreshCssBuild": true
+}
