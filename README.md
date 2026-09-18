@@ -1,3 +1,5 @@
+> **0.8.0 單母線第一期**：新預設採每側SST1680 kW、3台AC/DC＋5台DC/DC、3座雙槍終端；AC/DC預設95.35%可調。十年固定第一期，以三日能源收支估計需求／供應／缺口。操作與限制見[單母線指南](docs/SINGLE_BUS_PHASE1.md)。
+
 # HighwaySwapStationSim
 
 ## 0.7.0 電池 SOC 與回充修正

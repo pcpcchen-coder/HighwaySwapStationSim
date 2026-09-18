@@ -1,5 +1,7 @@
 # 離線單檔建置與驗收
 
+0.8.0改用單母線第一期，沿用下述啟動修正與CSP。頁首現標示「單母線第一期2026-09-18」。新增每台AC/DC效率調整與新年度頁，模型變更見[SINGLE_BUS_PHASE1.md](SINGLE_BUS_PHASE1.md)。下列啟動缺陷及原測試敘述屬於前次修正歷史。
+
 ## 2026-09-18 啟動修正
 
 前一版由臨時stdin TSX建立入口。入口被轉為 `React.createElement(...)`，但沒有匯入React，實際啟動會拋出 `ReferenceError: React is not defined`。HTML外框可見，React主畫面完全沒有掛載。前次腳本語法檢查與Worker數值比較沒有執行入口，所以漏掉這個缺陷。
@@ -14,10 +16,10 @@ npm run build
 npm run build:offline
 ```
 
-預設產出 `outputs/HighwaySwapSim-0.7.0-offline.html`，不依賴舊HTML作為模板。也可指定輸出：
+預設產出 `outputs/HighwaySwapSim-0.8.0-offline.html`，不依賴舊HTML作為模板。也可指定輸出：
 
 ```bash
-npm run build:offline -- /absolute/path/HighwaySwapSim-0.7.0-offline.html
+npm run build:offline -- /absolute/path/HighwaySwapSim-0.8.0-offline.html
 ```
 
 `scripts/build-offline.mjs`以同一版本的正式建置CSS為輸入，檢查完整Worker替換與外部模組依賴。HTML內保留來源SHA與離線修正版標記。先完成正式建置，再產生離線版。
@@ -27,7 +29,7 @@ npm run build:offline -- /absolute/path/HighwaySwapSim-0.7.0-offline.html
 ```bash
 npm run test:offline
 # 驗證已產出的交付檔，不重新建立檔案：
-OFFLINE_HTML_PATH=/absolute/path/HighwaySwapSim-0.7.0-offline.html npm run test:offline
+OFFLINE_HTML_PATH=/absolute/path/HighwaySwapSim-0.8.0-offline.html npm run test:offline
 ```
 
 新增兩項整合測試，使用交付HTML內的完整JavaScript與DOM：

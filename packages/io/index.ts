@@ -1,4 +1,6 @@
-import {projectTenYears,loadPlanOf,LOAD_LEVELS,splitDemand} from '../load-planning/index.ts';
+import {isSingleBus} from '../engineering/single-bus.ts';
+import {singleBusCapacity} from '../engineering/single-bus-capacity.ts';
+import {projectTenYears,loadPlanOf,LOAD_LEVELS,splitDemand,capacityCases,capacityMatches,capacitySummary,type CapacityRuns} from '../load-planning/index.ts';
 import {batteryWorkbookRows} from '../battery-trace/index.ts';
 import {detailedRows} from '../detailed-profile/index.ts';
 import {evaluateExtendedFinance} from '../extended-finance/index.ts';
@@ -74,7 +76,7 @@ function sheet(rows: Cell[][]) { return `<?xml version="1.0" encoding="UTF-8" st
     return `<c r="${ref}"><f>${esc(v.formula)}</f><v>${v.value}</v></c>`; return `<c r="${ref}" t="inlineStr"><is><t xml:space="preserve">${esc(v)}</t></is></c>`; }).join('')}</row>`).join('')}</sheetData></worksheet>`; }
 function objectRows(rows: Record<string, unknown>[]): Cell[][] { if (!rows.length)
     return [['No rows']]; const keys = [...new Set(rows.flatMap(r => Object.keys(r)))]; return [keys, ...rows.map(r => keys.map(k => { const v = r[k]; return v === null || v === undefined ? null : typeof v === 'number' ? v : typeof v === 'object' ? JSON.stringify(v) : String(v); }))]; }
-export function exportWorkbook(project: Project, result: RunResult) {
+export function exportWorkbook(project: Project, result: RunResult, capacityRuns:CapacityRuns={}) {
     const canonical=(value:unknown):string=>JSON.stringify(value,(_key,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
     if(canonical(project)!==canonical(result.parameterSnapshot))throw Error('EXPORT_SNAPSHOT_MISMATCH');
     const json = JSON.stringify(project);
@@ -85,8 +87,8 @@ export function exportWorkbook(project: Project, result: RunResult) {
     const sheets: {
         name: string;
         rows: Cell[][];
-    }[] = [{ name: 'Project_JSON', rows: chunks.map(v => [v]) }, { name: 'README', rows: [['HighwaySwapSim', '0.3.0'], ['schemaVersion', project.schemaVersion], ['Engine', result.engineVersion], ['Mode', result.mode], ['Currency', 'CNY — assumption'], ['Units', 'kW / kWh / absolute minutes; day is zero-based'], ['Horizon days',project.horizonDays],['Settlement','Quantity and rate: 6 decimal HALF_UP; invoice: CNY 2 decimals; source-hour grouping; arrival-locked customer rates'], ['Replay', 'SOURCE_REPLAY does not calculate physical grid purchases'], ['Import', 'Import an unchanged application-exported workbook or use JSON']] }, { name: 'Service_Profile', rows: objectRows(project.services as unknown as Record<string, unknown>[]) }, { name: 'Equipment', rows: objectRows(project.topology.nodes as unknown as Record<string, unknown>[]) }, { name: 'Topology', rows: objectRows(project.topology.edges as unknown as Record<string, unknown>[]) }, { name: 'Hourly_Results', rows: hourlyRows }, { name: 'Transactions', rows: objectRows(result.transactions as unknown as Record<string, unknown>[]) }, { name: 'Sources', rows: objectRows(project.sources) }, { name: 'Validation', rows: objectRows(result.diagnostics as unknown as Record<string, unknown>[]) }, { name: 'Financial_Settings', rows: Object.entries(project.finance).map(([k, v]) => [k, v]) }, { name: 'KPI', rows: [['Metric', 'Value'], ...Object.entries(result.totals).map(([k, v]) => [k, v] as Cell[]), ['Hourly delivered cross-check', { formula: deliveredFormula, value: result.totals.deliveredKWh }]] }];
-    if(project.engineering){sheets.push({name:'Engineering_Settings',rows:Object.entries(project.engineering).map(([k,v])=>[k,typeof v==='number'?v:String(v)])});sheets.push({name:'Capacity_Case',rows:Object.entries(capacityCase(project)).map(([k,v])=>[k,typeof v==='number'?v:JSON.stringify(v)])});}
+    }[] = [{ name: 'Project_JSON', rows: chunks.map(v => [v]) }, { name: 'README', rows: [['HighwaySwapSim', '0.8.0'], ['schemaVersion', project.schemaVersion], ['Engine', result.engineVersion], ['Mode', result.mode], ['Currency', 'CNY — assumption'], ['Units', 'kW / kWh / absolute minutes; day is zero-based'], ['Horizon days',project.horizonDays],['Settlement','Quantity and rate: 6 decimal HALF_UP; invoice: CNY 2 decimals; source-hour grouping; arrival-locked customer rates'], ['Replay', 'SOURCE_REPLAY does not calculate physical grid purchases'], ['Import', 'Import an unchanged application-exported workbook or use JSON']] }, { name: 'Service_Profile', rows: objectRows(project.services as unknown as Record<string, unknown>[]) }, { name: 'Equipment', rows: objectRows(project.topology.nodes as unknown as Record<string, unknown>[]) }, { name: 'Topology', rows: objectRows(project.topology.edges as unknown as Record<string, unknown>[]) }, { name: 'Hourly_Results', rows: hourlyRows }, { name: 'Transactions', rows: objectRows(result.transactions as unknown as Record<string, unknown>[]) }, { name: 'Sources', rows: objectRows(project.sources) }, { name: 'Validation', rows: objectRows(result.diagnostics as unknown as Record<string, unknown>[]) }, { name: 'Financial_Settings', rows: Object.entries(project.finance).map(([k, v]) => [k, v]) }, { name: 'KPI', rows: [['Metric', 'Value'], ...Object.entries(result.totals).map(([k, v]) => [k, v] as Cell[]), ['Hourly delivered cross-check', { formula: deliveredFormula, value: result.totals.deliveredKWh }]] }];
+    if(project.engineering){sheets.push({name:'Engineering_Settings',rows:Object.entries(project.engineering).map(([k,v])=>[k,typeof v==='number'?v:String(v)])});sheets.push({name:'Capacity_Case',rows:Object.entries(isSingleBus(project)?singleBusCapacity(project):capacityCase(project)).map(([k,v])=>[k,typeof v==='number'?v:JSON.stringify(v)])});}
     sheets.push({name:'Component_Energy',rows:objectRows(result.componentEnergy as unknown as Record<string,unknown>[])},{name:'Edge_Energy',rows:objectRows(result.edgeEnergy as unknown as Record<string,unknown>[])},{name:'Source_Meters',rows:objectRows(result.sourceMeters as unknown as Record<string,unknown>[])},{name:'Equipment_Schedule',rows:objectRows(project.equipmentSchedule as unknown as Record<string,unknown>[])});
 
     if(project.detailed){
@@ -99,12 +101,13 @@ export function exportWorkbook(project: Project, result: RunResult) {
     }
     const allocationColumns=(r:Project['services'][number])=>Object.fromEntries((['ac','dc'] as const).flatMap(part=>Object.entries(splitDemand(r)[part]??{}).map(([k,v])=>[`${part}_${k}`,v])));
     if(project.loadPlan){
-      const plan=loadPlanOf(project),estimate=projectTenYears(project);
+      const plan=loadPlanOf(project),estimate=projectTenYears(project,capacityRuns);
       const presets=LOAD_LEVELS.flatMap(load=>plan.profiles[load].map(r=>({load,...r,ac:undefined,...allocationColumns(r)})));
-      sheets.push({name:'Ten_Year_Settings',rows:[['energyValueCnyPerKWh',plan.energyValueCnyPerKWh],['Basis','代表日需求折算；加權效率比較同一DC售電量；節電收益未扣CAPEX/OPEX/稅務'],['Units','kWh / CNY; source annual units inferred as 萬度 / 萬元']]},
+      sheets.push({name:'Ten_Year_Settings',rows:[['energyValueCnyPerKWh',plan.energyValueCnyPerKWh],['Basis',isSingleBus(project)?'第一期固定設備；營運日含需求日與背景日；三日平均扣除期初庫存消耗，不保證排隊穩定；能源後貢獻未扣CAPEX/OPEX/稅務':'代表日需求折算；加權效率比較同一DC售電量；節電收益未扣CAPEX/OPEX/稅務'],['Units','kWh / CNY; source annual units inferred as 萬度 / 萬元']]},
        {name:'Ten_Year_Design',rows:objectRows(plan.years as unknown as Record<string,unknown>[])},
-       {name:'Ten_Year_Estimate',rows:objectRows(estimate.rows as unknown as Record<string,unknown>[])},
+       {name:'Ten_Year_Estimate',rows:objectRows((estimate.supplyPlan?.rows??estimate.rows) as unknown as Record<string,unknown>[])},
        {name:'Load_Presets',rows:objectRows(presets)});
+      sheets.push({name:'Capacity_Checks',rows:objectRows(capacityCases(project).map(level=>({level,current:capacityMatches(project,level,capacityRuns[level]),summary:capacityMatches(project,level,capacityRuns[level])?capacitySummary(capacityRuns[level]!):null})))});
     }
     if(project.services.some(r=>r.ac))sheets.push({name:'Service_AC_DC',rows:objectRows(project.services.map(r=>({day:r.day,station:r.station,hour:r.hour,...allocationColumns(r)})))});
     // Explicit worksheet indices remain stable and are included in regression validation.

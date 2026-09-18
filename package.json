@@ -1,6 +1,6 @@
 {
   "name": "highway-swap-station-sim",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "engines": {
     "node": ">=24.0.0"
@@ -19,6 +19,7 @@
     "verify:detailed": "python3 data/verification/calculate-detailed.py && node scripts/verification/run-detailed.ts",
     "verify:scenarios": "python3 data/verification/calculate.py && node scripts/verification/run.ts --history docs/evidence/v0.3.0/first-run-mismatch.json",
     "verify:soc": "python3 data/verification/calculate-soc.py && node scripts/verification/run-soc.ts",
+    "verify:single-bus": "node scripts/verification/run-single-bus.ts",
     "verify:load-planning": "python3 data/verification/calculate-load-planning.py && node scripts/verification/run-load-planning.ts",
     "build:offline": "node scripts/build-offline.mjs",
     "test:offline": "node --test tests/offline-ui.test.mjs"

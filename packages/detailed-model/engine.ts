@@ -113,12 +113,37 @@ export function simulateDetailed(input:Project):RunResult{
    const groups=new Map<string,'battery'|'gun'>();
    flexible=flexible.filter(r=>{const group=p.topology.nodes.find(n=>n.type==='sharing-group'&&reachable(network,n.id,r.sink));if(!group)return true;const mode=groups.get(group.id);if(mode&&mode!==r.kind)return false;groups.set(group.id,r.kind);return true;});
   }
-  const requests:Request[]=[...supportRequests.filter(r=>!blocked.has(r.sink)),...flexible.map(r=>({id:r.id,sink:r.sink,kw:r.kw*(r.kind==='battery'?(eta.get(r.sink)??1):1),station:r.station,kind:r.kind,pool:r.fleetId,service:r})),...aux.filter(r=>r.kind==='store')];
+  const serviceRequests:Request[]=flexible.map(r=>({id:r.id,sink:r.sink,kw:r.kw*(r.kind==='battery'?(eta.get(r.sink)??1):1),station:r.station,kind:r.kind,pool:r.fleetId,service:r}));
+  // No reserved auxiliary allocation: external charging goes first. Essential
+  // support still consumes real energy and its shortfall triggers interlocks.
+  const remainingSupport=supportRequests.filter(r=>!blocked.has(r.sink));
+  const requests:Request[]=c.dispatch.reserveAuxiliaryPower===false&&c.dispatch.priority==='GUN_FIRST'
+   ?[...serviceRequests.filter(r=>r.kind==='gun'),...remainingSupport,...serviceRequests.filter(r=>r.kind!=='gun'),...aux.filter(r=>r.kind==='store')]
+   :[...remainingSupport,...serviceRequests,...aux.filter(r=>r.kind==='store')];
   for(const solar of c.solar)if(solar.config.enabled&&solar.export?.enabled&&network.topology.nodes.find(n=>n.id===solar.export!.gridSourceId)?.enabled)requests.push({id:`export:${solar.id}`,sink:`${solar.id}-export`,kw:solar.config.exportLimitKW!,station:solar.station,kind:'export'});
   policyState.dynamicVoltages=new Map(fleet.powerRequests().filter(r=>r.voltageV!==undefined).map(r=>[r.sink,r.voltageV!]));
   policy=physicsPolicy(network,policyState);
   const routeAllowed=(path:Equipment[])=>(path.at(-1)?.type!=='grid-export'||path[0].id===path.at(-1)!.id.replace(/-export$/,'-source'))&&!(sourceTypes.has(path[0].type)&&path[0].type!=='grid'&&path[0].type!=='pv-source'&&path.at(-1)?.type==='storage-sink');
-  const allocations=allocateDetailedPower(network,requests,{...policy,routeAllowed});
+  let allocations=allocateDetailedPower(network,requests,{...policy,routeAllowed});
+  if(c.dispatch.reserveAuxiliaryPower===false){
+   // Re-solve after loss of required support; removing sources is monotonic in
+   // this step and never fabricates auxiliary reserves or unsupported output.
+   for(let pass=0;pass<=network.topology.nodes.length;pass++){
+    let changedSupport=false;
+    requests.forEach((r,i)=>{
+     if((r.kind!=='aux'&&r.kind!=='standby')||allocations[i].delivered+1e-6>=r.kw)return;
+     shortfall.add(r.sink);
+     if(r.sink.endsWith('swap-bay')&&!paused.includes(`${r.station}-truck`))paused.push(`${r.station}-truck`);
+     if(r.sink.endsWith('passenger-aux')&&!paused.includes(`${r.station}-passenger`))paused.push(`${r.station}-passenger`);
+     const dependent=r.sink.endsWith('sst-aux')?network.topology.nodes.filter(n=>n.type==='sst'&&n.station===r.station):r.kind==='standby'?network.topology.nodes.filter(n=>n.id===r.sink):[];
+     for(const n of dependent)if(n.enabled){n.enabled=false;blocked.add(n.id);runningSST.delete(n.id);changedSupport=true;}
+    });
+    if(!changedSupport)break;
+    policy=physicsPolicy(network,policyState);allocations=allocateDetailedPower(network,requests,{...policy,routeAllowed});
+   }
+   disabled.splice(0,disabled.length,...network.topology.nodes.filter(n=>!n.enabled).map(n=>n.id));
+   consumeEvents(fleet.activate(t,{disabledSinks:disabled,pausedFleetIds:paused}));
+  }
   const accepted:Record<string,number>={};for(let i=0;i<requests.length;i++)if(requests[i].service)accepted[requests[i].id]=allocations[i].delivered/(requests[i].kind==='battery'?(eta.get(requests[i].sink)??1):1);
   const nodeStep=new Map<string,Flow>(),edgeStep=new Map<string,number>();
   for(const a of allocations){for(const f of a.nodeFlows){const v=nodeStep.get(f.nodeId)??{input:0,output:0,loss:0,terminal:0};v.input+=f.inputKW;v.output+=f.outputKW;v.loss+=f.lossKW;v.terminal+=f.terminalKW;nodeStep.set(f.nodeId,v);}for(const e of a.edgeFlows)edgeStep.set(e.edgeId,(edgeStep.get(e.edgeId)??0)+e.kw);}
@@ -190,5 +215,5 @@ export function simulateDetailed(input:Project):RunResult{
  detail.energy.balanceResidualKWh=grid+detail.energy.pvKWh-detail.energy.exportKWh!-loss-detail.energy.auxiliaryKWh-delivered-(final-initial.A-initial.B)-(detail.energy.storageFinalKWh-detail.energy.storageInitialKWh);
  if(Math.abs(detail.energy.balanceResidualKWh)>1e-6)throw Error(`DETAILED_SITE_BALANCE:${detail.energy.balanceResidualKWh}`);
  const transactions=detail.fleet.transactions.map(j=>({id:j.id,station:j.station,kind:j.kind==='direct-charge'?'charge' as const:'swap' as const,arrival:j.arrival,start:j.start,completion:j.completion,requestedKWh:j.requestedKWh??0,deliveredKWh:j.deliveredKWh,unitPrice:j.unitPrice,revenue:j.revenue,equipmentId:j.gunIds.join('+')||j.outgoingBatteryId}));
- return {engineVersion:'0.7.0',parameterSnapshot:snapshot,mode:'CONSTRAINED',hours,transactions,diagnostics,powerTrace:trace,componentEnergy:[...components.values()],edgeEnergy:[...edges.values()],sourceMeters:[...meters.values()],detailedResult:detail,totals:{deliveredKWh:delivered,requestedKWh:sum('requestedKWh'),gridKWh:grid,lossKWh:loss,revenue:sumMoney(hours.map(h=>h.revenue)),gridCost:sumMoney(hours.map(h=>h.gridCost)),auxiliaryGridCost:sumMoney(hours.map(h=>h.auxiliaryGridCost)),completed:detail.fleet.totals.completed,unservedKWh:Math.max(0,sum('requestedKWh')-delivered),initialStoredKWh:initial.A+initial.B,finalStoredKWh:final,maxBalanceResidual:Math.max(Math.abs(detail.energy.balanceResidualKWh),...hours.map(h=>Math.abs(h.balanceResidual)))}};
+ return {engineVersion:'0.8.0',parameterSnapshot:snapshot,mode:'CONSTRAINED',hours,transactions,diagnostics,powerTrace:trace,componentEnergy:[...components.values()],edgeEnergy:[...edges.values()],sourceMeters:[...meters.values()],detailedResult:detail,totals:{deliveredKWh:delivered,requestedKWh:sum('requestedKWh'),gridKWh:grid,lossKWh:loss,revenue:sumMoney(hours.map(h=>h.revenue)),gridCost:sumMoney(hours.map(h=>h.gridCost)),auxiliaryGridCost:sumMoney(hours.map(h=>h.auxiliaryGridCost)),completed:detail.fleet.totals.completed,unservedKWh:Math.max(0,sum('requestedKWh')-delivered),initialStoredKWh:initial.A+initial.B,finalStoredKWh:final,maxBalanceResidual:Math.max(Math.abs(detail.energy.balanceResidualKWh),...hours.map(h=>Math.abs(h.balanceResidual)))}};
 }

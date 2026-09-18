@@ -14,7 +14,7 @@ export function referenceLayout(topology:Topology):Equipment[]{
   const bankIndex={pcs:0,sst:0};
   const ddPositions=new Map<number,{x:number;y:number}>();
   for(const n of topology.nodes.filter(n=>n.station===s&&/-dd-\d+$/.test(n.id))){
-   const pcs=topology.edges.some(e=>e.target===n.id&&e.source===`${s}-feed-pcs`);
+   const pcs=n.type==='acdc'||topology.edges.some(e=>e.target===n.id&&e.source===`${s}-feed-pcs`);
    const kind=pcs?'pcs':'sst',i=bankIndex[kind]++,cols=pcs?2:3;
    ddPositions.set(Number(n.id.split('-').at(-1)),{x:(pcs?450:1150)+i%cols*300,y:Math.floor(i/cols)*180});
   }

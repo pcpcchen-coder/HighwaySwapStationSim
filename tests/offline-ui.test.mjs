@@ -56,12 +56,17 @@ test('offline HTML boots without a global React, switches all presets, computes 
    click(w,`載入${label}劇本`);await until(()=>doc.querySelector('.load-card.selected')?.textContent.includes(label),label);
    await pause(50);const inputs=[...doc.querySelectorAll('input[aria-label^="A "][aria-label$="總swapCount"]')];assert.equal(inputs.length,24);assert.equal(inputs.reduce((sum,input)=>sum+Number(input.value),0),count);
   }
-  console.log('offline UI: three presets selected');click(w,'十年估算','tab');await until(()=>doc.querySelector('input[aria-label="2027 operatingDays"]'),'annual page');assert.match(doc.body.textContent,/年度需求組成/);assert.match(doc.body.textContent,/全站購電參考/);
+  console.log('offline UI: three presets selected');click(w,'十年估算','tab');await until(()=>doc.querySelector('input[aria-label="2027 operatingDays"]'),'annual page');assert.match(doc.body.textContent,/需求與估計供應量/);assert.match(doc.body.textContent,/背景負載/);
   console.log('offline UI: annual page mounted');click(w,'執行測算');await until(()=>messages.length>0,'embedded worker result');assert.equal(messages[0].error,undefined);await until(()=>doc.body.textContent.includes('測算已完成，結果與參數快照已更新'),'result applied');
   console.log('offline UI: worker result applied');assert.ok(Math.abs(messages[0].result.totals.deliveredKWh-52212.536)<1e-6);
   click(w,'能量流驗算','tab');await until(()=>doc.querySelector('[data-node="A-rack-0"]'),'flow nodes');
   click(w,'結果 XLSX');assert.ok(downloads.at(-1)?.blob);const exported=importWorkbook(new Uint8Array(await downloads.at(-1).blob.arrayBuffer()));assert.equal(exported.loadPlan.activeLoad,'low');assert.equal(exported.services.reduce((sum,r)=>sum+r.swapCount,0),69);
-  click(w,'JSON');const saved=JSON.parse(await downloads.at(-1).blob.text());assert.equal(saved.loadPlan.activeLoad,'low');assert.equal(saved.loadPlan.years.length,10);
+  click(w,'JSON');const saved=JSON.parse(await downloads.at(-1).blob.text());assert.equal(saved.loadPlan.activeLoad,'low');assert.equal(saved.loadPlan.years.length,10);assert.equal(saved.detailed.topology.architecture,'SINGLE_BUS');assert.equal(saved.topology.nodes.filter(n=>n.type==='gun').length,12);assert.equal(saved.topology.nodes.filter(n=>n.type==='pcs').length,0);assert.equal(saved.topology.nodes.filter(n=>n.type==='acdc'&&n.params.eta===.9535).length,6);
+  const efficiencyInput=()=>[...doc.querySelectorAll('label')].find(e=>e.textContent.includes('A-dd-0 AC/DC 整機效率'))?.querySelector('input');
+  click(w,'效率比較','tab');await until(()=>efficiencyInput(),'AC/DC efficiency editor');
+  const efficiency=efficiencyInput();assert.equal(Number(efficiency.value),95.35);
+  Object.getOwnPropertyDescriptor(w.HTMLInputElement.prototype,'value').set.call(efficiency,'94');efficiency.dispatchEvent(new w.Event('input',{bubbles:true}));efficiency.dispatchEvent(new w.Event('change',{bubbles:true}));efficiency.blur();await pause(100);
+  click(w,'JSON');const edited=JSON.parse(await downloads.at(-1).blob.text());assert.equal(edited.topology.nodes.find(n=>n.id==='A-dd-0').params.eta,.94);
   assert.deepEqual(errors,[]);
  }finally{w.close();}
 });

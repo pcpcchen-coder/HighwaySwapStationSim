@@ -1,4 +1,6 @@
 "use client";
+import {isSingleBus} from '../../packages/engineering/single-bus.ts';
+import {SingleBusCapacityPanel} from './single-bus-capacity';
 import { equipmentEfficiency, supportsEfficiency } from '../../packages/equipment-efficiency/index.ts';
 import { useState } from 'react';
 import { BatteryCharging, BatteryFull, Car, Truck, Fuel, Zap, Server, Cable, Gauge, ArrowDown, CircuitBoard } from 'lucide-react';
@@ -29,6 +31,7 @@ export function FacilityMap({project,onDesign}:{project:Project;onDesign?:()=>vo
 
 export function EngineeringPanel({project,setProject}:{project:Project;setProject:(p:Project)=>void}){
  const [socError,setSocError]=useState('');
+ if(isSingleBus(project))return <SingleBusCapacityPanel project={project} setProject={setProject}/>;
  const c=project.engineering;if(!c)return <section className="panel"><p>請在上方載入「410.4 kWh 物理案例」。</p></section>;const v=capacityCase(project);
  const update=(patch:Partial<EngineeringConfig>)=>{const p={...project,engineering:{...c,...patch}};setProject({...p,topology:engineeringTopology(p)});};
  return <><p className="notice">本頁容量表以 A 區目前容量與 SOC、附件對稱配置及全域效率作靜態摘要，不包含單台效率覆寫或任意自訂連線。兩站設定不同時，請重新執行受限測算，再查看能量流與元件帳。</p><section className="panel"><h2>換電 SOC 設定</h2><div className="two-column">{(['A','B'] as const).map(station=><SocRangeEditor key={station} project={project} station={station} setProject={setProject}/>)}</div></section><section className="panel mt-6"><div className="panel-heading"><div><p className="eyebrow">EQUIPMENT & CAPACITY</p><h2>從接入容量，算到每支槍。</h2></div><Button onClick={()=>{try{setProject(applyStationSOC(applyStationSOC(project,'A',project.station.A.returnSOC,project.station.A.readySOC),'B',project.station.B.returnSOC,project.station.B.readySOC));setSocError('');}catch(e){setSocError(e instanceof Error?e.message:String(e));}}}>依已套用 SOC 重算兩站全期換電需求</Button></div>{socError&&<p className="notice error" role="alert">上次重算未套用：{socError}</p>}<p className="panel-note">兩站重算使用目前已套用的 SOC 與電池容量；保留原車次、直接充電、案例名稱與測算模式。上方輸入須先按各站「套用」，重算後請重新執行測算。</p><div className="stats-grid"><Stat label="每次補電" value={fmt(v.energy,2)} unit="kWh"/><Stat label="8 次 / h 的 DD 輸入" value={fmt(v.hourlyDD,2)} unit="kW"/><Stat label="兩台 SST 輸出" value="3,360" unit="kW" note="兩台合計；不是每側一期容量"/><Stat label={v.sstDeficit>=0?"連續補電缺口":"連續補電餘量"} value={fmt(Math.abs(v.sstDeficit),2)} unit="kW" note={`能量上限 ${fmt(v.sustainableSST,4)} 次 / h`}/></div><p className="notice">兩台 SST 合計 {fmt(v.twoSST)} kW；依 A 區目前 SOC，每小時 8 次換電需 DD 輸入 {fmt(v.hourlyDD,2)} kW。{v.sstDeficit>0?'補電供應仍有缺口；初始庫存只可暫時支援。':'此静態電量條件可滿足；實際服務量仍須核對全站負載、接線及排隊。'}</p></section>

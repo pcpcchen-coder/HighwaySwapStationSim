@@ -1,3 +1,13 @@
+# 單母線第一期 0.8.0 — 2026-09-18
+
+使用者已明確授權依新架構修改。網站與離線版預設改用 `singleBusProject()`：每側1台1680 kW SST、3台560 kW AC/DC、5台560 kW DC/DC、3座雙槍終端。AC/DC整機95.35%可逐台調整；移除集中PCS及獨立超充；AC/DC兩组各自回充／外槍互斥、外槍優先、不預留站用。A電網供兩SST，B電網只供B箱變。詳細新契約與操作見 [SINGLE_BUS_PHASE1.md](SINGLE_BUS_PHASE1.md)，本節優先於以下歷史說明。
+
+十年固定第一期設備與既有年度需求。三負載各連續3天，另測3組背景用電；年度採日均能源收支、扣除期初電池庫存消耗與對應估計收入，不保證排隊可消化或穩態服務。參數變更使結果失效；JSON／CSV／XLSX與能量流共用設定。原圖效率與年度收益留作來源比較，不冒充新架構成果。核心190/190、型別與正式建置通過；正式Worker/SSR及離線驗證見VERIFICATION.md。
+
+舊 `completeProject()` 及來源fixture保留，以保持歷史專案／驗證可重現。新增架構與調度欄位皆可選，舊檔未標記SINGLE_BUS則依歷史模型。後續不要把舊PCS預設重新設為網站初始專案。離線預設輸出改為 `HighwaySwapSim-0.8.0-offline.html`。持續維護GitHub、網站及離線檔授權有效。
+
+---
+
 # 離線版啟動修正 — 2026-09-18
 
 修正離線入口缺少React匯入導致的空白頁，加入可重建的 `scripts/build-offline.mjs`、`offline/entry.tsx` 及兩項DOM/內嵌Worker整合測試。詳見 [OFFLINE_BUILD.md](OFFLINE_BUILD.md)。測試確認主畫面、三劇本、十年頁、低負載測算、能量流及JSON/XLSX往返；2/2通過，typecheck與正式建置通過。原生瀏覽器file://與CSP尚未驗收；本次未修改物理／年度模型或線上介面。

@@ -41,7 +41,7 @@ export interface DetailedConfig {
  physics:NodePhysics[]; storage:Store[]; solar:Solar[]; backup:Backup[];
  loads:{nodeId:string;idleKW:number|null;perActiveJobKW:number|null;hourlyKW:(number|null)[]|null;perEnabledSST:boolean}[];
  service:{useHourlyTruckDemand:boolean;truckSlotOverrides:{enabled:boolean;slot:BatterySlotConfig}[];passenger:Passenger[];profiles:VehicleChargeProfile[];swapArrivals:SwapArrival[];chargeArrivals:ChargeArrival[]};
- dispatch:{priority:'BATTERY_FIRST'|'GUN_FIRST'|'FAIR';sourcePolicy:'SOURCE_ORDER'|'LOWEST_PRICE';chargeBelow:number|null;reserveReadyPacks:number|null;forecastMinutes:number|null;gridLimits:{sourceId:string;kw:number|null}[];communicationOutages:{fromMinute:number;toMinute:number}[];fallback:'IMMEDIATE'|'PAUSE_FLEXIBLE'};
+ dispatch:{reserveAuxiliaryPower?:boolean;priority:'BATTERY_FIRST'|'GUN_FIRST'|'FAIR';sourcePolicy:'SOURCE_ORDER'|'LOWEST_PRICE';chargeBelow:number|null;reserveReadyPacks:number|null;forecastMinutes:number|null;gridLimits:{sourceId:string;kw:number|null}[];communicationOutages:{fromMinute:number;toMinute:number}[];fallback:'IMMEDIATE'|'PAUSE_FLEXIBLE'};
  construction:{atMinute:number;equipmentId:string;enabled:boolean;params:Record<string,number>}[];
  finance:ExtendedFinanceConfig;
  assumptions:{id:string;status:'ASSUMPTION'|'USER_CONFIRMED'|'SOURCE_TRANSCRIBED';note:string}[];

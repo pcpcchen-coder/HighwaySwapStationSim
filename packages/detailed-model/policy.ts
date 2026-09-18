@@ -30,6 +30,7 @@ export function physicsPolicy(p:Project,state:PolicyState):NetworkPolicy & {read
   inputForOutput:(n,out)=>reading(n,out).inputKW,
   capacity:n=>{
    const m=byId.get(n.id),hasComp=m?.compensation.enabled||p.topology.nodes.some(x=>x.type==='compensation'&&x.station===n.station&&x.enabled&&byId.get(x.id)?.compensation.enabled);let limit=(n.type==='transformer'&&(m?.transformer.enabled||hasComp))?n.params.kva:n.type==='gun'&&state.dynamicVoltages?.has(n.id)?Math.min(n.params.kw,n.params.amps*state.dynamicVoltages.get(n.id)!/1000):outputCapacity(p,n);
+   if(p.detailed?.topology.architecture==='SINGLE_BUS'&&n.id===`${n.station}-tie-sst`)limit=Math.min(limit,p.topology.nodes.filter(x=>x.type==='sst'&&x.station===n.station&&x.enabled).reduce((sum,x)=>sum+Math.min(x.params.kw,state.caps.get(x.id)??Infinity),0));
    if(state.caps.has(n.id))limit=Math.min(limit,state.caps.get(n.id)!);
    if(m?.rampKWPerMinute!==null&&m?.rampKWPerMinute!==undefined)limit=Math.min(limit,(state.lastOutput.get(n.id)??0)+m.rampKWPerMinute*state.minutesSinceLast);
    return Math.max(0,limit);

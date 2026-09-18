@@ -1,4 +1,6 @@
 "use client";
+import {isSingleBus} from '../../packages/engineering/single-bus.ts';
+import {SingleBusPlanningPanel} from './single-bus-planning';
 import {useState} from 'react';
 import {ResponsiveContainer,BarChart,Bar,XAxis,YAxis,Tooltip,Legend,CartesianGrid,LineChart,Line} from 'recharts';
 import type {Project,RunResult} from '../../packages/contracts/index.ts';
@@ -11,7 +13,9 @@ import {Choice,NumberField,Stat,fmt} from './controls';
 import './load-planning.css';
 function download(name:string,data:string,type:string){const url=URL.createObjectURL(new Blob([data],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 export function LoadPlanningPanel({project,setProject,runs,busy,onRunAll,onInspect}:{project:Project;setProject:(p:Project)=>void;runs:CapacityRuns;busy:boolean;onRunAll:()=>void;onInspect:(r:RunResult)=>void}){
- const [error,setError]=useState(''),plan=loadPlanOf(project),estimate=projectTenYears(project,runs);
+ const [error,setError]=useState('');
+ if(isSingleBus(project))return <SingleBusPlanningPanel project={project} setProject={setProject} runs={runs} busy={busy} onRunAll={onRunAll} onInspect={onInspect}/>;
+ const plan=loadPlanOf(project),estimate=projectTenYears(project,runs);
  const chart=estimate.rows.map(r=>({year:String(r.year),AC:r.acSalesKWh/10000,DC:r.dcSalesKWh/10000,年度節電收益:r.benefitCNY/10000,累計節電收益:r.cumulativeBenefitCNY/10000}));
  function change(next:LoadPlan){try{setProject({...project,loadPlan:loadPlanSchema.parse(next)});setError('');}catch{setError('請填入有效設定：效率大於0且不超過100%，營運日0–366，年度折算係數0–1000%。');}}
  function yearValue(index:number,key:'operatingDays'|'demandFactor'|'traditionalEfficiency'|'sstEfficiency',value:number){change({...plan,years:plan.years.map((r,i)=>i===index?{...r,[key]:value}:r)});}

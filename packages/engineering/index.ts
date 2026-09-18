@@ -1,3 +1,4 @@
+import {isSingleBus,singleBusBase} from './single-bus.ts';
 import { detailedTopology } from '../detailed-model/topology.ts';
 import type { Project, Topology, StationId, Equipment, EngineeringConfig } from '../contracts/index.ts';
 import { defaultProject } from '../reference/index.ts';
@@ -33,6 +34,7 @@ export function capacityCase(p:Project) {
  * Cross links connect source bus to opposite feeder, never short independent AC grids.
  */
 export function engineeringTopology(p:Project):Topology {
+ if(isSingleBus(p))return detailedTopology(p,singleBusBase(p));
  const c=p.engineering??engineeringDefaults(); const nodes:Equipment[]=[],edges:Topology['edges']=[];
  const add=(s:StationId,type:string,id:string,x:number,y:number,name:string,params:Record<string,number>={},enabled=true)=>{const n=makeNode(type,`${s}-${id}`,s,x+(s==='B'?1240:20),y,params);n.name=name;n.enabled=enabled;nodes.push(n);return n.id;};
  const link=(source:string,target:string,enabled=true)=>edges.push({id:`${source}>${target}`,source,target,enabled});

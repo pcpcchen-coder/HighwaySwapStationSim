@@ -1,3 +1,6 @@
+import {inventoryAdjustment} from './inventory-adjustment.ts';
+import {isSingleBus} from '../engineering/single-bus.ts';
+import {singleBusCapacity} from '../engineering/single-bus-capacity.ts';
 import source from '../../data/reference/load-scenarios-2026-09-18.json' with {type:'json'};
 import type {Project,RunResult,ServiceRow,StationId} from '../contracts/index.ts';
 import type {LoadLevel,LoadPlan} from './contracts.ts';
@@ -53,9 +56,15 @@ export function demandBranch(p:Project,sink:string):'ac'|'dc'|null{
 export function branchEndpoints(p:Project,station:StationId,branch:'ac'|'dc',type:'rack'|'gun'){
  return p.topology.nodes.filter(n=>n.station===station&&n.type===type&&demandBranch(p,n.id)===branch).map(n=>n.id);
 }
-/** One representative day, preserving first-day equipment and competing loads. No ten-year event replay is implied. */
-export function capacityProject(p:Project,level:LoadLevel):Project{
- const next=applyLoadPreset({...p,horizonDays:1},level);
+/** Three consecutive profile days for the new architecture; legacy uses one.
+ * Manual events and construction retain their explicit first-day times. */
+export type CapacityCase=LoadLevel|`idle-${LoadLevel}`;
+export const capacityCases=(p:Project):CapacityCase[]=>isSingleBus(p)?[...LOAD_LEVELS,...LOAD_LEVELS.map(l=>`idle-${l}` as const)]:LOAD_LEVELS;
+export const capacityCaseLabel=(level:CapacityCase)=>level.startsWith('idle-')?`${LOAD_LABELS[level.slice(5) as LoadLevel]}背景用電`:LOAD_LABELS[level as LoadLevel];
+export function capacityProject(p:Project,level:CapacityCase):Project{
+ const idle=level.startsWith('idle-'),load=(idle?level.slice(5):level) as LoadLevel;
+ const next=applyLoadPreset({...p,horizonDays:isSingleBus(p)?3:1},load);
+ if(idle){next.name=`${LOAD_LABELS[load]} · 背景用電日`;next.services=next.services.map(r=>({...r,swapCount:0,swapKWh:0,chargeCount:0,chargeKWh:0,ac:{swapCount:0,swapKWh:0,chargeCount:0,chargeKWh:0}}));}
  next.equipmentSchedule=next.equipmentSchedule.filter(e=>e.atMinute<1440);
  next.detailed=structuredClone(next.detailed!);
  next.detailed.service.swapArrivals=next.detailed.service.swapArrivals.filter(e=>e.atMinute<1440);
@@ -65,7 +74,7 @@ export function capacityProject(p:Project,level:LoadLevel):Project{
  return next;
 }
 const canonical=(value:unknown):string=>JSON.stringify(value,(_k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
-export function capacityMatches(p:Project,level:LoadLevel,r?:RunResult):boolean{
+export function capacityMatches(p:Project,level:CapacityCase,r?:RunResult):boolean{
  if(!r?.detailedResult||r.mode!=='CONSTRAINED')return false;
  try{const a=capacityProject(p,level),b=structuredClone(r.parameterSnapshot);delete a.loadPlan;delete b.loadPlan;return canonical(a)===canonical(b);}catch{return false;}
 }
@@ -76,7 +85,68 @@ export function capacitySummary(r:RunResult){
  const fleetInventoryDeltaKWh=r.totals.finalStoredKWh-r.totals.initialStoredKWh,storageInventoryDeltaKWh=(r.detailedResult?.energy.storageFinalKWh??0)-(r.detailedResult?.energy.storageInitialKWh??0);
  return {requestedKWh:requested.total.energyKWh,deliveredKWh:totalDelivered,dcDeliveredKWh:delivered.dc,acDeliveredKWh:delivered.ac,unservedKWh:Math.max(0,requested.total.energyKWh-totalDelivered),completionRatio:requested.total.energyKWh?totalDelivered/requested.total.energyKWh:1,gridKWh:r.totals.gridKWh,gridCost:r.totals.gridCost,revenue:r.totals.revenue,fleetInventoryDeltaKWh,storageInventoryDeltaKWh,inventoryDeltaKWh:fleetInventoryDeltaKWh+storageInventoryDeltaKWh,inventoryRestored:fleetInventoryDeltaKWh>=-.01&&storageInventoryDeltaKWh>=-.01,peakStationKW:Math.max(0,...r.hours.map(h=>h.peakKW)),balanceResidual:r.totals.maxBalanceResidual};
 }
-export type CapacityRuns=Partial<Record<LoadLevel,RunResult>>;
+export type CapacityRuns=Partial<Record<CapacityCase,RunResult>>;
+/** Daily mean with opening-stock consumption removed from profile swap sales. */
+export function planningDaySummary(r:RunResult){
+ const raw=capacitySummary(r),days=r.parameterSnapshot.horizonDays,adjustment=inventoryAdjustment(r,sink=>demandBranch(r.parameterSnapshot,sink));
+ const deliveredKWh=(raw.deliveredKWh-adjustment.removedKWh)/days;
+ return {requestedKWh:raw.requestedKWh/days,deliveredKWh,dcDeliveredKWh:(raw.dcDeliveredKWh-adjustment.removed.dc)/days,acDeliveredKWh:(raw.acDeliveredKWh-adjustment.removed.ac)/days,
+  unservedKWh:Math.max(0,raw.requestedKWh/days-deliveredKWh),completionRatio:raw.requestedKWh?deliveredKWh*days/raw.requestedKWh:1,
+  gridKWh:raw.gridKWh/days,gridCost:raw.gridCost/days,revenue:(raw.revenue-adjustment.revenueRemoved)/days,lossKWh:r.totals.lossKWh/days,
+  stockConsumedKWh:adjustment.removedKWh/days,valid:adjustment.valid&&raw.storageInventoryDeltaKWh>=-.01,raw,days};
+}
+
+/** Fixed equipment for all ten years. The demand factor is the fraction of
+ * operating days represented by a busy profile; the remaining days retain
+ * background loads and explicit non-profile traffic. Opening-stock draw is removed from sales and attributed swap revenue; this
+ * energy-throughput estimate does not certify queue stability.
+ */
+export function singleBusTenYears(p:Project,runs:CapacityRuns={}){
+ const plan=loadPlanOf(p),inventory=singleBusCapacity(p);
+ let cumulativeEnergyMarginCNY:number|null=0,cumulativeSavingCNY:number|null=0;
+ const rows=plan.years.map(y=>{
+  const busyDays=y.operatingDays*y.demandFactor,idleDays=y.operatingDays-busyDays;
+  const demand=demandSummary(plan.profiles[y.load]);
+  const busyRun=runs[y.load],idleKey=`idle-${y.load}` as const,idleRun=runs[idleKey];
+  const fresh=capacityMatches(p,y.load,busyRun),idleFresh=capacityMatches(p,idleKey,idleRun);
+  const busy=fresh?planningDaySummary(busyRun!):null,idle=idleFresh?planningDaySummary(idleRun!):null;
+  const status=y.demandFactor>1?'exceeds-reference':!fresh?(busyRun?'stale':'not-run'):!busy!.valid?'inventory-depleted':idleDays>1e-8&&!idleFresh?'idle-not-run':idleDays>1e-8&&!idle!.valid?'idle-inventory-depleted':'ready';
+  const valid=status==='ready';
+  const annual=(key:'gridKWh'|'gridCost'|'revenue')=>valid?busy![key]*busyDays+(idleDays>1e-8?idle![key]*idleDays:0):null;
+  const deliveredKWh=valid?busy!.deliveredKWh*busyDays:null,dcDeliveredKWh=valid?busy!.dcDeliveredKWh*busyDays:null,acDeliveredKWh=valid?busy!.acDeliveredKWh*busyDays:null;
+  const gridKWh=annual('gridKWh'),gridCostCNY=annual('gridCost'),revenueCNY=annual('revenue');
+  const energyMarginCNY=valid?revenueCNY!-gridCostCNY!:null;
+  cumulativeEnergyMarginCNY=cumulativeEnergyMarginCNY===null||energyMarginCNY===null?null:cumulativeEnergyMarginCNY+energyMarginCNY;
+  const lossKWh=valid?busy!.lossKWh*busyDays+(idleDays>1e-8?idle!.lossKWh*idleDays:0):null;
+  const stockConsumedKWh=valid?busy!.stockConsumedKWh*busyDays+(idleDays>1e-8?idle!.stockConsumedKWh*idleDays:0):null;
+  // Conversion-only comparison: observed SST/DC chain, versus the current
+  // nameplate-weighted transformer/ACDC chain delivering the SAME DC energy.
+  // Optional energy sources, backup and nonlinear converter models need a
+  // matched counterfactual run, so do not invent a scalar saving for them.
+  const simple=p.detailed!.storage.every(s=>!s.config.enabled)&&p.detailed!.solar.every(s=>!s.config.enabled)&&p.detailed!.backup.every(s=>!s.config.enabled)&&p.detailed!.physics.every(m=>!m.cable.enabled&&!m.curve.enabled&&!m.transformer.enabled&&!m.compensation.enabled);
+  let dcConversionOutput=0,dcConversionInput=0,referenceInput=0,referenceReady=simple;
+  if(fresh)for(const site of inventory.sites){
+   const output=busyRun!.componentEnergy.filter(e=>e.nodeId===`${site.station}-dd-group-sst`).reduce((v,e)=>v+e.outputKWh,0);
+   dcConversionOutput+=output;
+   const ids=new Set(p.topology.nodes.filter(n=>n.type==='sst'&&n.station===site.station).map(n=>n.id));
+   dcConversionInput+=busyRun!.componentEnergy.filter(e=>ids.has(e.nodeId)).reduce((v,e)=>v+e.inputKWh,0);
+   if(output>0&&site.acPathEfficiency===null)referenceReady=false;
+   if(site.acPathEfficiency!==null)referenceInput+=output/site.acPathEfficiency;
+  }
+  const sstConversionEfficiency=referenceReady&&dcConversionInput>0?dcConversionOutput/dcConversionInput:null;
+  const acReferenceEfficiency=referenceReady&&referenceInput>0?dcConversionOutput/referenceInput:null;
+  const conversionSavedKWh=valid&&dcDeliveredKWh!==null&&sstConversionEfficiency!==null&&acReferenceEfficiency!==null?dcDeliveredKWh*(1/acReferenceEfficiency-1/sstConversionEfficiency):null;
+  const conversionSavingCNY=conversionSavedKWh===null?null:conversionSavedKWh*plan.energyValueCnyPerKWh;
+  cumulativeSavingCNY=cumulativeSavingCNY===null||conversionSavingCNY===null?null:cumulativeSavingCNY+conversionSavingCNY;
+  return {year:y.year,load:y.load,equipmentPhase:p.phase,sstInstalledKW:inventory.sstKW,operatingDays:y.operatingDays,demandFactor:y.demandFactor,busyDays,idleDays,
+   demandKWh:demand.total.energyKWh*busyDays,acDemandKWh:demand.ac.energyKWh*busyDays,dcDemandKWh:demand.dc.energyKWh*busyDays,
+   deliveredKWh,acDeliveredKWh,dcDeliveredKWh,unservedKWh:valid?busy!.unservedKWh*busyDays:null,completionRatio:valid?busy!.completionRatio:null,
+   gridKWh,lossKWh,stockConsumedKWh,gridCostCNY,revenueCNY,energyMarginCNY,cumulativeEnergyMarginCNY,
+   sstConversionEfficiency,acReferenceEfficiency,conversionSavedKWh,conversionSavingCNY,cumulativeSavingCNY,status};
+ });
+ const total=(key:'deliveredKWh'|'unservedKWh'|'gridKWh'|'lossKWh'|'gridCostCNY'|'revenueCNY'|'energyMarginCNY'|'conversionSavedKWh'|'conversionSavingCNY')=>rows.some(r=>r[key]===null)?null:rows.reduce((v,r)=>v+r[key]!,0);
+ return {basis:'fixed-equipment-three-day-energy-throughput-inventory-adjusted' as const,inventory,rows,totals:{demandKWh:rows.reduce((v,r)=>v+r.demandKWh,0),deliveredKWh:total('deliveredKWh'),unservedKWh:total('unservedKWh'),gridKWh:total('gridKWh'),lossKWh:total('lossKWh'),gridCostCNY:total('gridCostCNY'),revenueCNY:total('revenueCNY'),energyMarginCNY:total('energyMarginCNY'),conversionSavedKWh:total('conversionSavedKWh'),conversionSavingCNY:total('conversionSavingCNY')}};
+}
 /** Equal customer-side energy boundary. Weighted scenario efficiencies already include their stated conversion chain. */
 export function projectTenYears(p:Project,runs:CapacityRuns={}){
  const plan=loadPlanSchema.parse(loadPlanOf(p));let cumulativeBenefitCNY=0;
@@ -98,9 +168,9 @@ export function projectTenYears(p:Project,runs:CapacityRuns={}){
    sourceSoldKWh:ref?ref.soldWanKWh*10000:null,sourceSavedKWh:ref?ref.savedWanKWh*10000:null,sourceBenefitCNY:ref?ref.benefitWanCNY*10000:null,
    sourceSavedDeltaKWh:ref?savedKWh-ref.savedWanKWh*10000:null};
  });
- return {basis:'representative-day-planning' as const,energyUnit:'kWh',currency:'CNY',rows,totals:{dcSalesKWh:rows.reduce((s,r)=>s+r.dcSalesKWh,0),acSalesKWh:rows.reduce((s,r)=>s+r.acSalesKWh,0),totalSalesKWh:rows.reduce((s,r)=>s+r.totalSalesKWh,0),savedKWh:rows.reduce((s,r)=>s+r.savedKWh,0),benefitCNY:cumulativeBenefitCNY}};
+ return {supplyPlan:isSingleBus(p)?singleBusTenYears(p,runs):null,basis:'representative-day-planning' as const,energyUnit:'kWh',currency:'CNY',rows,totals:{dcSalesKWh:rows.reduce((s,r)=>s+r.dcSalesKWh,0),acSalesKWh:rows.reduce((s,r)=>s+r.acSalesKWh,0),totalSalesKWh:rows.reduce((s,r)=>s+r.totalSalesKWh,0),savedKWh:rows.reduce((s,r)=>s+r.savedKWh,0),benefitCNY:cumulativeBenefitCNY}};
 }
 export function planningCSV(p:Project,runs:CapacityRuns={}){
- const data=projectTenYears(p,runs),keys=Object.keys(data.rows[0]);
- return '\uFEFF'+[keys.join(','),...data.rows.map(r=>keys.map(k=>(r as unknown as Record<string,unknown>)[k]??'').join(','))].join('\r\n')+'\r\n';
+ const data=projectTenYears(p,runs),rows=data.supplyPlan?.rows??data.rows,keys=Object.keys(rows[0]);
+ return '\uFEFF'+[keys.join(','),...rows.map(r=>keys.map(k=>(r as unknown as Record<string,unknown>)[k]??'').join(','))].join('\r\n')+'\r\n';
 }
