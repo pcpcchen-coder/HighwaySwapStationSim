@@ -28,6 +28,8 @@ export interface Topology {
     edges: Edge[];
 }
 export interface ServiceRow {
+    /** PCS branch subset; SST demand is total minus AC. Absent retains legacy unrestricted service. */
+    ac?: { swapCount:number; swapKWh:number; chargeCount:number; chargeKWh:number };
     day: number;
     hour: number;
     station: StationId;
@@ -56,6 +58,7 @@ export interface StationConfig {
     auxiliaryKW: number;
 }
 export interface Project {
+    loadPlan?: import('../load-planning/contracts.ts').LoadPlan;
     detailed?: import('../detailed-model/contracts.ts').DetailedConfig;
     schemaVersion: '1.3';
     horizonDays: number;

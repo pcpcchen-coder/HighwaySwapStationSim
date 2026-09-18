@@ -23,6 +23,8 @@ export interface VehicleChargeProfile {
 }
 export interface GunConfig {id:string; sink:string; station:StationId; terminal:string; enabled:boolean; maxKW:number; maxCurrentA:number; maxVoltageV:number;}
 export interface SwapArrival {
+ /** Restrict dispatch to the specified bank while retaining the shared physical swap bay. */
+ allowedSlotIds?:string[]|null;
  id:string; fleetId:string; atMinute:number; returnSOC:number|null; unitPrice:number|null;
  /** null means exchange with a returned pack of exactly the dispatched pack capacity, SOH and family. */
  returnedPack:BatterySpec|null;

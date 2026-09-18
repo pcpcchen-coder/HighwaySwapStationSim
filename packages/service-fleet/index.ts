@@ -40,6 +40,7 @@ export function validateFleetConfig(c:FleetConfig):void {
  for(const g of c.guns){if(!g.sink||!g.terminal)throw Error(`MISSING:${g.id}.mapping`);need(g.maxKW,`${g.id}.maxKW`);need(g.maxCurrentA,`${g.id}.maxCurrentA`);need(g.maxVoltageV,`${g.id}.maxVoltageV`,Number.EPSILON);}
  for(const a of c.swapArrivals){
   const f=c.swaps.find(f=>f.id===a.fleetId);if(!f?.enabled)throw Error(`DISABLED_OR_MISSING_FLEET:${a.fleetId}`);
+  if(a.allowedSlotIds!=null){unique(a.allowedSlotIds,`${a.id}.allowedSlotIds`);if(a.allowedSlotIds.some(id=>!f.slots.some(s=>s.id===id)))throw Error(`UNKNOWN_SLOT:${a.id}`);}
   need(a.atMinute,`${a.id}.atMinute`);need(a.unitPrice,`${a.id}.unitPrice`);
   if(a.requestedKWh!=null){need(a.requestedKWh,`${a.id}.requestedKWh`,Number.EPSILON);need(a.minReturnSOC,`${a.id}.minReturnSOC`,0,f.readySOC!);if(a.returnSOC!==null)throw Error(`TWO_ENERGY_TRUTHS:${a.id}`);}
   else {need(a.returnSOC,`${a.id}.returnSOC`,0,f.readySOC!);if(a.minReturnSOC!=null)throw Error(`MIN_RETURN_SOC_WITHOUT_ENERGY:${a.id}`);}
@@ -111,7 +112,7 @@ export class ServiceFleet {
   while(this.pendingCharge[0]?.atMinute<=this.now+EPS){const a=this.pendingCharge.shift()!,p=this.profile(a),requested=p?p.capacityKWh!*p.soh!*(a.targetSOC!-a.initialSOC!)/p.chargeEfficiency!:a.energyKWh!;this.makeTransaction(a.id,a.station,'direct-charge',a.atMinute,a.unitPrice!,requested);this.chargeQueue.push(a);}
   for(const f of this.config.swaps.filter(f=>f.enabled&&this.operating(f.id)))while(this.swapping.filter(a=>a.slot.fleet.id===f.id).length<f.bays!){
    let selected:{index:number;slot:SlotRuntime;incomingKWh:number}|undefined;
-   for(let i=0;i<this.swapQueue.length;i++){const a=this.swapQueue[i];if(a.fleetId!==f.id)continue;for(const slot of this.slots){if(slot.fleet.id!==f.id||slot.state.reserved||!this.enabled(slot.state.sink)||slot.state.energyKWh<this.target(slot)-EPS)continue;const incomingKWh=this.incoming(a,slot);if(incomingKWh!==undefined){selected={index:i,slot,incomingKWh};break;}}if(selected)break;}
+   for(let i=0;i<this.swapQueue.length;i++){const a=this.swapQueue[i];if(a.fleetId!==f.id)continue;for(const slot of this.slots){if(slot.fleet.id!==f.id||(a.allowedSlotIds!=null&&!a.allowedSlotIds.includes(slot.state.slotId))||slot.state.reserved||!this.enabled(slot.state.sink)||slot.state.energyKWh<this.target(slot)-EPS)continue;const incomingKWh=this.incoming(a,slot);if(incomingKWh!==undefined){selected={index:i,slot,incomingKWh};break;}}if(selected)break;}
    if(!selected)break;const a=this.swapQueue.splice(selected.index,1)[0],t=this.transaction(a.id),b=selected.slot.state;
    t.requestedKWh=a.requestedKWh??b.energyKWh-selected.incomingKWh;t.start=this.now;b.reserved=true;this.swapping.push({arrival:a,transaction:t,slot:selected.slot,remainingMinutes:f.swapMinutes!,incomingKWh:selected.incomingKWh});
   }

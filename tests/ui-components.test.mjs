@@ -235,3 +235,19 @@ test('reference arrangement gives design and energy replay identical nodes and a
  assert.equal(positions(design).length,142);assert.deepEqual(positions(flow),positions(design));
  for(const html of [design,flow]){assert.equal((html.match(/data-edge=/g)??[]).length,160);assert.ok(!html.includes('data-node="A-swap-terminal-sst-2"'));assert.ok(!html.includes('data-node="B-swap-gun-sst-5"'));for(const text of ['圖面排列','重卡換電站','CATL 巧克力換電站','可擴展儲能／光伏'])assert.ok(html.includes(text),text);}
 });
+
+test('load presets render exact source totals and explicit representative-day save action',async()=>{
+ const {LoadPresetControls}=await vite.ssrLoadModule('/components/simulator/load-preset-controls.tsx');
+ const {completeProject}=await import('../packages/detailed-model/project.ts');
+ const html=renderToStaticMarkup(React.createElement(LoadPresetControls,{project:completeProject(),day:0,onChange:()=>{},onError:()=>{}}));
+ for(const text of ['高負載','中負載','低負載','80,620','66,270','52,330','62,990','50,280','36,750','將第 1 天 A＋B 更新至高負載劇本','AC＝PCS 母線，DC＝SST 母線'])assert.ok(html.includes(text),text);
+});
+
+test('ten-year page renders all editable years, source discrepancy, units and unavailable capacity honestly',async()=>{
+ const {LoadPlanningPanel}=await vite.ssrLoadModule('/components/simulator/load-planning-panel.tsx');
+ const {completeProject}=await import('../packages/detailed-model/project.ts');
+ const html=renderToStaticMarkup(React.createElement(LoadPlanningPanel,{project:completeProject(),setProject:()=>{},runs:{},busy:false,onRunAll:()=>{},onInspect:()=>{}}));
+ for(let year=2027;year<=2036;year++)assert.ok(html.includes(`aria-label="${year} operatingDays"`));
+ for(const text of ['十年營運估算','年度需求組成','節電收益累積','年度折算','來源表對照','原圖效率只有小數點後兩位','萬元 CNY','匯出十年 CSV','尚未測算','可交付參考','全站購電參考','全站電量費參考','不是連續十年事件模擬'])assert.ok(html.includes(text),text);
+ assert.doesNotMatch(html,/已完成代表日測算/);
+});

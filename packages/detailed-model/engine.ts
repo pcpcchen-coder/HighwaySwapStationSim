@@ -50,7 +50,7 @@ export function simulateDetailed(input:Project):RunResult{
  if(slots.some(s=>!s.chargeBands))diagnostics.push({code:'BATTERY_FIXED_POWER_ASSUMPTION',severity:'warning',message:'部分電池艙未提供 SOC 分段充電曲線，採額定固定功率並受供電限制；請填入 BMS／實測曲線以評估高 SOC 回充時間。'});
  if(slots.some(s=>!s.battery.energySOC))diagnostics.push({code:'BATTERY_LINEAR_SOC_ASSUMPTION',severity:'warning',message:'部分電池未提供能量–SOC 對應曲線，採容量 × SOH × SOC 線性換算。'});
  if(slots.some(s=>s.chargeEfficiency===1))diagnostics.push({code:'BATTERY_UNITY_EFFICIENCY_ASSUMPTION',severity:'warning',message:'部分電池艙內部充電效率設定為 100%；此值不含上游充電機效率，請確認實測值。'});
- if(c.topology.sharedDD)diagnostics.push({code:'SHARING_MATRIX_ASSUMPTION',severity:'warning',message:`DD 2/6台共用矩陣採 ${c.topology.sharingMode}；請用設備規格確認可達端口。`});
+ if(c.topology.sharedDD)diagnostics.push({code:'SHARING_MATRIX_ASSUMPTION',severity:'warning',message:`DD共用矩陣採 ${c.topology.sharingMode}；請用設備規格確認可達端口。`});
  function consumeEvents(events:ServiceEvent[]){for(const e of events){const h=hour(e.station,e.atMinute);h.deliveredKWh+=e.deliveredKWh;h.revenue+=e.revenueDelta;if(e.kind==='swap-complete')h.swapCount++;if(e.kind==='charge-complete')h.chargeCount++;}}
  consumeEvents(fleet.activate(0));
  while(t<horizon-EPS){

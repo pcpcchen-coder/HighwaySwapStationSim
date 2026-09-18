@@ -1,3 +1,4 @@
+import {branchEndpoints} from '../load-planning/index.ts';
 import type {Project} from '../contracts/index.ts';
 import type {Passenger} from './contracts.ts';
 import type {FleetConfig,BatterySlotConfig} from '../service-fleet/contracts.ts';
@@ -32,10 +33,13 @@ export function compileFleet(p:Project):FleetConfig{
  }
  if(c.service.useHourlyTruckDemand){const rng=new SeededRandom(p.seed);let ordinal=0;
   for(const row of p.services)for(const kind of ['swap','charge'] as const){const count=kind==='swap'?row.swapCount:row.chargeCount,energy=kind==='swap'?row.swapKWh:row.chargeKWh;
+   const acCount=row.ac?.[`${kind}Count`]??0,acEnergy=row.ac?.[`${kind}KWh`]??0;
+   const endpoints=row.ac?{ac:branchEndpoints(p,row.station,'ac',kind==='swap'?'rack':'gun'),dc:branchEndpoints(p,row.station,'dc',kind==='swap'?'rack':'gun')}:null;
    if(count>0&&energy<=0)throw Error(`逐時${kind}需求有車次但沒有電量：${row.station} D${row.day+1} ${row.hour}時`);
    for(let i=0;i<count;i++){const atMinute=row.day*1440+row.hour*60+(p.arrival==='SEEDED'?rng.next()*60:i*60/count),id=`hourly-${row.station}-${row.day}-${row.hour}-${kind}-${ordinal++}`,unitPrice=p.billing==='SOURCE_DISPLAY_PRICE'?(kind==='swap'?row.swapTotalRaw:row.chargeTotalRaw):row.gridPrice+(kind==='swap'?row.swapFee:row.chargeFee);
-    if(kind==='swap'){const st=p.station[row.station];result.swapArrivals.push({id,fleetId:`${row.station}-truck`,atMinute,returnSOC:null,requestedKWh:energy/count,minReturnSOC:st.returnSOC,unitPrice,returnedPack:null});}
-    else if(energy>0)result.chargeArrivals.push({id,station:row.station,atMinute,unitPrice,gunsRequired:1,energyKWh:energy/count,profileId:null,initialSOC:null,targetSOC:null,temperatureC:null,temperatureSchedule:[],allowedGunIds:null});
+    const branch=i<acCount?'ac':'dc',jobEnergy=row.ac?(branch==='ac'?acEnergy/acCount:(energy-acEnergy)/(count-acCount)):energy/count;
+    if(kind==='swap'){const st=p.station[row.station];result.swapArrivals.push({id,fleetId:`${row.station}-truck`,atMinute,returnSOC:null,requestedKWh:jobEnergy,...(endpoints?{allowedSlotIds:endpoints[branch]}:{}),minReturnSOC:st.returnSOC,unitPrice,returnedPack:null});}
+    else if(energy>0)result.chargeArrivals.push({id,station:row.station,atMinute,unitPrice,gunsRequired:1,energyKWh:jobEnergy,profileId:null,initialSOC:null,targetSOC:null,temperatureC:null,temperatureSchedule:[],allowedGunIds:endpoints?endpoints[branch]:null});
    }
   }
  }

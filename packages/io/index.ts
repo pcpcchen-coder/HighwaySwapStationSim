@@ -1,3 +1,4 @@
+import {projectTenYears,loadPlanOf,LOAD_LEVELS,splitDemand} from '../load-planning/index.ts';
 import {batteryWorkbookRows} from '../battery-trace/index.ts';
 import {detailedRows} from '../detailed-profile/index.ts';
 import {evaluateExtendedFinance} from '../extended-finance/index.ts';
@@ -96,6 +97,16 @@ export function exportWorkbook(project: Project, result: RunResult) {
        catch(error){sheets.push({name:'Finance_Missing',rows:[['Status','Reason'],['VALIDATION_ERROR',String(error)]]});}
       }
     }
+    const allocationColumns=(r:Project['services'][number])=>Object.fromEntries((['ac','dc'] as const).flatMap(part=>Object.entries(splitDemand(r)[part]??{}).map(([k,v])=>[`${part}_${k}`,v])));
+    if(project.loadPlan){
+      const plan=loadPlanOf(project),estimate=projectTenYears(project);
+      const presets=LOAD_LEVELS.flatMap(load=>plan.profiles[load].map(r=>({load,...r,ac:undefined,...allocationColumns(r)})));
+      sheets.push({name:'Ten_Year_Settings',rows:[['energyValueCnyPerKWh',plan.energyValueCnyPerKWh],['Basis','代表日需求折算；加權效率比較同一DC售電量；節電收益未扣CAPEX/OPEX/稅務'],['Units','kWh / CNY; source annual units inferred as 萬度 / 萬元']]},
+       {name:'Ten_Year_Design',rows:objectRows(plan.years as unknown as Record<string,unknown>[])},
+       {name:'Ten_Year_Estimate',rows:objectRows(estimate.rows as unknown as Record<string,unknown>[])},
+       {name:'Load_Presets',rows:objectRows(presets)});
+    }
+    if(project.services.some(r=>r.ac))sheets.push({name:'Service_AC_DC',rows:objectRows(project.services.map(r=>({day:r.day,station:r.station,hour:r.hour,...allocationColumns(r)})))});
     // Explicit worksheet indices remain stable and are included in regression validation.
     const files: Record<string, string> = { '[Content_Types].xml': `<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>${sheets.map((_, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('')}</Types>`, '_rels/.rels': '<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>', 'xl/workbook.xml': `<?xml version="1.0"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>${sheets.map((s, i) => `<sheet name="${s.name}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join('')}</sheets><calcPr fullCalcOnLoad="1"/></workbook>`, 'xl/_rels/workbook.xml.rels': `<?xml version="1.0"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${sheets.map((_, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('')}</Relationships>` };
     sheets.forEach((s, i) => files[`xl/worksheets/sheet${i + 1}.xml`] = sheet(s.rows));

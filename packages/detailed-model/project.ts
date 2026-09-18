@@ -1,8 +1,9 @@
+import {defaultLoadPlan} from '../load-planning/index.ts';
 import type {Project} from '../contracts/index.ts';
 import {engineeringProject,engineeringTopology,physicalProjection} from '../engineering/index.ts';
 import {defaultDetailedConfig,syncCostInventory} from './defaults.ts';
 export function completeProject():Project{
- const p=physicalProjection(engineeringProject());p.name='完整雙站 · 410.4 kWh 物理案例';p.detailed=defaultDetailedConfig(p);
+ const p=physicalProjection(engineeringProject());p.loadPlan=defaultLoadPlan();p.name='完整雙站 · 410.4 kWh 物理案例';p.detailed=defaultDetailedConfig(p);
  // Current complete preset: PCS:SST = 3:5 on both sides. Terminal inventory
  // is 1 PCS + 2 SST dual-gun terminals; DD count does not buy more guns.
  p.engineering!.pcsSlotsPerSite=3;p.detailed.topology.swapTerminalCounts={pcs:1,sst:2};

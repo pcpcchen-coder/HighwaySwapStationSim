@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-18",
+  "core": {
+    "passed": 184,
+    "total": 184
+  },
+  "production_worker_and_ssr": {
+    "passed": 40,
+    "total": 40
+  },
+  "typecheck_exit_code": 0,
+  "build_exit_code": 0,
+  "annual_decimal_checks": 110,
+  "annual_tolerance": 1e-06,
+  "browser_validation": "Blocked by Cloud Browser URL policy for managed preview; no click/mobile visual validation performed",
+  "source_data_sha256": "ee961a229c5750b630b67eb3fb61319df8a651ed9bceac6846fb640d473dcb56",
+  "offline": {
+    "passed": true,
+    "profiles": 3,
+    "offlineWorkerMatchesVerifiedCapacity": true,
+    "sharedTerminalsPerSite": 3,
+    "sharedGunsPerSite": 6,
+    "newCSSIncluded": true,
+    "standaloneScriptSyntax": true
+  }
+}

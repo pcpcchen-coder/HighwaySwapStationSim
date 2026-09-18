@@ -24,7 +24,7 @@ export function applyStationSOC(p:Project,station:StationId,returnSOC:number,rea
  const {energyKWh}=socWindowPreview(p,station,returnSOC,readySOC);
  const services=p.services.map(row=>{
   if(row.station!==station)return row;
-  const next={...row,swapKWh:row.swapCount*energyKWh};
+  const next={...row,swapKWh:row.swapCount*energyKWh,...(row.ac?{ac:{...row.ac,swapKWh:row.ac.swapCount*energyKWh}}:{})};
   if(!serviceRowSchema.safeParse(next).success)throw Error(`第 ${row.day+1} 天 ${station} 區 ${row.hour} 時需求不合法，請先修正車次、充電電量或價格。`);
   return next;
  });
