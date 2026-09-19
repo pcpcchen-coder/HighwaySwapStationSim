@@ -9,4 +9,6 @@ export interface LoadPlan {
  profiles:Record<LoadLevel,ServiceRow[]>;
  years:LoadPlanYear[];
  energyValueCnyPerKWh:number;
+ /** Comparison only; absent in older files, defaults to project PCS efficiency. */
+ pcsReferenceEfficiency?:number;
 }

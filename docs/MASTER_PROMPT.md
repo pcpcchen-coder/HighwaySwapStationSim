@@ -4307,3 +4307,10 @@ SOC套用不可重建拓撲、排序服務列、覆蓋另一站、車次、直�
 依[SINGLE_BUS_PHASE1.md](SINGLE_BUS_PHASE1.md)實作及維護：母線1／2合併公共DC，A/B各一台SST1680 kW；A接入6000 kVA供兩SST及A箱變，B2500 kVA只供B箱變。各側3台AC/DC560 kW直供AC倉1–3、5台DC/DC560 kW供DC倉4–8；整機AC/DC95.35%使用者可調，取消集中PCS和重複轉換級。各側AC1座／DC2座雙槍终端，移除獨立超充。兩組各自回充與槍互斥，槍優先、不預留輔助負載，必要運行負載不足仍停相依設備。
 
 十年固定第一期，沿用低／中／高需求時序；明示三日平均能源收支折算、背景用電、庫存扣除、財務缺项与非穩態保證。不得用舊效率百分比當新架構計算結果；不得把節電價值再加到已扣電量費的貢獻。歷史completeProject與fixture不改；新初始專案用singleBusProject。詳細驗證與離線輸出見最新HANDOFF、VERIFICATION與OFFLINE_BUILD。
+
+
+## 2026-09-19 使用者補充 — 0.8.1 效率收益圖
+
+先保存當前版可回復：GitHub restore/pre-sst-pcs-chart-2026-09-19、Sites版本16、離線版本4。後續回復依docs/RESTORE_BEFORE_SST_PCS_CHART.md。
+
+十年圖改成相同DC交付量下，SST＋DC/DC相較箱變＋PCS＋DC/DC的年度與累計節省電費。新增可調PCS比較效率；AC/DC95.35%不屬此替代PCS。下游與服務量固定，替代設備假設容量足夠。原全站能源後貢獻留在營運表，不再用作右側累計圖。原則與數值見docs/SST_PCS_COMPARISON.md。不要把此效率差額再加到既有全站營運收益或稱作完整淨利。

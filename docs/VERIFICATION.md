@@ -1,3 +1,15 @@
+## 2026-09-19：0.8.1 SST／PCS 累計效率收益
+
+- 修改前建立GitHub備份分支，讀回確認Sites版本16的source與本地舊HEAD一致；離線現有版本4保留供還原。
+- 核心194/194通過；新增4項數值測試涵蓋同量交付、同一下游DC/DC、排除AC/DC、跨區SST來源加權、正／零／負收益、零電價與零交付、不支援設定、逐年累計、參數快照及CSV／JSON／XLSX。補充浮點抵消歸零後針對4項再次通過。
+- 初次跨區加權测试3/4，失败是手算期望值抄寫錯誤。以Python Decimal獨立核對750/0.95＋250/0.98=1044.57572502685，修正期望常數；未修改公式或放寬容差。
+- 六組既有0.8.0三日物理結果逐一通過capacityMatches，使用0.8.1比較公式產出完整年度證據 docs/evidence/v0.8.1/sst-pcs-comparison.json。預設SST路徑95.452%、PCS路徑93.54296%，累計1,687,721.0302320232 CNY。實體模型僅版本標記更新，調度與能量守恆邏輯未變。
+- typecheck退出碼0，最終Sites正式build退出碼0；正式Worker SSR 1/1通過。
+- 真實單檔HTML的JSDOM／內嵌Worker整合2/2通過：原三劇本、低負載52,212.536 kWh、能量流、XLSX／JSON與AC/DC95.35%調為94%仍有效；新增新圖文案、無舊圖標題、PCS預設98%改97%、估算JSON與專案JSON持久化、未測算累計保持null。
+- 原生瀏覽器能力未提供；未宣稱完成Edge/Chrome file://、CSP或像素版面驗收。既有proxy與chunk大小建置提示仍存在。
+
+---
+
 ## 2026-09-18：0.8.0 單母線第一期
 
 新模型與邊界見 [SINGLE_BUS_PHASE1.md](SINGLE_BUS_PHASE1.md)。核心190/190通過（原184項及新增6項）、typecheck退出碼0、Sites正式建置退出碼0。六組三日物理測算及年度數值見 `docs/evidence/v0.8.0/single-bus-results.json`。

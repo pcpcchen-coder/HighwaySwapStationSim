@@ -1,3 +1,13 @@
+# 0.8.1 — SST／PCS 累計效率收益（2026-09-19）
+
+使用者要求將累計能源後貢獻圖替換為SST對比替代PCS的效率收益，並在修改前留存還原點。已建立GitHub備份分支、保留Sites第16版與離線檔第4版，詳見 [RESTORE_BEFORE_SST_PCS_CHART.md](RESTORE_BEFORE_SST_PCS_CHART.md)。
+
+新比較採同量DC交付、同一下游DC/DC，SST對比箱變＋PCS。預設PCS98%與節電價值0.67 CNY/kWh可在十年頁即時調整，AC/DC95.35%與原供電、排程模型不變。圖為年度柱與累計線，摘要、明細、CSV／JSON／XLSX欄位共用核心計算。預設2036累計168.772103萬元CNY。完整定義與操作見 [SST_PCS_COMPARISON.md](SST_PCS_COMPARISON.md)；此定義取代舊AC/DC比較基準。結果XLSX依舊匯出上次測算快照；十年CSV／JSON匯出當前比較設定。
+
+新增可選loadPlan.pcsReferenceEfficiency，舊JSON相容。核心194/194通過，後續最終驗證見VERIFICATION.md。離線預設檔名HighwaySwapSim-0.8.1-offline.html。
+
+---
+
 # 單母線第一期 0.8.0 — 2026-09-18
 
 使用者已明確授權依新架構修改。網站與離線版預設改用 `singleBusProject()`：每側1台1680 kW SST、3台560 kW AC/DC、5台560 kW DC/DC、3座雙槍終端。AC/DC整機95.35%可逐台調整；移除集中PCS及獨立超充；AC/DC兩组各自回充／外槍互斥、外槍優先、不預留站用。A電網供兩SST，B電網只供B箱變。詳細新契約與操作見 [SINGLE_BUS_PHASE1.md](SINGLE_BUS_PHASE1.md)，本節優先於以下歷史說明。

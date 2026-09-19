@@ -1,4 +1,5 @@
 import {inventoryAdjustment} from './inventory-adjustment.ts';
+import {sstPcsComparison} from './sst-pcs-comparison.ts';
 import {isSingleBus} from '../engineering/single-bus.ts';
 import {singleBusCapacity} from '../engineering/single-bus-capacity.ts';
 import source from '../../data/reference/load-scenarios-2026-09-18.json' with {type:'json'};
@@ -119,30 +120,16 @@ export function singleBusTenYears(p:Project,runs:CapacityRuns={}){
   cumulativeEnergyMarginCNY=cumulativeEnergyMarginCNY===null||energyMarginCNY===null?null:cumulativeEnergyMarginCNY+energyMarginCNY;
   const lossKWh=valid?busy!.lossKWh*busyDays+(idleDays>1e-8?idle!.lossKWh*idleDays:0):null;
   const stockConsumedKWh=valid?busy!.stockConsumedKWh*busyDays+(idleDays>1e-8?idle!.stockConsumedKWh*idleDays:0):null;
-  // Conversion-only comparison: observed SST/DC chain, versus the current
-  // nameplate-weighted transformer/ACDC chain delivering the SAME DC energy.
-  // Optional energy sources, backup and nonlinear converter models need a
-  // matched counterfactual run, so do not invent a scalar saving for them.
-  const simple=p.detailed!.storage.every(s=>!s.config.enabled)&&p.detailed!.solar.every(s=>!s.config.enabled)&&p.detailed!.backup.every(s=>!s.config.enabled)&&p.detailed!.physics.every(m=>!m.cable.enabled&&!m.curve.enabled&&!m.transformer.enabled&&!m.compensation.enabled);
-  let dcConversionOutput=0,dcConversionInput=0,referenceInput=0,referenceReady=simple;
-  if(fresh)for(const site of inventory.sites){
-   const output=busyRun!.componentEnergy.filter(e=>e.nodeId===`${site.station}-dd-group-sst`).reduce((v,e)=>v+e.outputKWh,0);
-   dcConversionOutput+=output;
-   const ids=new Set(p.topology.nodes.filter(n=>n.type==='sst'&&n.station===site.station).map(n=>n.id));
-   dcConversionInput+=busyRun!.componentEnergy.filter(e=>ids.has(e.nodeId)).reduce((v,e)=>v+e.inputKWh,0);
-   if(output>0&&site.acPathEfficiency===null)referenceReady=false;
-   if(site.acPathEfficiency!==null)referenceInput+=output/site.acPathEfficiency;
-  }
-  const sstConversionEfficiency=referenceReady&&dcConversionInput>0?dcConversionOutput/dcConversionInput:null;
-  const acReferenceEfficiency=referenceReady&&referenceInput>0?dcConversionOutput/referenceInput:null;
-  const conversionSavedKWh=valid&&dcDeliveredKWh!==null&&sstConversionEfficiency!==null&&acReferenceEfficiency!==null?dcDeliveredKWh*(1/acReferenceEfficiency-1/sstConversionEfficiency):null;
-  const conversionSavingCNY=conversionSavedKWh===null?null:conversionSavedKWh*plan.energyValueCnyPerKWh;
+  const pcsEfficiency=plan.pcsReferenceEfficiency??p.efficiency.pcs;
+  const comparison=valid&&dcDeliveredKWh!==null?sstPcsComparison(p,busyRun!,dcDeliveredKWh,pcsEfficiency,plan.energyValueCnyPerKWh):null;
+  const {sstConversionEfficiency=null,pcsReferenceEfficiency=null,sstComparisonInputKWh=null,pcsComparisonInputKWh=null,conversionSavedKWh=null,conversionSavingCNY=null}=comparison??{};
   cumulativeSavingCNY=cumulativeSavingCNY===null||conversionSavingCNY===null?null:cumulativeSavingCNY+conversionSavingCNY;
   return {year:y.year,load:y.load,equipmentPhase:p.phase,sstInstalledKW:inventory.sstKW,operatingDays:y.operatingDays,demandFactor:y.demandFactor,busyDays,idleDays,
    demandKWh:demand.total.energyKWh*busyDays,acDemandKWh:demand.ac.energyKWh*busyDays,dcDemandKWh:demand.dc.energyKWh*busyDays,
    deliveredKWh,acDeliveredKWh,dcDeliveredKWh,unservedKWh:valid?busy!.unservedKWh*busyDays:null,completionRatio:valid?busy!.completionRatio:null,
    gridKWh,lossKWh,stockConsumedKWh,gridCostCNY,revenueCNY,energyMarginCNY,cumulativeEnergyMarginCNY,
-   sstConversionEfficiency,acReferenceEfficiency,conversionSavedKWh,conversionSavingCNY,cumulativeSavingCNY,status};
+   comparisonBasis:'same-delivery-sst-vs-transformer-pcs-dcdc' as const,pcsEfficiency,energyValueCnyPerKWh:plan.energyValueCnyPerKWh,
+   sstConversionEfficiency,pcsReferenceEfficiency,sstComparisonInputKWh,pcsComparisonInputKWh,conversionSavedKWh,conversionSavingCNY,cumulativeSavingCNY,status};
  });
  const total=(key:'deliveredKWh'|'unservedKWh'|'gridKWh'|'lossKWh'|'gridCostCNY'|'revenueCNY'|'energyMarginCNY'|'conversionSavedKWh'|'conversionSavingCNY')=>rows.some(r=>r[key]===null)?null:rows.reduce((v,r)=>v+r[key]!,0);
  return {basis:'fixed-equipment-three-day-energy-throughput-inventory-adjusted' as const,inventory,rows,totals:{demandKWh:rows.reduce((v,r)=>v+r.demandKWh,0),deliveredKWh:total('deliveredKWh'),unservedKWh:total('unservedKWh'),gridKWh:total('gridKWh'),lossKWh:total('lossKWh'),gridCostCNY:total('gridCostCNY'),revenueCNY:total('revenueCNY'),energyMarginCNY:total('energyMarginCNY'),conversionSavedKWh:total('conversionSavedKWh'),conversionSavingCNY:total('conversionSavingCNY')}};
