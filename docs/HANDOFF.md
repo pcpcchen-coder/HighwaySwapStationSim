@@ -1,3 +1,9 @@
+# SOC 設定入口統一 — 2026-09-21
+
+「設備與容量」與「站務配置」原本使用同一個 SocRangeEditor 與 station.A/B.returnSOC、readySOC。依使用者要求，統一保留「站務配置」A/B 卡片的編輯器；移除單母線與舊版容量頁的重複區塊。舊版容量頁的已套用 SOC 重算功能保留，提示改為指向站務配置。計算與資料結構不變；操作文件及離線檔同步更新。既有 SST／PCS 修改前還原點保留。本次驗證見 VERIFICATION.md。
+
+---
+
 # 0.8.1 — SST／PCS 累計效率收益（2026-09-19）
 
 使用者要求將累計能源後貢獻圖替換為SST對比替代PCS的效率收益，並在修改前留存還原點。已建立GitHub備份分支、保留Sites第16版與離線檔第4版，詳見 [RESTORE_BEFORE_SST_PCS_CHART.md](RESTORE_BEFORE_SST_PCS_CHART.md)。

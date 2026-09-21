@@ -153,7 +153,7 @@ test("financial setup and independent case launchers remain available before the
 });
 
 
-test("SOC controls expose percentages per station and capacity summaries follow the applied window",async()=>{
+test("SOC controls appear only in station configuration and capacity summaries follow the applied window",async()=>{
  const { StationPanel }=await vite.ssrLoadModule('/components/simulator/panels.tsx');
  const { EngineeringPanel }=await vite.ssrLoadModule('/components/simulator/facility.tsx');
  const { SocRangeEditor }=await vite.ssrLoadModule('/components/simulator/soc-settings.tsx');
@@ -161,12 +161,16 @@ test("SOC controls expose percentages per station and capacity summaries follow 
  const { applyStationSOC }=await import('../packages/station-settings/index.ts');
  const p=applyStationSOC(physicalProjection(engineeringProject()),'A',.2,.8);
  const props={project:p,setProject:()=>{}};
- for(const Component of [StationPanel,EngineeringPanel]){
-  const html=renderToStaticMarkup(React.createElement(Component,props));
-  for(const label of ['A 區回收 SOC 下限','A 區交付 SOC 上限','B 區回收 SOC 下限','B 區交付 SOC 上限','套用 A 區 SOC 並同步全期換電需求','套用 B 區 SOC 並同步全期換電需求','307.8000','410.4000'])assert.ok(html.includes(label),label);
-  assert.doesNotMatch(html,/Ready SOC|回收 SOC <small>0–1/);
- }
+ const stationHTML=renderToStaticMarkup(React.createElement(StationPanel,props));
+ for(const label of ['A 區回收 SOC 下限','A 區交付 SOC 上限','B 區回收 SOC 下限','B 區交付 SOC 上限','套用 A 區 SOC 並同步全期換電需求','套用 B 區 SOC 並同步全期換電需求','307.8000','410.4000'])assert.ok(stationHTML.includes(label),label);
+ assert.doesNotMatch(stationHTML,/Ready SOC|回收 SOC <small>0–1/);
+ for(const station of ['A','B'])assert.equal(stationHTML.split(`aria-label="${station} 區換電 SOC 設定"`).length-1,1);
  const capacity=renderToStaticMarkup(React.createElement(EngineeringPanel,props));
+ const {SingleBusCapacityPanel}=await vite.ssrLoadModule('/components/simulator/single-bus-capacity.tsx');
+ const {singleBusProject}=await vite.ssrLoadModule('/packages/detailed-model/single-bus-project.ts');
+ for(const page of [capacity,renderToStaticMarkup(React.createElement(SingleBusCapacityPanel,{project:singleBusProject(),setProject:()=>{}}))]){
+  assert.doesNotMatch(page,/aria-label="[AB] 區換電 SOC 設定"|區回收 SOC 下限|區交付 SOC 上限/);
+ }
  assert.match(capacity,/2,528\.13/);assert.match(capacity,/連續補電餘量/);assert.doesNotMatch(capacity,/3370\.84/);
  const invalid={...p,station:{...p.station,A:{...p.station.A,returnSOC:.9,readySOC:.8}}};
  const html=renderToStaticMarkup(React.createElement(SocRangeEditor,{...props,project:invalid,station:'A'}));
