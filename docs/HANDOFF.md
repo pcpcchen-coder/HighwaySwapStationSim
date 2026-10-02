@@ -1,3 +1,11 @@
+# 2026-10-02：結案文件DOC-1.0
+
+新增 [closeout文件主線](closeout/README.md)：專案基準、40項REQ、設計、實現、20項TC、驗證報告、10項SOP、40項追溯、交付維護、結案正文與決策待辦。重寫README現行導航，原README保留於history；既有專題文件加入版本優先說明，修正離線檔名与已替代效率公式的敘述。
+
+本輪僅更新Repository文件，未修改UI／模型／fixture、未重新發布網站或離線HTML，也未重跑產品測試。歷史194項等結果明確按原日期引用。文件連結、需求追溯与封存算術核對記於 [DOCUMENTATION_AUDIT.json](closeout/DOCUMENTATION_AUDIT.json)。正式UAT、現場校準、成本資料与結案簽核仍待完成，不可宣稱本次已驗收。
+
+---
+
 # SOC 設定入口統一 — 2026-09-21
 
 「設備與容量」與「站務配置」原本使用同一個 SocRangeEditor 與 station.A/B.returnSOC、readySOC。依使用者要求，統一保留「站務配置」A/B 卡片的編輯器；移除單母線與舊版容量頁的重複區塊。舊版容量頁的已套用 SOC 重算功能保留，提示改為指向站務配置。計算與資料結構不變；操作文件及離線檔同步更新。既有 SST／PCS 修改前還原點保留。本次驗證見 VERIFICATION.md。

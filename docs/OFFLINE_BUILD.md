@@ -1,3 +1,5 @@
+> **現行離線檔為0.8.1**，以下命令已更新檔名；啟動修正段落與測試數字保留其歷史日期。交付程序見[08交付維護](closeout/08_DELIVERY_MAINTENANCE.md)。
+
 # 離線單檔建置與驗收
 
 0.8.0改用單母線第一期，沿用下述啟動修正與CSP。頁首現標示「單母線第一期2026-09-18」。新增每台AC/DC效率調整與新年度頁，模型變更見[SINGLE_BUS_PHASE1.md](SINGLE_BUS_PHASE1.md)。下列啟動缺陷及原測試敘述屬於前次修正歷史。
@@ -16,10 +18,10 @@ npm run build
 npm run build:offline
 ```
 
-預設產出 `outputs/HighwaySwapSim-0.8.0-offline.html`，不依賴舊HTML作為模板。也可指定輸出：
+預設產出 `outputs/HighwaySwapSim-0.8.1-offline.html`，不依賴舊HTML作為模板。也可指定輸出：
 
 ```bash
-npm run build:offline -- /absolute/path/HighwaySwapSim-0.8.0-offline.html
+npm run build:offline -- /absolute/path/HighwaySwapSim-0.8.1-offline.html
 ```
 
 `scripts/build-offline.mjs`以同一版本的正式建置CSS為輸入，檢查完整Worker替換與外部模組依賴。HTML內保留來源SHA與離線修正版標記。先完成正式建置，再產生離線版。
@@ -29,7 +31,7 @@ npm run build:offline -- /absolute/path/HighwaySwapSim-0.8.0-offline.html
 ```bash
 npm run test:offline
 # 驗證已產出的交付檔，不重新建立檔案：
-OFFLINE_HTML_PATH=/absolute/path/HighwaySwapSim-0.8.0-offline.html npm run test:offline
+OFFLINE_HTML_PATH=/absolute/path/HighwaySwapSim-0.8.1-offline.html npm run test:offline
 ```
 
 新增兩項整合測試，使用交付HTML內的完整JavaScript與DOM：

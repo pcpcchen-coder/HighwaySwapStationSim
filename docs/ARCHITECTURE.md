@@ -1,3 +1,5 @@
+> **現行文件入口（2026-10-02）**：現行架構、資料流、電氣邊界與公式已展開。見[結案文件](closeout/02_DESIGN.md)。下方歷史敘述依其版本使用。
+
 # 架構
 UI → SimulationProject (Zod) → Web Worker → SimulationKernel + plugins → immutable RunResult → Charts / tables / export。
 packages/contracts：資料契約；schemas：驗證和migration；sim-kernel：時鐘、事件、seed、registry；topology-engine：圖與端口驗證；electrical-engine：逐路徑功率配置／容量與損耗；station-engine：排隊、電池、充電；economics-engine：計費與現金流。

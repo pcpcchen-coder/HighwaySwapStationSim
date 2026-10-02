@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-02",
+  "document_version": "DOC-1.0",
+  "product_version": "0.8.1",
+  "baseline_github_commit": "612aecfcd8fc143341ef1269efc165e45e7d8341",
+  "baseline_local_sites_commit": "bc4190de67f0446f1ab7fd579701ca7e4adbe8cc",
+  "scope": "Documentation-only validation. Product test suites, browser UAT, engine simulations and field validation were not rerun.",
+  "status": "passed",
+  "checks": {
+    "documentation_only_changes": true,
+    "requirements": 40,
+    "traceability_entries": 40,
+    "test_case_definitions": 20,
+    "sop_definitions": 10,
+    "relative_links_checked": 565,
+    "heading_anchors_checked": 41,
+    "stored_evidence_arithmetic_checks": 76,
+    "stored_evidence_max_abs_difference": 7.275957614183426e-12
+  },
+  "not_executed": [
+    "product regression suites",
+    "new physical model runs",
+    "native browser UI/file/CSP acceptance",
+    "field calibration",
+    "restore drill",
+    "new website/offline publication"
+  ],
+  "review_notes": [
+    "Historical README retained; relative link bases adjusted only.",
+    "Historical evidence is cited by version and date, not relabeled as current test execution.",
+    "Formal administrative data and acceptance signatures remain explicitly pending."
+  ],
+  "reviewed_source_sha256": {
+    "docs/evidence/v0.8.0/single-bus-results.json": "72bc8ea7af97d84a00c053c216d0750caefa62f29d0193e17bc627a4617aefcc",
+    "docs/evidence/v0.8.1/sst-pcs-comparison.json": "c80750d93ed263c77d6bbf8fcf2336139a04d11dfbc5ac99f709297397eb4d7e",
+    "docs/evidence/v0.7.0/release-checks.json": "4d072c2fe7f98c4299ccdd2aabbbbe008dc3c0986b2b58b8ae38099f8c7a6157",
+    "package.json": "371d7373d2bc7bdece30d36a05b991ac1697185a2bbb57618509f2bab9a48909",
+    "packages/detailed-model/single-bus-project.ts": "3cb8bf3d4ca91030610fe8ff567fe6a53e7ae347a90ca1042f74b8c2f1772d37",
+    "packages/load-planning/sst-pcs-comparison.ts": "fcdf0d62dea598e634f3bc43ec19fcff1a94e1d071cd2e701d6c6e32ea7d93f2"
+  },
+  "document_sha256": {
+    "README.md": "aa39523f676bccf014cd21e2b4d34f2b1b7c7270d003e6ded8359f263b0c3491",
+    "docs/ARCHITECTURE.md": "b8bcc4796170420dba1e17cf1062fcb0400c9770230e1f07f0f1fc8fe2e1fbfb",
+    "docs/ASSUMPTIONS.md": "cd1f9877e1e9a5f86fae3442d034ddd4a1196b391d5646e3c3d4047b09067b88",
+    "docs/COMPLETE_MODEL_GUIDE.md": "3b068de9c3cff33dd7b5ea14c7d3d7317ba88fe2903abcfb0bc9f6c6a5fb81db",
+    "docs/HANDOFF.md": "f9d7f87ab5d1cb13f90692cb20f92b1e30178dea0fe8590107fb02ce5a29d1a8",
+    "docs/LOAD_PLANNING.md": "d98edf02d5daade99fa1fafd18bf28ce2d8db4871b7c2bb815bb8fce828266bd",
+    "docs/OFFLINE_BUILD.md": "c86e697805b886fb6419b53efb9177cc29bd917f7ce3a8135291eff98b0591ba",
+    "docs/REQUIREMENTS.md": "c519f3a7a7a77e149142937f65bece984454104afb5a22acfa96d604755b3040",
+    "docs/SINGLE_BUS_PHASE1.md": "671e86bbe57012f4aa9a6da91174c5ed2f9f2667eeac8eff85b8c75fed68a238",
+    "docs/USER_GUIDE.md": "4f41a74caefedea3c99cd8350450cc225fd2925c4e6b512610f59da6c3ea989e",
+    "docs/VERIFICATION.md": "64c59b5b554946993724b1d740da75652c6b976013d1de49b83c5620d472a97a",
+    "docs/VERIFICATION_PLAN.md": "edb3a8fd96a69cce747f962fded15c2678c7e9434c0513dfc1a8c6633019f57c",
+    "docs/closeout/00_PROJECT_BASELINE.md": "d332ec464f58c6a1fdcf5c5b436f0460414cf4b7d6f128e0e21fce44799b9a4f",
+    "docs/closeout/01_REQUIREMENTS.md": "f6b94ed0e930890439b57d09a92736345cf61f28d04bd964745c7a315307a9e9",
+    "docs/closeout/02_DESIGN.md": "16967572ec3c9679bf9f316634d36a0351bcab9266a1b158c64eee9276fd6c1a",
+    "docs/closeout/03_IMPLEMENTATION.md": "207d9d3d6186a8783c16da5e0d3f681e0314ec222c43269e43af2ca436b6a4e8",
+    "docs/closeout/04_TEST_PLAN.md": "3bf6404a884efe8ad96b4876931d5f3168ac07d92fa702198c090539b2fd03f5",
+    "docs/closeout/05_VERIFICATION_REPORT.md": "f12065d8b75fb2a08f2fb249768ba2b34cc4c7a3609527aabb4e88cc3b6a2f7b",
+    "docs/closeout/06_OPERATIONS.md": "6f6c9ef4cb47438b30666af1ef836da43e41e2d30e1a6db979fd1448d343cb81",
+    "docs/closeout/07_TRACEABILITY.md": "3c3e078d43861aad3ff1d834c84c659cd4104a2b434d5b9c783d8e4b2634e2f2",
+    "docs/closeout/08_DELIVERY_MAINTENANCE.md": "cdf0cb264899f5e485d7473d165a39e4b498e0bbd0e61eac5d3443c5c89b89db",
+    "docs/closeout/09_CLOSEOUT_REPORT.md": "2f84b56e22ab5abaafa36253c3cc02c5cb9826f0ec1a29b3d4b5e3eb78f519c2",
+    "docs/closeout/10_ISSUES_DECISIONS.md": "cbf15dd3a2af1f344000a817da77ffb57f752184925d4c8517c729df36f5f907",
+    "docs/closeout/README.md": "71d5e7ee5fc8f4dfb441afbff5d80f49891db258a28cba206190426adf6fce0f",
+    "docs/history/README_before_closeout_2026-10-02.md": "957e5f6ed78476a7cd29ab3e4c7e49345407e2c4438111b6fc460ebf0647fde9"
+  },
+  "errors": []
+}
